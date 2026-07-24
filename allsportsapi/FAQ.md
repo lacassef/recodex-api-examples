@@ -6,6 +6,7 @@ Common questions about the AllSportsAPI family. New here? Start with the
 
 **Contents**
 
+- [Where can I subscribe to the API?](#where-can-i-subscribe-to-the-api)
 - [How do I get live and pre‑match data?](#how-do-i-get-live-and-pre-match-data)
 - [How do I retrieve player statistics from a match?](#how-do-i-retrieve-player-statistics-from-a-match)
 - [How do I display images on my website?](#how-do-i-display-images-on-my-website)
@@ -21,6 +22,22 @@ Common questions about the AllSportsAPI family. New here? Start with the
 - [What if the data I need isn't available?](#what-if-the-data-i-need-isnt-available)
 - [What do the team transfer types mean?](#what-do-the-team-transfer-types-mean)
 - [Where can I get help?](#where-can-i-get-help)
+
+---
+
+## Where can I subscribe to the API?
+
+AllSportsAPI is available on two marketplaces, with different coverage:
+
+| Marketplace | What's available |
+|-------------|------------------|
+| [RapidAPI](https://rapidapi.com/fluis.lacasse) | Full **All Sports** bundle **and** every individual sport API (Football, Tennis, Basketball, …) |
+| [API.market](https://api.market/store/recodex/allsportsapi) | Complete **All Sports** only |
+
+If you only need one sport, subscribe to that sport’s API on **RapidAPI**. If you
+want every sport under one product, use the All Sports bundle on RapidAPI
+([allsportsapi2](https://rapidapi.com/fluis.lacasse/api/allsportsapi2)) or on
+[API.market](https://api.market/store/recodex/allsportsapi).
 
 ---
 
@@ -386,6 +403,8 @@ See the [Transfer model](Models/Transfer.md) for the full field list.
 
 ## Where can I get help?
 
-Reach out via the **About** tab of any API on RapidAPI, or open a discussion on the
-API's RapidAPI page. Support during development is **free** — whether it's a technical
-issue or best‑practice advice, we're happy to help.
+Reach out via the **About** tab of any API on RapidAPI, open a discussion on the
+API's RapidAPI page, or use the listing on
+[API.market](https://api.market/store/recodex/allsportsapi). Support during development
+is **free** — whether it's a technical issue or best‑practice advice, we're happy to
+help.

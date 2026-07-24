@@ -1,12 +1,22 @@
 # AllSportsAPI — Code Examples, Models & Guides
 
 Practical, copy‑paste examples, response‑model documentation and OpenAPI
-specifications for the **AllSportsAPI** family of sports‑data APIs published on
-[RapidAPI](https://rapidapi.com/fluis.lacasse).
+specifications for the **AllSportsAPI** family of sports‑data APIs.
 
 Everything here works the same way across every sport: the same authentication,
 the same response shapes and the same endpoint structure. Learn one API and you
 know them all.
+
+### Where to subscribe
+
+| Marketplace | What's available |
+|-------------|------------------|
+| [RapidAPI](https://rapidapi.com/fluis.lacasse) | The full **All Sports** bundle **and** every individual sport API |
+| [API.market](https://api.market/store/recodex/allsportsapi) | The complete **All Sports** bundle only |
+
+Individual sport APIs (Football, Tennis, Basketball, …) are available on
+**RapidAPI only**. On **API.market** you get the complete multi‑sport product:
+[api.market/store/recodex/allsportsapi](https://api.market/store/recodex/allsportsapi).
 
 ---
 
@@ -32,9 +42,14 @@ Every sport is a separate API on RapidAPI but shares the same paths and models.
 Subscribe to **All Sports** for one key that covers the bundled sports, or use a
 single‑sport API if you only need one.
 
+- **RapidAPI** — individual sport APIs **and** the All Sports bundle
+  ([allsportsapi2](https://rapidapi.com/fluis.lacasse/api/allsportsapi2)).
+- **API.market** — complete All Sports only
+  ([recodex/allsportsapi](https://api.market/store/recodex/allsportsapi)).
+
 | Sport | RapidAPI page | Host header (`X-RapidAPI-Host`) |
 |-------|---------------|---------------------------------|
-| **All Sports** (bundle) | [allsportsapi2](https://rapidapi.com/fluis.lacasse/api/allsportsapi2) | `allsportsapi2.p.rapidapi.com` |
+| **All Sports** (bundle) | [allsportsapi2](https://rapidapi.com/fluis.lacasse/api/allsportsapi2) · also on [API.market](https://api.market/store/recodex/allsportsapi) | `allsportsapi2.p.rapidapi.com` |
 | Football / Soccer | [footapi7](https://rapidapi.com/fluis.lacasse/api/footapi7/) | `footapi7.p.rapidapi.com` |
 | Tennis | [tennisapi1](https://rapidapi.com/fluis.lacasse/api/tennisapi1/) | `tennisapi1.p.rapidapi.com` |
 | Ice Hockey | [icehockeyapi](https://rapidapi.com/fluis.lacasse/api/icehockeyapi/) | `icehockeyapi.p.rapidapi.com` |
@@ -226,5 +241,5 @@ If a data point isn't available here, try the
 ## Support
 
 Questions or feature requests? Reach out via the **About** tab of any API on RapidAPI,
-or open a discussion on the API's RapidAPI page. Support during development is free.
-```
+or open a discussion on the API's RapidAPI / [API.market](https://api.market/store/recodex/allsportsapi)
+page. Support during development is free.

@@ -39,12 +39,20 @@ the API and scaffold typed clients.
 ## Point it at the real server
 
 The `servers` URL in each file is a placeholder (`http://localhost:8080`). To make real
-calls, target the RapidAPI host for the sport and send your auth headers:
+calls, target the host for the marketplace you subscribe to and send your auth headers.
+
+**RapidAPI** (individual sports **and** the All Sports bundle):
 
 - **Base URL:** `https://{host}.p.rapidapi.com` (e.g. `https://footapi7.p.rapidapi.com`)
 - **Headers:** `X-RapidAPI-Key` and `X-RapidAPI-Host` — see the [root README](../README.md).
 
-In Swagger UI you can override the server URL and add the two headers under
+**API.market** (complete **All Sports** only — no per‑sport listings):
+
+- Product page: [api.market/store/recodex/allsportsapi](https://api.market/store/recodex/allsportsapi)
+- Use the full-bundle specs (`allsports_openapi.yaml` /
+  `allsports_simplified_openapi.yaml`) with the host and auth shown on that page.
+
+In Swagger UI you can override the server URL and add auth headers under
 **Authorize** / request headers; in Postman, set them as collection variables.
 
 ## Notes
