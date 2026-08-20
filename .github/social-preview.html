@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>AllSportsAPI social preview</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body {
+      width: 1280px;
+      height: 640px;
+      overflow: hidden;
+      background: #070b14;
+      font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+      color: #f4f7fb;
+    }
+    .canvas {
+      width: 1280px;
+      height: 640px;
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 70% at 88% 18%, rgba(61, 220, 151, 0.16), transparent 55%),
+        radial-gradient(ellipse 50% 60% at 8% 90%, rgba(31, 97, 230, 0.18), transparent 50%),
+        linear-gradient(135deg, #070b14 0%, #0d1526 52%, #0a1220 100%);
+      padding: 64px 72px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+    }
+    .canvas::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      bottom: 0;
+      width: 10px;
+      background: linear-gradient(180deg, #3ddc97 0%, #1f61e6 100%);
+    }
+    .eyebrow {
+      font-size: 22px;
+      letter-spacing: 0.28em;
+      text-transform: uppercase;
+      color: #3ddc97;
+      font-weight: 700;
+    }
+    h1 {
+      font-size: 92px;
+      line-height: 0.95;
+      letter-spacing: -0.03em;
+      font-weight: 800;
+      margin-top: 18px;
+    }
+    .subtitle {
+      margin-top: 22px;
+      font-size: 32px;
+      font-weight: 500;
+      color: #c5d0e0;
+      max-width: 980px;
+      line-height: 1.25;
+    }
+    .pills {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      max-width: 1100px;
+    }
+    .pill {
+      border: 1px solid rgba(244, 247, 251, 0.16);
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: 999px;
+      padding: 11px 20px;
+      font-size: 21px;
+      font-weight: 600;
+      color: #e8eef7;
+    }
+    .footer {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #8b98ab;
+      font-size: 22px;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+    }
+    .footer span { color: #3ddc97; }
+  </style>
+</head>
+<body>
+  <div class="canvas">
+    <div>
+      <div class="eyebrow">Recodex · RapidAPI</div>
+      <h1>AllSportsAPI</h1>
+      <p class="subtitle">Sports data API examples for football, tennis, basketball and live scores.</p>
+    </div>
+    <div class="pills">
+      <div class="pill">Football / Soccer</div>
+      <div class="pill">Tennis</div>
+      <div class="pill">Basketball</div>
+      <div class="pill">Live scores</div>
+      <div class="pill">OpenAPI · Python · JavaScript</div>
+    </div>
+    <div class="footer">
+      <div>OpenAPI specs · copy-paste examples · 14 sports</div>
+      <div>github.com/<span>lacassef</span></div>
+    </div>
+  </div>
+</body>
+</html>
