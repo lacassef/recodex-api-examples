@@ -1,0 +1,8 @@
+# Language stats should reflect the runnable Python/JS examples.
+# HTML demos and OpenAPI dumps are documentation, not the project language.
+*.html linguist-documentation
+allsportsapi/openapi/*.yaml linguist-documentation
+flashscore/*.yaml linguist-documentation
+skalpha/openapi/*.yaml linguist-documentation
+allsportsapi/Models/json/*.json linguist-vendored
+.idea/** linguist-vendored

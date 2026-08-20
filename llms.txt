@@ -1,0 +1,43 @@
+# AllSportsAPI
+
+> OpenAPI 3.0 specs and copy-paste Python/JavaScript examples for Recodex sports data APIs: live scores, fixtures, standings, odds, lineups, players, and shotmaps.
+
+Auth is RapidAPI headers `X-RapidAPI-Key` and `X-RapidAPI-Host`. Keep the key on a server. Football live path is `/api/matches/live` on `footapi7.p.rapidapi.com`; other sports prefix the sport, e.g. `/api/tennis/...`. Status codes: `200` data, `204` empty, `429` rate limit, `5xx` retry.
+
+## Start here
+
+- [README](https://github.com/lacassef/recodex-api-examples/blob/master/README.md): hub, sport hosts, quick start
+- [AllSportsAPI guide](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/README.md): auth, data model, workflows
+- [FAQ](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/FAQ.md): leagues, match clock, images, errors
+- [Examples](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/Examples/README.md): Python and Node clients
+
+## OpenAPI
+
+- [All sports (compact)](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/openapi/allsports_simplified_openapi.yaml): preferred for agents
+- [All sports (full)](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/openapi/allsports_openapi.yaml)
+- [Football](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/openapi/football_openapi.yaml)
+- [Tennis](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/openapi/tennis_openapi.yaml)
+- [Basketball](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/openapi/basketball_openapi.yaml)
+- [OpenAPI index](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/openapi/README.md)
+- [Live Sports Data API](https://github.com/lacassef/recodex-api-examples/blob/master/flashscore/flashscore_openapi.yaml)
+- [SKAlpha](https://github.com/lacassef/recodex-api-examples/blob/master/skalpha/openapi/openapi-sklpha.yaml)
+
+## Code examples
+
+- [Python quickstart](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/Examples/quickstart.py)
+- [JavaScript quickstart](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/Examples/quickstart.js)
+- [Flask proxy](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/Examples/server_proxy_flask.py)
+- [Express proxy](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/Examples/server_proxy_express.js)
+
+## Other docs
+
+- [Response models](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/Models/README.md)
+- [Daily matches](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/DailyMatches.md)
+- [Live Sports Data API](https://github.com/lacassef/recodex-api-examples/blob/master/flashscore/README.md)
+- [SKAlpha](https://github.com/lacassef/recodex-api-examples/blob/master/skalpha/README.md)
+
+## Subscribe
+
+- RapidAPI All Sports: https://rapidapi.com/fluis.lacasse/api/allsportsapi2
+- RapidAPI publisher: https://rapidapi.com/fluis.lacasse
+- API.market: https://api.market/store/recodex/allsportsapi

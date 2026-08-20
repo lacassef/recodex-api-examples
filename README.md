@@ -11,6 +11,7 @@ OpenAPI specs and copy-paste **Python** / **JavaScript** examples for Recodex sp
 [![JavaScript](https://img.shields.io/badge/javascript-examples-F7DF1E?logo=javascript&logoColor=black)](allsportsapi/Examples/)
 [![OpenAPI](https://img.shields.io/badge/OpenAPI-3.0-6BA539?logo=openapiinitiative&logoColor=white)](allsportsapi/openapi/)
 [![RapidAPI](https://img.shields.io/badge/RapidAPI-AllSportsAPI-1f61e6)](https://rapidapi.com/fluis.lacasse/api/allsportsapi2)
+[![GitHub stars](https://img.shields.io/github/stars/lacassef/recodex-api-examples?style=social)](https://github.com/lacassef/recodex-api-examples)
 
 ## What's in this repository
 
@@ -108,7 +109,7 @@ Import into Swagger UI, Postman, Insomnia, or a client generator.
 - [All sports (full)](allsportsapi/openapi/allsports_openapi.yaml) and [simplified](allsportsapi/openapi/allsports_simplified_openapi.yaml)
 - Per sport: [football](allsportsapi/openapi/football_openapi.yaml), [tennis](allsportsapi/openapi/tennis_openapi.yaml), [basketball](allsportsapi/openapi/basketball_openapi.yaml), [ice hockey](allsportsapi/openapi/ice_hockey_openapi.yaml), [cricket](allsportsapi/openapi/cricket_openapi.yaml), [esports](allsportsapi/openapi/esports_openapi.yaml), [and more](allsportsapi/openapi/README.md)
 - Live Sports Data API: [flashscore/flashscore_openapi.yaml](flashscore/flashscore_openapi.yaml)
-- SKAlpha: [skalpha/openapi/openapi-skalpha.yaml](skalpha/openapi/openapi-skalpha.yaml)
+- SKAlpha: [skalpha/openapi/openapi-sklpha.yaml](skalpha/openapi/openapi-sklpha.yaml)
 
 ## Docs map
 
@@ -118,6 +119,21 @@ Import into Swagger UI, Postman, Insomnia, or a client generator.
 - [Daily matches](allsportsapi/DailyMatches.md) — how to assemble a day's schedule
 - [Live Sports Data API](flashscore/README.md) — scoreboards, feeds, matches, rankings
 - [SKAlpha](skalpha/README.md) — market data, news, symbols
+
+## For coding agents
+
+This repo is meant to be loaded as context when generating AllSportsAPI clients.
+
+1. Read [`llms.txt`](llms.txt) for the file map.
+2. Load [`allsportsapi/openapi/allsports_simplified_openapi.yaml`](allsportsapi/openapi/allsports_simplified_openapi.yaml) for paths and schemas.
+3. Copy [`allsportsapi/Examples/quickstart.py`](allsportsapi/Examples/quickstart.py) or [`quickstart.js`](allsportsapi/Examples/quickstart.js) for auth headers and `200` / `204` / `429` / `5xx` handling.
+4. Use [`allsportsapi/README.md`](allsportsapi/README.md) for hosts and the category → tournament → event tree.
+
+Do not put `X-RapidAPI-Key` in browser or mobile code. Use the [server proxy examples](allsportsapi/Examples/README.md).
+
+## Questions
+
+[Open a discussion](https://github.com/lacassef/recodex-api-examples/discussions) or an [issue](https://github.com/lacassef/recodex-api-examples/issues). See [CONTRIBUTING.md](CONTRIBUTING.md) if you are adding an example.
 
 ## License
 

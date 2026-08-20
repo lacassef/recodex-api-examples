@@ -1,0 +1,25 @@
+name: Docs or OpenAPI
+description: Something in the guides, models, or OpenAPI specs is wrong or missing
+title: "[docs] "
+labels: [documentation]
+body:
+  - type: dropdown
+    id: area
+    attributes:
+      label: Area
+      options:
+        - AllSportsAPI guide
+        - FAQ / models
+        - OpenAPI spec
+        - Live Sports Data API
+        - SKAlpha
+        - Root README
+    validations:
+      required: true
+  - type: textarea
+    id: problem
+    attributes:
+      label: What is wrong or missing
+      description: File path, endpoint, and the expected vs actual text.
+    validations:
+      required: true

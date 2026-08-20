@@ -1,0 +1,19 @@
+name: Example request
+description: Propose a new Python/JavaScript example
+title: "[example] "
+labels: [enhancement, good first issue]
+body:
+  - type: input
+    id: sport
+    attributes:
+      label: Sport or API
+      placeholder: football, tennis, basketball, live sports data, …
+    validations:
+      required: true
+  - type: textarea
+    id: goal
+    attributes:
+      label: What the example should show
+      description: Endpoint, language (Python / JS / both), and the outcome (e.g. print live scores).
+    validations:
+      required: true

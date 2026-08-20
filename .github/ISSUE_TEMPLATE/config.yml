@@ -1,0 +1,8 @@
+blank_issues_enabled: true
+contact_links:
+  - name: Discussions
+    url: https://github.com/lacassef/recodex-api-examples/discussions
+    about: Ask how to call an endpoint or use an example
+  - name: RapidAPI publisher page
+    url: https://rapidapi.com/fluis.lacasse
+    about: API keys, plans, and product listings
