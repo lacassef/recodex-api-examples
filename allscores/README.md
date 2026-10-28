@@ -1,6 +1,8 @@
 # AllScores API
 
-How to call the `GET` routes under `/api/allscores`. Each route's parameters are in the [OpenAPI](openapi/allscores_openapi.yaml). That file is a copy of `docs/oai/allscores_openapi.yaml`, the output of `go run ./cmd/openapi-gen`. Do not edit it by hand. When the routes change, run the generator and copy it again.
+How to call the `GET` routes under `/api/allscores`. Each route's parameters are in the [OpenAPI](openapi/allscores_openapi.yaml).
+
+Subscribe on [RapidAPI](https://rapidapi.com/fluis.lacasse/api/allscores). Send `X-RapidAPI-Key` and `X-RapidAPI-Host: allscores.p.rapidapi.com`. The base URL is `https://allscores.p.rapidapi.com`. Copy the host from the Endpoints tab if that listing prints a different one.
 
 The spec lists `204` when the route exists and there is no data for those parameters. Some routes still return `200` with an empty object or an empty list. Those cases are on the area pages.
 
@@ -28,4 +30,4 @@ The spec lists `204` when the route exists and there is no data for those parame
 
 ## Smallest request
 
-Call `/sports`. Omit `langId` for the default language. `{api-host}` is this gateway's host. Send only parameters the operation lists. An invalid value returns `400`. A filled call is in [Examples](guides/examples.md).
+Call `https://allscores.p.rapidapi.com/api/allscores/sports`. Omit `langId` for the default language. Send only parameters the operation lists. An invalid value returns `400`. A filled call is in [Examples](guides/examples.md).

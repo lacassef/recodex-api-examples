@@ -99,7 +99,7 @@ Successful responses may include `Cache-Control`, `ETag`, and `Last-Modified`. R
 | 503 | Temporarily unavailable | Retry with backoff |
 | 504 | The request timed out | Retry with backoff |
 
-`request_id` is present when the gateway has one. Send it when you ask for help.
+`request_id` is present when the error body includes one. Send it when you ask for help.
 
 The [quickstart](Examples/quickstart.py) retries 429 and 5xx and treats 204 as no data.
 

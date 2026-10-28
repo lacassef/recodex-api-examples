@@ -1,8 +1,8 @@
-# AllSportsAPI
+# Recodex API examples
 
-> OpenAPI 3.0 specs and copy-paste Python/JavaScript examples for Recodex sports data APIs: live scores, fixtures, standings, odds, lineups, players, and shotmaps.
+> OpenAPI 3.0 specs and copy-paste Python/JavaScript examples for Recodex APIs: AllSportsAPI (live scores, fixtures, standings, odds, lineups, players, shotmaps), AllScores, LivescoresAPI, and SKAlpha.
 
-Auth is RapidAPI headers `X-RapidAPI-Key` and `X-RapidAPI-Host`. Keep the key on a server. Football live path is `/api/matches/live` on `footapi7.p.rapidapi.com`; other sports prefix the sport, e.g. `/api/tennis/...`. Status codes: `200` data, `204` empty, `429` rate limit, `5xx` retry.
+Auth is RapidAPI headers `X-RapidAPI-Key` and `X-RapidAPI-Host`. Keep the key on a server. Football live path is `/api/matches/live` on `footapi7.p.rapidapi.com`; other AllSportsAPI sports prefix the sport, e.g. `/api/tennis/...`. AllScores is `/api/allscores/...` on `allscores.p.rapidapi.com`. SKAlpha is `/api/skalpha/...` on `skalpha1.p.rapidapi.com`. LivescoresAPI is `/api/livescores/...` on the host printed for that product. Status codes: `200` data, `204` empty, `429` rate limit, `5xx` retry.
 
 ## Start here
 
@@ -19,8 +19,9 @@ Auth is RapidAPI headers `X-RapidAPI-Key` and `X-RapidAPI-Host`. Keep the key on
 - [Tennis](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/openapi/tennis_openapi.yaml)
 - [Basketball](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/openapi/basketball_openapi.yaml)
 - [OpenAPI index](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/openapi/README.md)
-- [Live Sports Data API](https://github.com/lacassef/recodex-api-examples/blob/master/flashscore/flashscore_openapi.yaml)
-- [SKAlpha](https://github.com/lacassef/recodex-api-examples/blob/master/skalpha/openapi/openapi-sklpha.yaml)
+- [AllScores](https://github.com/lacassef/recodex-api-examples/blob/master/allscores/openapi/allscores_openapi.yaml)
+- [LivescoresAPI](https://github.com/lacassef/recodex-api-examples/blob/master/livescores/openapi/livescoresapi_openapi.yaml)
+- [SKAlpha](https://github.com/lacassef/recodex-api-examples/blob/master/skalpha/openapi/skalpha_openapi.yaml)
 
 ## Code examples
 
@@ -33,11 +34,14 @@ Auth is RapidAPI headers `X-RapidAPI-Key` and `X-RapidAPI-Host`. Keep the key on
 
 - [Response models](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/Models/README.md)
 - [Daily matches](https://github.com/lacassef/recodex-api-examples/blob/master/allsportsapi/DailyMatches.md)
-- [Live Sports Data API](https://github.com/lacassef/recodex-api-examples/blob/master/flashscore/README.md)
+- [AllScores](https://github.com/lacassef/recodex-api-examples/blob/master/allscores/README.md)
+- [LivescoresAPI](https://github.com/lacassef/recodex-api-examples/blob/master/livescores/README.md)
 - [SKAlpha](https://github.com/lacassef/recodex-api-examples/blob/master/skalpha/README.md)
 
 ## Subscribe
 
 - RapidAPI All Sports: https://rapidapi.com/fluis.lacasse/api/allsportsapi2
+- RapidAPI AllScores: https://rapidapi.com/fluis.lacasse/api/allscores
+- RapidAPI SKAlpha: https://rapidapi.com/fluis.lacasse/api/skalpha1
 - RapidAPI publisher: https://rapidapi.com/fluis.lacasse
 - API.market: https://api.market/store/recodex/allsportsapi

@@ -80,10 +80,10 @@ The other objects are in [Schemas](../reference/schemas.md). `JSONResult` is the
 
 - `application/json` for most routes.
 - `text/html` for `/matches/{eventId}/report/html`.
-- `image/png` for `/images/static/{path}`.
-- `image/avif` for `/images/ott/{path}`.
+- `image/png` for `/images/static/*`.
+- `image/avif` for `/images/ott/*`.
 
-`{path}` on an image route can contain slashes. It is the rest of the path.
+The `*` on an image route can contain slashes. It is the rest of the path.
 
 ## Errors
 

@@ -74,7 +74,7 @@ Yes. The name goes in the path. Patterns are in [Feed names](../feeds/feed-patte
 
 ## How do image paths work?
 
-`/images/static/{path}` returns PNG. `/images/ott/{path}` returns AVIF. `{path}` can contain slashes. It is the rest of the URL path.
+`/images/static/*` returns PNG. `/images/ott/*` returns AVIF. The `*` can contain slashes. It is the rest of the URL path.
 
 ## Do I send an account cookie or token?
 

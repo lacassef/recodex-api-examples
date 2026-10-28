@@ -1,6 +1,8 @@
 # SKAlpha
 
-How to call the `GET` routes under `/api/skalpha`. Each route's parameters are in the [OpenAPI](openapi/skalpha_openapi.yaml). That file is a copy of `docs/oai/skalpha_openapi.yaml`, the output of `go run ./cmd/openapi-gen`. Do not edit it by hand. When the routes change, run the generator and copy it again.
+How to call the `GET` routes under `/api/skalpha`. Each route's parameters are in the [OpenAPI](openapi/skalpha_openapi.yaml).
+
+Subscribe on [RapidAPI](https://rapidapi.com/fluis.lacasse/api/skalpha1). Send `X-RapidAPI-Key` and `X-RapidAPI-Host: skalpha1.p.rapidapi.com`. The base URL is `https://skalpha1.p.rapidapi.com`. Copy the host from the Endpoints tab if that listing prints a different one.
 
 `204` means the route exists and there is no data for those parameters.
 
@@ -22,4 +24,4 @@ How to call the `GET` routes under `/api/skalpha`. Each route's parameters are i
 
 ## Smallest request
 
-Call `/news`. Set `filter_category` to one news category and `page_size` to the size you want. `{api-host}` is this gateway's host. Send only parameters the operation lists. An invalid value returns `400`. A filled call is in [Examples](docs/guides/examples.md).
+Call `https://skalpha1.p.rapidapi.com/api/skalpha/news`. Set `filter_category` to one news category and `page_size` to the size you want. Send only parameters the operation lists. An invalid value returns `400`. A filled call is in [Examples](docs/guides/examples.md).

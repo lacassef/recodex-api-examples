@@ -2,7 +2,7 @@
 
 OpenAPI 3.0 descriptions of every route. Import one into Swagger UI, Postman, Insomnia, or a client generator.
 
-The `servers` entry is `https://{host}`. Set `host` to the marketplace host you subscribed to, and send that same value in `X-RapidAPI-Host`. The default host is the All Sports bundle.
+Each file's `servers` URL is the RapidAPI host for that product. Send the same value in `X-RapidAPI-Host`. The All Sports bundle host is `allsportsapi2.p.rapidapi.com`. Single-sport hosts are in the [guide](../README.md). A sport with no separate listing uses the bundle host.
 
 These files list paths, parameters, and the response status. The JSON fields inside a `200` body are described in [Models](../Models/). A `200` schema of "JSON object" means the body is the payload for that route (`events`, `event`, `standings`, and so on). Extra fields may be present.
 
@@ -12,7 +12,7 @@ These files list paths, parameters, and the response status. The JSON fields ins
 
 | File | Use it when |
 |------|-------------|
-| `allsports_simplified_openapi.yaml` | You want one file for every sport and your tool has a size limit. Shared segments are enums. 353 paths. |
+| `allsports_simplified_openapi.yaml` | You want one file for every sport and your tool has a size limit. Shared segments are enums. 359 paths. |
 | `allsports_openapi.yaml` | You want every concrete path written out. 1978 paths. |
 | `{sport}_openapi.yaml` | You are building one sport. |
 

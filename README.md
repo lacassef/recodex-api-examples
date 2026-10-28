@@ -4,7 +4,7 @@
 
 # AllSportsAPI — Sports data API examples (football, tennis, basketball, live scores)
 
-OpenAPI specs and copy-paste **Python** / **JavaScript** examples for Recodex sports data APIs: **live scores**, fixtures, standings, odds, lineups, players, and shotmaps. Covers football/soccer, tennis, basketball, ice hockey, cricket, esports, and more.
+OpenAPI specs and copy-paste **Python** / **JavaScript** examples for Recodex APIs. AllSportsAPI covers live scores, fixtures, standings, odds, lineups, players, and shotmaps for football/soccer, tennis, basketball, ice hockey, cricket, esports, and more. The same repo documents AllScores, LivescoresAPI, and SKAlpha.
 
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
 [![Python](https://img.shields.io/badge/python-examples-3776AB?logo=python&logoColor=white)](allsportsapi/Examples/)
@@ -18,8 +18,9 @@ OpenAPI specs and copy-paste **Python** / **JavaScript** examples for Recodex sp
 | Product | What you get | Start here |
 |---------|--------------|------------|
 | **AllSportsAPI** | Multi-sport live and historical data — scores, fixtures, standings, odds, players, media, shotmaps | [allsportsapi/README.md](allsportsapi/README.md) |
-| **Live Sports Data API** | Scoreboards, feeds, tournaments, matches, rankings, news, GraphQL hashes | [flashscore/README.md](flashscore/README.md) |
-| **SKAlpha** | Market data, news, symbols, screeners, fundamentals | [skalpha/README.md](skalpha/README.md) |
+| **AllScores** | Scores, fixtures, standings, lineups, athletes, odds, and news on `/api/allscores` | [allscores/README.md](allscores/README.md) |
+| **LivescoresAPI** | Scoreboards, feeds, tournaments, matches, rankings, news, and persisted queries on `/api/livescores` | [livescores/README.md](livescores/README.md) |
+| **SKAlpha** | Quotes, prices, news, symbols, screeners, and fundamentals on `/api/skalpha` | [skalpha/README.md](skalpha/README.md) |
 
 Subscribe on [RapidAPI](https://rapidapi.com/fluis.lacasse) (every sport API plus the All Sports bundle) or [API.market](https://api.market/store/recodex/allsportsapi) (complete All Sports bundle).
 
@@ -43,6 +44,15 @@ Same authentication, response shapes, and endpoint structure across every sport.
 | Volleyball | [volleyballapi](https://rapidapi.com/fluis.lacasse/api/volleyballapi) | `volleyballapi.p.rapidapi.com` |
 | Handball | [handballapi](https://rapidapi.com/fluis.lacasse/api/handballapi) | `handballapi.p.rapidapi.com` |
 | MMA | [mmaapi](https://rapidapi.com/fluis.lacasse/api/mmaapi) | `mmaapi.p.rapidapi.com` |
+
+## Other products
+
+| Product | RapidAPI | Host (`X-RapidAPI-Host`) |
+|---------|----------|--------------------------|
+| **AllScores** | [allscores](https://rapidapi.com/fluis.lacasse/api/allscores) | `allscores.p.rapidapi.com` |
+| **SKAlpha** | [skalpha1](https://rapidapi.com/fluis.lacasse/api/skalpha1) | `skalpha1.p.rapidapi.com` |
+
+LivescoresAPI uses the same two headers. Its host is the one printed on that product's Endpoints tab. Paths stay `/api/livescores/...`.
 
 Always copy the exact host from the RapidAPI **Endpoints** tab for the API you subscribed to.
 
@@ -108,8 +118,9 @@ Import into Swagger UI, Postman, Insomnia, or a client generator.
 
 - [All sports (full)](allsportsapi/openapi/allsports_openapi.yaml) and [simplified](allsportsapi/openapi/allsports_simplified_openapi.yaml)
 - Per sport: [football](allsportsapi/openapi/football_openapi.yaml), [tennis](allsportsapi/openapi/tennis_openapi.yaml), [basketball](allsportsapi/openapi/basketball_openapi.yaml), [ice hockey](allsportsapi/openapi/ice_hockey_openapi.yaml), [cricket](allsportsapi/openapi/cricket_openapi.yaml), [esports](allsportsapi/openapi/esports_openapi.yaml), [and more](allsportsapi/openapi/README.md)
-- Live Sports Data API: [flashscore/flashscore_openapi.yaml](flashscore/flashscore_openapi.yaml)
-- SKAlpha: [skalpha/openapi/openapi-sklpha.yaml](skalpha/openapi/openapi-sklpha.yaml)
+- AllScores: [allscores/openapi/allscores_openapi.yaml](allscores/openapi/allscores_openapi.yaml)
+- LivescoresAPI: [livescores/openapi/livescoresapi_openapi.yaml](livescores/openapi/livescoresapi_openapi.yaml)
+- SKAlpha: [skalpha/openapi/skalpha_openapi.yaml](skalpha/openapi/skalpha_openapi.yaml)
 
 ## Docs map
 
@@ -117,8 +128,9 @@ Import into Swagger UI, Postman, Insomnia, or a client generator.
 - [FAQ](allsportsapi/FAQ.md) — leagues, match time, images, status codes
 - [Response models](allsportsapi/Models/README.md) — Event, Team, Player, Tournament, odds, statistics
 - [Daily matches](allsportsapi/DailyMatches.md) — how to assemble a day's schedule
-- [Live Sports Data API](flashscore/README.md) — scoreboards, feeds, matches, rankings
-- [SKAlpha](skalpha/README.md) — market data, news, symbols
+- [AllScores](allscores/README.md) — scores, games, competitions, athletes, odds
+- [LivescoresAPI](livescores/README.md) — scoreboards, feeds, matches, rankings
+- [SKAlpha](skalpha/README.md) — quotes, news, symbols, screeners
 
 ## For coding agents
 

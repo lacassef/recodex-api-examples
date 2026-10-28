@@ -22,20 +22,16 @@ Response: `JSONResult`
 
 ## Static images
 
-GET `/api/livescores/images/static/{path}`
+GET `/api/livescores/images/static/*`
 
-Parameters:
-
-- `path` (path, required). It can contain slashes.
+The `*` is the rest of the path. It can contain slashes.
 
 Response: `image/png`
 
 ## Media images
 
-GET `/api/livescores/images/ott/{path}`
+GET `/api/livescores/images/ott/*`
 
-Parameters:
-
-- `path` (path, required). It can contain slashes. A news cover or a photo uses this route.
+The `*` is the rest of the path. It can contain slashes. A news cover or a photo uses this route.
 
 Response: `image/avif`

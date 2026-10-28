@@ -4,7 +4,7 @@ Shapes of the JSON you parse, and how those objects link. Paths are in [Routes](
 
 A `200` body is the payload for that route. A `204` body is empty: the route is valid and there is nothing for those parameters. Do not parse it as JSON. Error bodies are in [ErrorResponse](ErrorResponse.md).
 
-`/images/static/{path}` returns `image/png`. `/images/ott/{path}` returns `image/avif`. `/matches/{eventId}/report/html` returns HTML. Those three have no JSON model.
+`/images/static/*` returns `image/png`. `/images/ott/*` returns `image/avif`. `/matches/{eventId}/report/html` returns HTML. Those three have no JSON model.
 
 ## The data model
 

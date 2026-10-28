@@ -1,6 +1,6 @@
 # Examples
 
-Replace `{api-host}`. The names are the OpenAPI names. Ids in these curls (`08W6fzLP`, `COuk57Ci`, `lId4TMwf`, `UkhgIFEq`, `4KeVObqb`, `v3LmzFnC`) belong to these examples. Another event has another id.
+Replace `{api-host}` with the LivescoresAPI host from the product page, and send `X-RapidAPI-Key` and `X-RapidAPI-Host`. The names are the OpenAPI names. Ids in these curls (`08W6fzLP`, `COuk57Ci`, `lId4TMwf`, `UkhgIFEq`, `4KeVObqb`, `v3LmzFnC`) belong to these examples. Another event has another id.
 
 ## Scoreboard and lists
 
