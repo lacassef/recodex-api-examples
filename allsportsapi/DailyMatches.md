@@ -1,181 +1,138 @@
-# Getting daily matches & events
+# Matches on a date
 
-The old flat per‑date feed — `GET /api/matches/{day}/{month}/{year}` (football) and
-`GET /api/{sport}/matches|events/{day}/{month}/{year}` (other sports) — is **retired**.
-No single call returns every match of a day anymore. Instead you **assemble the day per
-competition**: find what's running, then pull each one's schedule.
+Two calls cover a normal day. One lists the competitions that have matches. The next lists the matches in the competitions you care about.
 
-This guide is the complete recipe for every sport. For response shapes see the
-[Models reference](Models/README.md); for auth and the per‑sport host table see the
-[README](README.md).
+Football has no sport-wide day list. `GET /api/matches/{day}/{month}/{year}` is discontinued. Build the football day from scheduled tournaments, then the competition schedule. That walk is below.
 
-> **Time zones.** Schedule endpoints return a window of **±12 h around UTC midnight**, so
-> a "day" can include a few matches from the neighbouring UTC dates. Filter by
-> `event.startTimestamp` to the user's local day — see
-> [`filter_schedule_by_timezone`](Examples/filter_schedule_by_timezone.py).
+Other sports still publish one list for the whole sport, when you want every match and you do not need to pick competitions first:
 
----
+- Team sports and esports: `GET /api/{sport}/matches/{day}/{month}/{year}`
+- Tennis, table tennis, badminton, darts, snooker, padel: `GET /api/{sport}/events/{day}/{month}/{year}`
+
+`{day}` and `{month}` are not zero-padded. The body is `{ "events": [ ... ] }`. A `204` means nothing is scheduled.
+
+That list is in UTC for the date you asked. A kickoff near midnight can fall on the previous or next local day. Filter with `event.startTimestamp`. The [timezone example](Examples/filter_schedule_by_timezone.py) does that.
+
+The competition walk below is also the one to use when the sport-wide list is larger than you need, or when you already follow a set of leagues.
 
 ## Quick reference
 
-| Sport family | Step 1 — discover the day's competitions | Step 2 — fetch the schedule |
-|---|---|---|
-| **Football** | `GET /api/scheduled-tournaments/{day}/{month}/{year}/page/{page}` | per tournament, or `GET /api/category/{id}/events/{day}/{month}/{year}` |
-| **Team sports**¹ | `GET /api/{sport}/scheduled-tournaments/{day}/{month}/{year}/page/{page}` | per tournament, or `GET /api/{sport}/category/{id}/events/{day}/{month}/{year}` |
-| **Tennis / Table‑tennis** | `GET /api/{sport}/calendar/{day}/{month}/{year}/categories` | `GET /api/{sport}/category/{id}/events/{day}/{month}/{year}` |
-| **MMA** | `GET /api/mma/main-events/{date}/extended` *(direct, by ISO date)* | — |
-| **Motorsport** | `GET /api/motorsport/stage/scheduled/{date}` *(direct, by ISO date)* | — |
-| **Cycling** | walk team → season → races (no by‑date endpoint) | `GET /api/cycling/team/{id}/stage/season/{seasonId}/races` |
+| Sport | Competitions on that day | Matches for one competition |
+|-------|--------------------------|-----------------------------|
+| Football | `GET /api/scheduled-tournaments/{day}/{month}/{year}/page/{page}` | `GET /api/tournament/{uniqueTournamentId}/scheduled-events/{YYYY-MM-DD}` or `.../schedules/{day}/{month}/{year}` |
+| Team sports | `GET /api/{sport}/scheduled-tournaments/{day}/{month}/{year}/page/{page}` | `GET /api/{sport}/tournament/{uniqueTournamentId}/schedules/{day}/{month}/{year}` |
+| Cricket and tennis | the same scheduled-tournaments call | `schedules/{day}/{month}/{year}` or `scheduled-events/{YYYY-MM-DD}` |
+| Esports | `GET /api/esport/scheduled-tournaments/{day}/{month}/{year}/page/{page}` | `GET /api/esport/tournament/{uniqueTournamentId}/scheduled-events/{YYYY-MM-DD}` only |
+| Tennis, table tennis | `GET /api/{sport}/calendar/{day}/{month}/{year}/categories` | `GET /api/{sport}/category/{id}/events/{day}/{month}/{year}` |
+| MMA | `GET /api/mma/main-events/{YYYY-MM-DD}/extended` | one card, no second step |
+| Motorsport | `GET /api/motorsport/stage/scheduled/{YYYY-MM-DD}` | `GET /api/motorsport/stage/{id}/substages` |
+| Cycling | no by-date list | team, then season, then races |
 
-¹ basketball, baseball, handball, cricket, rugby, volleyball, ice‑hockey,
-american‑football, esport.
+Team sports here: american-football, aussie-rules, bandy, baseball, basketball, beach-volley, cricket, floorball, futsal, handball, ice-hockey, minifootball, rugby, volleyball, and waterpolo. Esports uses the same tournament index and the ISO date form only.
 
----
+The runnable version of the team-sport walk is [Examples/day_schedule.py](Examples/day_schedule.py).
 
-## Team sports (football + the "matches" sports)
+## Scheduled tournaments
 
-Applies to **football, basketball, baseball, handball, cricket, rugby, volleyball,
-ice‑hockey, american‑football, esport**.
+`page` starts at **1**.
 
-### Option A — date‑aware tournament index · *recommended*
-
-One paginated call lists the tournaments that **actually have matches that day** — no
-guessing, no empty competitions:
-
-`GET /api/{sport}/scheduled-tournaments/{day}/{month}/{year}/page/{page}` — football:
-`GET /api/scheduled-tournaments/{day}/{month}/{year}/page/{page}`.
-
-`page` is **1‑based**; walk pages until one comes back empty (or `204`). Then pull each
-tournament's matches:
-
-- **ISO date** — football, cricket, esport:
-  `GET /api/{sport}/tournament/{tournament_id}/scheduled-events/{YYYY-MM-DD}`
-- **day/month/year** — football, basketball, handball, rugby, volleyball, ice‑hockey,
-  cricket: `GET /api/{sport}/tournament/{tournament_id}/schedules/{day}/{month}/{year}`
-
-```bash
-# Football — tournaments with matches on 22 Jul 2025 (first page)
-HOST=footapi7.p.rapidapi.com
-curl -s "https://$HOST/api/scheduled-tournaments/22/7/2025/page/1" \
-  -H "X-RapidAPI-Key: $RAPIDAPI_KEY" -H "X-RapidAPI-Host: $HOST"
+```json
+{
+  "scheduled": [
+    {
+      "tournament": {
+        "id": 137866,
+        "name": "Campeonato Mineiro",
+        "uniqueTournament": { "id": 23389, "name": "Campeonato Mineiro" }
+      },
+      "timezoneEventCount": { "0": 1, "3600": 1, "7200": 0 }
+    }
+  ],
+  "hasNextPage": false
+}
 ```
 
-### Option B — by category (country / tour) · *works for all of them*
+Read pages until `hasNextPage` is false or `scheduled` is empty.
 
-One cheap, cacheable discovery call, then one call per category.
+`tournament.id` is the group or edition on that day. `tournament.uniqueTournament.id` is the competition id. Pass **`uniqueTournament.id`** to `schedules` and `scheduled-events`.
 
-1. **List categories** (countries / regions):
-   `GET /api/{sport}/tournament/categories` — football: `GET /api/tournament/categories`.
-2. **Fetch each category's schedule for the day:**
-   `GET /api/{sport}/category/{category_id}/events/{day}/{month}/{year}` — football:
-   `GET /api/category/{category_id}/events/{day}/{month}/{year}`.
-3. **Union** the results and dedupe by `event.id`.
+`timezoneEventCount` maps a timezone offset, in seconds east of UTC, to how many of this competition's events fall on that local day. The key is a string. UTC is `"0"`. UTC+2 is `"7200"`. UTC−3 is `"-10800"`. Skip a competition when your viewers' offset is missing or `0`.
 
-```bash
-# Football — every match in England (category 1) on 7 March 2026
-HOST=footapi7.p.rapidapi.com
-curl -s "https://$HOST/api/tournament/categories" \
-  -H "X-RapidAPI-Key: $RAPIDAPI_KEY" -H "X-RapidAPI-Host: $HOST"     # → category ids
-curl -s "https://$HOST/api/category/1/events/7/3/2026" \
-  -H "X-RapidAPI-Key: $RAPIDAPI_KEY" -H "X-RapidAPI-Host: $HOST"     # → that day's matches
+Then:
+
+```text
+GET /api/volleyball/tournament/23389/schedules/29/9/2026
 ```
 
-### Option C — by tournament · *when you only track specific leagues*
+Football, cricket, esports, and tennis also accept an ISO date:
 
-1. List tournaments in a category:
-   `GET /api/{sport}/tournament/all/category/{category_id}`.
-2. Fetch a tournament's day, whichever form the sport exposes:
-   - **ISO date** — football, cricket, esport:
-     `GET /api/{sport}/tournament/{tournament_id}/scheduled-events/{YYYY-MM-DD}`
-   - **day/month/year** — football, basketball, handball, cricket, rugby, volleyball,
-     ice‑hockey:
-     `GET /api/{sport}/tournament/{tournament_id}/schedules/{day}/{month}/{year}`
+```text
+GET /api/tournament/23389/scheduled-events/2026-09-29
+```
 
-> **Football quirks:** no sport slug, and its category schedule is also exposed as
-> `GET /api/category/{id}/matches/{day}/{month}/{year}` (alias of the `events` form).
+The body is `{ "events": [ ... ] }`. Dedupe by `event.id` if you merge several competitions.
 
----
+## By category
 
-## Tennis & table‑tennis
+Use this when you want one country or one tour, and you already know the category id.
 
-These publish a **daily category index**, so you skip the full category list and touch
-only competitions that actually have play that day.
+1. `GET /api/tournament/categories` (football) or `GET /api/{sport}/tournament/categories`.
+2. `GET /api/category/{categoryId}/events/{day}/{month}/{year}` or `GET /api/{sport}/category/{categoryId}/events/{day}/{month}/{year}`.
 
-1. **Categories with play that day:**
-   `GET /api/{sport}/calendar/{day}/{month}/{year}/categories`
-2. **Fetch each one:**
-   `GET /api/{sport}/category/{category_id}/events/{day}/{month}/{year}`
+MMA, cycling, and motorsport list categories on their own prefix: `/api/mma/categories`, `/api/cycling/categories`, `/api/motorsport/categories`.
 
-`{sport}` is `tennis` or `table-tennis`. Tennis tournaments also support
-`GET /api/tennis/tournament/{tournament_id}/scheduled-events/{YYYY-MM-DD}`.
+Cache the category list. It changes slowly.
 
----
+Tennis and table tennis can skip the full category list. `GET /api/{sport}/calendar/{day}/{month}/{year}/categories` returns only the categories that have play that day. Then call the category events route for each id.
 
 ## MMA
 
-Organised by **organization → tournament → event**.
+`GET /api/mma/main-events/{YYYY-MM-DD}/extended` returns `{ "events": [ ... ] }` for that date.
 
-- **Direct (simplest)** — all main events on a date:
-  `GET /api/mma/main-events/{date}/extended` (`{date}` = `YYYY-MM-DD`).
-- **By organization:**
-  1. Organizations (UFC, KSW, …): `GET /api/mma/categories`
-  2. Their tournaments: `GET /api/mma/category/{category_id}/unique-tournaments`
-  3. A tournament's day:
-     `GET /api/mma/unique-tournament/{tournament_id}/schedules/{day}/{month}/{year}`
-     (or the whole month: `.../schedules/{month}/{year}`)
-- **Which months have events:**
-  `GET /api/mma/calendar/unique-tournament/{id}/{timezoneOffset}/months-with-events`
+To walk one promotion:
 
----
+1. `GET /api/mma/categories`
+2. `GET /api/mma/category/{categoryId}/unique-tournaments`
+3. `GET /api/mma/unique-tournament/{uniqueTournamentId}/schedules/{day}/{month}/{year}`
+
+The month form is `.../schedules/{month}/{year}`. Months that have cards: `GET /api/mma/calendar/unique-tournament/{id}/{timezoneOffset}/months-with-events`. `timezoneOffset` is seconds east of UTC.
+
+The tournaments route returns groups:
+
+```json
+{ "groups": [ { "uniqueTournaments": [ { "id": 19906, "name": "UFC" } ] } ] }
+```
 
 ## Motorsport
 
-Organised by **category → stage** (a stage is a race weekend / session).
+A stage is a race weekend.
 
-- **Direct** — stages scheduled on a date:
-  `GET /api/motorsport/stage/scheduled/{date}` (`{date}` = `YYYY-MM-DD`).
-- **By category:**
-  1. Categories (Formula 1, MotoGP, WRC, …): `GET /api/motorsport/categories`
-  2. Their stages: `GET /api/motorsport/category/{category_id}/stages/all`
-  3. Stage detail / sessions: `GET /api/motorsport/stage/{stage_id}` and
-     `GET /api/motorsport/stage/{stage_id}/substages`
-- **Next featured event:** `GET /api/motorsport/stage/featured`
-
----
+- `GET /api/motorsport/stage/scheduled/{YYYY-MM-DD}`
+- `GET /api/motorsport/categories`
+- `GET /api/motorsport/category/{categoryId}/stages/all`
+- `GET /api/motorsport/stage/{stageId}`
+- `GET /api/motorsport/stage/{stageId}/substages`
+- `GET /api/motorsport/stage/featured` for the next highlighted event
 
 ## Cycling
 
-Cycling has **no by‑date endpoint** — reach races through teams and seasons.
+There is no route that takes a calendar date and returns every race.
 
-1. Find a team / stage ID: `GET /api/cycling/search/{term}` (or `GET /api/search/all`).
-2. A team's seasons: `GET /api/cycling/team/{team_id}/stage/seasons`
-3. That season's races: `GET /api/cycling/team/{team_id}/stage/season/{season_id}/races`
-4. Race detail: `GET /api/cycling/stage/{stage_id}/...`
+1. `GET /api/cycling/search/{term}` or `GET /api/search/all?q={term}&sport=cycling&page=0`
+2. `GET /api/cycling/team/{teamId}/stage/seasons`
+3. `GET /api/cycling/team/{teamId}/stage/season/{seasonId}/races`
+4. `GET /api/cycling/stage/{stageId}` for one race
 
-To narrow to dates that actually have racing, use the days‑with‑events helper below.
+`GET /api/calendar/season/{seasonId}/{year}/days-with-events` tells you which days in that season have something on the calendar, so you can skip empty dates.
 
----
+## Live, and days that have matches
 
-## Helpers (every sport)
+| Need | Route |
+|------|-------|
+| In play now | `GET /api/matches/live`, `GET /api/{sport}/matches/live`, or `GET /api/{sport}/events/live` |
+| Competitions in play | `GET /api/tournaments/live` or `GET /api/{sport}/tournaments/live` |
+| Categories in play | `GET /api/tournament/categories/live` or `GET /api/{sport}/tournament/categories/live` |
+| Days in a season that have matches | `GET /api/calendar/season/{seasonId}/{year}/days-with-events` |
+| How many events each sport has today, for one offset | `GET /api/sport/event-count/{timezoneOffset}` |
 
-| Need | Endpoint |
-|---|---|
-| **Live right now** (in‑play only) | `GET /api/matches/live` · `GET /api/{sport}/matches/live` · `GET /api/{sport}/events/live` (tennis / table‑tennis) |
-| **Which days have play in a season** | `GET /api/calendar/season/{season_id}/{year}/days-with-events` |
-
----
-
-## Conventions
-
-- **Date formats.** `{day}/{month}/{year}` are integers, not zero‑padded (e.g. `7/3/2026`);
-  `{date}` is ISO `YYYY-MM-DD` (e.g. `2026-03-07`).
-- **`{sport}` slug.** `basketball`, `baseball`, `handball`, `cricket`, `rugby`,
-  `volleyball`, `ice-hockey`, `american-football`, `esport`, `tennis`, `table-tennis`,
-  `mma`, `motorsport`, `cycling`. **Football omits the slug** (`/api/...`).
-- **Host per sport.** Set `X-RapidAPI-Host` to the sport's RapidAPI host — see the
-  [README host table](README.md).
-- **`204` = valid route, no data** for those parameters. Treat it as "nothing scheduled",
-  not an error.
-- **Cache** the category / tournament lists; they change slowly, so you only pay for the
-  per‑day calls. The [`list_all_leagues`](Examples/list_all_leagues.py) example shows the
-  enumeration.
+`event-count` returns one number per sport slug. The offset is seconds east of UTC, for example `0` or `7200`. It is not a sport name.

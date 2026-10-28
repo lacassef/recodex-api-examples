@@ -2,14 +2,14 @@
  * Filter a day's schedule to a specific time zone — the code companion to the FAQ
  * "Why do schedule endpoints return matches from the previous/next day?" (../FAQ.md).
  *
- * Schedule endpoints are timestamped in UTC and intentionally return a window that
- * spans ~12 h before and after the UTC date, so every time zone is covered. To show a
- * user's *local* day, filter by `event.startTimestamp` against that day's local
- * bounds — and fetch the neighbouring UTC dates that overlap it.
+ * startTimestamp is Unix seconds in UTC. A viewer's local day is the half-open
+ * window local midnight <= startTimestamp < local midnight + 86400. This example
+ * fetches the UTC dates at offsets -1, 0 and +1, then keeps events inside that window.
  *
- * The flat per-date feed (/api/matches/{day}/{month}/{year}) has been retired, so we
- * assemble the day *per competition*. Two options (see ../FAQ.md "How do I get all
- * matches on a specific date?"):
+ * Football has no sport-wide day list: GET /api/matches/{day}/{month}/{year} is
+ * discontinued. Other sports still publish GET /api/{sport}/matches/{day}/{month}/{year}
+ * or GET /api/{sport}/events/{day}/{month}/{year}. This example assembles one day from
+ * a few categories. Two options (see ../DailyMatches.md):
  *
  *   1. By category:    /api/{sport}/category/{id}/events/{day}/{month}/{year}
  *                      (football: /api/category/{id}/events/{day}/{month}/{year})
@@ -47,9 +47,10 @@ async function get(path) {
 }
 
 async function fetchSchedule(day, month, year) {
-  // The flat /api/matches/{day}/{month}/{year} feed is retired — union each category's
-  // schedule and dedupe. Swap to /api{SPORT_PREFIX}/tournament/{id}/scheduled-events/
-  // {YYYY-MM-DD} to drive it by tournament instead. See ../FAQ.md.
+  // Union each category's schedule and dedupe by event id. Swap to
+  // /api{SPORT_PREFIX}/tournament/{uniqueTournamentId}/scheduled-events/{YYYY-MM-DD}
+  // (or .../schedules/{day}/{month}/{year}) to drive it by competition.
+  // The id is uniqueTournament.id. See ../DailyMatches.md.
   const seen = new Set();
   const events = [];
   for (const catId of CATEGORY_IDS) {

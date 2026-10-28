@@ -32,19 +32,19 @@ app = Flask(__name__)
 
 @app.route("/api/<path:subpath>")
 def proxy(subpath):
-    """Forward /api/<subpath> (with query string) to the upstream API."""
-    upstream = f"https://{HOST}/api/{subpath}"
+    """Forward /api/<subpath> (with query string) to AllSportsAPI."""
+    target = f"https://{HOST}/api/{subpath}"
     headers = {"X-RapidAPI-Key": API_KEY, "X-RapidAPI-Host": HOST}
 
-    upstream_res = requests.get(
-        upstream, headers=headers, params=request.args, timeout=15
+    api_res = requests.get(
+        target, headers=headers, params=request.args, timeout=15
     )
 
-    # Mirror the upstream status and content type (JSON or image/png).
+    # Mirror the status and content type (JSON or an image).
     response = Response(
-        upstream_res.content,
-        status=upstream_res.status_code,
-        content_type=upstream_res.headers.get("Content-Type", "application/json"),
+        api_res.content,
+        status=api_res.status_code,
+        content_type=api_res.headers.get("Content-Type", "application/json"),
     )
     # CORS for local front-end development — restrict the origin in production!
     response.headers["Access-Control-Allow-Origin"] = "*"

@@ -18,31 +18,31 @@ For draft‑based sports, `round` and `pick` describe the selection slot.
 
 ## Properties
 
-- **fromTeamName** (`String`):
+- **fromTeamName** (`string`):
     - The name of the team from which the player or manager is being transferred.
 
-- **id** (`int`):
+- **id** (`number`):
     - A unique identifier for the transfer.
 
 - **isManager** (`boolean`):
     - A flag indicating whether the transfer involves a manager rather than a player.
 
-- **pick** (`Integer`):
+- **pick** (`number`):
     - The pick number in the draft or selection process associated with this transfer, if applicable.
 
 - **player** (`Player`):
     - The player involved in the transfer. If the transfer is for a manager, this field might not be used.
 
-- **round** (`Integer`):
+- **round** (`number`):
     - The round in which the transfer or draft pick occurred, if applicable.
 
-- **toTeamName** (`String`):
+- **toTeamName** (`string`):
     - The name of the team to which the player or manager is being transferred.
 
-- **transferDateTimestamp** (`int`):
+- **transferDateTimestamp** (`number`):
     - The timestamp representing the date of the transfer, typically in Unix time (seconds since the epoch).
 
-- **transferFeeDescription** (`String`):
+- **transferFeeDescription** (`string`):
     - A textual description of the transfer fee, detailing the amount and potentially any conditions or terms related to the payment.
 
 - **transferFeeRaw** (`Money`):
@@ -54,5 +54,5 @@ For draft‑based sports, `round` and `pick` describe the selection slot.
 - **transferTo** (`Team`):
     - The `Team` object representing the team to which the player or manager is being transferred.
 
-- **type** (`Integer`):
+- **type** (`number`):
     - An integer representing the type of transfer, which could denote different kinds of transfers (e.g., loan, permanent, free transfer).

@@ -1,65 +1,56 @@
-# OpenAPI Specifications
+# OpenAPI specifications
 
-Machine‑readable **OpenAPI 3.0** descriptions of the AllSportsAPI endpoints. Import them
-into Swagger UI / Editor, Postman, Insomnia, or an OpenAPI client generator to explore
-the API and scaffold typed clients.
+OpenAPI 3.0 descriptions of every route. Import one into Swagger UI, Postman, Insomnia, or a client generator.
 
-## What's here
+The `servers` entry is `https://{host}`. Set `host` to the marketplace host you subscribed to, and send that same value in `X-RapidAPI-Host`. The default host is the All Sports bundle.
 
-| File | Scope | Paths |
-|------|-------|------:|
-| `allsports_openapi.yaml` | **Everything** — all sports merged into one spec, fully expanded. | 952 |
-| `allsports_simplified_openapi.yaml` | Same coverage, **compacted** using path enums (one template per path family instead of every concrete route). Smaller and easier to skim. | 296 |
-| `football_openapi.yaml` | Football / Soccer only | 179 |
-| `basketball_openapi.yaml` | Basketball only | 133 |
-| `tennis_openapi.yaml` | Tennis only | 99 |
-| `american_football_openapi.yaml` | American Football only | 91 |
-| `ice_hockey_openapi.yaml` | Ice Hockey only | 89 |
-| `table_tennis_openapi.yaml` | Table Tennis only | 83 |
-| `baseball_openapi.yaml` | Baseball only | 79 |
-| `handball_openapi.yaml` | Handball only | 79 |
-| `cricket_openapi.yaml` | Cricket only | 75 |
-| `esports_openapi.yaml` | Esports only | 71 |
-| `rugby_openapi.yaml` | Rugby only | 68 |
-| `volleyball_openapi.yaml` | Volleyball only | 66 |
-| `mma_openapi.yaml` | MMA only | 55 |
-| `motorsport_openapi.yaml` | Motorsport only | 45 |
-| `cycling_openapi.yaml` | Cycling only | 34 |
+These files list paths, parameters, and the response status. The JSON fields inside a `200` body are described in [Models](../Models/). A `200` schema of "JSON object" means the body is the payload for that route (`events`, `event`, `standings`, and so on). Extra fields may be present.
 
-> Path counts are approximate and will drift as endpoints are added or removed.
+`204` means the route exists and there is no data for those parameters. The body is empty.
 
-## Which one should I use?
+## Which file
 
-- **Browsing / learning a single sport** → the per‑sport file (e.g. `tennis_openapi.yaml`).
-- **A quick overview of the whole surface** → `allsports_simplified_openapi.yaml`
-  (the compacted enums keep it readable).
-- **Code generation or exhaustive tooling** → `allsports_openapi.yaml` (every concrete
-  route spelled out).
+| File | Use it when |
+|------|-------------|
+| `allsports_simplified_openapi.yaml` | You want one file for every sport and your tool has a size limit. Shared segments are enums. 353 paths. |
+| `allsports_openapi.yaml` | You want every concrete path written out. 1978 paths. |
+| `{sport}_openapi.yaml` | You are building one sport. |
 
-## Point it at the real server
+Path counts move when routes are added. The simplified file is the one to import into a marketplace that rejects a very large document.
 
-The `servers` URL in each file is a placeholder (`http://localhost:8080`). To make real
-calls, target the host for the marketplace you subscribe to and send your auth headers.
+## Files
 
-**RapidAPI** (individual sports **and** the All Sports bundle):
+| File | Paths |
+|------|------:|
+| `allsports_openapi.yaml` | 1978 |
+| `allsports_simplified_openapi.yaml` | 353 |
+| `football_openapi.yaml` | 205 |
+| `basketball_openapi.yaml` | 172 |
+| `tennis_openapi.yaml` | 131 |
+| `american_football_openapi.yaml` | 118 |
+| `ice_hockey_openapi.yaml` | 116 |
+| `table_tennis_openapi.yaml` | 110 |
+| `baseball_openapi.yaml` | 110 |
+| `handball_openapi.yaml` | 106 |
+| `aussie_rules_openapi.yaml` | 104 |
+| `bandy_openapi.yaml` | 104 |
+| `beach_volley_openapi.yaml` | 104 |
+| `floorball_openapi.yaml` | 104 |
+| `futsal_openapi.yaml` | 104 |
+| `minifootball_openapi.yaml` | 104 |
+| `waterpolo_openapi.yaml` | 104 |
+| `cricket_openapi.yaml` | 102 |
+| `padel_openapi.yaml` | 101 |
+| `esports_openapi.yaml` | 97 |
+| `badminton_openapi.yaml` | 95 |
+| `darts_openapi.yaml` | 95 |
+| `snooker_openapi.yaml` | 95 |
+| `rugby_openapi.yaml` | 95 |
+| `volleyball_openapi.yaml` | 94 |
+| `mma_openapi.yaml` | 77 |
+| `cycling_openapi.yaml` | 66 |
+| `motorsport_openapi.yaml` | 65 |
 
-- **Base URL:** `https://{host}.p.rapidapi.com` (e.g. `https://footapi7.p.rapidapi.com`)
-- **Headers:** `X-RapidAPI-Key` and `X-RapidAPI-Host` — see the [root README](../README.md).
+`esports_openapi.yaml` documents the public prefix `/api/esport`.
 
-**API.market** (complete **All Sports** only — no per‑sport listings):
-
-- Product page: [api.market/store/recodex/allsportsapi](https://api.market/store/recodex/allsportsapi)
-- Use the full-bundle specs (`allsports_openapi.yaml` /
-  `allsports_simplified_openapi.yaml`) with the host and auth shown on that page.
-
-In Swagger UI you can override the server URL and add auth headers under
-**Authorize** / request headers; in Postman, set them as collection variables.
-
-## Notes
-
-- These specs describe **paths, parameters and response wrappers**. For the detailed
-  shape of each response object, pair them with the [Models reference](../Models/).
-- The `204` responses mean "the route is valid but there's no data for those parameters"
-  — handle it distinctly from `200`.
-- Endpoint paths are consistent across sports: football uses `/api/...`, other sports
-  prefix the sport name (e.g. `/api/tennis/...`).
+Football paths have no sport slug. Every other file includes the shared routes (search, flags, TV, odds providers) plus that sport's own routes.

@@ -1,22 +1,25 @@
-# SKAlpha Proxy API Documentation
+# SKAlpha
 
-This documentation set explains how to call the SKAlpha endpoints that are exposed under the `/api/skalpha` path. The goal is to help you assemble valid requests that return the data you expect.
+How to call the `GET` routes under `/api/skalpha`. Each route's parameters are in the [OpenAPI](openapi/skalpha_openapi.yaml). That file is a copy of `docs/oai/skalpha_openapi.yaml`, the output of `go run ./cmd/openapi-gen`. Do not edit it by hand. When the routes change, run the generator and copy it again.
 
-- The full OpenAPI description lives at `skalpha/openapi/openapi-skalpha.yaml`.
-- Errors use a JSON:API style wrapper; see [Request essentials](guides/request-essentials.md#handling-errors) for details.
+`204` means the route exists and there is no data for those parameters.
 
-## Documentation map
+## Map
 
-- [Request essentials](guides/request-essentials.md) — query aliases, validation rules, pagination limits, and screener payload requirements.
-- [Content & media endpoints](content/overview.md) — news, articles, press releases, filings, authors, and feed cards.
-- [Market data endpoints](market-data/overview.md) — prices, quotes, options, market status, charts, ETF performance, and aggregated symbol data.
-- [Symbol subresources](symbols/overview.md) — per-symbol fundamentals, content feeds, peers, ratings, and discovery helpers.
-- [Reference & discovery endpoints](reference/overview.md) — metrics, calendars, screeners, and search APIs.
+- [Parameters](docs/guides/request-essentials.md) — value shape, enums, and categories.
+- [Building a request](docs/guides/building-requests.md) — what to put on the query.
+- [Workflows](docs/guides/workflows.md) — which call comes next, and which field of the response fills the next parameter.
+- [FAQ](docs/guides/faq.md) — status codes, ids, categories, and the parameters that differ by route.
+- [Examples](docs/guides/examples.md) — curls.
+- [Best practices](docs/guides/best-practices.md) — what to send and what to omit.
+- [Models](Models/README.md) — JSON objects and the route catalog.
+- [Symbol page](docs/articles/symbol-page.md) — which call each block of a symbol screen makes, and which parameter it sets.
+- [News and articles](docs/articles/news-and-articles.md) — list, then the item, then comments.
+- [Content](docs/content/overview.md) — news, articles, filings, authors, feed.
+- [Market](docs/market-data/overview.md) — prices, quotes, options, charts, ETFs, aggregates.
+- [Symbols](docs/symbols/overview.md) — sub-resources of `/symbols/{slug}`.
+- [Reference](docs/reference/overview.md) — metrics, calendar, screener, search.
 
-## Example request
+## Smallest request
 
-```sh
-curl "https://{api-host}/api/skalpha/news?filter_category=market-news::technology&page_size=20"
-```
-
-`{api-host}` represents whatever host exposes this proxy. Parameters must satisfy the validation rules documented in the guides; otherwise the proxy will return `400 Bad Request`.
+Call `/news`. Set `filter_category` to one news category and `page_size` to the size you want. `{api-host}` is this gateway's host. Send only parameters the operation lists. An invalid value returns `400`. A filled call is in [Examples](docs/guides/examples.md).

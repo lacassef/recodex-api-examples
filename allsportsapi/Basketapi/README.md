@@ -6,7 +6,7 @@ classifying shots into court zones.
 
 | File | What it does |
 |------|--------------|
-| [`basketball-shotmap.py`](basketball-shotmap.py) | Draws a half‑court with Matplotlib, plots made/missed shots, and renders a shot‑density heatmap (Seaborn + NumPy). |
+| [`basketball-shotmap.py`](basketball-shotmap.py) | Draws a half‑court with Matplotlib, plots made/missed/saved shots, and renders a shot‑density heatmap on the same court coordinates (NumPy). |
 | [`PlayerShotActionAreas.md`](PlayerShotActionAreas.md) | Explains how to classify a shot's `(x, y)` into a named court zone (corner three, top of the key, paint, …). |
 
 ---
@@ -26,7 +26,9 @@ Host: `basketapi1.p.rapidapi.com` (or `allsportsapi2.p.rapidapi.com` with the bu
 
 ## Shot data shape
 
-Each shot in the response carries a court position plus made/missed/saved counts:
+Both routes return `{ "shotmap": [ ... ] }`. Pass that array to `plot_shotmap()`. `shots_from_body()` reads it for you. A `204` is an empty body.
+
+The team route aggregates every attempt at one spot:
 
 ```json
 { "x": -233, "y": -2, "made": 1, "missed": 1, "saved": 0 }
@@ -34,38 +36,43 @@ Each shot in the response carries a court position plus made/missed/saved counts
 
 | Field | Meaning |
 |-------|---------|
-| `x` | Horizontal position. `0` is the centre; negative = left, positive = right. |
-| `y` | Distance from the baseline toward half‑court. |
-| `made` / `missed` / `saved` | Counts for the outcome at that spot. |
+| `x` | Horizontal position. `0` is the basket; negative = left, positive = right. |
+| `y` | Distance from the basket toward half‑court. Slightly negative means just behind the rim. |
+| `made` / `missed` / `saved` | How many attempts at that spot ended that way. |
+
+The player route is one attempt per item, not those counts:
+
+```json
+{ "x": -40, "y": 8, "type": 1, "typeName": "made", "isHome": false, "id": 19548784, "period": "2Q" }
+```
+
+`type` `1` and `typeName` `"made"` are a made shot. `type` `0` and `"missed"` are a miss. There is no `made` / `missed` / `saved` on this object.
 
 ### Coordinate system
 
-The examples use a hoop‑centred system that matches the drawn court:
+The example uses a hoop‑centred court:
 
-- **Origin `(0, 0)` is the basket.**
-- `x` runs roughly **‑250 … 250** (court width).
-- `y` runs **0 … 470** (baseline toward half‑court).
-- The three‑point arc sits at radius ≈ **238**; the paint is ±**80** wide.
+- **Origin `(0, 0)` is the basket.** The backboard is drawn at `y = -7.5`.
+- `x` runs roughly **‑250 … 250**.
+- `y` grows from the basket toward half‑court. The axis in the example is **‑50 … 470**, so the hoop and shots with a small negative `y` stay on the chart.
+- The three‑point arc sits at radius ≈ **238** (`x² + y² >= 56644`). Corner threes are `x <= -219` and `y < 89`, or `x >= 219` and `y < 89`.
 
 These same thresholds drive the zone classification in
-[`PlayerShotActionAreas.md`](PlayerShotActionAreas.md).
+[`PlayerShotActionAreas.md`](PlayerShotActionAreas.md). `TOP_MIDDLE` is the middle of the arc. `CENTER_MIDDLE` is the middle of the paint. They are different zones.
 
 ---
 
 ## Running the Python example
 
 ```bash
-pip install matplotlib numpy seaborn
+pip install matplotlib numpy
 python basketball-shotmap.py
 ```
 
-`basketball-shotmap.py` ships with sample shot data and two views:
+`basketball-shotmap.py` ships with sample team shots and two views:
 
-1. **Shotmap** — made shots in green, missed in red, drawn over a half‑court.
-2. **Heatmap** — a 2‑D histogram of shot density (Seaborn) over the same court.
-
-To use live data, fetch one of the shotmap endpoints and pass the returned list to
-`plot_shotmap()` / `plot_heatmap()` (each item needs `x`, `y`, `made`, `missed`):
+1. **Shotmap** — made shots in green, missed in red, saved in blue, over a half‑court. A spot with more than one outcome draws each marker.
+2. **Heatmap** — a 2‑D histogram on the same court axes (`x` −250…250, `y` −50…470), with the court drawn on top. Team cells are weighted by `made + missed + saved`.
 
 ```python
 import os, requests
@@ -75,9 +82,12 @@ headers = {
     "X-RapidAPI-Host": "basketapi1.p.rapidapi.com",
 }
 url = "https://basketapi1.p.rapidapi.com/api/basketball/match/{id}/team/{teamId}/shotmap"
-shots = requests.get(url, headers=headers, timeout=15).json()  # adapt to the payload key
+res = requests.get(url, headers=headers, timeout=15)
+shots = [] if res.status_code == 204 else shots_from_body(res.json())
 plot_shotmap(shots)
 ```
+
+The player route uses the same functions. `shots_from_body` reads `shotmap` from the 200 body.
 
 ---
 

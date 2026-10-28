@@ -1,55 +1,62 @@
-# Content & Media Endpoints
+# Content
 
-Content-oriented routes surface news, articles, press releases, filings, author stats, and curated feed cards. Every section below highlights the available paths, required inputs, and validation notes. Reuse the shared guidance in [Request essentials](../guides/request-essentials.md) for filter tokens, pagination limits, and query aliasing.
+News, articles, press releases, filings, authors, and the feed. Parameter shape, pagination, and categories are in [Parameters](../guides/request-essentials.md). The detail step is in [News and articles](../articles/news-and-articles.md).
+
+`page_size` is 1 to 50. `lang` is optional on every route. Do not send `isMounting`. It is not a parameter.
 
 ## News
 
-| Path | Purpose | Required params | Optional params | Notes |
+| Route | Purpose | Required | Optional | Notes |
 | --- | --- | --- | --- | --- |
-| `/api/skalpha/breaking-news` | Latest market-moving headlines. | — | — | Short-cache response tuned for rapid refresh; no query parameters are accepted. |
-| `/api/skalpha/news` | General news feed with filtering. | — | `fields_news`, `fields_tag`, `filter_category`, `filter_since`, `filter_until`, `include`, `isMounting`, `page_size`, `page_number` | `filter_category` must match a token from the category lists; timestamps are Unix seconds. |
-| `/api/skalpha/news/trending` | Trending news items. | — | `filter_category`, `include`, `page_size`, `page_number` | Shares the same category tokens and pagination limits as the main news feed. |
-| `/api/skalpha/news/{id}` | Fetch a specific news item. | `id` | `include`, `lang` | `id` is the upstream article identifier; optional `lang` switches localization when available. |
-| `/api/skalpha/news-page-content-recommendations` | Related content for a news item. | — | `market_current_id`, `variation` | Use when building sidebars or recommendation units. |
-| `/api/skalpha/full-news/trending` | Extended trending news with richer relationships. | — | `fields_news`, `fields_tag`, `filter_category`, `include`, `isMounting`, `page_size`, `page_number` | Same category and pagination rules; include fields lists to limit payload size. |
-| `/api/skalpha/leading-news-stories` | Curated top stories. | — | — | Returns a small curated list without pagination. |
-
-## Press releases
-
-| Path | Purpose | Required params | Optional params | Notes |
-| --- | --- | --- | --- | --- |
-| `/api/skalpha/press-releases/{id}` | Retrieve a single press release. | `id` | `include` | `id` is the press release identifier. Use `include` to side-load tickers or authors. |
-| `/api/skalpha/press-releases/{id}/comment-maps` | Comment thread metadata for a press release. | `id` | `include`, `sort` | `sort` follows the general sort token rules. |
+| `/api/skalpha/breaking-news` | Short headlines. | — | `lang` | No other parameters. |
+| `/api/skalpha/news` | List with a category. | — | `fields_news`, `fields_tag`, `filter_category`, `filter_since`, `filter_until`, `filter_unread`, `include`, `lang`, `page_size`, `page_number` | Example include: `primaryTickers,secondaryTickers`. `filter_unread=true` limits the list to unread items. |
+| `/api/skalpha/news/trending` | Trending. | — | `filter_category`, `include`, `page_size`, `page_number` | Category `market-news::all` or `market-news::trending`. Include `author`. |
+| `/api/skalpha/news/{id}` | One news item. | `id` | `include`, `lang`, `sa_page_url`, `sa_referrer`, `sa_query` | Include `author,primaryTickers,secondaryTickers,otherTags`. `sa_page_url` is the `links.self` path. |
+| `/api/skalpha/news/{id}/comment-maps` | Comment ids. | `id` | `include`, `sort`, `lang` | `include=user`, `sort=-top_parent_id`. |
+| `/api/skalpha/news/{id}/comments` | Bodies. | `id` | `comment_ids`, `include`, `sort`, `lang` | `comment_ids` comma-separated, ids from `comment-maps`. |
+| `/api/skalpha/news-page-content-recommendations` | News sidebar. | — | `market_current_id`, `variation` | Use `variation=variation_b`. |
+| `/api/skalpha/full-news/trending` | Trending with more fields. | — | `fields_news`, `fields_tag`, `filter_category`, `include`, `page_size`, `page_number` | `page_size` up to 50. A full body uses 50. |
+| `/api/skalpha/leading-news-stories` | Home highlights. | — | `lang` | No pagination. |
 
 ## Articles
 
-| Path | Purpose | Required params | Optional params | Notes |
+| Route | Purpose | Required | Optional | Notes |
 | --- | --- | --- | --- | --- |
-| `/api/skalpha/articles` | Article feed with category filters. | — | `fields_article`, `filter_category`, `filter_since`, `filter_until`, `include`, `isMounting`, `page_size`, `page_number` | Category tokens are shared with news; timestamps are Unix seconds. |
-| `/api/skalpha/articles/trending` | Trending analysis articles. | — | `fields_article`, `fields_author`, `filter_category`, `include`, `page_size`, `page_number` | Include author fields to enrich author metadata in the response. |
-| `/api/skalpha/articles/{id}` | Fetch a specific article. | `id` | `include`, `lang` | `id` is the article identifier; `lang` applies localized variants when available. |
-| `/api/skalpha/articles/{id}/author` | Author details for an article. | `id` | `include` | Useful for populating author cards without a separate lookup. |
-| `/api/skalpha/articles/{id}/comment-maps` | Comment aggregation for an article. | `id` | `include`, `sort` | `sort` uses the standard sort token format. |
-| `/api/skalpha/article-page-content-recommendations` | Recommended reading for an article. | — | `article_id`, `variation` | Omit optional params to receive the default recommendation set. |
+| `/api/skalpha/articles` | List by article category. | — | `fields_article`, `filter_category`, `filter_since`, `filter_until`, `include`, `page_size`, `page_number` | Include `author,primaryTickers,secondaryTickers,sentiments`. |
+| `/api/skalpha/articles/trending` | Analysis trending. | — | `fields_article`, `fields_author`, `filter_category`, `include`, `page_size`, `page_number` | Category `latest-articles`. Fields `title,links,author` and author `nick,image`. |
+| `/api/skalpha/articles/{id}` | One article. | `id` | `include`, `lang`, `sa_page_url`, `sa_referrer`, `sa_query` | Page include: `author,primaryTickers,secondaryTickers,otherTags,presentations,presentations.slides,author.authorResearch,author.userBio`. |
+| `/api/skalpha/articles/{id}/author` | Author of that article. | `id` | `include` | `authorResearch,userBioTags`. |
+| `/api/skalpha/articles/{id}/comment-maps` | Comment ids. | `id` | `include`, `sort` | `user` and `-top_parent_id`. |
+| `/api/skalpha/articles/{id}/comments` | Bodies. | `id` | `comment_ids`, `include`, `sort`, `lang` | Same shape as news. |
+| `/api/skalpha/comments/{id}/sub-comments` | Replies to one comment. | `id` | `include`, `sort`, `lang` | `include` in the spec is `user`. |
+| `/api/skalpha/article-page-content-recommendations` | Article sidebar. | — | `article_id`, `variation` | Use `variation=variation_a`. |
+| `/api/skalpha/education-top-articles` | Top of one education category. | — | `filter_category`, `lang`, `page_size` | Category is an `education::` token. Example: `page_size=3` and `lang=en`. |
+
+## Press releases
+
+| Route | Purpose | Required | Optional | Notes |
+| --- | --- | --- | --- | --- |
+| `/api/skalpha/press-releases/{id}` | One press release. | `id` | `include`, `sa_page_url`, `sa_referrer`, `sa_query` | Include `acquireService,primaryTickers`. `sa_page_url` in the form `/pr/{id}-{slug}`. |
+| `/api/skalpha/press-releases/{id}/comment-maps` | Comment ids. | `id` | `include`, `sort` | `user`, `-top_parent_id`. |
 
 ## Filings
 
-| Path | Purpose | Required params | Optional params | Notes |
+| Route | Purpose | Required | Optional | Notes |
 | --- | --- | --- | --- | --- |
-| `/api/skalpha/filings/{id}` | Retrieve a filing record. | `id` | `include` | `id` is numeric. Include relationships (for example `ticker`) to enrich the payload. |
-| `/api/skalpha/filings/{id}/comment-maps` | Filing comment aggregation. | `id` | `include`, `sort` | Mirrors the comment map behavior used by articles and press releases. |
-| `/api/skalpha/filings/pdf/{id}` | Direct link metadata for filing PDFs. | `id` | — | Returns delivery details for the underlying PDF. |
+| `/api/skalpha/filings/{id}` | One filing. | `id` | `include`, `sa_page_url`, `sa_referrer`, `sa_query` | Include `ticker`. Page path: `/filing/{id}`. |
+| `/api/skalpha/filings/{id}/comment-maps` | Comment ids. | `id` | `include`, `sort` | Same as the other maps. |
+| `/api/skalpha/filings/pdf/{id}` | PDF. | `id` | — | The body is the PDF, not JSON. |
 
 ## Authors
 
-| Path | Purpose | Required params | Optional params | Notes |
+| Route | Purpose | Required | Optional | Notes |
 | --- | --- | --- | --- | --- |
-| `/api/skalpha/authors/{slug}` | Author profile. | `slug` | `include` | `slug` must match the author slug pattern; include relationships to load stats or social data. |
-| `/api/skalpha/authors/{slug}/article/ticker-counts` | Count of tickers covered by an author. | `slug` | — | Returns aggregate counts by ticker. |
-| `/api/skalpha/authors/{slug}/top-covered-symbols` | Top symbols associated with an author. | `slug` | — | Useful for highlighting frequent coverage areas. |
+| `/api/skalpha/authors/{slug}` | Profile. | `slug` | `include`, `sa_page_url`, `sa_referrer`, `sa_query` | `sa_page_url=/author/{slug}`. |
+| `/api/skalpha/authors/{slug}/article/ticker-counts` | Ticker counts across articles. | `slug` | — | Aggregate. |
+| `/api/skalpha/authors/{slug}/top-covered-symbols` | Most covered symbols. | `slug` | — | — |
 
 ## Feed
 
-| Path | Purpose | Required params | Optional params | Notes |
+| Route | Purpose | Required | Optional | Notes |
 | --- | --- | --- | --- | --- |
-| `/api/skalpha/feed` | Mixed content feed used on the homepage. | `models_list` | `all_list`, `any_tags_list`, `any_primary_list`, `include`, `page_size`, `page_number`, `filter_since`, `filter_until`, `custom_sort`, `without_list`, `isMounting` | `models_list` chooses the block types to return (for example `Article,MarketCurrent`). Timestamp filters use Unix seconds. |
+| `/api/skalpha/feed` | Home blocks. | `models_list` | `all_list`, `any_tags_list`, `any_primary_list`, `include`, `page_size`, `page_number`, `filter_since`, `filter_until`, `custom_sort`, `without_list` | Models: `Article`, `MarketCurrent`, `Research`. Example: the first two. `without_list`: `transcripts`, `earnings-slides`, `exclude-feed`. |

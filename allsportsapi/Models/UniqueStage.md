@@ -11,20 +11,20 @@ leg within a larger event structure. It is most relevant to sports organised in 
 
 ## Properties
 
-- **category** (`@NotNull Category`):
-    - The category or division to which the stage belongs, such as a particular round or level within a tournament. This field is mandatory and cannot be null.
+- **category** (`Category`):
+    - The category or division to which the stage belongs, such as a particular round or level within a tournament.
 
-- **id** (`int`):
+- **id** (`number`):
     - A unique identifier for the stage.
 
-- **name** (`@NotNull String`):
-    - The official name of the stage. This could refer to the stage's round name, like "Quarterfinals" or "Group Stage". This field is mandatory and cannot be null.
+- **name** (`string`):
+    - The official name of the stage. This could refer to the stage's round name, like "Quarterfinals" or "Group Stage".
 
-- **primaryColorHex** (`String`):
+- **primaryColorHex** (`string`):
     - The primary color of the stage, represented as a hexadecimal color code. This color may be used for branding, visual representation, or theming specific to this stage.
 
-- **secondaryColorHex** (`String`):
+- **secondaryColorHex** (`string`):
     - The secondary color of the stage, also represented as a hexadecimal color code. This complements the primary color in the stage's visual identity.
 
-- **slug** (`@NotNull String`):
-    - A URL-friendly identifier for the stage, often used in web applications for routing or identifying the stage in a readable manner. This field is mandatory and cannot be null.
+- **slug** (`string`):
+    - A URL-friendly identifier for the stage, often used in web applications for routing or identifying the stage in a readable manner.

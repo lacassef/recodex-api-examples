@@ -41,6 +41,8 @@ Define an enumeration or set of constants for each zone:
 TOP_LEFT_OUTSIDE
 TOP_MIDDLE
 TOP_RIGHT_OUTSIDE
+LEFT_OUTSIDE
+RIGHT_OUTSIDE
 TOP_LEFT_INSIDE
 TOP_RIGHT_INSIDE
 CENTER_MIDDLE
@@ -51,9 +53,10 @@ BOTTOM_RIGHT
 
 ### 2. Set up Coordinate System
 
-- Origin (0,0) is at the center of the court
-- X-axis: negative to the left, positive to the right
-- Y-axis: negative towards the bottom, positive towards the top
+- Origin `(0, 0)` is the basket.
+- X-axis: negative to the left, positive to the right. About −250 to 250.
+- Y-axis: distance from the basket toward half-court. `0` is the basket. Larger `y` is farther up the floor. A shot can sit slightly below the rim (a small negative `y`).
+- The diagram above puts the basket at the top. `TOP_*` zones are the ones nearer the basket. `BOTTOM_*` zones are farther from the basket.
 
 ### 3. Classification Logic
 
@@ -61,7 +64,7 @@ Here's a general algorithm to classify a shot:
 
 1. Get the (x, y) coordinates of the shot
 2. Check for corner three-pointers (top left and right outside)
-3. Calculate distance from center to check if it's a three-pointer
+3. Calculate the distance from the basket to check if it's a three-pointer
 4. For two-pointers, divide the court into sections based on x and y values
 
 Pseudocode:
@@ -82,14 +85,14 @@ function classifyShot(x, y):
         else:
             return RIGHT_OUTSIDE
     else:  // Two-pointer
-        if y <= 139:  // Top half
+        if y <= 139:  // closer to the basket (top of the diagram)
             if x < -79:
                 return TOP_LEFT_INSIDE
             else if x <= 79:
-                return TOP_MIDDLE
+                return CENTER_MIDDLE
             else:
                 return TOP_RIGHT_INSIDE
-        else:  // Bottom half
+        else:  // farther from the basket (bottom of the diagram)
             if x < -79:
                 return BOTTOM_LEFT
             else if x <= 79:
@@ -97,3 +100,5 @@ function classifyShot(x, y):
             else:
                 return BOTTOM_RIGHT
 ```
+
+`TOP_MIDDLE` is the middle of the three-point arc. `CENTER_MIDDLE` is the middle of the paint (`y <= 139` and `x` between −79 and 79). A shot that is both near the basket and in the middle of the floor is `CENTER_MIDDLE`.

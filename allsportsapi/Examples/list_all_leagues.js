@@ -6,6 +6,11 @@
  *   1. List all categories:          /api/tournament/categories
  *   2. For each category, list its
  *      unique tournaments (leagues):  /api/tournament/all/category/{id}
+ *      The body is groups[].uniqueTournaments. A top-level uniqueTournaments
+ *      array is read too, when a response uses that shape.
+ *
+ * MMA, cycling, and motorsport list categories on /api/{sport}/categories, not
+ * under /tournament/categories. This script targets football and the team sports.
  *
  * This example targets football (host footapi7). For other sports, prefix the path
  * with the sport, e.g. /api/basketball/tournament/categories, and set RAPIDAPI_HOST
@@ -46,8 +51,17 @@ async function listCategories() {
 }
 
 async function listLeaguesInCategory(categoryId) {
-  const data = await get(`/api${SPORT_PREFIX}/tournament/all/category/${categoryId}`);
-  return data?.uniqueTournaments ?? [];
+  const data = (await get(`/api${SPORT_PREFIX}/tournament/all/category/${categoryId}`)) ?? {};
+  const found = [...(data.uniqueTournaments ?? [])];
+  for (const group of data.groups ?? []) {
+    found.push(...(group.uniqueTournaments ?? []));
+  }
+  const seen = new Set();
+  return found.filter((league) => {
+    if (seen.has(league.id)) return false;
+    seen.add(league.id);
+    return true;
+  });
 }
 
 async function main() {

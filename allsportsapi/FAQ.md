@@ -1,117 +1,115 @@
 # FAQ
 
-Common questions about the AllSportsAPI family. New here? Start with the
-[README](README.md), then come back for specifics. For response shapes, see the
-[Models reference](Models/README.md).
+Short answers for people calling the API. Start with the [README](README.md) if you have not made a request yet. Field lists are in [Models](Models/README.md). Step-by-step calls are in [Workflows](Workflows.md).
 
 **Contents**
 
-- [Where can I subscribe to the API?](#where-can-i-subscribe-to-the-api)
-- [How do I get live and pre‑match data?](#how-do-i-get-live-and-pre-match-data)
-- [How do I retrieve player statistics from a match?](#how-do-i-retrieve-player-statistics-from-a-match)
-- [How do I display images on my website?](#how-do-i-display-images-on-my-website)
+- [Where can I subscribe?](#where-can-i-subscribe)
+- [How do I get live and pre-match data?](#how-do-i-get-live-and-pre-match-data)
+- [How do I get player statistics from a match?](#how-do-i-get-player-statistics-from-a-match)
+- [How do I display images?](#how-do-i-display-images)
 - [How do I determine the match time?](#how-do-i-determine-the-match-time)
 - [Do you provide betting odds?](#do-you-provide-betting-odds)
-- [How do I interpret match incidents and status?](#how-do-i-interpret-match-incidents-and-status)
+- [How do I interpret incidents and status?](#how-do-i-interpret-incidents-and-status)
 - [How do I navigate the API?](#how-do-i-navigate-the-api)
-- [Why don't you provide widgets?](#why-dont-you-provide-widgets)
+- [Why are there no widgets?](#why-are-there-no-widgets)
 - [How do I get all leagues of a sport?](#how-do-i-get-all-leagues-of-a-sport)
 - [How do I retrieve all teams in a league?](#how-do-i-retrieve-all-teams-in-a-league)
-- [How do I get all matches on a specific date?](#how-do-i-get-all-matches-on-a-specific-date)
-- [Why do schedule endpoints return matches from the previous/next day?](#why-do-schedule-endpoints-return-matches-from-the-previousnext-day)
-- [What if the data I need isn't available?](#what-if-the-data-i-need-isnt-available)
-- [What do the team transfer types mean?](#what-do-the-team-transfer-types-mean)
+- [How do I get all matches on a date?](#how-do-i-get-all-matches-on-a-date)
+- [Why do I see matches from the previous or next day?](#why-do-i-see-matches-from-the-previous-or-next-day)
+- [Which page number do I send?](#which-page-number-do-i-send)
+- [What does 204 mean, and what does an error look like?](#what-does-204-mean-and-what-does-an-error-look-like)
+- [What is customId?](#what-is-customid)
+- [How do I search?](#how-do-i-search)
+- [What if the data I need is missing?](#what-if-the-data-i-need-is-missing)
+- [What do transfer types mean?](#what-do-transfer-types-mean)
 - [Where can I get help?](#where-can-i-get-help)
 
 ---
 
-## Where can I subscribe to the API?
-
-AllSportsAPI is available on two marketplaces, with different coverage:
+## Where can I subscribe?
 
 | Marketplace | What's available |
 |-------------|------------------|
-| [RapidAPI](https://rapidapi.com/fluis.lacasse) | Full **All Sports** bundle **and** every individual sport API (Football, Tennis, Basketball, …) |
-| [API.market](https://api.market/store/recodex/allsportsapi) | Complete **All Sports** only |
+| [RapidAPI](https://rapidapi.com/fluis.lacasse) | The All Sports bundle and every single-sport API that has its own listing |
+| [API.market](https://api.market/store/recodex/allsportsapi) | The All Sports bundle only |
 
-If you only need one sport, subscribe to that sport’s API on **RapidAPI**. If you
-want every sport under one product, use the All Sports bundle on RapidAPI
-([allsportsapi2](https://rapidapi.com/fluis.lacasse/api/allsportsapi2)) or on
-[API.market](https://api.market/store/recodex/allsportsapi).
+The host you send in `X-RapidAPI-Host` is on the product page. The [README](README.md) lists the hosts that are published today. Paths are the same on the bundle and on a single-sport product.
 
 ---
 
-## How do I get live and pre‑match data?
+## How do I get live and pre-match data?
 
-Live and pre‑match data (statistics, incidents, odds, and more) lives in the endpoints
-labelled **"Match"**. The quickest way to find them is the search box on the API's
-**Endpoints** tab on RapidAPI — type `Match` and you'll get the full list (statistics,
-incidents, odds, lineups, etc.).
+Live and pre-match detail is on the match routes: the event itself, statistics, incidents, lineups, odds, form, and highlights. The map is in [Workflows](Workflows.md#one-match).
 
----
+The list of matches that are in play right now:
 
-## How do I retrieve player statistics from a match?
+- Football: `GET /api/matches/live`
+- Team sports and esports: `GET /api/{sport}/matches/live`
+- Tennis, table tennis, badminton, darts, snooker, padel: `GET /api/{sport}/events/live`
 
-There are two ways:
-
-1. **Match Lineups** endpoint (e.g. *Football Match Lineups*) — returns every
-   participating player together with their statistics.
-2. **Match Player Statistics** endpoint — pass a specific player's `id` to get just
-   that player's statistics.
-
-Both are easy to find via the search box on the Endpoints tab.
+Pre-match data for a match that has not started is on the same detail routes. Many of them return `204` until the match is close enough to have that data (no lineup yet, no odds yet).
 
 ---
 
-## How do I display images on my website?
+## How do I get player statistics from a match?
 
-All image/logo endpoints return **`image/png`** (placeholders are the only exception —
-they return SVG). Because the calls need authorization headers, you can't point an
-`<img src>` directly at the endpoint. Pick one of these approaches:
+On a team sport, `GET /api/match/{id}/lineups` (with the sport prefix) returns every player and, once the match has numbers, a `statistics` object on each player.
 
-1. **Fetch API** — use `fetch` (or Axios) to GET the endpoint with your headers, then
-   set the response (as a Blob/object URL) as an `<img>` source.
-2. **Base64** — convert the fetched bytes to a base64 data URL for inline rendering.
-3. **Server‑side proxy** — your backend makes the authorized request and serves the
-   image to the front‑end. This keeps your API key off the client. **Recommended.**
-4. **Canvas API** — fetch the image, then draw it onto a `<canvas>` when you need to
-   manipulate it.
+A single player, where the sport publishes it: `GET /api/match/{id}/player/{playerId}/statistics`.
 
-Working code for each pattern is in [`Examples/`](Examples/).
+Badminton, darts, snooker, and padel do not have lineups. Use `GET /api/{sport}/event/{id}/point-by-point`.
+
+Season totals are a different route. See [Workflows](Workflows.md#season-player-statistics).
+
+---
+
+## How do I display images?
+
+Image routes return bytes. `Content-Type` is `image/png`, `image/webp`, or `image/svg+xml` for a placeholder. They require the two auth headers, so an `<img>` tag pointed at the route will be rejected.
+
+1. **Fetch the bytes** and use a blob or object URL as the image source.
+2. **Base64**, if you need a data URL.
+3. **Your own server**, which adds the key and serves the bytes to the browser. This is the one to use in production.
+4. **Canvas**, if you need to draw on the image.
+
+Working code is in [Examples](Examples/).
 
 ---
 
 ## How do I determine the match time?
 
-Every match endpoint returns enough information to compute elapsed time across all
-active periods. The key attributes are `status`, `lastPeriod` and `time`.
+`status`, `lastPeriod`, and `time` sit on the event, next to each other. `time` is often an empty object when the match is not in progress. Then the clock is just `status.description`.
 
-### Key attributes
+### Fields
 
-- **`status`** — current match status.
-  - `code` — numeric status code.
-  - `description` — text description (e.g. `"1st half"`).
-  - `type` — general type (e.g. `inprogress`, `finished`).
-- **`lastPeriod`** — the most recent active period (e.g. `"period1"`, `"period2"`).
-- **`time`** — timing details.
-  - `initial` — time before the period starts (often `0`).
-  - `max` — maximum regular time for the period (e.g. `2700` s = 45 min).
-  - `extra` — additional allocated time (e.g. `540` s).
-  - `currentPeriodStartTimestamp` — UNIX timestamp (seconds) when the current period started.
+- **`status.code`** is the numeric code.
+- **`status.description`** is the label, for example `1st half`.
+- **`status.type`** is the coarse state: `inprogress`, `finished`, `notstarted`, and the others listed under incidents below.
+- **`lastPeriod`** is the current period, for example `period1`.
+- **`time.initial`** is the offset before the period starts, often `0`.
+- **`time.max`** is the regular length of the period in seconds. `2700` is 45 minutes.
+- **`time.extra`** is allocated added time, in seconds.
+- **`time.currentPeriodStartTimestamp`** is the Unix second when the current period started.
+- **`time.injuryTime`** is the added time the referee has given, in minutes, when it is published.
 
-### Calculating total period time
+### Elapsed time
 
-The **Total Period Time** is the cumulative time across all active periods.
+When `status.type` is `inprogress`, `lastPeriod` names the current period, and `currentPeriodStartTimestamp` is greater than 0:
 
-1. **Identify active periods.** Periods typically range from `period1` to `period7`;
-   include only those that are active for your sport/league.
-2. **Compute each active period's time.** For period `i`:
-   - If the match is **in progress** (`status.type == "inprogress"`), the current active
-     period is `period i` (`lastPeriod == "periodi"`), and `currentPeriodStartTimestamp > 0`:
-     `ElapsedTime_i = CurrentTimeInSeconds − time.currentPeriodStartTimestamp`
-   - Otherwise use the recorded time:
-     `RecordedTime_i = time.initial + time.max + time.extra`
-3. **Sum all period times:** `TotalPeriodTime = Σ PeriodTime_i` for `i = 1…7`.
+```text
+elapsed = nowSeconds - time.currentPeriodStartTimestamp
+```
+
+`nowSeconds` is your clock in Unix seconds. If that elapsed value is greater than `time.max`, the difference is added time.
+
+```text
+added = elapsed - time.max
+```
+
+A football half with `time.max` of `2700` and an elapsed time of `2800` is 45 minutes plus 100 seconds.
+
+If the period is already over, use the recorded length `time.initial + time.max + time.extra` for that period.
 
 ### Example
 
@@ -128,283 +126,276 @@ The **Total Period Time** is the cumulative time across all active periods.
 }
 ```
 
-Assume the current system time is `1727862000` (UNIX seconds).
+If the current Unix time is `1727862000`, elapsed time is `600` seconds (10 minutes).
 
-- Active period: `period1`.
-- The match is in progress and `period1` is active, so
-  `ElapsedTime_1 = 1727862000 − 1727861400 = 600` s (10 minutes).
-- **TotalPeriodTime = 600 s.**
+The [match clock example](Examples/match_clock.py) runs this offline on a sample event.
 
-### Handling added time
-
-To show "time + added time", treat anything beyond the period's regular duration
-(`time.max`) as added time:
-
-- If `(CurrentTimeInSeconds − time.currentPeriodStartTimestamp) > time.max`, then
-  `AddedTime_i = (CurrentTimeInSeconds − time.currentPeriodStartTimestamp) − time.max`.
-
-Football example: with `time.max = 2700` s and an elapsed time of `2800` s,
-`AddedTime = 2800 − 2700 = 100` s (1:40).
-
-### Injury time
-
-The `time` object also includes **`injuryTime`** — the maximum additional time granted
-by the referee. Factor it in if you want to account for stoppages.
-
-### Important notes
-
-- All timestamps are in **seconds** (UNIX format).
-- Make sure the clock you use for `CurrentTimeInSeconds` is accurate.
-- Adjust the period range (`1…7`) to the sport/league you're tracking.
-- Handle the case where `currentPeriodStartTimestamp` is missing or `0`.
-
-### Pseudocode
-
-```text
-function calculateTotalPeriodTime(event):
-    totalPeriodTime = 0
-    currentTime = getCurrentSystemTimeInSeconds()
-    lastPeriod = event.lastPeriod
-    statusType = event.status.type
-    currentPeriodStart = event.time.currentPeriodStartTimestamp
-
-    // Standard recorded time per period
-    recordedTime = event.time.initial + event.time.max + event.time.extra
-
-    for i from 1 to 7:
-        periodIdentifier = "period" + i
-        if (statusType == "inprogress" and lastPeriod == periodIdentifier and currentPeriodStart > 0):
-            elapsedTime = currentTime - currentPeriodStart
-            totalPeriodTime += elapsedTime
-        else:
-            totalPeriodTime += recordedTime
-
-    return totalPeriodTime
-```
-
-> ℹ️ `lastPeriod` and `time` are top‑level fields of the event (siblings of `status`),
-> not nested inside `status`.
+All timestamps are Unix seconds. If `currentPeriodStartTimestamp` is missing or `0`, do not subtract it. Period names run `period1` through `period7`. Use the ones that sport actually plays.
 
 ---
 
 ## Do you provide betting odds?
 
-Yes. Except for motorsport and esports, odds are available for all sports, primarily
-sourced from **bet365**, for general/referential use.
+Yes. The full board for an event is `GET /api/match/{id}/odds/{providerId}/all`. Provider `1` is the default board. The short `GET /api/match/{id}/odds` route, on the sports that have it, is that same board.
 
-For more detailed, sport‑specific odds, consider our dedicated odds services:
-[Pinaculo](https://rapidapi.com/fluis.lacasse/api/pinaculo) and
-[Uniodds](https://rapidapi.com/fluis.lacasse/api/uniodds4).
+`204` means that event has no odds. Markets with `suspended: true` should not be shown as live prices.
+
+Books for a country: `GET /api/odds/providers/{countryCode}/web`. `countryCode` is alpha-2.
+
+Cycling and motorsport put odds on the stage: `GET /api/{sport}/stage/{id}/odds/provider/{providerId}/all`.
+
+The shape and the other odds routes are in [Workflows](Workflows.md#odds).
+
+Pinaculo and Uniodds, on RapidAPI, are separate products when you need a dedicated odds feed.
 
 ---
 
-## How do I interpret match incidents and status?
+## How do I interpret incidents and status?
 
 ### Incidents
 
-Read an incident's nature from `incidentType` (refined by `incidentClass` or `text`):
+`GET /api/match/{id}/incidents` returns `{ "incidents": [ ... ] }`. Read `incidentType`, then `incidentClass` or `text`.
 
-- **`incidentType`**: `period`, `penaltyShootout`, `card`, `substitution`, `injuryTime`,
-  `goal`, `varDecision`, `inGamePenalty`.
-- **`incidentClass`** (depends on type):
-  - `penaltyShootout`: `scored`, `missed`
-  - `card`: `red`, `yellow`, `yellowRed`
-  - `goal`: `penalty`, `regular`, `ownGoal`
-  - `substitution`: `injury`, `null`
-  - `varDecision`: `penaltyNotAwarded`, `goalAwarded`, `cardUpgrade` (plus a `confirmed`
-    flag that may be `true`/`false`)
-  - `inGamePenalty`: `missed`
-- **`text`** (for `period`): `HT`, `FT`, `ET`, `PEN`.
+Football values you will see:
 
-See the [Incidents model](Models/Incidents.md) for every field.
+| `incidentType` | `incidentClass` or `text` |
+|----------------|---------------------------|
+| `goal` | `regular`, `penalty`, `ownGoal` |
+| `card` | `yellow`, `red`, `yellowRed` |
+| `substitution` | `injury`, or no class |
+| `period` | `text` is `HT`, `FT`, `ET`, `PEN`, or a period name such as `1. set` |
+| `injuryTime` | the added minutes |
+| `varDecision` | `goalAwarded`, `penaltyNotAwarded`, `cardUpgrade`, plus `confirmed` |
+| `inGamePenalty` | `missed` |
+| `penaltyShootout` | `scored`, `missed` |
+
+Other sports add their own types. Cricket uses `incidentType` `ball`, with `incidentClass` such as `4`, `6`, `W`, or `WD`. A set sport uses `period` rows with the set score in `homeScore` and `awayScore`.
+
+The full field list is [Models/Incidents.md](Models/Incidents.md).
 
 ### Status
 
-The match status has three properties:
+`status` has three fields.
 
-- **`code`** — integer status code. Examples:
+`code` is an integer. Codes you can rely on for football and the sports that share its clock:
 
-  | Code | Meaning |
-  |------|---------|
-  | 31 | HT (Halftime) |
-  | 32 | AwET (Awaiting Extra Time) |
-  | 33 | ETHT (Extra Time Halftime) |
-  | 34 | AwP (Awaiting Penalties) |
-  | 40 | OT (Overtime) |
-  | 41 | ET1 (1st Extra Time Period) |
-  | 42 | ET2 (2nd Extra Time Period) |
-  | 50 | PEN (Penalties) |
-  | 110 | AET (After Extra Time) |
-  | 120 | AP (After Penalties) |
+| Code | Meaning |
+|------|---------|
+| 0 | Not started |
+| 6 | 1st half, in progress (the description confirms the period) |
+| 31 | Halftime |
+| 32 | Awaiting extra time |
+| 33 | Extra-time halftime |
+| 34 | Awaiting penalties |
+| 40 | Overtime |
+| 41 | First extra-time period |
+| 42 | Second extra-time period |
+| 50 | Penalties |
+| 100 | Ended |
+| 110 | After extra time |
+| 120 | After penalties |
 
-- **`type`** — general status: `inprogress`, `finished`, `postponed`, `interrupted`,
-  `canceled`, `notstarted`, `preliminary`, `suspended`, `willcontinue`, `delayed`.
-- **`description`** — human‑readable text, varies by sport/circumstance, e.g.
-  `1st half`, `2nd half`, `Halftime`, `Ended`, `Postponed`, `Canceled`, `Not started`,
-  `AP` (After Penalties), `AET` (After Extra Time), `1st extra`,
-  `Extra time halftime`, `2nd extra`, `Awaiting penalties`, `Penalties`,
-  `Awaiting extra time`, `First break`, `Second break`, `Third break`, `FT`.
+`type` is `inprogress`, `finished`, `notstarted`, `postponed`, `canceled`, `interrupted`, `suspended`, `delayed`, `willcontinue`, or `preliminary`.
+
+`description` is the text to show. It varies by sport: `1st half`, `2nd half`, `Halftime`, `Ended`, `Postponed`, `Not started`, `AET`, `AP`, `1st set`, `FT`.
+
+Other sports use further codes. A set uses `8` for `1st set`. Cricket uses `21` for `1st Inning`. `60` is postponed and `70` is canceled when those states apply. Prefer `type` for logic and `description` for the label. Do not switch on description text alone.
+
+`winnerCode` after the match has a result: `1` home won, `2` away won, `3` draw.
 
 ---
 
 ## How do I navigate the API?
 
-The API combines several sports into one consistent structure. If it feels large, take
-it one sport at a time — the endpoint structure is the same across every host:
+Pick one sport. The tree is the same.
 
-- [Football/Soccer](https://rapidapi.com/fluis.lacasse/api/footapi7/)
-- [Tennis](https://rapidapi.com/fluis.lacasse/api/tennisapi1/)
-- [Ice Hockey](https://rapidapi.com/fluis.lacasse/api/icehockeyapi/)
-- [American Football](https://rapidapi.com/fluis.lacasse/api/americanfootballapi/)
-- [Baseball](https://rapidapi.com/fluis.lacasse/api/baseballapi/)
-- [Basketball](https://rapidapi.com/fluis.lacasse/api/basketapi1/)
-- [Cricket](https://rapidapi.com/fluis.lacasse/api/cricketapi21/)
-- [Esports](https://rapidapi.com/fluis.lacasse/api/esportapi1/)
-- [Motorsport](https://rapidapi.com/fluis.lacasse/api/motorsportapi/)
-- [Rugby](https://rapidapi.com/fluis.lacasse/api/rugbyapi2/)
+```text
+category  →  unique tournament  →  season  →  event
+(country or tour)  (the competition)  (one edition)  (one match)
+```
 
-Endpoints are grouped into four main areas:
+Football paths omit the sport name. Every other sport uses `/api/{sport}/...`. Esports uses the slug `esport`.
 
-- **Matches** — schedules, lineups, statistics, incidents, highlights, odds.
-- **Teams** — squads, statistics, logos, transfers.
-- **Players** — statistics, images, transfer history.
-- **Managers** — career history, images, recent matches.
+Four groups cover most screens:
 
-Still stuck? Reach out — we're happy to help and open to feature suggestions.
+- **Matches** are schedules, lineups, statistics, incidents, highlights, odds.
+- **Teams** are squads, results, logos, transfers.
+- **Players** are profiles, season stats, photos.
+- **Managers** are career, photo, recent matches.
+
+The path table is in the [README](README.md#path-rules). One sport's routes are in its file under [openapi](openapi/).
 
 ---
 
-## Why don't you provide widgets?
+## Why are there no widgets?
 
-To protect your API key. Widgets can expose your key to end users, which is a security
-risk. Instead of widgets, we offer **free development support** — reach out during
-build‑out and we'll help you wire things up safely (e.g. via a server‑side proxy).
+A widget in the page would need your key in the browser. Call the API from your server and render the HTML yourself. The [proxy examples](Examples/) are the starting point. We help you wire that up while you are building.
 
 ---
 
 ## How do I get all leagues of a sport?
 
-Walk the tree top‑down — list categories, then list tournaments per category:
+1. Categories: `GET /api/tournament/categories` or `GET /api/{sport}/tournament/categories`.
+   MMA, cycling, and motorsport use `/api/mma/categories`, `/api/cycling/categories`, and `/api/motorsport/categories`.
+2. Tournaments in one category: `GET /api/tournament/all/category/{categoryId}` or `GET /api/{sport}/tournament/all/category/{categoryId}`.
+   MMA uses `GET /api/mma/category/{categoryId}/unique-tournaments`.
 
-1. **List all categories.** Categories represent the country, tour or game of the
-   tournaments. Use `/api/tournament/categories` for football, or
-   `/api/{sport}/tournament/categories` for other sports.
-2. **List tournaments within each category.** Use
-   `/api/tournament/all/category/{category_id}` for football, or
-   `/api/{sport}/tournament/all/category/{category_id}` for other sports.
-3. **(Optional) Get a category's schedule for a day.** Use
-   `/api/category/{category_id}/events/{day}/{month}/{year}` for football, or
-   `/api/{sport}/category/{category_id}/events/{day}/{month}/{year}` for other sports.
+The tournaments body is grouped:
 
-See the [Category](Models/Category.md) and [Tournament](Models/Tournament.md) models for
-the shapes you'll get back.
+```json
+{
+  "groups": [
+    { "uniqueTournaments": [ { "id": 17, "name": "Premier League", "slug": "premier-league" } ] }
+  ]
+}
+```
+
+Flatten `groups[].uniqueTournaments`. Some responses also put `uniqueTournaments` at the top. Read whichever key is present. The id you keep is `uniqueTournament.id`.
+
+`GET /api/tournament/categories/all` includes categories that have no live match. The shorter `categories` route is the one most screens need.
+
+The [list-all-leagues example](Examples/list_all_leagues.py) does this walk. Cache the result for hours or days.
 
 ---
 
 ## How do I retrieve all teams in a league?
 
-Use the **standings** endpoint for the league/season. It returns every team in the
-competition along with their record (wins, losses, draws, goal difference, etc.) — a
-solid foundation for league tables and team listings.
+The clubs in one season:
+
+```text
+GET /api/tournament/{uniqueTournamentId}/season/{seasonId}/teams
+```
+
+The table, with a `team` on every row:
+
+```text
+GET /api/tournament/{uniqueTournamentId}/season/{seasonId}/standings/total
+```
+
+Prefix the sport when it is not football. A competition with groups returns several objects inside `standings`. Read every `rows` array. Each row's `team.id` is the id for the squad and the logo.
+
+The squad of one team is `GET /api/team/{id}/players`.
 
 ---
 
-## How do I get all matches on a specific date?
+## How do I get all matches on a date?
 
-The flat per‑date feed — `GET /api/matches/{day}/{month}/{year}` (football) and
-`GET /api/{sport}/matches|events/{day}/{month}/{year}` (other sports) — is being
-**retired**. Assemble the day **per competition** instead: find what's running that
-day, then pull each one's schedule. Use whichever entry point fits — and for the full
-per‑sport recipe (including MMA, motorsport and cycling) see the dedicated
-[**DailyMatches** guide](DailyMatches.md).
+Football has no sport-wide day list. `GET /api/matches/{day}/{month}/{year}` is discontinued. Build that day from scheduled tournaments, then the competition schedule. The recipe is [DailyMatches.md](DailyMatches.md).
 
-> **Quickest discovery (team sports):**
-> `GET /api/{sport}/scheduled-tournaments/{day}/{month}/{year}/page/{page}` returns a
-> paginated list of the tournaments that have matches that day — then fetch each
-> tournament's schedule.
+Other sports still publish one list for the whole sport:
 
-**Option 1 — by category (country / tour).** The most complete; it reuses the
-[league tree walk](#how-do-i-get-all-leagues-of-a-sport).
+```text
+GET /api/basketball/matches/7/3/2026       a team sport
+GET /api/tennis/events/7/3/2026            tennis, and the other event sports
+```
 
-1. List categories: `/api/tournament/categories` (football) or
-   `/api/{sport}/tournament/categories`.
-2. For each category, fetch that day's schedule:
-   `/api/category/{category_id}/events/{day}/{month}/{year}` (football) or
-   `/api/{sport}/category/{category_id}/events/{day}/{month}/{year}`.
+Use the competition walk when you want specific leagues, or when you want to skip competitions that have no matches in the viewer's timezone. The full recipe, including MMA, motorsport, and cycling, is [DailyMatches.md](DailyMatches.md).
 
-**Option 2 — by tournament, ISO date.** Available for **football, cricket, esport and
-tennis**: `/api/{sport}/tournament/{tournament_id}/scheduled-events/{YYYY-MM-DD}`.
-The other team sports expose the day/month/year form instead:
-`/api/{sport}/tournament/{tournament_id}/schedules/{day}/{month}/{year}`.
-
-**Tennis & table‑tennis shortcut.** Ask which categories actually have play that day,
-then pull only those — no full category list needed:
-`/api/{sport}/calendar/{day}/{month}/{year}/categories` →
-`/api/{sport}/category/{category_id}/events/{day}/{month}/{year}`.
-
-**Helpers**
-
-- **Live right now:** `GET /api/matches/live` (football) /
-  `GET /api/{sport}/matches/live` — unaffected by the change, but in‑play only.
-- **Which days have play:**
-  `GET /api/calendar/season/{season_id}/{year}/days-with-events` — skip empty dates
-  before you fan out.
-
-> Football is the exception: no sport prefix, and its category schedule is also exposed
-> as `/api/category/{category_id}/matches/{day}/{month}/{year}`.
-
-Two practical notes: schedule responses span **±12 h around UTC midnight**, so filter to
-the user's local day yourself (see
-[the next question](#why-do-schedule-endpoints-return-matches-from-the-previousnext-day)
-and the [`filter_schedule_by_timezone`](Examples/filter_schedule_by_timezone.py)
-example); and **cache the category / tournament lists** — they change slowly, so you
-only pay for the per‑day calls. The
-[`list_all_leagues`](Examples/list_all_leagues.py) example shows the enumeration.
+The id on `schedules` and `scheduled-events` is `tournament.uniqueTournament.id` from the scheduled-tournaments row, not `tournament.id`.
 
 ---
 
-## Why do schedule endpoints return matches from the previous/next day?
+## Why do I see matches from the previous or next day?
 
-To cover every time zone. Schedule timestamps are in **GMT/UTC+00**, so the endpoint
-returns matches spanning **12 hours of the previous day and 12 hours of the next day**
-relative to UTC midnight. Filter to your users' local day on your side.
+`startTimestamp` is a Unix second. The date you put in the path is a calendar date, read in UTC. A match at 23:30 UTC is still that UTC date, and it is already the next day in UTC+2. A match at 00:30 UTC is the previous evening in the Americas.
 
-> In short, the endpoint returns matches independent of the user's time zone. You can
-> filter the matches according to your time zone — and we're happy to help you do so.
+Keep an event when this is true:
 
-More detail in these discussions:
-[allsportsapi2](https://rapidapi.com/fluis.lacasse/api/allsportsapi2/discussions/38225) ·
-[footapi7](https://rapidapi.com/fluis.lacasse/api/footapi7/discussions/33473).
+```text
+localMidnight <= startTimestamp < localMidnight + 86400
+```
 
----
+`localMidnight` is midnight in the viewer's timezone, converted to Unix seconds. The [filter example](Examples/filter_schedule_by_timezone.py) does this, including the neighboring UTC date when the local day crosses midnight UTC.
 
-## What if the data I need isn't available?
-
-If a data point isn't provided here, try the
-[Allscores API](https://rapidapi.com/fluis.lacasse/api/allscores/), which may cover your
-use case. Either way, feel free to reach out — we're glad to point you in the right
-direction.
+On `scheduled-tournaments`, `timezoneEventCount` already answers "does this competition have a match on that local day?". The key is the offset in seconds east of UTC, as a string. `"7200"` is UTC+2. Skip rows whose count for that key is `0` or missing.
 
 ---
 
-## What do the team transfer types mean?
+## Which page number do I send?
 
-Transfers are categorized by the `type` field:
+| Route | First page | Stop when |
+|-------|------------|-----------|
+| `scheduled-tournaments/.../page/{page}` | 1 | `hasNextPage` is false, or `scheduled` is empty |
+| Team, player, or manager `previous/{page}` and `next/{page}` | 0 | `204`, or `events` is empty |
+| Season `matches/last/{page}` and `matches/next/{page}` (football and team sports). Event sports use `events/last` and `events/next` | 0 | `204`, or the list is empty |
+| `GET /api/search/{entityType}?page=` | 0 | the page is short, or `204` |
+| Season player `statistics?page=&limit=` | 1 | the page is shorter than `limit`. `limit` is required from page 2 |
+
+Sending page `1` to a 0-based route skips the first page. Sending page `0` to scheduled-tournaments or to season statistics is the wrong page.
+
+---
+
+## What does 204 mean, and what does an error look like?
+
+`204` means the route is valid and there is nothing for those parameters: no match that day, no lineup yet, no odds, an unknown id, an empty search. The body is empty. Do not call `response.json()` on it. Do not retry it.
+
+`400` means a path or query value is not valid (a month of `13`, a bad page). Fix the request.
+
+```json
+{ "error": { "status": 400, "title": "Bad Request", "request_id": "…" } }
+```
+
+A bad date on some routes returns a one-line text body instead of that JSON. Either way, the status is `400`.
+
+`401` and `403` come from the marketplace: the key is missing, wrong, or does not match the host.
+
+`429` is the plan limit. Wait for `Retry-After` when it is set, otherwise back off.
+
+`500`, `502`, `503`, and `504` are temporary. Retry with backoff. The JSON uses the same `error` object, with `title` `Internal Server Error`, `Bad Gateway`, `Service Unavailable`, or `Gateway Timeout`. Include `request_id` if you ask us about one of these.
+
+---
+
+## What is customId?
+
+`id` is the numeric event id. Use it for the match, lineups, statistics, incidents, and odds.
+
+`customId` is a short string on the same event, for example `BLcsubhd`. Use it only for head-to-head:
+
+```text
+GET /api/match/{customId}/h2h
+GET /api/tennis/event/{customId}/h2h
+```
+
+The two ids are not interchangeable.
+
+---
+
+## How do I search?
+
+```text
+GET /api/search/all?q=arsenal&page=0
+GET /api/search/teams?q=arsenal&page=0&sport=football
+GET /api/basketball/search/lakers?page=0
+```
+
+`page` starts at 0. `sport` is the slug (`football`, `ice-hockey`, `esport`, `table-tennis`). Entity types are `all`, `teams`, `player-team-persons`, `events`, `unique-tournaments`, `news`, `managers`, `referees`, `venues`.
+
+Take the id from the result and call the detail route. Do not keep searching to render a page you already have an id for.
+
+---
+
+## What if the data I need is missing?
+
+A `204` on a detail route usually means that match, team, or season does not have that data. Coverage depends on the sport and the competition. A lower league often has a score and no shotmap, no odds, and no player ratings.
+
+If the fact is not in these routes at all, the [Allscores API](https://rapidapi.com/fluis.lacasse/api/allscores/) is a different product and a different JSON shape. Ask us either way. If a route should have returned data and you got `502` or `504`, send the path and the `request_id`.
+
+---
+
+## What do transfer types mean?
+
+On a transfer, `type` is a number.
 
 | `type` | Meaning |
 |--------|---------|
-| **1** | **Loan** — the player moves temporarily to another team. |
-| **2** | **End of loan** — the player returns to their original team. |
-| **3** | **Permanent transfer** — the player is bought/sold outright. |
+| 1 | Loan |
+| 2 | End of loan |
+| 3 | Permanent transfer |
 
-See the [Transfer model](Models/Transfer.md) for the full field list.
+The rest of the fields are in [Models/Transfer.md](Models/Transfer.md).
 
 ---
 
 ## Where can I get help?
 
-Reach out via the **About** tab of any API on RapidAPI, open a discussion on the
-API's RapidAPI page, or use the listing on
-[API.market](https://api.market/store/recodex/allsportsapi). Support during development
-is **free** — whether it's a technical issue or best‑practice advice, we're happy to
-help.
+The About tab of the API on RapidAPI, or the listing on [API.market](https://api.market/store/recodex/allsportsapi). Help during development is free.

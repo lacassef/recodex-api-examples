@@ -35,7 +35,7 @@ endpoint (`image/png`) — see [Examples](../Examples/).
 
 ## Properties
 
-- **contractUntilTimestamp** (`Long`):
+- **contractUntilTimestamp** (`number`):
     - A timestamp indicating the date until which the player's current contract is valid.
 
 - **country** (`Country`):
@@ -44,10 +44,10 @@ endpoint (`image/png`) — see [Examples](../Examples/).
 - **cricketPlayerInfo** (`CricketPlayerInfo`):
     - Specialized information pertinent to players in cricket, detailing aspects like batting style, bowling style, and cricket-specific statistics.
 
-- **dateOfBirthTimestamp** (`Long`):
+- **dateOfBirthTimestamp** (`number`):
     - The player's date of birth, represented as a timestamp.
 
-- **dateOfDeathTimestamp** (`Long`):
+- **dateOfDeathTimestamp** (`number`):
     - The date of the player's death, if applicable, represented as a timestamp.
 
 - **deceased** (`boolean`):
@@ -56,13 +56,13 @@ endpoint (`image/png`) — see [Examples](../Examples/).
 - **fieldTranslations** (`FieldTranslations`):
     - Contains translations for various player-related fields, supporting internationalization and localization.
 
-- **firstName** (`String`):
+- **firstName** (`string`):
     - The player's first name.
 
-- **height** (`Integer`):
+- **height** (`number`):
     - The player's height in centimeters.
 
-- **id** (`int`):
+- **id** (`number`):
     - A unique identifier for the player.
 
 - **injury** (`Injury`):
@@ -71,25 +71,25 @@ endpoint (`image/png`) — see [Examples](../Examples/).
 - **isRecent** (`boolean`):
     - A flag indicating whether there have been recent updates or activities related to the player.
 
-- **jerseyNumber** (`String`):
+- **jerseyNumber** (`string`):
     - The number on the player's jersey, representing their official team number during competitions.
 
-- **lastName** (`String`):
+- **lastName** (`string`):
     - The player's last name.
 
-- **managerId** (`Integer`):
+- **managerId** (`number`):
     - An identifier linking the player to a manager or agent.
 
 - **marketValueRaw** (`Money`):
     - The player's current market value as a monetary amount.
 
-- **name** (`@NotNull String`):
-    - The player's full name. This field is mandatory and cannot be null.
+- **name** (`string`):
+    - The player's full name.
 
-- **position** (`String`):
+- **position** (`string`):
     - The player's playing position on the team (e.g., forward, midfielder, goalkeeper).
 
-- **preferredFoot** (`String`):
+- **preferredFoot** (`string`):
     - Indicates the player's preferred foot for playing (e.g., right, left, both).
 
 - **proposedMarketValueRaw** (`Money`):
@@ -98,14 +98,14 @@ endpoint (`image/png`) — see [Examples](../Examples/).
 - **retired** (`boolean`):
     - Indicates whether the player has retired from professional play.
 
-- **shortName** (`String`):
+- **shortName** (`string`):
     - A shorter or abbreviated version of the player's name, often used in media or during broadcasts.
 
-- **slug** (`String`):
+- **slug** (`string`):
     - A URL-friendly identifier for the player, often used for linking to player profiles or related content online.
 
 - **team** (`Team`):
     - The team to which the player is currently signed.
 
-- **userCount** (`long`):
+- **userCount** (`number`):
     - The number of users or fans following the player, indicative of the player's popularity or fan base.

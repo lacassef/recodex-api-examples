@@ -14,62 +14,62 @@ see [EsportsGameStatisticsResponse](EsportsGameStatisticsResponse.md).
 
 ## Properties
 
-- **bans** (`List<ESportCharacter>`):
+- **bans** (`array of ESportCharacter`):
     - A list of characters that were banned during the match, representing the characters that teams chose to prohibit from being played.
 
-- **barracksDestroyed** (`Integer`):
+- **barracksDestroyed** (`number`):
     - The number of enemy barracks (structures) that were destroyed by this team.
 
-- **barracksRemaining** (`Integer`):
+- **barracksRemaining** (`number`):
     - The number of barracks that remain intact for this team by the end of the match.
 
-- **chemtechDrakeKills** (`Integer`):
+- **chemtechDrakeKills** (`number`):
     - The number of Chemtech Drakes (a type of dragon) that this team killed during the match.
 
-- **cloudDrakeKills** (`Integer`):
+- **cloudDrakeKills** (`number`):
     - The number of Cloud Drakes killed by this team during the match.
 
-- **dragonKills** (`Integer`):
+- **dragonKills** (`number`):
     - The total number of dragons of all types that this team killed during the match.
 
-- **elderDrakeKills** (`Integer`):
+- **elderDrakeKills** (`number`):
     - The number of Elder Drakes (a powerful dragon) that this team killed during the match.
 
-- **firstBlood** (`Boolean`):
+- **firstBlood** (`boolean`):
     - A flag indicating whether this team achieved the first blood (the first kill) in the match.
 
-- **goldEarned** (`Integer`):
+- **goldEarned** (`number`):
     - The total amount of gold earned by this team throughout the match.
 
-- **heraldKilled** (`Boolean`):
+- **heraldKilled** (`boolean`):
     - A flag indicating whether this team killed the Rift Herald (a powerful neutral monster) during the match.
 
-- **hextechDrakeKills** (`Integer`):
+- **hextechDrakeKills** (`number`):
     - The number of Hextech Drakes killed by this team during the match.
 
-- **infernalDrakeKills** (`Integer`):
+- **infernalDrakeKills** (`number`):
     - The number of Infernal Drakes killed by this team during the match.
 
-- **inhibitorKills** (`Integer`):
+- **inhibitorKills** (`number`):
     - The number of enemy inhibitors (key structures) that this team destroyed during the match.
 
-- **kills** (`Integer`):
+- **kills** (`number`):
     - The total number of kills achieved by this team during the match.
 
-- **mountainDrakeKills** (`Integer`):
+- **mountainDrakeKills** (`number`):
     - The number of Mountain Drakes killed by this team during the match.
 
-- **nashorKills** (`Integer`):
+- **nashorKills** (`number`):
     - The number of Baron Nashor kills achieved by this team during the match.
 
-- **oceanDrakeKills** (`Integer`):
+- **oceanDrakeKills** (`number`):
     - The number of Ocean Drakes killed by this team during the match.
 
-- **towerKills** (`Integer`):
+- **towerKills** (`number`):
     - The total number of towers (defensive structures) that this team destroyed during the match.
 
-- **towersDestroyed** (`Integer`):
+- **towersDestroyed** (`number`):
     - The number of enemy towers that were destroyed by this team.
 
-- **towersRemaining** (`Integer`):
+- **towersRemaining** (`number`):
     - The number of towers that remain standing for this team by the end of the match.

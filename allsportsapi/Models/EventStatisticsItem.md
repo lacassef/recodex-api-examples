@@ -17,28 +17,28 @@ or pick a winner. The `name` tells you which metric the row represents.
 - **addBottomPadding** (`boolean`):
     - A flag indicating whether bottom padding should be added when rendering this statistic, which may affect the layout or spacing in the display.
 
-- **away** (`@NotNull String`):
-    - A string representing the away team’s label or name for the statistic. This field is mandatory and cannot be null.
+- **away** (`string`):
+    - A string representing the away team’s label or name for the statistic.
 
-- **awayTotal** (`Double`):
+- **awayTotal** (`number`):
     - The total value of the statistic for the away team. This can be used for aggregated or cumulative statistics.
 
-- **awayValue** (`double`):
+- **awayValue** (`number`):
     - The specific value of the statistic for the away team. This is a raw numeric value.
 
-- **compareCode** (`int`):
+- **compareCode** (`number`):
     - A code used for comparison purposes, which may help in sorting, categorizing, or comparing different statistics.
 
 - **hideDivider** (`boolean`):
     - A flag indicating whether to hide the divider line that might separate this statistic from others in the display.
 
-- **home** (`@NotNull String`):
-    - A string representing the home team’s label or name for the statistic. This field is mandatory and cannot be null.
+- **home** (`string`):
+    - A string representing the home team’s label or name for the statistic.
 
-- **homeTotal** (`Double`):
+- **homeTotal** (`number`):
     - The total value of the statistic for the home team. This can be used for aggregated or cumulative statistics.
 
-- **homeValue** (`double`):
+- **homeValue** (`number`):
     - The specific value of the statistic for the home team. This is a raw numeric value.
 
 - **isExpectedGoals** (`boolean`):
@@ -47,13 +47,13 @@ or pick a winner. The `name` tells you which metric the row represents.
 - **isGoalsPrevented** (`boolean`):
     - A flag indicating whether this statistic represents goals prevented, which tracks defensive actions or goalkeeper performance.
 
-- **name** (`@NotNull String`):
-    - The name of the statistic, which describes what the statistic measures (e.g., "Shots on Target," "Pass Accuracy"). This field is mandatory and cannot be null.
+- **name** (`string`):
+    - The name of the statistic, which describes what the statistic measures (e.g., "Shots on Target," "Pass Accuracy").
 
 - **otherPlayerSelected** (`boolean`):
     - A flag indicating whether the statistic applies to another player beyond the primary focus, which may affect how it is displayed or calculated.
 
-- **renderType** (`Integer`):
+- **renderType** (`number`):
     - An integer representing the type of rendering or display for this statistic, which may dictate how the data is visualized (e.g., as a bar chart, percentage, or raw number).
 
 - **shouldReverseTeams** (`boolean`):
@@ -62,8 +62,8 @@ or pick a winner. The `name` tells you which metric the row represents.
 - **shouldRoundToInt** (`boolean`):
     - A flag indicating whether the statistic value should be rounded to an integer when displayed, affecting the precision of the displayed data.
 
-- **statisticsType** (`@NotNull String`):
-    - The type of the statistic, which categorizes it into broader categories such as "Offensive," "Defensive," or "Team Performance." This field is mandatory and cannot be null.
+- **statisticsType** (`string`):
+    - The type of the statistic, which categorizes it into broader categories such as "Offensive," "Defensive," or "Team Performance."
 
-- **valueType** (`@NotNull String`):
-    - The type of value represented by the statistic, such as "Count," "Percentage," or "Rate." This field is mandatory and cannot be null.
+- **valueType** (`string`):
+    - The type of value represented by the statistic, such as "Count," "Percentage," or "Rate."

@@ -1,7 +1,10 @@
 import matplotlib.pyplot as plt
 from matplotlib.patches import Arc
 import numpy as np
-import seaborn as sns
+
+# Hoop at (0, 0). y grows toward half-court and can be slightly negative.
+COURT_X = (-250, 250)
+COURT_Y = (-50, 470)
 
 # Step 1: Draw the Basketball Court
 def draw_court(ax=None, color='black', lw=2):
@@ -32,33 +35,68 @@ def draw_court(ax=None, color='black', lw=2):
 
     return ax
 
+def shots_from_body(body):
+    """Return the shot list from a 200 body. The list lives under shotmap."""
+    if isinstance(body, dict):
+        shots = body.get("shotmap")
+        if isinstance(shots, list):
+            return shots
+    if isinstance(body, list):
+        return body
+    return []
+
+
+def _player_shot(shot):
+    return "type" in shot or "typeName" in shot
+
+
+def _made_missed_saved(shot):
+    """Team items carry counts. A player item is one attempt: type 1 / typeName made."""
+    if _player_shot(shot):
+        made = shot.get("typeName") == "made" or shot.get("type") == 1
+        return (1, 0, 0) if made else (0, 1, 0)
+    return (
+        int(shot.get("made") or 0),
+        int(shot.get("missed") or 0),
+        int(shot.get("saved") or 0),
+    )
+
+
+def _scatter(ax, x, y, color, label, seen):
+    ax.scatter(
+        x, y, c=color, edgecolors="black", linewidth=0.5, s=100, zorder=3,
+        label=label if label not in seen else "",
+    )
+    seen.add(label)
+
+
 # Step 2: Plot Shot Data
 def plot_shotmap(shot_data):
-    # Create the figure and axis
     fig, ax = plt.subplots(figsize=(12, 11))
-    ax.set_xlim(-250, 250)
-    ax.set_ylim(0, 470)
-
-    # Draw the basketball court
+    ax.set_xlim(*COURT_X)
+    ax.set_ylim(*COURT_Y)
     draw_court(ax)
 
-    # Plot shots
+    seen = set()
     for shot in shot_data:
-        x, y = shot['x'], shot['y']
-        made = shot['made']
-        missed = shot['missed']
+        x, y = shot["x"], shot["y"]
+        made, missed, saved = _made_missed_saved(shot)
+        marks = []
+        if made:
+            marks.append(("green", "Made"))
+        if missed:
+            marks.append(("red", "Missed"))
+        if saved:
+            marks.append(("#2563eb", "Saved"))
+        shift = 6
+        start = -shift * (len(marks) - 1) / 2
+        for i, (color, label) in enumerate(marks):
+            _scatter(ax, x + start + i * shift, y, color, label, seen)
 
-        # Plot made shots in green, missed shots in red
-        if made > 0:
-            ax.scatter(x, y, c='green', edgecolors='black', linewidth=0.5, s=100, label='Made Shot' if 'Made Shot' not in ax.get_legend_handles_labels()[1] else "")
-        elif missed > 0:
-            ax.scatter(x, y, c='red', edgecolors='black', linewidth=0.5, s=100, label='Missed Shot' if 'Missed Shot' not in ax.get_legend_handles_labels()[1] else "")
-
-    # Adding legend for the plot
     plt.legend()
-    plt.title('Team Shotmap')
-    plt.xlabel('Court Width')
-    plt.ylabel('Court Height')
+    plt.title("Shotmap")
+    plt.xlabel("Court width")
+    plt.ylabel("Distance from basket")
     plt.show()
 
 # Step 3: Create Heatmap of Shot Density
@@ -66,15 +104,32 @@ def plot_heatmap(shot_data, ax=None):
     if ax is None:
         ax = plt.gca()
 
-    # Extract shot coordinates
-    x_coords = [shot['x'] for shot in shot_data]
-    y_coords = [shot['y'] for shot in shot_data]
+    xs, ys, weights = [], [], []
+    for shot in shot_data:
+        made, missed, saved = _made_missed_saved(shot)
+        weight = made + missed + saved
+        xs.append(shot["x"])
+        ys.append(shot["y"])
+        weights.append(weight if weight > 0 else 1)
 
-    # Create a 2D histogram for the shot attempts
-    heatmap_data, x_edges, y_edges = np.histogram2d(x_coords, y_coords, bins=(30, 30))
-
-    # Plot heatmap with Seaborn
-    sns.heatmap(heatmap_data.T, cmap='Blues', ax=ax, cbar=True, alpha=0.6)
+    if xs:
+        hist, _, _ = np.histogram2d(
+            xs, ys, bins=(30, 30),
+            range=[list(COURT_X), list(COURT_Y)],
+            weights=weights,
+        )
+        ax.imshow(
+            hist.T,
+            origin="lower",
+            extent=[COURT_X[0], COURT_X[1], COURT_Y[0], COURT_Y[1]],
+            cmap="Blues",
+            alpha=0.55,
+            aspect="auto",
+            zorder=0,
+        )
+    ax.set_xlim(*COURT_X)
+    ax.set_ylim(*COURT_Y)
+    return ax
 
 # Step 4: Putting It All Together
 def main():
@@ -86,10 +141,10 @@ def main():
 
     # Plot shotmap with heatmap
     fig, ax = plt.subplots(figsize=(12, 11))
-    ax.set_xlim(-250, 250)
-    ax.set_ylim(0, 470)
-    draw_court(ax)
+    ax.set_xlim(*COURT_X)
+    ax.set_ylim(*COURT_Y)
     plot_heatmap(home_shot_data, ax)
+    draw_court(ax)
     plt.title('Shot Density Heatmap')
     plt.xlabel('Court Width')
     plt.ylabel('Court Height')

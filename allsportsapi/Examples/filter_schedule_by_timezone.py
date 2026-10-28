@@ -2,14 +2,15 @@
 Filter a day's schedule to a specific time zone — the code companion to the FAQ
 "Why do schedule endpoints return matches from the previous/next day?" (../FAQ.md).
 
-Schedule endpoints are timestamped in UTC and intentionally return a window that
-spans ~12 h before and after the UTC date, so every time zone is covered. To show a
-user's *local* day, you must filter by `event.startTimestamp` against that day's
-local bounds — and fetch the neighbouring UTC dates that overlap it.
+startTimestamp is Unix seconds in UTC. A viewer's local day is the half-open
+window local midnight <= startTimestamp < local midnight + 86400. This example
+fetches the UTC dates at offsets -1, 0 and +1, then keeps events inside that window.
 
-The flat per-date feed (/api/matches/{day}/{month}/{year}) has been retired, so we
-assemble the day *per competition*. Two options (see ../FAQ.md "How do I get all
-matches on a specific date?"):
+Football has no sport-wide day list: GET /api/matches/{day}/{month}/{year} is
+discontinued. Other sports still publish GET /api/{sport}/matches/{day}/{month}/{year}
+or GET /api/{sport}/events/{day}/{month}/{year}. This example assembles one day from
+a few categories, which is the right call when you only follow some countries.
+Two options (see ../DailyMatches.md):
 
   1. By category:    /api/{sport}/category/{id}/events/{day}/{month}/{year}
                      (football: /api/category/{id}/events/{day}/{month}/{year})
@@ -57,9 +58,10 @@ def get(path, *, timeout=15):
 def fetch_schedule(day, month, year):
     """All events on a UTC date across CATEGORY_IDS (deduped).
 
-    The flat /api/matches/{day}/{month}/{year} feed is retired, so we union each
-    category's schedule. Swap to /api{SPORT_PREFIX}/tournament/{id}/scheduled-events/
-    {YYYY-MM-DD} if you'd rather drive it by tournament.
+    Union each category's schedule and dedupe by event id. Swap to
+    /api{SPORT_PREFIX}/tournament/{uniqueTournamentId}/scheduled-events/{YYYY-MM-DD}
+    (or .../schedules/{day}/{month}/{year}) to drive it by competition. The id is
+    uniqueTournament.id.
     """
     events, seen = [], set()
     for cat_id in CATEGORY_IDS:

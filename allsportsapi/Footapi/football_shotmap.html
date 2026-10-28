@@ -28,12 +28,19 @@
         .field-container {
             position: relative;
             width: 100%;
-            background: #90EE90;
+            background: #2d8a4e;
         }
 
         .soccer-field {
             width: 100%;
             height: auto;
+            display: block;
+            aspect-ratio: 100 / 35;
+        }
+
+        #shots {
+            position: absolute;
+            inset: 0;
         }
 
         .shot {
@@ -75,12 +82,12 @@
         <span id="status" style="margin-left:8px; font-size:12px; color:#555;"></span>
     </div>
     <div class="field-container">
-        <svg class="soccer-field" viewBox="0 0 400 280">
-            <rect width="400" height="280" fill="#90EE90"/>
-            <rect width="400" height="280" fill="none" stroke="white" stroke-width="2"/>
-            <rect x="125" y="0" width="150" height="66" fill="none" stroke="white" stroke-width="2"/>
-            <rect x="170" y="0" width="60" height="20" fill="none" stroke="white" stroke-width="2"/>
-            <rect x="180" y="0" width="40" height="4" fill="none" stroke="white" stroke-width="2"/>
+        <svg class="soccer-field" viewBox="0 0 100 35" preserveAspectRatio="none">
+            <rect width="100" height="35" fill="#2d8a4e"/>
+            <rect x="20.35" y="0" width="59.3" height="16.5" fill="none" stroke="#fff" stroke-width="0.35"/>
+            <rect x="36.53" y="0" width="26.94" height="5.5" fill="none" stroke="#fff" stroke-width="0.35"/>
+            <circle cx="50" cy="11" r="0.35" fill="#fff"/>
+            <line x1="44.62" y1="0.2" x2="55.38" y2="0.2" stroke="#fff" stroke-width="0.7"/>
         </svg>
         <div id="shots"></div>
         <div id="tooltip" class="tooltip"></div>
@@ -119,6 +126,14 @@
                         'x-rapidapi-key': apiKey || 'demo'
                     }
                 });
+                if (res.status === 204) {
+                    currentData = { shotmap: [] };
+                    shotsContainer.innerHTML = '';
+                    toggleTeam(currentTeam);
+                    statusEl.textContent = 'No shot data for this match';
+                    statusEl.style.color = '#555';
+                    return;
+                }
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
                 if (!data || !data.shotmap) throw new Error('Unexpected response');
@@ -142,41 +157,70 @@
         });
     }
 
+    // Attacking third: x is 0-100 across the pitch, y is 0 at the goal line up to about 35.
+    const PITCH_X = 100;
+    const PITCH_Y = 35;
+    const SHOT_COLOR = { goal: '#22c55e', save: '#f59e0b', block: '#94a3b8', miss: '#ffffff' };
+
+    function shotEnds(shot) {
+        if (shot.draw && shot.draw.start) {
+            return { start: shot.draw.start, end: shot.draw.block || shot.draw.end || null };
+        }
+        const pc = shot.playerCoordinates;
+        if (!pc) return null;
+        const start = { x: pc.y, y: pc.x };
+        let end = null;
+        if (shot.blockCoordinates) {
+            end = { x: shot.blockCoordinates.y, y: shot.blockCoordinates.x };
+        } else if (shot.goalMouthCoordinates) {
+            // Approximate. draw.end.x is not exactly goalMouthCoordinates.y.
+            end = { x: shot.goalMouthCoordinates.y, y: 0 };
+        }
+        return { start, end };
+    }
+
+    function toPixels(pt) {
+        const width = shotsContainer.clientWidth || container.clientWidth;
+        const height = shotsContainer.clientHeight || container.clientHeight;
+        return {
+            x: (pt.x / PITCH_X) * width,
+            y: (pt.y / PITCH_Y) * height
+        };
+    }
+
     function createShot(shot) {
         if (shot.isHome !== (currentTeam === 'home')) return;
+        const geom = shotEnds(shot);
+        if (!geom) return;
 
-        const x = (shot.playerCoordinates.y / 100) * container.offsetWidth;
-        const y = (shot.playerCoordinates.x / 30) * container.offsetHeight;
-
+        const start = toPixels(geom.start);
         const marker = document.createElement('div');
         marker.className = 'shot';
 
-        const size = Math.max(shot.xg * 14 + 6, 8);
+        const size = Math.max(Number(shot.xg || 0) * 14 + 6, 8);
         marker.style.width = size + 'px';
         marker.style.height = size + 'px';
 
-        const fillColor = shot.shotType === 'goal' ? '#22c55e' : '#ffffff';
+        const fillColor = SHOT_COLOR[shot.shotType] || '#ffffff';
         const strokeColor = shot.isHome ? '#000000' : '#3b82f6';
 
         marker.style.backgroundColor = fillColor;
         marker.style.border = `1.5px solid ${strokeColor}`;
-        marker.style.left = x + 'px';
-        marker.style.top = y + 'px';
+        marker.style.left = start.x + 'px';
+        marker.style.top = start.y + 'px';
 
-        if (shot.shotType === 'goal') {
+        if (geom.end) {
+            const end = toPixels(geom.end);
             const line = document.createElement('div');
             line.className = 'shot-line';
             line.style.width = '2px';
             line.style.backgroundColor = strokeColor;
             line.style.position = 'absolute';
-            line.style.left = x + 'px';
-            line.style.top = y + 'px';
+            line.style.left = start.x + 'px';
+            line.style.top = start.y + 'px';
 
-            const targetX = (shot.goalMouthCoordinates.y / 100) * container.offsetWidth;
-            const targetY = 20;
-
-            const angle = Math.atan2(targetY - y, targetX - x) * (180 / Math.PI);
-            const length = Math.sqrt(Math.pow(targetX - x, 2) + Math.pow(targetY - y, 2));
+            const angle = Math.atan2(end.y - start.y, end.x - start.x) * (180 / Math.PI);
+            const length = Math.hypot(end.x - start.x, end.y - start.y);
 
             line.style.height = length + 'px';
             line.style.transformOrigin = 'top';
@@ -187,10 +231,12 @@
 
         marker.addEventListener('mouseover', (e) => {
             tooltip.style.display = 'block';
+            const name = shot.player && shot.player.name ? shot.player.name : '';
+            const own = shot.goalType === 'own' ? ' (own goal)' : '';
             tooltip.innerHTML = `
-          Player: ${shot.player.name}<br>
-          xG: ${shot.xg.toFixed(2)}<br>
-          Outcome: ${shot.shotType}
+          Player: ${name}<br>
+          xG: ${Number(shot.xg || 0).toFixed(2)}<br>
+          Outcome: ${shot.shotType}${own}
         `;
             tooltip.style.left = e.pageX + 10 + 'px';
             tooltip.style.top = e.pageY + 10 + 'px';

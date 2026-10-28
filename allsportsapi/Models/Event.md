@@ -37,46 +37,46 @@ match clock and interpreting `status`, see the [FAQ](../FAQ.md).
 
 ## Properties
 
-- **aggregatedWinnerCode** (`Integer`):
+- **aggregatedWinnerCode** (`number`):
     - Represents the code of the team or player who is the aggregated winner of the event.
 
-- **attendance** (`Integer`):
+- **attendance** (`number`):
     - Indicates the number of people attending the event.
 
-- **awayRedCards** (`Integer`):
+- **awayRedCards** (`number`):
     - Tracks the number of red cards issued to the away team during the event.
 
-- **awayScore** (`@NotNull Score`):
-    - Holds the score of the away team. This field cannot be null.
+- **awayScore** (`Score`):
+    - Holds the score of the away team.
 
-- **awayTeam** (`@NotNull Team`):
-    - Represents the away team participating in the event. This field cannot be null.
+- **awayTeam** (`Team`):
+    - Represents the away team participating in the event.
 
-- **awayTeamRanking** (`Integer`):
+- **awayTeamRanking** (`number`):
     - Indicates the ranking of the away team at the time of the event.
 
 - **awayTeamSeasonHistoricalForm** (`TeamSeasonForm`):
     - Stores the historical form of the away team during the season.
 
-- **awayTeamSeed** (`String`):
+- **awayTeamSeed** (`string`):
     - Refers to the seed assigned to the away team in the event.
 
-- **bestOf** (`Integer`):
+- **bestOf** (`number`):
     - Represents the "best of" format for the event, such as best of 3, 5, etc.
 
-- **bet365ExcludedCountryCodes** (`List<String>`):
+- **bet365ExcludedCountryCodes** (`array of string`):
     - Contains a list of country codes where bet365 services are excluded for the event.
 
 - **changes** (`EventChanges`):
     - Tracks changes made to the event.
 
-- **childEvents** (`List<Integer>`):
+- **childEvents** (`array of number`):
     - Holds the list of child event IDs associated with this event.
 
-- **coverage** (`Integer`):
+- **coverage** (`number`):
     - Indicates the extent of coverage provided for the event.
 
-- **cricketBallProperties** (`List<String>`):
+- **cricketBallProperties** (`array of string`):
     - Stores properties of the cricket ball used in the event, such as color, type, etc.
 
 - **crowdsourcingDataDisplayEnabled** (`boolean`):
@@ -85,76 +85,76 @@ match clock and interpreting `status`, see the [FAQ](../FAQ.md).
 - **crowdsourcingEnabled** (`boolean`):
     - Flag to indicate if crowdsourcing is enabled for the event.
 
-- **cupMatchesInRound** (`int`):
+- **cupMatchesInRound** (`number`):
     - Number of cup matches in the current round of the event.
 
-- **currentBatsmanId** (`Integer`):
+- **currentBatsmanId** (`number`):
     - The ID of the current batsman in a cricket event.
 
-- **currentBattingTeamId** (`Integer`):
+- **currentBattingTeamId** (`number`):
     - The ID of the current batting team in a cricket event.
 
-- **currentBowlerId** (`Integer`):
+- **currentBowlerId** (`number`):
     - The ID of the current bowler in a cricket event.
 
-- **currentPeriodStartTimestamp** (`Long`):
+- **currentPeriodStartTimestamp** (`number`):
     - Timestamp representing the start time of the current period in the event.
 
-- **customId** (`@NotNull String`):
-    - A custom identifier for the event. This field cannot be null.
+- **customId** (`string`):
+    - A custom identifier for the event.
 
-- **defaultPeriodCount** (`Integer`):
+- **defaultPeriodCount** (`number`):
     - Number of default periods (e.g., halves, quarters) in the event.
 
-- **defaultPeriodLength** (`Integer`):
+- **defaultPeriodLength** (`number`):
     - Length of each default period in the event.
 
-- **deletedAtTimestamp** (`Integer`):
+- **deletedAtTimestamp** (`number`):
     - Timestamp indicating when the event was deleted, if applicable.
 
-- **detailId** (`Integer`):
+- **detailId** (`number`):
     - An identifier for additional details related to the event.
 
-- **endTimestamp** (`Long`):
+- **endTimestamp** (`number`):
     - Timestamp marking the end time of the event.
 
 - **eventEditor** (`EventEditor`):
     - The editor responsible for making changes to the event.
 
-- **eventEditorName** (`String`):
+- **eventEditorName** (`string`):
     - Name of the event editor.
 
-- **eventType** (`String`):
+- **eventType** (`string`):
     - Describes the type of event, e.g., match, tournament, etc.
 
 - **fanRatingEvent** (`boolean`):
     - Indicates whether fan ratings are enabled for the event.
 
-- **fightDiscipline** (`String`):
+- **fightDiscipline** (`string`):
     - Specifies the discipline (e.g., boxing, MMA) of the fight in the event.
 
-- **fightState** (`String`):
+- **fightState** (`string`):
     - Represents the current state of the fight, such as ongoing, ended, etc.
 
-- **fightType** (`String`):
+- **fightType** (`string`):
     - Type of fight in the event, such as a title fight, exhibition, etc.
 
 - **finalResultOnly** (`boolean`):
     - Indicates whether only the final result is considered in the event.
 
-- **finalRound** (`Integer`):
+- **finalRound** (`number`):
     - Specifies the final round number in the event.
 
-- **firstToServe** (`Integer`):
+- **firstToServe** (`number`):
     - Indicates the ID of the team or player who serves first in a match.
 
-- **gameAdvantageTeamId** (`Integer`):
+- **gameAdvantageTeamId** (`number`):
     - ID of the team that has the advantage in the game.
 
-- **gender** (`String`):
+- **gender** (`string`):
     - Indicates the gender category of the event participants (e.g., male, female, mixed).
 
-- **groundType** (`String`):
+- **groundType** (`string`):
     - Describes the type of ground or playing surface for the event.
 
 - **hasBet365LiveStream** (`boolean`):
@@ -163,49 +163,49 @@ match clock and interpreting `status`, see the [FAQ](../FAQ.md).
 - **hasEventPlayerHeatMap** (`boolean`):
     - Indicates whether a player heat map is available for the event.
 
-- **hasEventPlayerStatistics** (`Boolean`):
+- **hasEventPlayerStatistics** (`boolean`):
     - Indicates whether player statistics are available for the event.
 
 - **hasGlobalHighlights** (`boolean`):
     - Indicates whether global highlights are available for the event.
 
-- **hasXg** (`Boolean`):
+- **hasXg** (`boolean`):
     - Indicates whether Expected Goals (xG) statistics are available for the event.
 
 - **hide** (`boolean`):
     - Flag to indicate whether the event should be hidden.
 
-- **homeRedCards** (`Integer`):
+- **homeRedCards** (`number`):
     - Tracks the number of red cards issued to the home team during the event.
 
-- **homeScore** (`@NotNull Score`):
-    - Holds the score of the home team. This field cannot be null.
+- **homeScore** (`Score`):
+    - Holds the score of the home team.
 
-- **homeTeam** (`@NotNull Team`):
-    - Represents the home team participating in the event. This field cannot be null.
+- **homeTeam** (`Team`):
+    - Represents the home team participating in the event.
 
-- **homeTeamRanking** (`Integer`):
+- **homeTeamRanking** (`number`):
     - Indicates the ranking of the home team at the time of the event.
 
 - **homeTeamSeasonHistoricalForm** (`TeamSeasonForm`):
     - Stores the historical form of the home team during the season.
 
-- **homeTeamSeed** (`String`):
+- **homeTeamSeed** (`string`):
     - Refers to the seed assigned to the home team in the event.
 
-- **id** (`int`):
+- **id** (`number`):
     - The unique identifier for the event.
 
 - **isAwarded** (`boolean`):
     - Indicates whether the event has been awarded a particular status or result.
 
-- **isEditor** (`Boolean`):
+- **isEditor** (`boolean`):
     - Indicates whether the event is in editor mode.
 
 - **isRecent** (`boolean`):
     - Flag to indicate if the event is recent or upcoming.
 
-- **lastPeriod** (`String`):
+- **lastPeriod** (`string`):
     - Represents the last period played in the event.
 
 - **manOfMatch** (`Player`):
@@ -214,22 +214,22 @@ match clock and interpreting `status`, see the [FAQ](../FAQ.md).
 - **mute** (`boolean`):
     - Flag to mute notifications or alerts for the event.
 
-- **note** (`String`):
+- **note** (`string`):
     - Additional notes or remarks related to the event.
 
-- **parentEventId** (`Integer`):
+- **parentEventId** (`number`):
     - ID of the parent event, if this event is a child event.
 
-- **periods** (`Map<String, String>`):
+- **periods** (`object`):
     - Maps period names to their corresponding values or details.
 
-- **previousLegEventId** (`Integer`):
+- **previousLegEventId** (`number`):
     - ID of the previous leg of the event, if applicable.
 
 - **referee** (`Referee`):
     - Represents the referee officiating the event.
 
-- **refereeName** (`String`):
+- **refereeName** (`string`):
     - Name of the referee officiating the event.
 
 - **roundInfo** (`Round`):
@@ -238,58 +238,58 @@ match clock and interpreting `status`, see the [FAQ](../FAQ.md).
 - **season** (`Season`):
     - Represents the season in which the event is taking place.
 
-- **seasonStatisticsType** (`String`):
+- **seasonStatisticsType** (`string`):
     - Indicates the type of statistics used for the season.
 
-- **showTotoPromo** (`Boolean`):
+- **showTotoPromo** (`boolean`):
     - Indicates whether a "Toto Promo" should be shown for the event.
 
-- **slug** (`@NotNull String`):
-    - A URL-friendly identifier for the event. This field cannot be null.
+- **slug** (`string`):
+    - A URL-friendly identifier for the event.
 
-- **startTimestamp** (`long`):
+- **startTimestamp** (`number`):
     - Timestamp indicating the start time of the event.
 
-- **status** (`@NotNull Status`):
-    - Current status of the event, such as scheduled, ongoing, completed. This field cannot be null.
+- **status** (`Status`):
+    - Current status of the event, such as scheduled, ongoing, completed.
 
-- **statusReason** (`String`):
+- **statusReason** (`string`):
     - Reason for the current status of the event.
 
 - **time** (`Time`):
     - Represents the time-related details of the event.
 
-- **tossDecision** (`String`):
+- **tossDecision** (`string`):
     - The decision made by the toss-winning team (e.g., bat, bowl) in a cricket event.
 
-- **tossWin** (`String`):
+- **tossWin** (`string`):
     - The team that won the toss in a cricket event.
 
-- **tournament** (`@NotNull Tournament`):
-    - The tournament to which the event belongs. This field cannot be null.
+- **tournament** (`Tournament`):
+    - The tournament to which the event belongs.
 
-- **tvUmpireName** (`String`):
+- **tvUmpireName** (`string`):
     - Name of the TV umpire in a cricket event.
 
 - **typeList** (`HashSet<EventType>`):
     - Set of event types associated with the event.
 
-- **umpire1Name** (`String`):
+- **umpire1Name** (`string`):
     - Name of the first on-field umpire in a cricket event.
 
-- **umpire2Name** (`String`):
+- **umpire2Name** (`string`):
     - Name of the second on-field umpire in a cricket event.
 
 - **venue** (`Venue`):
     - Venue where the event is being held.
 
-- **weightClass** (`String`):
+- **weightClass** (`string`):
     - Weight class of the participants in a combat sports event.
 
-- **winType** (`String`):
+- **winType** (`string`):
     - Describes the type of win (e.g., knockout, points) in the event.
 
-- **winnerCode** (`Integer`):
+- **winnerCode** (`number`):
     - Code representing the winner of the event.
 
 - **yardDistance** (`AmericanFootballDownDistance`):

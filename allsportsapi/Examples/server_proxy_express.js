@@ -28,29 +28,29 @@ if (!API_KEY) {
 
 const app = express();
 
-// Forward every /api/* path (query string included) to the upstream API.
+// Forward every /api/* path (query string included) to AllSportsAPI.
 app.get('/api/*', async (req, res) => {
-  const upstream = `https://${HOST}${req.originalUrl}`;
+  const target = `https://${HOST}${req.originalUrl}`;
   try {
-    const upstreamRes = await fetch(upstream, {
+    const apiRes = await fetch(target, {
       headers: { 'X-RapidAPI-Key': API_KEY, 'X-RapidAPI-Host': HOST },
     });
 
-    // Mirror the upstream status and content type (JSON or image/png).
-    res.status(upstreamRes.status);
-    const contentType = upstreamRes.headers.get('content-type');
+    // Mirror the status and content type (JSON or an image).
+    res.status(apiRes.status);
+    const contentType = apiRes.headers.get('content-type');
     if (contentType) res.set('content-type', contentType);
 
     // CORS for local front-end development — restrict the origin in production!
     res.set('Access-Control-Allow-Origin', '*');
 
-    if (upstreamRes.status === 204) return res.end();
+    if (apiRes.status === 204) return res.end();
 
-    const buffer = Buffer.from(await upstreamRes.arrayBuffer());
+    const buffer = Buffer.from(await apiRes.arrayBuffer());
     res.send(buffer);
   } catch (err) {
-    console.error('Upstream request failed:', err);
-    res.status(502).json({ error: 'Upstream request failed' });
+    console.error('API request failed:', err);
+    res.status(502).json({ error: 'API request failed' });
   }
 });
 

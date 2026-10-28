@@ -31,13 +31,13 @@ endpoint (`image/png`).
 
 ## Properties
 
-- **activeCap** (`Integer`):
+- **activeCap** (`number`):
     - Represents the active salary cap for the team, which is the portion of the salary cap currently allocated to active players.
 
-- **capMaximum** (`Integer`):
+- **capMaximum** (`number`):
     - The maximum salary cap allowed for the team. This is the upper limit of the total salary expenditure that the team can have.
 
-- **capSpace** (`Integer`):
+- **capSpace** (`number`):
     - Indicates the remaining salary cap space available to the team, calculated as the difference between the cap maximum and the active cap.
 
 - **category** (`Category`):
@@ -52,31 +52,31 @@ endpoint (`image/png`).
 - **fieldTranslations** (`FieldTranslations`):
     - Contains translations for various fields related to the team, allowing for internationalization and localization of team-related information.
 
-- **foundationDateTimestamp** (`Long`):
+- **foundationDateTimestamp** (`number`):
     - The timestamp representing the date when the team was founded.
 
-- **fullName** (`String`):
+- **fullName** (`string`):
     - The full legal or formal name of the team.
 
-- **gender** (`String`):
+- **gender** (`string`):
     - Indicates the gender category of the team, such as male, female, or mixed.
 
-- **id** (`int`):
+- **id** (`number`):
     - A unique identifier for the team.
 
 - **isRecent** (`boolean`):
     - A flag indicating whether the team has been recently active or updated.
 
-- **luxuryTaxThreshold** (`Integer`):
+- **luxuryTaxThreshold** (`number`):
     - Represents the luxury tax threshold for the team. Exceeding this amount may result in additional financial penalties.
 
 - **manager** (`Manager`):
     - Represents the manager or head coach responsible for overseeing the team's operations and performance.
 
-- **name** (`@NotNull String`):
-    - The official name of the team. This field is mandatory and cannot be null.
+- **name** (`string`):
+    - The official name of the team.
 
-- **nameCode** (`String`):
+- **nameCode** (`string`):
     - A short code or abbreviation representing the team's name, often used in standings, fixtures, or scoreboards.
 
 - **national** (`boolean`):
@@ -91,17 +91,17 @@ endpoint (`image/png`).
 - **primaryUniqueTournament** (`UniqueTournament`):
     - The primary tournament or competition in which the team participates.
 
-- **ranking** (`Integer`):
+- **ranking** (`number`):
     - The team's current ranking in its primary competition or league.
 
-- **shortName** (`String`):
+- **shortName** (`string`):
     - A shortened version of the team's name, typically used for brevity in UI elements or media.
 
-- **signedPlayers** (`Integer`):
+- **signedPlayers** (`number`):
     - The number of players currently signed to the team.
 
-- **slug** (`@NotNull String`):
-    - A URL-friendly identifier for the team. This field is mandatory and cannot be null.
+- **slug** (`string`):
+    - A URL-friendly identifier for the team.
 
 - **sport** (`Sport`):
     - The sport that the team competes in, such as football, basketball, or cricket.
@@ -112,22 +112,22 @@ endpoint (`image/png`).
 - **subTeam2** (`SubTeam`):
     - Represents the second affiliated sub-team, if any.
 
-- **teamColors** (`@NotNull TeamColors`):
-    - The official colors of the team. This field is mandatory and cannot be null.
+- **teamColors** (`TeamColors`):
+    - The official colors of the team.
 
-- **teamRankings** (`List<TeamRankings>`):
+- **teamRankings** (`array of TeamRankings`):
     - A list of rankings across various competitions or metrics, showing the team's performance relative to others.
 
-- **totalCap** (`Integer`):
+- **totalCap** (`number`):
     - Represents the total salary cap, including all players, both active and inactive.
 
 - **tournament** (`Tournament`):
     - Represents the tournament or league in which the team is currently participating.
 
-- **type** (`int`):
+- **type** (`number`):
     - Indicates the type of team, such as club, national, or regional.
 
-- **userCount** (`long`):
+- **userCount** (`number`):
     - The number of users or fans associated with or following the team.
 
 - **venue** (`Venue`):

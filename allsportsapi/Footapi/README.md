@@ -7,7 +7,7 @@ data** from the API.
 
 | File | What it does |
 |------|--------------|
-| [`football_shotmap.html`](football_shotmap.html) | Renders a match **shotmap** on a half‑pitch: every shot placed by location, sized by xG, colored by outcome, with shot→goal lines and tooltips. Includes an API loader. |
+| [`football_shotmap.html`](football_shotmap.html) | Renders a match **shotmap** on the attacking third: every shot placed from `draw`, sized by xG, colored by outcome, with a line to the block or the goal line. Includes an API loader. |
 | [`football_heatmap.html`](football_heatmap.html) | Renders a positional **heatmap** (D3.js) over a pitch image, with live radius/opacity controls. |
 | [`soccer_field.png`](soccer_field.png) | Pitch background used by the heatmap. |
 
@@ -21,8 +21,11 @@ data** from the API.
 |------|----------|
 | Whole‑match shotmap | `GET /api/match/{id}/shotmap` |
 | Single player's shots | `GET /api/match/{id}/player/{playerId}/shotmap` |
+| One goalkeeper's shots | `GET /api/match/{id}/player/{playerId}/goalkeeper-shotmap` |
 
 Host: `footapi7.p.rapidapi.com` (or `allsportsapi2.p.rapidapi.com` with the bundle path).
+
+The match and the player shotmap routes return `{ "shotmap": [ ... ] }`. A `204` is an empty body: the route is valid and this match has no shots. Do not parse JSON. The goalkeeper route is a separate body for that goalkeeper.
 
 ### Response shape (per shot)
 
@@ -32,27 +35,43 @@ Each entry in `shotmap[]` describes one shot:
 |-------|---------|
 | `player` | The shooter ([Player](../Models/Player.md), trimmed). |
 | `isHome` | `true` = home team, `false` = away. |
-| `shotType` | Outcome: `goal`, `save`, `miss`, `block`, `post`. |
-| `situation` | Build‑up: `regular`, `assisted`, `corner`, `set-piece`, `fast-break`, … |
-| `bodyPart` | `left-foot`, `right-foot`, `head`, `other`. |
-| `playerCoordinates` | Where the shot was taken (`x`, `y`, `z`). |
-| `goalMouthCoordinates` | Where it crossed the goal line (`y` = horizontal in goal, `z` = height). |
-| `blockCoordinates` | Where a blocked/saved shot was stopped (when applicable). |
+| `shotType` | Outcome. Values seen on a full match: `goal`, `save`, `miss`, `block`. |
+| `goalType` | On a goal: `regular` or `own`. Absent otherwise. |
+| `situation` | Build‑up, with hyphens: `regular`, `assisted`, `set-piece`, `corner`, `fast-break`. |
+| `bodyPart` | `left-foot`, `right-foot`, `head`. |
+| `playerCoordinates` | Where the shot was taken: `{x, y, z}`. |
+| `goalMouthCoordinates` | Where it met the goal: `{x, y, z}`. `x` is usually `0`. `y` runs across the goal, 0–100. `z` is the height, 0–100. |
+| `goalMouthLocation` | A label for that point, such as `low-left`, `low-centre`, `high`, `close-left`. |
+| `blockCoordinates` | `{x, y, z}` where a save or a block stopped the shot. Absent on a goal or a clean miss. |
+| `draw` | Points already laid out for the attacking‑third graphic. See below. |
 | `xg`, `xgot` | Expected Goals and Expected Goals on Target. |
 | `time`, `addedTime` | Minute of the shot. |
+| `incidentType` | `shot`. |
+| `goalkeeper` | The goalkeeper, on some shots. |
 
 ### Coordinates
 
-`playerCoordinates` and `goalMouthCoordinates` are pitch coordinates relative to the
-attacking direction. In the demo we map them onto a **half‑pitch** SVG: the lateral
-position drives the horizontal axis and the distance‑from‑goal drives the vertical axis,
-so shots cluster realistically around the box. For goals, a line is drawn from the shot
-location to the goal‑mouth point. Marker **size encodes xG** and **color encodes
-outcome** (green = goal).
+Plot `draw`, not a fresh conversion of `playerCoordinates`.
 
-> 💡 Because the exact normalization can differ between data sets, the safest approach
-> is to inspect a live response and scale to your own pitch graphic — exactly what the
-> demo's `createShot()` function shows.
+The graphic is the attacking third. `x` runs 0–100 across the pitch. `y` is `0` on the goal line and grows to about 35. The goal is at the top.
+
+| `draw` point | Meaning |
+|--------------|---------|
+| `start` | The shot. `start.x` = `playerCoordinates.y`. `start.y` = `playerCoordinates.x`. |
+| `block` | Present when the shot is saved or blocked. `block.x` = `blockCoordinates.y`. `block.y` = `blockCoordinates.x`. |
+| `end` | The goal line, so `end.y` is `0`. `end.x` is across the goal. It is not exactly `goalMouthCoordinates.y`. |
+| `goal` | A separate picture of the goal mouth. `goal.x` matches `end.x`. `goal.y` = `100 - goalMouthCoordinates.z` (about 0–100). Do not plot `goal` on the 35‑deep pitch. |
+
+Place the marker at `start`. Draw the line to `block` when that point exists, otherwise to `end`. In pixels, with the pitch box at `PITCH_X = 100` and `PITCH_Y = 35`:
+
+```text
+left = draw.start.x / 100 * width
+top  = draw.start.y / 35  * height
+```
+
+Marker size follows `xg`. Color follows `shotType` (green = goal, amber = save, grey = block, white = miss).
+
+If `draw` is missing, build the same points by swapping axes: start is `{x: playerCoordinates.y, y: playerCoordinates.x}`, block is the same swap of `blockCoordinates`, and end is `{x: goalMouthCoordinates.y, y: 0}`. That end `x` is approximate.
 
 ### Try it with live data
 
@@ -74,19 +93,25 @@ outcome** (green = goal).
 | Team positions in a match | `GET /api/match/{id}/team/{teamId}/heatmap` |
 | Player positions across a season | `GET /api/player/{id}/tournament/{tournamentId}/season/{seasonId}/heatmap` |
 
+The three bodies are different. `x` and `y` are 0–100 on the full pitch in every case. Check `hasEventPlayerHeatMap` on the event before requesting a player or team map.
+
+| Route | 200 body |
+|-------|----------|
+| Player, one match | `{ "heatmap": [ { "x", "y" } ] }` |
+| Team, one match | `{ "playerPoints": [ { "x", "y" } ], "goalkeeperPoints": [ { "x", "y" } ] }` |
+| Player, one season | `{ "points": [ { "x", "y", "count" } ], "matches": 0, "events": [ ] }` |
+
+A team map is both arrays together. `playerPoints` and `goalkeeperPoints` have no `count`: each point is one visit, and `x` can be fractional. A season map already sets `count` (how many times the player was at that `x`, `y`). `matches` is an integer. `events` is the list of matches behind the map. Sum `count` when the same `x`, `y` appears more than once. Do not drop `count` and recount the rows.
+
 ### How the demo works
 
-`football_heatmap.html` uses **D3.js v6**. The data is a list of `{x, y}` points on a
-0–100 pitch grid (length × width). The script:
+`football_heatmap.html` uses **D3.js v6**. `pointsFromPayload()` accepts a bare `{x, y}` list or any of the three bodies above. The script:
 
-1. Aggregates repeated points into a `count` (density).
-2. Draws one circle per location over [`soccer_field.png`](soccer_field.png),
-   converting pitch coordinates to pixels (`cx = x/100 * width`,
-   `cy = height − y/100 * height`, flipping Y for SVG).
-3. Lets you tune **radius** and **opacity** with the sliders to taste.
+1. Reads `count` when the point has one, otherwise treats the point as one visit, then sums visits that share `x` and `y`.
+2. Draws one circle per location over [`soccer_field.png`](soccer_field.png). Both axes are 0–100. SVG `y` grows downward, so the pitch is flipped: `cx = x/100 * width`, `cy = height − y/100 * height`.
+3. Lets you tune **radius** and **opacity** with the sliders.
 
-To use live data, fetch one of the heatmap endpoints from your backend and replace the
-`data` array with the returned points (each has `x`/`y`).
+To use live data, fetch one of the heatmap endpoints from your backend and pass the 200 body to `pointsFromPayload()`. A `204` means that match has no map.
 
 ---
 

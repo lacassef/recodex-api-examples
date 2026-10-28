@@ -1,35 +1,36 @@
-# Reference & Discovery Endpoints
+# Reference
 
-These helper endpoints power dashboards, screeners, and search workflows. Follow the shared validation rules in [Request essentials](../guides/request-essentials.md) for aliases, enums, and pagination.
+Metrics, the calendar, screener definitions, and search. A screener here is read-only: filters, the list, and one definition by id. There is no POST.
 
-## Metrics & grades
+## Metrics and grades
 
-| Path | Purpose | Required params | Optional params | Notes |
+| Route | Purpose | Required | Optional | Notes |
 | --- | --- | --- | --- | --- |
-| `/api/skalpha/metrics` | Core metric snapshots keyed by slug. | `filter_fields`, `filter_slugs` | `minified` | Fields and slugs are comma-separated; set `minified=true` to drop verbose metadata. |
-| `/api/skalpha/ticker-metric-grades` | Quant, dividend, ETF, and REIT grades. | `filter_fields`, `filter_slugs` | `filter_algos`, `minified` | `filter_algos` accepts the predefined list (`main_quant`, `dividends`, `etf`, `reit`, `reit_dividend`). |
-| `/api/skalpha/fundamental-metrics` | Fundamental ratios by numeric ticker ID. | `ticker_ids` | `fields_list` | `ticker_ids` is a comma-separated list of SA ticker IDs; use `fields_list` to limit the response. |
+| `/api/skalpha/metrics` | Metrics by slug. | `filter_fields`, `filter_slugs` | `minified` | `filter_fields=marketcap,tev` and `filter_slugs=tgt`. `minified` is `true` or `false`. The page makes one request per field group. |
+| `/api/skalpha/ticker-metric-grades` | Grades by algorithm. | `filter_fields`, `filter_slugs` | `filter_algos`, `minified` | `filter_algos`: `main_quant`, `dividends`, `etf`, `reit`, `reit_dividend`, comma-separated. Example: `main_quant,dividends` and `minified=false`. |
+| `/api/skalpha/fundamental-metrics` | Metrics by numeric id. | — | `ticker_ids`, `fields_list` | `ticker_ids=62` and `fields_list=total_revenue_growth,total_revenue_3y_cagr`. Estimates use `/symbol-data/estimates`. |
 
-## Calendars
+## Earnings calendar
 
-| Path | Purpose | Required params | Optional params | Notes |
+| Route | Purpose | Required | Optional | Notes |
 | --- | --- | --- | --- | --- |
-| `/api/skalpha/earnings-calendar/days` | Daily earnings calendar view. | — | `filter_start_date`, `filter_end_date`, `filter_with_rating`, `filter_currency` | Dates accept ISO strings; `filter_with_rating=false` is removed automatically. |
-| `/api/skalpha/earnings-calendar/tickers` | Earnings calendar focused on tickers. | `filter_selected_date` | `filter_with_rating`, `filter_currency` | `filter_selected_date` is required; other toggles behave like the days endpoint. |
+| `/api/skalpha/earnings-calendar/days` | A range of days. | — | `filter_start_date`, `filter_end_date`, `filter_with_rating`, `filter_currency` | Example: `filter_start_date=2026-08-30`, `filter_end_date=2026-10-04`, `filter_with_rating=false`, `filter_currency=USD`. |
+| `/api/skalpha/earnings-calendar/tickers` | One day. | `filter_selected_date` | `filter_with_rating`, `filter_currency` | Same toggles. Date `YYYY-MM-DD`. |
 
 ## Screeners
 
-| Path | Purpose | Required params | Optional params | Notes |
+| Route | Purpose | Required | Optional | Notes |
 | --- | --- | --- | --- | --- |
-| `/api/skalpha/screener-filters` | Filter metadata for a screener type. | `type`, `variation` | — | `type` must be `stock` or `etf`; `variation` selects the filter bundle. |
-| `/api/skalpha/screeners` | Public screener directory. | `type` | — | Returns available screener definitions for the specified universe. |
-| `/api/skalpha/screeners/{id}` | Screener definition by ID. | `id` | — | Useful for hydrating saved screeners. |
-| `/api/skalpha/screener-results` (POST) | Execute a screener. | JSON body | — | See [Screener request body](../guides/request-essentials.md#screener-request-body) for required fields and validation. |
+| `/api/skalpha/screener-filters` | Filter metadata. | `type`, `variation` | `lang` | `type`: `analysis`, `etf`, `stock`. Page `variation`: `show`. |
+| `/api/skalpha/screeners` | Directory. | `type` | `lang` | `type` is `stock` or `etf`. |
+| `/api/skalpha/screeners/{id}` | One definition. | `id` | `lang` | `id` is a short hex string, for example `922b797269`. |
 
 ## Search
 
-| Path | Purpose | Required params | Optional params | Notes |
+| Route | Purpose | Required | Optional | Notes |
 | --- | --- | --- | --- | --- |
-| `/api/skalpha/search` | Autocomplete across symbols, indices, and crypto. | `term` | `limit`, `symbols`, `indices`, `crypto`, `actively_traded`, `currency` | Toggle parameters accept `0` or `1`; `currency` expects an ISO code. |
-| `/api/skalpha/searches` | Global search with filters. | — | `filter_query`, `filter_type`, `filter_list`, `filter_period`, `page_size`, `page_number` | `filter_type` accepts comma-separated scopes from the standard search list. |
-| `/api/skalpha/searches/{scope}` | Scoped search collections. | `scope` | `filter_query`, `filter_list`, `filter_period`, `filter_tags`, `filter_defunct`, `page_size`, `page_number` | `scope` must match one of the allowed values (`all`, `articles`, `headlines`, `news`, `pages`, `people`, `symbols`). |
+| `/api/skalpha/search` | Autocomplete. | `term` | `limit`, `symbols`, `indices`, `crypto`, `actively_traded`, `currency` | Flags are `0` or `1`. Example: `1` on all four, `limit=20`, `currency=USD`. |
+| `/api/skalpha/searches` | Global search. | — | `filter_query`, `filter_type`, `filter_list`, `filter_period`, `filter_tags`, `filter_defunct`, `page_size`, `page_number` | `filter_type` is one value: `people,symbols,pages,shortcuts`. `filter_list`: `all`, `stocks`, `etfs`, `mutual_funds`, `cryptos`. `filter_period`: `all`, `day`, `week`, `month`, `quarter`. |
+| `/api/skalpha/searches/{scope}` | One tab. | `scope` | `filter_query`, `filter_list`, `filter_period`, `filter_tags`, `filter_defunct`, `page_size`, `page_number` | `scope`: `all`, `articles`, `headlines`, `news`, `pages`, `people`, `symbols`. For people, `filter_defunct=true` includes inactive records. Headlines example: `filter_tags=transcripts,evergreen-seo`. |
+
+Ready-made examples are in [Examples](../guides/examples.md).

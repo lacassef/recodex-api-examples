@@ -6,6 +6,11 @@ Strategy (top-down tree walk):
     1. List all categories:            /api/tournament/categories
     2. For each category, list its
        unique tournaments (leagues):   /api/tournament/all/category/{id}
+       The body is groups[].uniqueTournaments. A top-level uniqueTournaments
+       array is read too, when a response uses that shape.
+
+MMA, cycling, and motorsport list categories on /api/{sport}/categories, not
+under /tournament/categories. This script targets football and the team sports.
 
 This example targets football (host footapi7). For other sports, prefix the path
 with the sport, e.g. /api/basketball/tournament/categories and
@@ -51,8 +56,19 @@ def list_categories():
 
 
 def list_leagues_in_category(category_id):
-    data = get(f"/api{SPORT_PREFIX}/tournament/all/category/{category_id}")
-    return (data or {}).get("uniqueTournaments", [])
+    data = get(f"/api{SPORT_PREFIX}/tournament/all/category/{category_id}") or {}
+    found = list(data.get("uniqueTournaments") or [])
+    for group in data.get("groups") or []:
+        found.extend(group.get("uniqueTournaments") or [])
+    seen = set()
+    leagues = []
+    for league in found:
+        league_id = league.get("id")
+        if league_id in seen:
+            continue
+        seen.add(league_id)
+        leagues.append(league)
+    return leagues
 
 
 def main():

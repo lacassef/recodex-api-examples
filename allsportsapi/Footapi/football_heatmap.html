@@ -24,7 +24,10 @@
   </div>
   <svg></svg>
   <script>
-    // The "heatmap"
+    // Sample is a bare list of {x, y}. pointsFromPayload also accepts the three
+    // response bodies: {heatmap}, {playerPoints, goalkeeperPoints}, and
+    // {points:[{x, y, count}], matches, events}. x and y are 0-100 on the full pitch.
+    // Season points already carry count. Do not recount those by dropping count.
         var data = [
   {
     x: 98,
@@ -168,21 +171,36 @@
   }
 ];
     
-    // Convert the data
-    var convertedData = [];
-    var countMap = new Map();
-    for (var i = 0; i < data.length; i++) {
-      var x = data[i].x;
-      var y = data[i].y;
-      if (!countMap.has(x + "," + y)) {
-        countMap.set(x + "," + y, 1);
-        convertedData.push({x: x, y: y, count: 1});
-      } else {
-        var count = countMap.get(x + "," + y) + 1;
-        countMap.set(x + "," + y, count);
-        convertedData[convertedData.length - 1].count = count;
-      }
+    function pointsFromPayload(body) {
+      if (Array.isArray(body)) return body;
+      if (!body || typeof body !== "object") return [];
+      if (Array.isArray(body.heatmap)) return body.heatmap;
+      if (Array.isArray(body.points)) return body.points;
+      var out = [];
+      if (Array.isArray(body.playerPoints)) out = out.concat(body.playerPoints);
+      if (Array.isArray(body.goalkeeperPoints)) out = out.concat(body.goalkeeperPoints);
+      return out;
     }
+
+    function aggregate(points) {
+      var byKey = new Map();
+      var out = [];
+      for (var i = 0; i < points.length; i++) {
+        var p = points[i];
+        var n = (typeof p.count === "number" && p.count > 0) ? p.count : 1;
+        var key = p.x + "," + p.y;
+        var existing = byKey.get(key);
+        if (!existing) {
+          existing = {x: p.x, y: p.y, count: 0};
+          byKey.set(key, existing);
+          out.push(existing);
+        }
+        existing.count += n;
+      }
+      return out;
+    }
+
+    var convertedData = aggregate(pointsFromPayload(data));
     
     // Append the circles to the SVG with dynamic controls
     var svg = d3.select("svg");

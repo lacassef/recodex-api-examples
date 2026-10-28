@@ -7,36 +7,34 @@ positions they can play, plus ranked lists of `positive` (strengths) and `negati
 [Characteristic Types](#characteristic-types) below (e.g. `5` = Finishing,
 `9` = Tackling).
 
-**Where you'll see it:** the football player‑attributes / characteristics endpoint.
+**Where you'll see it:** `GET /api/player/{id}/characteristics` and `GET /api/player/{id}/attribute`.
 
 **Related models:** [Player](Player.md).
 
 ## Properties
 
-* **negative** (`@NotNull List<PlayerCharacteristic>`):
+* **negative** (`array of PlayerCharacteristic`):
     * A list of negative characteristics associated with the player.
-    * This field is mandatory and cannot be null.
+    *
     * Each characteristic contains a rank and type indicating specific player weaknesses.
 
-* **positions** (`@NotNull List<String>`):
+* **positions** (`array of string`):
     * A list of playing positions that the player can occupy on the field.
-    * This field is mandatory and cannot be null.
+    *
     * Contains standard position codes (e.g., "ST" for striker, "CB" for center back).
 
-* **positive** (`@NotNull List<PlayerCharacteristic>`):
+* **positive** (`array of PlayerCharacteristic`):
     * A list of positive characteristics associated with the player.
-    * This field is mandatory and cannot be null.
+    *
     * Each characteristic contains a rank and type indicating specific player strengths.
-
-# Related Classes
 
 ## PlayerCharacteristic
 
-* **rank** (`int`):
+* **rank** (`number`):
     * Numerical value indicating the strength or significance of this characteristic.
     * Higher values typically indicate stronger presence of the characteristic.
 
-* **type** (`int`):
+* **type** (`number`):
     * Integer constant identifying the specific type of characteristic.
     * Maps to predefined characteristic types (see Characteristic Types below).
 

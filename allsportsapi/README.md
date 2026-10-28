@@ -1,95 +1,49 @@
-# AllSportsAPI — Code Examples, Models & Guides
+# AllSportsAPI
 
-Practical, copy‑paste examples, response‑model documentation and OpenAPI
-specifications for the **AllSportsAPI** family of sports‑data APIs.
+Live scores, fixtures, lineups, statistics, standings, and odds, with the same paths and the same JSON shapes across sports.
 
-Everything here works the same way across every sport: the same authentication,
-the same response shapes and the same endpoint structure. Learn one API and you
-know them all.
+Learn one sport and the others follow. Football is the exception: its paths have no sport name. Every other sport puts the sport slug after `/api`.
 
-### Where to subscribe
+## Where to subscribe
 
-| Marketplace | What's available |
+| Marketplace | What you can buy |
 |-------------|------------------|
-| [RapidAPI](https://rapidapi.com/fluis.lacasse) | The full **All Sports** bundle **and** every individual sport API |
-| [API.market](https://api.market/store/recodex/allsportsapi) | The complete **All Sports** bundle only |
+| [RapidAPI](https://rapidapi.com/fluis.lacasse) | The **All Sports** bundle and each single-sport API |
+| [API.market](https://api.market/store/recodex/allsportsapi) | The **All Sports** bundle only |
 
-Individual sport APIs (Football, Tennis, Basketball, …) are available on
-**RapidAPI only**. On **API.market** you get the complete multi‑sport product:
-[api.market/store/recodex/allsportsapi](https://api.market/store/recodex/allsportsapi).
+Single-sport products (Football, Tennis, Basketball, and the others that have their own listing) are on RapidAPI. API.market sells the bundle only.
 
----
+Copy `X-RapidAPI-Host` from the endpoint snippet on the product page. The hosts below are the ones published today.
 
-## What you get from the API
+| Product | Host |
+|---------|------|
+| All Sports | `allsportsapi2.p.rapidapi.com` |
+| Football | `footapi7.p.rapidapi.com` |
+| Tennis | `tennisapi1.p.rapidapi.com` |
+| Basketball | `basketapi1.p.rapidapi.com` |
+| Ice Hockey | `icehockeyapi.p.rapidapi.com` |
+| American Football | `americanfootballapi.p.rapidapi.com` |
+| Baseball | `baseballapi.p.rapidapi.com` |
+| Cricket | `cricketapi21.p.rapidapi.com` |
+| Esports | `esportapi1.p.rapidapi.com` |
+| Motorsport | `motorsportapi.p.rapidapi.com` |
+| Rugby | `rugbyapi2.p.rapidapi.com` |
+| Volleyball | `volleyballapi.p.rapidapi.com` |
+| Handball | `handballapi.p.rapidapi.com` |
+| MMA | `mmaapi.p.rapidapi.com` |
 
-A single, consistent interface to live and historical sports data:
+Aussie rules, badminton, bandy, beach volleyball, cycling, darts, floorball, futsal, minifootball, padel, snooker, table tennis, and water polo are on the All Sports bundle. If a sport also has its own listing, use the host printed on that listing.
 
-- **Live & pre‑match scores** and event schedules (by day, by category, by tournament).
-- **Match detail**: lineups, statistics, incidents (goals, cards, substitutions),
-  best players, head‑to‑head, votes, highlights and **odds**.
-- **Standings / league tables** and the full league → season → round tree.
-- **Teams**: squads, transfers, statistics, near events, logos.
-- **Players**: profile, season & match statistics, attributes, transfer history, images.
-- **Media**: team logos, player and manager photos, tournament/league images.
-- Sport‑specific data such as football shotmaps & heatmaps, basketball shotmaps,
-  cricket innings/batting, American‑football down & distance, and esports map stats.
+## Authentication
 
----
-
-## The API family
-
-Every sport is a separate API on RapidAPI but shares the same paths and models.
-Subscribe to **All Sports** for one key that covers the bundled sports, or use a
-single‑sport API if you only need one.
-
-- **RapidAPI** — individual sport APIs **and** the All Sports bundle
-  ([allsportsapi2](https://rapidapi.com/fluis.lacasse/api/allsportsapi2)).
-- **API.market** — complete All Sports only
-  ([recodex/allsportsapi](https://api.market/store/recodex/allsportsapi)).
-
-| Sport | RapidAPI page | Host header (`X-RapidAPI-Host`) |
-|-------|---------------|---------------------------------|
-| **All Sports** (bundle) | [allsportsapi2](https://rapidapi.com/fluis.lacasse/api/allsportsapi2) · also on [API.market](https://api.market/store/recodex/allsportsapi) | `allsportsapi2.p.rapidapi.com` |
-| Football / Soccer | [footapi7](https://rapidapi.com/fluis.lacasse/api/footapi7/) | `footapi7.p.rapidapi.com` |
-| Tennis | [tennisapi1](https://rapidapi.com/fluis.lacasse/api/tennisapi1/) | `tennisapi1.p.rapidapi.com` |
-| Ice Hockey | [icehockeyapi](https://rapidapi.com/fluis.lacasse/api/icehockeyapi/) | `icehockeyapi.p.rapidapi.com` |
-| American Football | [americanfootballapi](https://rapidapi.com/fluis.lacasse/api/americanfootballapi/) | `americanfootballapi.p.rapidapi.com` |
-| Baseball | [baseballapi](https://rapidapi.com/fluis.lacasse/api/baseballapi/) | `baseballapi.p.rapidapi.com` |
-| Basketball | [basketapi1](https://rapidapi.com/fluis.lacasse/api/basketapi1/) | `basketapi1.p.rapidapi.com` |
-| Cricket | [cricketapi21](https://rapidapi.com/fluis.lacasse/api/cricketapi21/) | `cricketapi21.p.rapidapi.com` |
-| Esports | [esportapi1](https://rapidapi.com/fluis.lacasse/api/esportapi1/) | `esportapi1.p.rapidapi.com` |
-| Motorsport | [motorsportapi](https://rapidapi.com/fluis.lacasse/api/motorsportapi/) | `motorsportapi.p.rapidapi.com` |
-| Rugby | [rugbyapi2](https://rapidapi.com/fluis.lacasse/api/rugbyapi2/) | `rugbyapi2.p.rapidapi.com` |
-
-**Standalone APIs** (not part of the All Sports bundle because of import‑size limits,
-but identical in structure):
-
-| Sport | RapidAPI page | Host header |
-|-------|---------------|-------------|
-| Volleyball | [volleyballapi](https://rapidapi.com/fluis.lacasse/api/volleyballapi) | `volleyballapi.p.rapidapi.com` |
-| Handball | [handballapi](https://rapidapi.com/fluis.lacasse/api/handballapi) | `handballapi.p.rapidapi.com` |
-| MMA | [mmaapi](https://rapidapi.com/fluis.lacasse/api/mmaapi) | `mmaapi.p.rapidapi.com` |
-
-> ℹ️ **Always copy the exact host from RapidAPI.** Open the API's **Endpoints** tab,
-> pick any endpoint, and read the `X-RapidAPI-Host` value in the auto‑generated code
-> snippet. The hosts above follow RapidAPI's `{slug}.p.rapidapi.com` convention.
-
----
-
-## Authentication & your first request
-
-Every request needs two headers:
+Every request needs two headers.
 
 | Header | Value |
 |--------|-------|
-| `X-RapidAPI-Key` | Your personal RapidAPI key (from the RapidAPI dashboard) |
-| `X-RapidAPI-Host` | The host of the API you are calling (see tables above) |
+| `X-RapidAPI-Key` | Your key |
+| `X-RapidAPI-Host` | The host of the product you subscribed to |
 
-> 🔒 **Never ship your API key in client‑side code.** Anyone can read it in the
-> browser. Call the API from your own backend and proxy the result to the front‑end.
-> See [Best practices](#best-practices) and the [FAQ](FAQ.md).
-
-### cURL
+Keep the key on your server. A browser, a mobile app, or a public repository can leak it. The [server proxy examples](Examples/server_proxy_flask.py) show the pattern.
 
 ```bash
 curl --request GET \
@@ -98,148 +52,107 @@ curl --request GET \
   --header 'X-RapidAPI-Host: footapi7.p.rapidapi.com'
 ```
 
-### JavaScript (fetch)
+On the bundle, the same call is `https://allsportsapi2.p.rapidapi.com/api/matches/live` with host `allsportsapi2.p.rapidapi.com`. Paths do not change between the bundle and a single-sport product.
 
-```js
-const options = {
-  method: 'GET',
-  headers: {
-    'X-RapidAPI-Key': process.env.RAPIDAPI_KEY,        // keep this on the server
-    'X-RapidAPI-Host': 'footapi7.p.rapidapi.com'
-  }
-};
+## Path rules
 
-const res = await fetch('https://footapi7.p.rapidapi.com/api/matches/live', options);
-const data = await res.json();
-console.log(data.events?.length, 'live matches');
-```
+`{day}`, `{month}`, and `{year}` are numbers. `7/3/2026` is 7 March 2026. Do not zero-pad them. Where a path uses `{date}`, the value is `YYYY-MM-DD`.
 
-### Python (requests)
+| Family | Sports | One event | A day's list | Person or club |
+|--------|--------|-----------|--------------|----------------|
+| Football | football | `/api/match/{id}` | `/api/matches/...` | `/api/player/{id}`, `/api/team/{id}` |
+| Team sports | american-football, aussie-rules, bandy, baseball, basketball, beach-volley, cricket, floorball, futsal, handball, ice-hockey, minifootball, rugby, volleyball, waterpolo | `/api/{sport}/match/{id}` | `/api/{sport}/matches/...` | `/api/{sport}/player/{id}`, `/api/{sport}/team/{id}` |
+| Esports | esport | `/api/esport/event/{id}` | `/api/esport/matches/...` | `/api/esport/team/{id}` |
+| Matches and sets | tennis, table-tennis | `/api/{sport}/event/{id}` | `/api/{sport}/events/...` | `/api/{sport}/player/{id}` (tennis also has `/team/{id}`) |
+| Individual, published as a team | badminton, darts, snooker | `/api/{sport}/event/{id}` | `/api/{sport}/events/...` | `/api/{sport}/team/{id}` |
+| Padel | padel | `/api/padel/event/{id}` | `/api/padel/events/...` | `/api/padel/player/{id}` |
+| Fight cards | mma | `/api/mma/event/{id}` | `/api/mma/main-events/{date}/extended` | rankings and events under `/api/mma` |
+| Stages | cycling, motorsport | `/api/{sport}/stage/{id}` | see [DailyMatches.md](DailyMatches.md) | team and rider routes under that prefix |
 
-```python
-import os, requests
+The esports slug in the path is `esport`, one word, no final `s`.
 
-url = "https://footapi7.p.rapidapi.com/api/matches/live"
-headers = {
-    "X-RapidAPI-Key": os.environ["RAPIDAPI_KEY"],
-    "X-RapidAPI-Host": "footapi7.p.rapidapi.com",
-}
+Badminton, darts, and snooker do not have a separate player route or a lineup route. The athlete id is the id on `/team/{id}`. Padel uses `/player/{id}` for that same kind of id.
 
-resp = requests.get(url, headers=headers, timeout=15)
-resp.raise_for_status()
-print(len(resp.json().get("events", [])), "live matches")
-```
+## What a response looks like
 
-> 📌 Endpoint paths differ slightly per sport. Football uses `/api/...`, while other
-> sports prefix the sport name, e.g. `/api/tennis/...` or `/api/basketball/...`.
-> Use the [OpenAPI specs](openapi/) or the RapidAPI **Endpoints** tab as the source of truth.
+A `200` body is the payload itself. A match list is `{ "events": [ ... ] }`. One match is `{ "event": { ... } }`. A table is `{ "standings": [ ... ] }`. Categories are `{ "categories": [ ... ] }`. There is no `head` wrapper around the payload.
 
----
+Fields that do not apply to the sport are missing or `null`. Read nested objects only after you check them.
 
-## Understanding the data model
+`startTimestamp` is Unix time in seconds. Treat it as UTC when you convert it to a local clock.
 
-Most sports share the same hierarchy. Understanding it makes navigation predictable:
+Image routes return bytes, not JSON. `Content-Type` is `image/png`, `image/webp`, or `image/svg+xml` for a placeholder. Send the same two auth headers. An `<img src>` cannot send them. See [Examples](Examples/).
 
-```
-Sport
-└── Category            (a country, region or tour — e.g. "England", "ATP")
-    └── UniqueTournament (a competition across seasons — e.g. "Premier League")
-        └── Season       (one edition — e.g. "Premier League 24/25")
-            └── Tournament / Round
-                └── Event (a single match / game / fixture)
-                    ├── Team (home / away)
-                    │   └── Player
-                    ├── Status & Time
-                    ├── Score
-                    ├── Incidents
-                    └── Statistics
-```
+Successful responses may include `Cache-Control`, `ETag`, and `Last-Modified`. Reuse them. Error responses do not carry cache headers.
 
-To list every league in a sport you walk the tree top‑down: list **categories**,
-then list **tournaments per category**. See the
-[FAQ → "How to get all leagues"](FAQ.md) and the
-[Models guide](Models/README.md) for the full picture and field‑by‑field reference.
+## Status codes
 
----
+| Code | Meaning | What to do |
+|------|---------|------------|
+| 200 | Payload or image bytes | Read the body |
+| 204 | The route exists and there is nothing for those parameters | Empty body. Do not parse JSON. Treat it as an empty list or a missing image |
+| 400 | A path or query value is invalid | Fix the request. The body is JSON `{"error":{"status":400,"title":"Bad Request","request_id":"..."}}`, or a short text line for a bad date |
+| 401, 403 | Key or host rejected by the marketplace | Check the key and `X-RapidAPI-Host` |
+| 429 | Plan limit | Wait. Honor `Retry-After` when it is present, then back off |
+| 500 | Unexpected failure | Retry with backoff |
+| 502 | The data could not be fetched | Retry with backoff |
+| 503 | Temporarily unavailable | Retry with backoff |
+| 504 | The request timed out | Retry with backoff |
 
-## Common workflows
+`request_id` is present when the gateway has one. Send it when you ask for help.
 
-| Goal | How |
-|------|-----|
-| **Live matches** | `GET /api/matches/live` (football) — search "live" in the Endpoints tab for other sports. |
-| **Matches on a date** | The flat `/api/matches/{day}/{month}/{year}` feed is being retired — assemble the day **per competition** (list categories → `GET /api/{sport}/category/{id}/events/{day}/{month}/{year}`, or per tournament `GET /api/{sport}/tournament/{id}/scheduled-events/{YYYY-MM-DD}`). Full per‑sport recipe: **[DailyMatches.md](DailyMatches.md)**. |
-| **All leagues of a sport** | List categories → list tournaments per category. |
-| **All teams in a league** | Use the **standings** endpoint for the season. |
-| **Match detail** | Find any "Match" endpoint: `lineups`, `statistics`, `incidents`, `best-players`, `odds`, `shotmap`, `highlights`. |
-| **Player / team statistics** | Use the `Match Lineups` or `Match Player Statistics` endpoints (see FAQ). |
-| **Images** | Logo/photo endpoints return `image/png`; placeholders return SVG. See [Examples](Examples/). |
+The [quickstart](Examples/quickstart.py) retries 429 and 5xx and treats 204 as no data.
 
----
+## Ids you will reuse
 
-## Best practices
+| Id | Where you get it | Where you send it |
+|----|------------------|-------------------|
+| `event.id` | Any list of events | `/match/{id}` or `/event/{id}`, then lineups, incidents, statistics, odds |
+| `event.customId` | The same event object | Head-to-head. This is a short string, not the numeric id |
+| `event.tournament.uniqueTournament.id` | The event, or a scheduled-tournament row | Seasons, standings, a competition's matches on a date |
+| `event.tournament.id` | The event | The edition or group playing that match. Do not send this id to a unique-tournament route |
+| `event.season.id` | The event | `/season/{seasonId}/...` |
+| `homeTeam.id`, `awayTeam.id` | The event | Team, squad, and logo routes |
+| `player.id` | Lineups, squads, search | Player routes. On padel, badminton, darts, and snooker this is the participant id described above |
+| Category `id` | `/tournament/categories` | Tournaments in that country or tour, and that category's matches on a date |
 
-1. **Keep your key on the server.** Proxy API calls through your backend; never expose
-   `X-RapidAPI-Key` in a browser, mobile app, or public repo.
-2. **Cache aggressively.** Schedules, standings, squads and historical results change
-   slowly. Cache them (minutes to hours) to stay within your plan's quota and to keep
-   your app fast. Reserve frequent polling for live endpoints only.
-3. **Poll live data sensibly.** A 10–30 s interval is plenty for live scores. Tighter
-   loops mostly burn quota.
-4. **Handle every status code.** Expect `200` (data), `204` (route valid but no data
-   yet), `429` (rate‑limited — back off), and `5xx` (retry with exponential backoff).
-5. **Convert timestamps yourself.** All times are UNIX seconds in UTC. Schedule
-   endpoints intentionally return ±12 h around UTC midnight so every time zone is
-   covered — filter to the user's local day on your side.
-6. **Treat optional fields as optional.** Coverage varies by sport, league and match.
-   Null‑check before reading nested objects.
-7. **Don't hard‑code IDs.** Resolve teams/tournaments/players through search or the
-   tree, then store the IDs you need.
+`winnerCode` on a finished event: `1` the home side won, `2` the away side won, `3` draw. It is absent before the match has a result.
 
-More answers in the **[FAQ](FAQ.md)**.
+## Common tasks
 
----
+| Goal | Start here |
+|------|------------|
+| Live matches | `GET /api/matches/live` for football, `GET /api/{sport}/matches/live` for team sports and esports, `GET /api/{sport}/events/live` for tennis, table tennis, badminton, darts, snooker, and padel |
+| One day's matches | [DailyMatches.md](DailyMatches.md) |
+| One match | [Workflows.md](Workflows.md) |
+| Every league | Categories, then the tournaments in each category. See the [FAQ](FAQ.md) |
+| A league table | `GET /api/tournament/{uniqueTournamentId}/season/{seasonId}/standings/total` (prefix the sport when the sport is not football) |
+| Odds | `GET /api/match/{id}/odds/{providerId}/all` or the short `.../odds` route. Provider `1` is the default board |
+| A name, when you do not have an id | `GET /api/search/all?q={text}&page=0` |
+| A logo or a photo | `GET /api/team/{id}/image`, `GET /api/player/{id}/image`, with the sport prefix when needed |
 
-## Repository layout
+Worked sequences are in [Workflows.md](Workflows.md). Questions that come up on every integration are in the [FAQ](FAQ.md).
 
-```
-allsportsapi/
-├── README.md                ← you are here
-├── FAQ.md                   Frequently asked questions (auth, images, time, odds, leagues…)
-├── DailyMatches.md          How to get a day's matches/events per sport (the new workflow)
-├── Models/                  Response‑model reference
-│   ├── README.md            Data‑model guide + index of every model
-│   ├── *.md                 Field‑by‑field docs (Event, Player, Team, Tournament…)
-│   └── json/                Endpoint → response‑schema JSON (player, team, event, odds…)
-├── openapi/                 OpenAPI 3.0 specs (per sport + combined + simplified)
-├── Examples/                Runnable Python & Node examples (quickstart, proxy, FAQ recipes) + image snippets
-├── Footapi/                 Football examples: shotmap, heatmap, pitch asset
-├── Basketapi/               Basketball examples: shotmap, shot‑zone classification
-└── Tennisapi/               Tennis examples: cup‑tree (bracket) visualization
-```
+## Reading the rest of this folder
 
-- **New to the API?** Start with this README, then skim the [FAQ](FAQ.md). For a first
-  program, run the [quickstart](Examples/quickstart.py) (Python) or
-  [quickstart.js](Examples/quickstart.js) (Node).
-- **Want runnable recipes?** The [Examples](Examples/) folder has the quickstart, a
-  key‑safe [server‑side proxy](Examples/server_proxy_express.js), a
-  [match‑clock calculator](Examples/match_clock.py), a
-  [list‑all‑leagues](Examples/list_all_leagues.py) walk, and
-  [timezone schedule filtering](Examples/filter_schedule_by_timezone.py).
-- **Building a response parser?** Read the [Models guide](Models/README.md) and the
-  [JSON schemas](Models/json/).
-- **Generating a client?** Import an [OpenAPI spec](openapi/) into your tool of choice.
-- **Want visualizations?** See [Footapi](Footapi/), [Basketapi](Basketapi/) and
-  [Tennisapi](Tennisapi/).
+| Path | Use it for |
+|------|------------|
+| [FAQ.md](FAQ.md) | Auth, images, the match clock, incidents, leagues, dates, pages, errors |
+| [DailyMatches.md](DailyMatches.md) | A full day, per sport |
+| [Workflows.md](Workflows.md) | Live board, one match, a table, search, odds, season stats |
+| [Models/](Models/) | JSON objects (`Event`, `Team`, `Player`, incidents, statistics) and the [route catalog](Models/Routes.md) |
+| [openapi/](openapi/) | OpenAPI 3.0 files for clients and API tools |
+| [Examples/](Examples/) | Python and Node you can run |
+| [Footapi/](Footapi/), [Basketapi/](Basketapi/), [Tennisapi/](Tennisapi/) | Shotmap, heatmap, and cup-tree drawings |
 
----
+Import [openapi/allsports_simplified_openapi.yaml](openapi/allsports_simplified_openapi.yaml) when a tool struggles with the full file. It describes the same routes, with shared path segments collapsed. Per-sport files are the easiest way to read one sport.
 
-## Need data we don't provide?
+## Habits that save quota
 
-If a data point isn't available here, try the
-[Allscores API](https://rapidapi.com/fluis.lacasse/api/allscores/).
+Cache categories, tournament lists, squads, and finished results. Poll a live list every 10–30 seconds, not faster. Resolve ids through search or the tree, then store them. A 204 is a normal empty result, so do not retry it as a failure.
 
 ## Support
 
-Questions or feature requests? Reach out via the **About** tab of any API on RapidAPI,
-or open a discussion on the API's RapidAPI / [API.market](https://api.market/store/recodex/allsportsapi)
-page. Support during development is free.
+Use the About tab of the API on RapidAPI, or the listing on [API.market](https://api.market/store/recodex/allsportsapi). Help while you are building is free.
+
+If a fact you need is not in these routes, the [Allscores API](https://rapidapi.com/fluis.lacasse/api/allscores/) is a separate product with a different shape.
