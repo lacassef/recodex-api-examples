@@ -51,8 +51,7 @@ Same authentication, response shapes, and endpoint structure across every sport.
 |---------|----------|--------------------------|
 | **AllScores** | [allscores](https://rapidapi.com/fluis.lacasse/api/allscores) | `allscores.p.rapidapi.com` |
 | **SKAlpha** | [skalpha1](https://rapidapi.com/fluis.lacasse/api/skalpha1) | `skalpha1.p.rapidapi.com` |
-
-LivescoresAPI uses the same two headers. Its host is the one printed on that product's Endpoints tab. Paths stay `/api/livescores/...`.
+| **LivescoresAPI** | [livescoresapi](https://rapidapi.com/fluis.lacasse/api/livescoresapi) | `livescoresapi.p.rapidapi.com` |
 
 Always copy the exact host from the RapidAPI **Endpoints** tab for the API you subscribed to.
 

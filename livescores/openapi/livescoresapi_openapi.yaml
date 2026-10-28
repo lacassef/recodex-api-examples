@@ -6,6 +6,9 @@ info:
   x-category: Sports
   x-long-description: LivescoresAPI routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
   x-version-lifecycle: active
+servers:
+  - url: https://livescoresapi.p.rapidapi.com
+    description: RapidAPI. Send this host in X-RapidAPI-Host.
 paths:
   /api/livescores/banners:
     get:

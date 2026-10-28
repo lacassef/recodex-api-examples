@@ -2,7 +2,7 @@
 
 How to call the `GET` routes under `/api/livescores`. Each route's parameters are in the [OpenAPI](openapi/livescoresapi_openapi.yaml).
 
-Send `X-RapidAPI-Key` and `X-RapidAPI-Host`. The host is the one on the LivescoresAPI product page. Paths stay `/api/livescores/...`.
+The listing is [LivescoresAPI on RapidAPI](https://rapidapi.com/fluis.lacasse/api/livescoresapi). Send `X-RapidAPI-Key` and `X-RapidAPI-Host: livescoresapi.p.rapidapi.com`. The base URL is `https://livescoresapi.p.rapidapi.com`. Paths stay `/api/livescores/...`.
 
 `204` means the route exists and there is no data for those parameters.
 
@@ -33,4 +33,4 @@ Send `X-RapidAPI-Key` and `X-RapidAPI-Host`. The host is the one on the Livescor
 
 ## Smallest request
 
-Call `https://{host}/api/livescores/sports/{sportId}/scoreboard`. `{host}` is the LivescoresAPI host from the product page. Take `sportId` from the [sport list](reference/sport-ids.md). Omit `dayOffset` for today. Send only parameters the operation lists. An invalid value returns `400`. A filled call is in [Examples](guides/examples.md).
+Call `https://livescoresapi.p.rapidapi.com/api/livescores/sports/{sportId}/scoreboard`. Take `sportId` from the [sport list](reference/sport-ids.md). Omit `dayOffset` for today. Send only parameters the operation lists. An invalid value returns `400`. A filled call is in [Examples](guides/examples.md).
