@@ -9,26 +9,55 @@
         }
 
         .toggle {
-            margin-bottom: 20px;
+            margin-bottom: 12px;
             text-align: center;
         }
 
         .toggle button {
             padding: 8px 16px;
-            margin: 0 5px;
+            margin: 0 4px;
             cursor: pointer;
+            border: 1px solid #cbd5e1;
+            background: #f8fafc;
+            border-radius: 4px;
         }
 
         .toggle button.active {
             background: #3b82f6;
             color: white;
-            border: none;
+            border-color: #3b82f6;
+        }
+
+        .legend {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 14px;
+            margin-bottom: 12px;
+            font-family: sans-serif;
+            font-size: 12px;
+            color: #334155;
+        }
+
+        .legend-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .legend-dot {
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            border: 1.5px solid #000;
+            display: inline-block;
         }
 
         .field-container {
             position: relative;
             width: 100%;
             background: #2d8a4e;
+            overflow: hidden;
         }
 
         .soccer-field {
@@ -49,43 +78,59 @@
             transform: translate(-50%, -50%);
             cursor: pointer;
             transition: opacity 0.2s;
+            z-index: 2;
+            box-sizing: border-box;
         }
 
         .shot-line {
             position: absolute;
             pointer-events: none;
+            z-index: 1;
         }
 
         .tooltip {
             position: absolute;
-            background: rgba(0, 0, 0, 0.8);
+            background: rgba(0, 0, 0, 0.85);
             color: white;
-            padding: 8px;
+            padding: 8px 10px;
             border-radius: 4px;
+            font-family: sans-serif;
             font-size: 12px;
+            line-height: 1.4;
             pointer-events: none;
             display: none;
             z-index: 100;
+            white-space: nowrap;
         }
     </style>
 </head>
 <body>
 <div class="container">
     <div class="toggle">
-        <button onclick="toggleTeam('home')" class="active">Home Team</button>
-        <button onclick="toggleTeam('away')">Away Team</button>
+        <button data-team="home" onclick="toggleTeam('home')" class="active">Home Team</button>
+        <button data-team="away" onclick="toggleTeam('away')">Away Team</button>
+        <button data-team="all" onclick="toggleTeam('all')">All Shots</button>
     </div>
     <div style="margin-bottom:12px; text-align:center;">
-        <input id="apiKey" type="password" placeholder="RapidAPI Key" style="width:260px; padding:6px;" />
-        <input id="matchId" type="text" placeholder="Match ID (e.g., 123456)" style="width:200px; padding:6px;" />
-        <button id="loadShotsBtn" style="padding:6px 12px;">Load Shots</button>
-        <span id="status" style="margin-left:8px; font-size:12px; color:#555;"></span>
+        <input id="apiKey" type="password" placeholder="RapidAPI Key" style="width:220px; padding:6px;" />
+        <input id="matchId" type="text" placeholder="Match ID (e.g., 14015387)" style="width:170px; padding:6px;" />
+        <input id="playerId" type="text" placeholder="Player ID (optional)" style="width:150px; padding:6px;" />
+        <button id="loadShotsBtn" style="padding:6px 12px; cursor:pointer;">Load Shots</button>
+        <span id="status" style="margin-left:8px; font-family:sans-serif; font-size:12px; color:#555;"></span>
+    </div>
+    <div class="legend">
+        <span class="legend-item"><span class="legend-dot" style="background:#22c55e;"></span>Goal</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#f59e0b;"></span>Save</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#ef4444;"></span>Post</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#94a3b8;"></span>Block</span>
+        <span class="legend-item"><span class="legend-dot" style="background:#ffffff;"></span>Miss</span>
     </div>
     <div class="field-container">
         <svg class="soccer-field" viewBox="0 0 100 35" preserveAspectRatio="none">
             <rect width="100" height="35" fill="#2d8a4e"/>
             <rect x="20.35" y="0" width="59.3" height="16.5" fill="none" stroke="#fff" stroke-width="0.35"/>
             <rect x="36.53" y="0" width="26.94" height="5.5" fill="none" stroke="#fff" stroke-width="0.35"/>
+            <path d="M 42.68 16.5 A 9.15 9.15 0 0 0 57.32 16.5" fill="none" stroke="#fff" stroke-width="0.35"/>
             <circle cx="50" cy="11" r="0.35" fill="#fff"/>
             <line x1="44.62" y1="0.2" x2="55.38" y2="0.2" stroke="#fff" stroke-width="0.7"/>
         </svg>
@@ -107,20 +152,31 @@
     const loadBtn = document.getElementById('loadShotsBtn');
     const apiKeyInput = document.getElementById('apiKey');
     const matchIdInput = document.getElementById('matchId');
+    const playerIdInput = document.getElementById('playerId');
+
+    function shotsFromBody(body) {
+        if (Array.isArray(body)) return body;
+        if (body && Array.isArray(body.shotmap)) return body.shotmap;
+        return [];
+    }
 
     if (loadBtn) {
         loadBtn.addEventListener('click', async () => {
             const apiKey = apiKeyInput.value.trim();
             const matchId = matchIdInput.value.trim();
+            const playerId = playerIdInput ? playerIdInput.value.trim() : '';
             if (!matchId) {
                 statusEl.textContent = 'Please enter a Match ID';
                 statusEl.style.color = '#b91c1c';
                 return;
             }
+            const path = playerId
+                ? `/api/match/${encodeURIComponent(matchId)}/player/${encodeURIComponent(playerId)}/shotmap`
+                : `/api/match/${encodeURIComponent(matchId)}/shotmap`;
             statusEl.textContent = 'Loading shots...';
             statusEl.style.color = '#555';
             try {
-                const res = await fetch(`https://footapi7.p.rapidapi.com/api/match/${encodeURIComponent(matchId)}/shotmap`, {
+                const res = await fetch(`https://footapi7.p.rapidapi.com${path}`, {
                     headers: {
                         'x-rapidapi-host': 'footapi7.p.rapidapi.com',
                         'x-rapidapi-key': apiKey || 'demo'
@@ -128,30 +184,31 @@
                 });
                 if (res.status === 204) {
                     currentData = { shotmap: [] };
-                    shotsContainer.innerHTML = '';
                     toggleTeam(currentTeam);
-                    statusEl.textContent = 'No shot data for this match';
+                    statusEl.textContent = 'No shot data for this match/player (204)';
                     statusEl.style.color = '#555';
                     return;
                 }
                 if (!res.ok) throw new Error(`HTTP ${res.status}`);
                 const data = await res.json();
-                if (!data || !data.shotmap) throw new Error('Unexpected response');
-                // replace global data and re-render
-                currentData = data;
-                shotsContainer.innerHTML = '';
-                // remove any previous lines
-                document.querySelectorAll('.shot-line').forEach(el => el.remove());
+                const list = shotsFromBody(data);
+                if (!data || !Array.isArray(data.shotmap)) throw new Error('Unexpected response');
+                currentData = { shotmap: list };
+                const hasHome = list.some(s => s.isHome === true);
+                const hasAway = list.some(s => s.isHome === false);
+                if (currentTeam === 'home' && !hasHome && hasAway) {
+                    currentTeam = 'away';
+                } else if (currentTeam === 'away' && !hasAway && hasHome) {
+                    currentTeam = 'home';
+                }
                 toggleTeam(currentTeam);
-                statusEl.textContent = 'Loaded shots from API';
+                statusEl.textContent = `Loaded ${list.length} shots from API`;
                 statusEl.style.color = '#166534';
             } catch (err) {
                 console.warn('Falling back to demo data:', err);
                 statusEl.textContent = 'Could not load from API, showing demo data';
                 statusEl.style.color = '#b45309';
                 currentData = defaultShotData;
-                shotsContainer.innerHTML = '';
-                document.querySelectorAll('.shot-line').forEach(el => el.remove());
                 toggleTeam(currentTeam);
             }
         });
@@ -160,7 +217,13 @@
     // Attacking third: x is 0-100 across the pitch, y is 0 at the goal line up to about 35.
     const PITCH_X = 100;
     const PITCH_Y = 35;
-    const SHOT_COLOR = { goal: '#22c55e', save: '#f59e0b', block: '#94a3b8', miss: '#ffffff' };
+    const SHOT_COLOR = {
+        goal: '#22c55e',
+        save: '#f59e0b',
+        post: '#ef4444',
+        block: '#94a3b8',
+        miss: '#ffffff'
+    };
 
     function shotEnds(shot) {
         if (shot.draw && shot.draw.start) {
@@ -172,9 +235,8 @@
         let end = null;
         if (shot.blockCoordinates) {
             end = { x: shot.blockCoordinates.y, y: shot.blockCoordinates.x };
-        } else if (shot.goalMouthCoordinates) {
-            // Approximate. draw.end.x is not exactly goalMouthCoordinates.y.
-            end = { x: shot.goalMouthCoordinates.y, y: 0 };
+        } else if (shot.goalMouthCoordinates && typeof shot.goalMouthCoordinates.y === 'number') {
+            end = { x: 100 - shot.goalMouthCoordinates.y, y: 0 };
         }
         return { start, end };
     }
@@ -189,7 +251,7 @@
     }
 
     function createShot(shot) {
-        if (shot.isHome !== (currentTeam === 'home')) return;
+        if (currentTeam !== 'all' && shot.isHome !== (currentTeam === 'home')) return;
         const geom = shotEnds(shot);
         if (!geom) return;
 
@@ -197,7 +259,8 @@
         const marker = document.createElement('div');
         marker.className = 'shot';
 
-        const size = Math.max(Number(shot.xg || 0) * 14 + 6, 8);
+        const hasXg = typeof shot.xg === 'number' && !Number.isNaN(shot.xg);
+        const size = hasXg ? Math.max(shot.xg * 14 + 6, 8) : 11;
         marker.style.width = size + 'px';
         marker.style.height = size + 'px';
 
@@ -213,59 +276,86 @@
             const end = toPixels(geom.end);
             const line = document.createElement('div');
             line.className = 'shot-line';
-            line.style.width = '2px';
-            line.style.backgroundColor = strokeColor;
-            line.style.position = 'absolute';
-            line.style.left = start.x + 'px';
-            line.style.top = start.y + 'px';
-
             const angle = Math.atan2(end.y - start.y, end.x - start.x) * (180 / Math.PI);
             const length = Math.hypot(end.x - start.x, end.y - start.y);
 
-            line.style.height = length + 'px';
-            line.style.transformOrigin = 'top';
+            line.style.width = length + 'px';
+            line.style.height = '2px';
+            line.style.backgroundColor = strokeColor;
+            line.style.opacity = '0.75';
+            line.style.left = start.x + 'px';
+            line.style.top = (start.y - 1) + 'px';
+            line.style.transformOrigin = '0 50%';
             line.style.transform = `rotate(${angle}deg)`;
 
             shotsContainer.appendChild(line);
         }
 
-        marker.addEventListener('mouseover', (e) => {
-            tooltip.style.display = 'block';
-            const name = shot.player && shot.player.name ? shot.player.name : '';
-            const own = shot.goalType === 'own' ? ' (own goal)' : '';
-            tooltip.innerHTML = `
-          Player: ${name}<br>
-          xG: ${Number(shot.xg || 0).toFixed(2)}<br>
-          Outcome: ${shot.shotType}${own}
-        `;
-            tooltip.style.left = e.pageX + 10 + 'px';
-            tooltip.style.top = e.pageY + 10 + 'px';
-        });
+        function showTooltip(e) {
+            const name = shot.player && shot.player.name ? shot.player.name : 'Unknown';
+            const minute = shot.time != null
+                ? `${shot.time}${shot.addedTime ? '+' + shot.addedTime : ''}'`
+                : '';
+            const goalTag = shot.goalType && shot.goalType !== 'regular' ? ` (${shot.goalType})` : '';
+            const xgLine = hasXg ? `xG: ${shot.xg.toFixed(2)}` : 'xG: n/a';
+            const details = [shot.situation, shot.bodyPart].filter(Boolean).join(' · ');
 
-        marker.addEventListener('mouseout', () => {
+            tooltip.innerHTML = [
+                `<strong>${name}</strong>${minute ? ' (' + minute + ')' : ''}`,
+                `Outcome: ${shot.shotType}${goalTag}`,
+                details ? `Play: ${details}` : '',
+                xgLine
+            ].filter(Boolean).join('<br>');
+            tooltip.style.display = 'block';
+
+            const rect = container.getBoundingClientRect();
+            const relX = e ? (e.clientX - rect.left) : start.x;
+            const relY = e ? (e.clientY - rect.top) : start.y;
+            const maxLeft = Math.max(0, rect.width - tooltip.offsetWidth - 8);
+            const maxTop = Math.max(0, rect.height - tooltip.offsetHeight - 8);
+            tooltip.style.left = Math.min(Math.max(8, relX + 12), maxLeft) + 'px';
+            tooltip.style.top = Math.min(Math.max(8, relY + 12), maxTop) + 'px';
+        }
+
+        marker.addEventListener('mouseenter', showTooltip);
+        marker.addEventListener('mousemove', showTooltip);
+        marker.addEventListener('mouseleave', () => {
             tooltip.style.display = 'none';
         });
 
         shotsContainer.appendChild(marker);
     }
 
+    function updateButtonCounts() {
+        const list = shotsFromBody(currentData);
+        const homeCount = list.filter(s => s.isHome === true).length;
+        const awayCount = list.filter(s => s.isHome === false).length;
+        const homeBtn = document.querySelector('button[data-team="home"]');
+        const awayBtn = document.querySelector('button[data-team="away"]');
+        const allBtn = document.querySelector('button[data-team="all"]');
+        if (homeBtn) homeBtn.textContent = `Home Team (${homeCount})`;
+        if (awayBtn) awayBtn.textContent = `Away Team (${awayCount})`;
+        if (allBtn) allBtn.textContent = `All Shots (${list.length})`;
+    }
+
     function toggleTeam(team) {
         currentTeam = team;
         shotsContainer.innerHTML = '';
+        tooltip.style.display = 'none';
         document.querySelectorAll('.toggle button').forEach(btn => {
-            btn.classList.remove('active');
+            btn.classList.toggle('active', btn.getAttribute('data-team') === team);
         });
-        document.querySelector(`button[onclick="toggleTeam('${team}')"]`).classList.add('active');
-        currentData.shotmap.forEach(createShot);
+        updateButtonCounts();
+        shotsFromBody(currentData).forEach(createShot);
     }
 
     // Initial render
-    currentData.shotmap.forEach(createShot);
+    toggleTeam(currentTeam);
 
     // Handle window resize
     window.addEventListener('resize', () => {
         shotsContainer.innerHTML = '';
-        currentData.shotmap.forEach(createShot);
+        shotsFromBody(currentData).forEach(createShot);
     });
 </script>
 </body>

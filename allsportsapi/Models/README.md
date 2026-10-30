@@ -56,11 +56,11 @@ A `200` body is the object below. A `204` has no body. Drawing steps are in [Foo
 
 `GET /api/match/{id}/shotmap` and `GET /api/match/{id}/player/{playerId}/shotmap` return `{ "shotmap": [ ... ] }`.
 
-Each item has `playerCoordinates` `{x, y, z}`, `goalMouthCoordinates` `{x, y, z}`, and `blockCoordinates` `{x, y, z}` when the shot was saved or blocked. `shotType` is `goal`, `save`, `miss`, or `block`. `situation` and `bodyPart` use hyphens (`set-piece`, `fast-break`, `left-foot`). `goalType`, when present, is `regular` or `own`.
+Each item has `playerCoordinates` `{x, y, z}`, `goalMouthCoordinates` `{x, y, z}`, and `blockCoordinates` `{x, y, z}` when the shot was saved or blocked. `shotType` is `goal`, `save`, `post`, `miss`, or `block`. `situation` and `bodyPart` use hyphens (`set-piece`, `fast-break`, `free-kick`, `left-foot`). `goalType`, when present, is `regular`, `penalty`, or `own`.
 
 `draw` is what the attacking-third graphic uses. `draw.start.x` is `playerCoordinates.y` and `draw.start.y` is `playerCoordinates.x`. On that graphic `x` is 0–100 across the pitch and `y` is 0 on the goal line, growing to about 35. The line ends at `draw.block` when that point exists, otherwise at `draw.end` (`end.y` is 0). `draw.goal` is a separate goal-mouth picture: `goal.y = 100 - goalMouthCoordinates.z`. Do not plot `draw.goal` on the 35-deep pitch.
 
-`goalMouthCoordinates.x` is usually 0. `y` runs across the goal, 0–100. `z` is the height, 0–100. `draw.end.x` is not exactly `goalMouthCoordinates.y`.
+`goalMouthCoordinates.x` is usually 0. `y` runs across the goal, 0–100 (right-to-left from the shooter's view). `z` is the height, 0–100. `draw.end.x` is `100 - goalMouthCoordinates.y`.
 
 `GET /api/match/{id}/player/{playerId}/goalkeeper-shotmap` is a separate route. This page does not list its item keys.
 

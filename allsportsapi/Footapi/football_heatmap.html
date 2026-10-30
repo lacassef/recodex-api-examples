@@ -3,12 +3,34 @@
 <head>
   <script src="https://d3js.org/d3.v6.min.js"></script>
   <style>
+    body {
+      font-family: sans-serif;
+      margin: 16px;
+    }
+    .controls {
+      margin: 8px 0;
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 8px;
+    }
+    .controls input[type="text"],
+    .controls input[type="password"],
+    .controls select {
+      padding: 5px 8px;
+    }
+    .controls button {
+      padding: 5px 12px;
+      cursor: pointer;
+    }
     svg {
       background-image: url("soccer_field.png");
       background-repeat: no-repeat;
+      background-size: 100% 100%;
       background-color: #228B22;
       width: 297px;
       height: 186px;
+      display: block;
     }
     .node {
       fill: #c0cd32;
@@ -17,12 +39,25 @@
   </style>
 </head>
 <body>
-  <div style="margin:8px 0;">
+  <div class="controls">
+    <input id="apiKey" type="password" placeholder="RapidAPI Key" style="width:200px;" />
+    <select id="heatmapMode">
+      <option value="player-match">Player in Match</option>
+      <option value="team-match">Team in Match</option>
+      <option value="player-season">Player in Season</option>
+    </select>
+    <input id="matchId" type="text" placeholder="Match ID (e.g., 14012306)" style="width:165px;" />
+    <input id="entityId" type="text" placeholder="Player ID (e.g., 985186)" style="width:165px;" />
+    <input id="tournamentId" type="text" placeholder="Tournament ID (e.g., 357)" style="width:170px; display:none;" />
+    <input id="seasonId" type="text" placeholder="Season ID (e.g., 69619)" style="width:155px; display:none;" />
+    <button id="loadHeatmapBtn">Load Heatmap</button>
+    <span id="heatmapStatus" style="font-size:12px; color:#555;"></span>
+  </div>
+  <div class="controls">
     <label>Radius scale: <input id="radiusScale" type="range" min="2" max="12" value="5"></label>
     <label style="margin-left:12px;">Opacity: <input id="opacityScale" type="range" min="0.2" max="1" step="0.1" value="0.5"></label>
-    <span id="heatmapStatus" style="margin-left:8px; font-size:12px; color:#555;"></span>
   </div>
-  <svg></svg>
+  <svg viewBox="0 0 297 186"></svg>
   <script>
     // Sample is a bare list of {x, y}. pointsFromPayload also accepts the three
     // response bodies: {heatmap}, {playerPoints, goalkeeperPoints}, and
@@ -200,33 +235,137 @@
       return out;
     }
 
-    var convertedData = aggregate(pointsFromPayload(data));
-    
-    // Append the circles to the SVG with dynamic controls
+    var defaultData = data;
+    var convertedData = [];
     var svg = d3.select("svg");
     var radiusInput = document.getElementById('radiusScale');
     var opacityInput = document.getElementById('opacityScale');
-
-    // initial draw
-    var nodes = svg.selectAll(".node")
-      .data(convertedData)
-      .enter().append("circle")
-      .attr("class", "node")
-      .attr("cx", function(d) { return d.x / 100 * 297; })
-      .attr("cy", function(d) { return 186 - d.y / 100 * 186; });
+    var statusEl = document.getElementById('heatmapStatus');
+    var modeSelect = document.getElementById('heatmapMode');
+    var apiKeyInput = document.getElementById('apiKey');
+    var matchIdInput = document.getElementById('matchId');
+    var entityIdInput = document.getElementById('entityId');
+    var tournamentIdInput = document.getElementById('tournamentId');
+    var seasonIdInput = document.getElementById('seasonId');
+    var loadBtn = document.getElementById('loadHeatmapBtn');
+    var nodes = svg.selectAll(".node");
 
     function renderHeatmap() {
       var rScale = parseFloat(radiusInput?.value || 5);
       var baseOpacity = parseFloat(opacityInput?.value || 0.5);
       nodes
-        .attr("r", function(d) { return d.count * rScale; })
-        .style("opacity", function(d) { return Math.max(0.1, baseOpacity - d.count / 20); });
+        .attr("r", function(d) { return Math.sqrt(d.count) * rScale; })
+        .style("opacity", function(d) { return Math.min(1, Math.max(0.15, baseOpacity + (d.count - 1) * 0.08)); });
     }
+
+    function setHeatmapData(body) {
+      convertedData = aggregate(pointsFromPayload(body));
+      nodes = svg.selectAll(".node")
+        .data(convertedData, function(d) { return d.x + "," + d.y; })
+        .join("circle")
+        .attr("class", "node")
+        .attr("cx", function(d) { return d.x / 100 * 297; })
+        .attr("cy", function(d) { return 186 - d.y / 100 * 186; });
+      nodes.selectAll("title").remove();
+      nodes.append("title").text(function(d) {
+        return "x: " + d.x + ", y: " + d.y + " (count: " + d.count + ")";
+      });
+      renderHeatmap();
+    }
+
+    function updateModeInputs() {
+      var mode = modeSelect ? modeSelect.value : 'player-match';
+      if (mode === 'player-match') {
+        matchIdInput.style.display = '';
+        matchIdInput.placeholder = 'Match ID (e.g., 14012306)';
+        entityIdInput.placeholder = 'Player ID (e.g., 985186)';
+        tournamentIdInput.style.display = 'none';
+        seasonIdInput.style.display = 'none';
+      } else if (mode === 'team-match') {
+        matchIdInput.style.display = '';
+        matchIdInput.placeholder = 'Match ID (e.g., 13295530)';
+        entityIdInput.placeholder = 'Team ID (e.g., 1769)';
+        tournamentIdInput.style.display = 'none';
+        seasonIdInput.style.display = 'none';
+      } else {
+        matchIdInput.style.display = 'none';
+        entityIdInput.placeholder = 'Player ID (e.g., 982780)';
+        tournamentIdInput.style.display = '';
+        seasonIdInput.style.display = '';
+      }
+    }
+
+    modeSelect?.addEventListener('change', updateModeInputs);
+
+    loadBtn?.addEventListener('click', async function() {
+      var apiKey = apiKeyInput.value.trim();
+      var mode = modeSelect ? modeSelect.value : 'player-match';
+      var matchId = matchIdInput.value.trim();
+      var entityId = entityIdInput.value.trim();
+      var tournamentId = tournamentIdInput.value.trim();
+      var seasonId = seasonIdInput.value.trim();
+      var path = '';
+
+      if (mode === 'player-match') {
+        if (!matchId || !entityId) {
+          statusEl.textContent = 'Enter Match ID and Player ID';
+          statusEl.style.color = '#b91c1c';
+          return;
+        }
+        path = '/api/match/' + encodeURIComponent(matchId) + '/player/' + encodeURIComponent(entityId) + '/heatmap';
+      } else if (mode === 'team-match') {
+        if (!matchId || !entityId) {
+          statusEl.textContent = 'Enter Match ID and Team ID';
+          statusEl.style.color = '#b91c1c';
+          return;
+        }
+        path = '/api/match/' + encodeURIComponent(matchId) + '/team/' + encodeURIComponent(entityId) + '/heatmap';
+      } else {
+        if (!entityId || !tournamentId || !seasonId) {
+          statusEl.textContent = 'Enter Player ID, Tournament ID, and Season ID';
+          statusEl.style.color = '#b91c1c';
+          return;
+        }
+        path = '/api/player/' + encodeURIComponent(entityId) + '/tournament/' + encodeURIComponent(tournamentId) + '/season/' + encodeURIComponent(seasonId) + '/heatmap';
+      }
+
+      statusEl.textContent = 'Loading heatmap...';
+      statusEl.style.color = '#555';
+      try {
+        var res = await fetch('https://footapi7.p.rapidapi.com' + path, {
+          headers: {
+            'x-rapidapi-host': 'footapi7.p.rapidapi.com',
+            'x-rapidapi-key': apiKey || 'demo'
+          }
+        });
+        if (res.status === 204) {
+          setHeatmapData([]);
+          statusEl.textContent = 'No heatmap data (204)';
+          statusEl.style.color = '#555';
+          return;
+        }
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        var body = await res.json();
+        var pts = pointsFromPayload(body);
+        if (!pts.length && !Array.isArray(body?.heatmap) && !Array.isArray(body?.points) && !Array.isArray(body?.playerPoints)) {
+          throw new Error('Unexpected response');
+        }
+        setHeatmapData(body);
+        statusEl.textContent = 'Loaded ' + convertedData.length + ' locations from API';
+        statusEl.style.color = '#166534';
+      } catch (err) {
+        console.warn('Falling back to demo data:', err);
+        setHeatmapData(defaultData);
+        statusEl.textContent = 'Could not load from API, showing demo data';
+        statusEl.style.color = '#b45309';
+      }
+    });
 
     radiusInput?.addEventListener('input', renderHeatmap);
     opacityInput?.addEventListener('input', renderHeatmap);
 
-    renderHeatmap();
+    updateModeInputs();
+    setHeatmapData(defaultData);
   </script>
 </body>
 </html>
