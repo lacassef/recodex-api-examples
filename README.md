@@ -146,6 +146,22 @@ Do not put `X-RapidAPI-Key` in browser or mobile code. Use the [server proxy exa
 
 [Open a discussion](https://github.com/lacassef/recodex-api-examples/discussions) or an [issue](https://github.com/lacassef/recodex-api-examples/issues). See [CONTRIBUTING.md](CONTRIBUTING.md) if you are adding an example.
 
+## Commercial use of the data
+
+This is not legal advice and it is not a data licence. Ask your lawyer before you rely on it for a commercial product. Your lawyer can match these limits to your app, your country, and the marketplace terms on the plan you pay for.
+
+The [MIT license](LICENSE) below covers the example code in this repository. It does not cover the data the endpoints return.
+
+You may use the facts the API returns in your own application. That includes scores, statistics, lineups, names, standings, results, quotes, and other factual fields. You may store those facts, show them to your users, and build your own derived figures from them. A paid plan changes your request quota only. It does not add fields, markets, or image rights.
+
+Do not resell the feed. Do not republish the original JSON, and do not keep it as a database for other people.
+
+Photos, logos, and other media from the endpoints are not for a commercial app, including apps with ads, in-app purchases, or betting. Leave them out. Generic placeholders the API itself serves are fine. You are responsible for any image you display.
+
+Nothing on this page indemnifies you.
+
+Keep your API key on your server. Do not ship it in browser or mobile code, and do not commit it.
+
 ## License
 
-MIT. See [LICENSE](LICENSE).
+MIT for the example code in this repository. See [LICENSE](LICENSE). That license does not cover API data. See [Commercial use of the data](#commercial-use-of-the-data).
