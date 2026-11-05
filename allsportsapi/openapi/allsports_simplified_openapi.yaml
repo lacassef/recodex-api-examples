@@ -9,9 +9,37 @@ info:
 servers:
   - url: https://allsportsapi2.p.rapidapi.com
     description: RapidAPI. Send this host in X-RapidAPI-Host.
+tags:
+  - name: Assets
+  - name: Calendar
+  - name: Categories
+  - name: Category
+  - name: Config
+  - name: Events
+  - name: Fighters
+  - name: Games
+  - name: Managers
+  - name: Matches
+  - name: Media
+  - name: Odds
+  - name: Placeholders
+  - name: Players
+  - name: Rankings
+  - name: Referees
+  - name: Search
+  - name: Stage
+  - name: Stages
+  - name: TV
+  - name: Team
+  - name: Teams
+  - name: Tournaments
+  - name: Transfers
+  - name: Venues
 paths:
   "/api/american-football/match/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getAmericanFootballMatch
       summary: Get American Football Match
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -67,6 +95,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/american-football/player/{id}/tournament/{tournamentId}/season/{seasonId}/statistics/{segment9}":
     get:
+      tags:
+        - Players
       operationId: getAmericanFootballPlayerTournamentSeasonStatistics
       summary: Get American Football Player Tournament Season Statistics
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -124,6 +154,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/american-football/team/{id}/{segment4}":
     get:
+      tags:
+        - Teams
       operationId: getAmericanFootballTeam
       summary: Get American Football Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -168,6 +200,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/american-football/tournament/{tournamentId}/season/{seasonId}/best-players/{segment7}":
     get:
+      tags:
+        - Tournaments
       operationId: getAmericanFootballTournamentSeasonBestPlayers
       summary: Get American Football Tournament Season Best Players
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -219,6 +253,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/baseball/match/{id}/atbat/{atBatId}/pitches":
     get:
+      tags:
+        - Matches
       operationId: getAtBatPitches
       summary: Get at-bat pitches
       description: Retrieves pitch-by-pitch details for a specific at-bat in a baseball match.
@@ -260,6 +296,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/baseball/match/{id}/player/{playerId}/pitches/{kind}":
     get:
+      tags:
+        - Matches
       operationId: getPitchesForOnePlayerInAnEvent
       summary: Get pitches for one player in an event
       description: Returns the pitches thrown or faced by one player in a baseball event. kind selects the pitch group.
@@ -299,6 +337,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/baseball/match/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getBaseballMatch
       summary: Get Baseball Match
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -353,6 +393,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/baseball/player/{id}/season/{seasonId}/statistical-rankings/{phase}":
     get:
+      tags:
+        - Players
       operationId: getBaseballStatisticalRankings
       summary: Get baseball statistical rankings
       description: "Returns a player's statistical rankings for one season and phase."
@@ -398,6 +440,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/baseball/player/{id}/tournament/{tournamentId}/season/{seasonId}/pitches/{kind}/{phase}":
     get:
+      tags:
+        - Players
       operationId: getAPlayerSPitchesInASeason
       summary: "Get a player's pitches in a season"
       description: "Returns a player's pitches for one tournament season. kind and phase are path segments."
@@ -455,6 +499,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/baseball/player/{id}/tournament/{tournamentId}/season/{seasonId}/statistics/regularSeason":
     get:
+      tags:
+        - Players
       operationId: getPlayerRegularSeasonStatistics
       summary: Get player regular season statistics
       description: "Retrieves a player's statistics for the regular season of a specific tournament."
@@ -503,6 +549,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/group/tournament/{tournamentId}/season/{seasonId}/matches":
     get:
+      tags:
+        - Tournaments
       operationId: getGroupMatches
       summary: Get group matches
       description: Retrieves all matches for a specific group within a tournament season.
@@ -544,6 +592,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/group/tournament/{tournamentId}/season/{seasonId}/{segment7}/total":
     get:
+      tags:
+        - Tournaments
       operationId: getBasketballGroupTournamentSeasonTotal
       summary: Get Basketball Group Tournament Season Total
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -594,6 +644,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/match/{id}/odds/{providerId}/featured":
     get:
+      tags:
+        - Matches
       operationId: getMatchFeaturedOdds
       summary: Get match featured odds
       description: Retrieves featured odds for a specific match and provider.
@@ -635,6 +687,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/match/{id}/player/{playerId}/shotmap":
     get:
+      tags:
+        - Matches
       operationId: getPlayerShotMap
       summary: Get player shot map
       description: "Retrieves the shot map for a single player, showing shot locations and outcomes during the match."
@@ -676,6 +730,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/match/{id}/provider/{providerId}/winning-odds":
     get:
+      tags:
+        - Matches
       operationId: getMatchWinningOdds
       summary: Get match winning odds
       description: Retrieves winning odds for a specific match and provider.
@@ -717,6 +773,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/match/{id}/team/{teamId}/shotmap":
     get:
+      tags:
+        - Matches
       operationId: getTeamShotMap
       summary: Get team shot map
       description: "Retrieves the shot map for a specific team, showing shot locations and outcomes during the match."
@@ -758,6 +816,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/match/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getBasketballMatch
       summary: Get Basketball Match
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -813,6 +873,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/matches/odds/{day}/{month}/{year}":
     get:
+      tags:
+        - Matches
       operationId: getBasketballMatchesWithOddsByDate
       summary: Get basketball matches with odds by date
       description: "Retrieves basketball matches along with their betting odds for a specific date from bookmaker `1`."
@@ -861,6 +923,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/matches/odds/{segment4}/{providerId}":
     get:
+      tags:
+        - Matches
       operationId: getBasketballMatchesOdds
       summary: Get Basketball Matches Odds
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -899,6 +963,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/player/{id}/media/videos":
     get:
+      tags:
+        - Players
       operationId: getPlayerMediaVideos
       summary: Get player media videos
       description: Retrieves video highlights and media for a player.
@@ -927,6 +993,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/player/{id}/tournament/{tournamentId}/events/last/{page}":
     get:
+      tags:
+        - Matches
       operationId: getPlayerTournamentLastMatches
       summary: Get player tournament last matches
       description: "Retrieves a paginated list of the player's recent matches in a tournament."
@@ -969,6 +1037,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/player/{id}/tournament/{tournamentId}/season/{seasonId}/ratings/regularSeason":
     get:
+      tags:
+        - Players
       operationId: getPlayerRegularSeasonRatings
       summary: Get player regular season ratings
       description: Retrieves match-by-match rating data for a player in a tournament season.
@@ -1011,6 +1081,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/player/{id}/tournament/{tournamentId}/season/{seasonId}/shot-actions/{segment9}":
     get:
+      tags:
+        - Players
       operationId: getBasketballPlayerTournamentSeasonShotActions
       summary: Get Basketball Player Tournament Season Shot Actions
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -1068,6 +1140,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/player/{id}/tournament/{tournamentId}/season/{seasonId}/statistics/{segment9}":
     get:
+      tags:
+        - Players
       operationId: getBasketballPlayerTournamentSeasonStatistics
       summary: Get Basketball Player Tournament Season Statistics
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -1126,6 +1200,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/player/{id}/transfers":
     get:
+      tags:
+        - Players
       operationId: getPlayerTransferHistory
       summary: Get player transfer history
       description: Retrieves the complete transfer history for a specific player.
@@ -1160,6 +1236,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/team/{id}/image/small":
     get:
+      tags:
+        - Teams
       operationId: getTeamSmallLogo
       summary: Get team small logo
       description: Retrieves the small logo image for a specific team.
@@ -1195,6 +1273,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/team/{id}/tournament/{tournamentId}/season/{seasonId}/best-players/{segment9}":
     get:
+      tags:
+        - Teams
       operationId: getBasketballTeamTournamentSeasonBestPlayers
       summary: Get Basketball Team Tournament Season Best Players
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -1252,6 +1332,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/team/{id}/tournament/{tournamentId}/season/{seasonId}/{segment8}/{segment9}":
     get:
+      tags:
+        - Teams
       operationId: getBasketballTeamTournamentSeason
       summary: Get Basketball Team Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -1318,6 +1400,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/team/{id}/{segment4}":
     get:
+      tags:
+        - Teams
       operationId: getBasketballTeam
       summary: Get Basketball Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -1364,6 +1448,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/tournament/{tournamentId}/draft/{year}/pick-lottery-probability":
     get:
+      tags:
+        - Tournaments
       operationId: getBasketballDraftLotteryProbabilities
       summary: Get basketball draft lottery probabilities
       description: Returns the first-pick probability of each team for a draft year.
@@ -1398,6 +1484,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/tournament/{tournamentId}/draft/{year}/pick/{pick}":
     get:
+      tags:
+        - Tournaments
       operationId: getOneBasketballDraftPick
       summary: Get one basketball draft pick
       description: Returns one pick from a draft year.
@@ -1438,6 +1526,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/tournament/{tournamentId}/draft/{year}/prospect/{prospectId}":
     get:
+      tags:
+        - Tournaments
       operationId: getOneBasketballDraftProspect
       summary: Get one basketball draft prospect
       description: Returns one prospect from a draft year.
@@ -1478,6 +1568,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/tournament/{tournamentId}/player-transfer-history/all/{page}":
     get:
+      tags:
+        - Players
       operationId: getTournamentTransferHistory
       summary: Get tournament transfer history
       description: Retrieves paginated player transfer history for a tournament.
@@ -1513,6 +1605,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/tournament/{tournamentId}/season/{seasonId}/best-players/per-game/{segment8}":
     get:
+      tags:
+        - Tournaments
       operationId: getBasketballTournamentSeasonBestPlayersPerGame
       summary: Get Basketball Tournament Season Best Players Per Game
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -1563,6 +1657,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/tournament/{tournamentId}/season/{seasonId}/best-players/{segment7}":
     get:
+      tags:
+        - Tournaments
       operationId: getBasketballTournamentSeasonBestPlayers
       summary: Get Basketball Tournament Season Best Players
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -1616,6 +1712,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/tournament/{tournamentId}/season/{seasonId}/best-teams/{segment7}":
     get:
+      tags:
+        - Tournaments
       operationId: getBasketballTournamentSeasonBestTeams
       summary: Get Basketball Tournament Season Best Teams
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -1667,6 +1765,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/tournament/{tournamentId}/season/{seasonId}/shot-action-areas/event/overall":
     get:
+      tags:
+        - Tournaments
       operationId: getShotActionAreasByEventOverall
       summary: Get shot action areas by event overall
       description: Retrieves shot action area statistics aggregated by event for the entire season.
@@ -1702,6 +1802,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/tournament/{tournamentId}/season/{seasonId}/shot-actions/areas/{segment8}":
     get:
+      tags:
+        - Tournaments
       operationId: getBasketballTournamentSeasonShotActionsAreas
       summary: Get Basketball Tournament Season Shot Actions Areas
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -1752,6 +1854,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/tournament/{tournamentId}/season/{seasonId}/team-of-the-period/periods/{segment8}":
     get:
+      tags:
+        - Tournaments
       operationId: getBasketballTournamentSeasonTeamOfThePeriodPeriods
       summary: Get Basketball Tournament Season Team Of The Period Periods
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -1794,6 +1898,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/tournament/{tournamentId}/season/{seasonId}/team-of-the-week/periods":
     get:
+      tags:
+        - Tournaments
       operationId: listTeamOfTheWeekPeriods
       summary: List team-of-the-week periods
       description: "Returns the period list from team-of-the-week/periods. Published for football, basketball, and table tennis."
@@ -1827,6 +1933,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/tournament/{tournamentId}/season/{seasonId}/top-ratings/overall":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentTopRatings
       summary: Get tournament top ratings
       description: Retrieves overall top-rated players for a tournament season.
@@ -1862,6 +1970,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/tournament/{tournamentId}/season/{seasonId}/{segment6}":
     get:
+      tags:
+        - Tournaments
       operationId: getBasketballTournamentSeason
       summary: Get Basketball Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -1917,6 +2027,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/tournament/{tournamentId}/{segment4}":
     get:
+      tags:
+        - Tournaments
       operationId: getBasketballTournament
       summary: Get Basketball Tournament
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -1977,6 +2089,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/calendar/season/{seasonId}/{year}/days-with-events":
     get:
+      tags:
+        - Calendar
       operationId: getCalendarDaysWithEvents
       summary: Get calendar days with events
       description: Retrieves days that have events for a specific season and year.
@@ -2012,6 +2126,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/category/{categoryId}/image":
     get:
+      tags:
+        - Categories
       operationId: getCategoryImage
       summary: Get category image
       description: Retrieves the image/logo for a sport category.
@@ -2040,6 +2156,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/category/{categoryId}/matches/{day}/{month}/{year}":
     get:
+      tags:
+        - Matches
       operationId: getCategoryScheduledEvents
       summary: Get category scheduled events
       description: Lists all football matches for a given category occurring on a specific date (YYYY-MM-DD).
@@ -2101,6 +2219,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/category/{id}/event-count/{day}/{month}/{year}/{timezoneOffset}":
     get:
+      tags:
+        - Tournaments
       operationId: getCategoryUniqueTournamentEventCount
       summary: Get category unique tournament event count
       parameters:
@@ -2146,6 +2266,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/category/{id}/events/{day}/{month}/{year}":
     get:
+      tags:
+        - Categories
       operationId: getMatchesByCategoryAndDate
       summary: Get matches by category and date
       description: Retrieves all football matches for a specific category on a given date.
@@ -2207,6 +2329,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/countries/all:
     get:
+      tags:
+        - Config
       operationId: getAllCountries
       summary: Get all countries
       description: Retrieves a list of all available countries.
@@ -2227,6 +2351,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/country/{code}/flag":
     get:
+      tags:
+        - Media
       operationId: getCountryFlagImgAPI
       summary: Get country flag (img API)
       description: Fetches the flag image by country code.
@@ -2262,6 +2388,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/cricket/match/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getCricketMatch
       summary: Get Cricket Match
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -2314,6 +2442,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/cricket/player/{id}/tournament/{tournamentId}/season/{seasonId}/statistics/overall":
     get:
+      tags:
+        - Players
       operationId: getPlayerOverallStatistics
       summary: Get player overall statistics
       description: "Retrieves a player's combined statistics for an entire season (regular season and playoffs)."
@@ -2362,6 +2492,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/cricket/tournament/{tournamentId}/season/{seasonId}/team-events/total":
     get:
+      tags:
+        - Tournaments
       operationId: getTotalTeamEventsForCricketTournamentSeason
       summary: Get total team events for cricket tournament season
       description: "Returns tournamentTeamEvents. The first key is the tournament id, the second key is the team id, and the value is that team's events."
@@ -2403,6 +2535,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/cricket/tournament/{tournamentId}/season/{seasonId}/{segment6}":
     get:
+      tags:
+        - Tournaments
       operationId: getCricketTournamentSeason
       summary: Get Cricket Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -2452,6 +2586,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/cycling/category/{categoryId}/image":
     get:
+      tags:
+        - Category
       operationId: getCyclingCategoryImage
       summary: Get cycling category image
       description: Retrieves the image for a cycling category.
@@ -2487,6 +2623,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/esport/character/{characterId}/image":
     get:
+      tags:
+        - Assets
       operationId: getEsportsCharacterImage
       summary: Get eSports character image
       description: Retrieves the image for a specific in-game character.
@@ -2522,6 +2660,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/esport/event/{id}/odds/{providerId}/all":
     get:
+      tags:
+        - Matches
       operationId: getAllOddsForEvent
       summary: Get all odds for event
       description: Retrieves all available odds from a specific provider for an event.
@@ -2557,6 +2697,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/esport/event/{id}/{segment4}":
     get:
+      tags:
+        - Events
       operationId: getEsportEvent
       summary: Get Esport Event
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -2607,6 +2749,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/esport/game/{id}/{segment4}":
     get:
+      tags:
+        - Games
       operationId: getEsportGame
       summary: Get Esport Game
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -2652,6 +2796,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/esport/map/{mapId}/image":
     get:
+      tags:
+        - Assets
       operationId: getEsportsMapImage
       summary: Get eSports map image
       description: Retrieves the image for a specific in-game map.
@@ -2687,6 +2833,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/esport/team/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getEsportTeam
       summary: Get Esport Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -2730,6 +2878,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/esport/tournament/{tournamentId}/season/{seasonId}/{segment6}":
     get:
+      tags:
+        - Tournaments
       operationId: getEsportTournamentSeason
       summary: Get Esport Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -2781,6 +2931,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/esport/tournament/{tournamentId}/season/{seasonId}/{segment6}/total":
     get:
+      tags:
+        - Tournaments
       operationId: getEsportTournamentSeasonTotal
       summary: Get Esport Tournament Season Total
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -2831,6 +2983,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   /api/event/newly-added:
     get:
+      tags:
+        - Matches
       operationId: listNewlyAddedEvents
       summary: List newly added events
       description: Returns events recently added.
@@ -2851,6 +3005,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getHandballMatch
       summary: Get Handball Match
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -2904,6 +3060,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/handball/player/{id}/unique-tournament/{tournamentId}/season/{seasonId}/statistics/overall":
     get:
+      tags:
+        - Players
       operationId: getPlayerOverallStatisticsgetApiHandballPlayerIdUniqueTournamentTournamentidSeasonSeasonidStatisticsOverall
       summary: Get player overall statistics
       description: "Retrieves player's overall statistics for a specific tournament season."
@@ -2952,6 +3110,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/unique-tournament/{tournamentId}/season/{seasonId}/top-players/overall":
     get:
+      tags:
+        - Teams
       operationId: getTeamTopPlayersOverall
       summary: Get team top players overall
       parameters:
@@ -2987,6 +3147,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/{segment4}":
     get:
+      tags:
+        - Teams
       operationId: getHandballTeam
       summary: Get Handball Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3030,6 +3192,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/handball/team/{id}/{segment4}/seasons":
     get:
+      tags:
+        - Teams
       operationId: getHandballTeamSeasons
       summary: Get Handball Team Seasons
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3073,6 +3237,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/player-statistics/types":
     get:
+      tags:
+        - Tournaments
       operationId: getPlayerStatisticsTypes
       summary: Get player statistics types
       description: Retrieves available player statistics categories for the tournament.
@@ -3114,6 +3280,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/top-players-per-game/all/overall":
     get:
+      tags:
+        - Tournaments
       operationId: getTopPlayersPerGame
       summary: Get top players per game
       description: Retrieves the best performing players based on per-game averages.
@@ -3155,6 +3323,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/{segment6}":
     get:
+      tags:
+        - Tournaments
       operationId: getHandballUniqueTournamentSeason
       summary: Get Handball Unique Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3207,6 +3377,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/{segment6}/overall":
     get:
+      tags:
+        - Tournaments
       operationId: getHandballUniqueTournamentSeasonOverall
       summary: Get Handball Unique Tournament Season Overall
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3257,6 +3429,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/handball/unique-tournament/{tournamentId}/{segment4}":
     get:
+      tags:
+        - Tournaments
       operationId: getHandballUniqueTournament
       summary: Get Handball Unique Tournament
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3300,6 +3474,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/ice-hockey/match/{id}/streaks/odds":
     get:
+      tags:
+        - Matches
       operationId: getMatchStreaksWithOdds
       summary: Get match streaks with odds
       description: "Returns recent team streaks combined with associated betting odds from bookmaker `1`."
@@ -3334,6 +3510,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getIceHockeyMatch
       summary: Get Ice Hockey Match
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3388,6 +3566,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/ice-hockey/player/{id}/tournament/{tournamentId}/season/{seasonId}/statistics/{segment9}":
     get:
+      tags:
+        - Players
       operationId: getIceHockeyPlayerTournamentSeasonStatistics
       summary: Get Ice Hockey Player Tournament Season Statistics
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3446,6 +3626,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/ice-hockey/team/{id}/{segment4}":
     get:
+      tags:
+        - Teams
       operationId: getIceHockeyTeam
       summary: Get Ice Hockey Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3489,6 +3671,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/best-players/per-game/{segment8}":
     get:
+      tags:
+        - Tournaments
       operationId: getIceHockeyTournamentSeasonBestPlayersPerGame
       summary: Get Ice Hockey Tournament Season Best Players Per Game
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3540,6 +3724,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/best-players/{segment7}":
     get:
+      tags:
+        - Tournaments
       operationId: getIceHockeyTournamentSeasonBestPlayers
       summary: Get Ice Hockey Tournament Season Best Players
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3592,6 +3778,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/best-teams/{segment7}":
     get:
+      tags:
+        - Tournaments
       operationId: getIceHockeyTournamentSeasonBestTeams
       summary: Get Ice Hockey Tournament Season Best Teams
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3642,6 +3830,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/{segment6}":
     get:
+      tags:
+        - Tournaments
       operationId: getIceHockeyTournamentSeason
       summary: Get Ice Hockey Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3692,6 +3882,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/img/flag/{flag}":
     get:
+      tags:
+        - Media
       operationId: getCountryFlag
       summary: Get country flag
       description: Fetches the PNG flag image asset corresponding to a provided country code. The response is the raw image data. Codes are normalized to uppercase (e.g. jp → JP).
@@ -3726,6 +3918,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/main-events/{date}/extended":
     get:
+      tags:
+        - Matches
       operationId: listExtendedMainEventsByDate
       summary: List extended main events by date
       description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
@@ -3754,6 +3948,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/manager/{id}/history":
     get:
+      tags:
+        - Managers
       operationId: getManagerCareerHistory
       summary: Get manager career history
       description: Lists the teams previously and currently managed by a specific manager.
@@ -3788,6 +3984,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/match/{customId}/h2h":
     get:
+      tags:
+        - Matches
       operationId: getHeadToHeadHistory
       summary: Get head-to-head history
       description: Retrieves the detailed match history for head-to-head encounters between the two teams in a specific match.
@@ -3822,6 +4020,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/match/{eventId}/best-players/summary":
     get:
+      tags:
+        - Matches
       operationId: getMatchBestPlayerSummary
       summary: Get match best-player summary
       description: "Returns a summary of the best player's performance, highlighting standout statistics."
@@ -3856,6 +4056,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/match/{id}/goalkeeper/jersey/{segment5}":
     get:
+      tags:
+        - Matches
       operationId: getMatchGoalkeeperJersey
       summary: Get Match Goalkeeper Jersey
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -3900,6 +4102,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/match/{id}/graph/sequence":
     get:
+      tags:
+        - Matches
       operationId: getEventGraphSequence
       summary: Get event graph sequence
       description: Retrieves the momentum/pressure graph sequence data for a match.
@@ -3928,6 +4132,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/match/{id}/media/country/{country}":
     get:
+      tags:
+        - Matches
       operationId: getEventMediaSummary
       summary: Get event media summary
       description: "Returns the highlighted clip and the other media cards for one event in a country. Registered on the existing event prefix of football, basketball, tennis, table tennis, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, mma, and esport."
@@ -3962,6 +4168,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/match/{id}/odds/{providerId}/{segment5}":
     get:
+      tags:
+        - Matches
       operationId: getMatchOdds
       summary: Get Match Odds
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -4012,6 +4220,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/match/{id}/player/jersey/{segment5}":
     get:
+      tags:
+        - Matches
       operationId: getMatchPlayerJersey
       summary: Get Match Player Jersey
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -4058,6 +4268,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/match/{id}/player/{playerId}/{segment5}":
     get:
+      tags:
+        - Matches
       operationId: getMatchPlayer
       summary: Get Match Player
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -4109,6 +4321,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/match/{id}/players/featured":
     get:
+      tags:
+        - Matches
       operationId: getMatchFeaturedPlayers
       summary: Get match featured players
       description: Retrieves a list of highlighted players for the specified match.
@@ -4143,6 +4357,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/match/{id}/provider/{providerId}/winning-odds":
     get:
+      tags:
+        - Matches
       operationId: getMatchWinningOddsgetApiMatchIdProviderProvideridWinningOdds
       summary: Get match winning odds
       description: Retrieves winning odds for a specific match and provider.
@@ -4184,6 +4400,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/match/{id}/streaks/odds":
     get:
+      tags:
+        - Matches
       operationId: getMatchStreaksWithOddsgetApiMatchIdStreaksOdds
       summary: Get match streaks with odds
       description: "Returns recent team streaks combined with associated betting odds from bookmaker `1`."
@@ -4218,6 +4436,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/match/{id}/team/{teamId}/heatmap":
     get:
+      tags:
+        - Matches
       operationId: getMatchTeamHeatmapByID
       summary: Get match team heatmap by ID
       description: "Provides an aggregated positional data heatmap for an entire team in a match, specified by its ID."
@@ -4259,6 +4479,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/match/{id}/{segment3}":
     get:
+      tags:
+        - Matches
       operationId: getMatch
       summary: Get Match
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -4319,6 +4541,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   /api/matches/odds/featured:
     get:
+      tags:
+        - Matches
       operationId: getFeaturedBettingEvents
       summary: Get featured betting events
       description: Returns a curated list of highlighted football matches with their betting odds information.
@@ -4339,6 +4563,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/matches/odds/featured-by-popularity/{providerId}":
     get:
+      tags:
+        - Odds
       operationId: listFeaturedEventsByPopularity
       summary: List featured events by popularity
       description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
@@ -4366,6 +4592,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/matches/{segment2}/{day}/{month}/{year}":
     get:
+      tags:
+        - Matches
       operationId: getMatches
       summary: Get Matches
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -4424,6 +4652,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/mma/calendar/unique-tournament/{id}/{timezoneOffset}/months-with-events":
     get:
+      tags:
+        - Matches
       operationId: getMonthsWithEvents
       summary: Get months with events
       description: "Returns monthsWithEvents for one unique tournament. Each entry has month and year. timezoneOffset is seconds east of UTC. Send the viewer offset, for example 7200."
@@ -4459,6 +4689,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/mma/category/{id}/unique-tournaments":
     get:
+      tags:
+        - Categories
       operationId: getUniqueTournamentsByCategory
       summary: Get unique tournaments by category
       description: Retrieves all unique MMA tournaments within a specific category (organization).
@@ -4493,6 +4725,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/mma/event/{customId}/h2h/events":
     get:
+      tags:
+        - Events
       operationId: getHeadToHeadHistoryForAnMMAEvent
       summary: Get head-to-head history for an MMA event
       description: Retrieves the detailed match history for head-to-head encounters between the two fighters in an event.
@@ -4527,6 +4761,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/mma/event/{id}/{segment4}":
     get:
+      tags:
+        - Events
       operationId: getMmaEvent
       summary: Get Mma Event
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -4573,6 +4809,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   /api/mma/octogon.png:
     get:
+      tags:
+        - Media
       operationId: getMMAOctagonImage
       summary: Get MMA octagon image
       description: Retrieves the image of the MMA octagon.
@@ -4594,6 +4832,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/mma/rankings/unique-tournament/{tournamentId}/summary":
     get:
+      tags:
+        - Tournaments
       operationId: getMMARankingsSummaryForATournament
       summary: Get MMA rankings summary for a tournament
       description: Retrieves a summary of rankings for a specific MMA tournament.
@@ -4628,6 +4868,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/mma/team/{id}/career-statistics":
     get:
+      tags:
+        - Fighters
       operationId: getMMAFighterCareerStatistics
       summary: Get MMA fighter career statistics
       description: Retrieves the career statistics for a specific MMA fighter.
@@ -4662,6 +4904,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/mma/team/{id}/events/{segment5}/{page}":
     get:
+      tags:
+        - Fighters
       operationId: getMmaTeamEvents
       summary: Get Mma Team Events
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -4718,6 +4962,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/mma/unique-tournament/{tournamentId}/featured-events":
     get:
+      tags:
+        - Tournaments
       operationId: getFeaturedMMAEventsForATournament
       summary: Get featured MMA events for a tournament
       description: Retrieves a list of featured MMA events for a specific tournament.
@@ -4752,6 +4998,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/mma/unique-tournament/{tournamentId}/main-events/{segment5}/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getMmaUniqueTournamentMainEvents
       summary: Get Mma Unique Tournament Main Events
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -4808,6 +5056,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/mma/unique-tournament/{tournamentId}/schedules/{day}/{month}/{year}":
     get:
+      tags:
+        - Tournaments
       operationId: getMMATournamentScheduleByDate
       summary: Get MMA tournament schedule by date
       description: Retrieves the schedule of events for a specific MMA tournament on a given date.
@@ -4869,6 +5119,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/mma/unique-tournament/{tournamentId}/schedules/{month}/{year}":
     get:
+      tags:
+        - Tournaments
       operationId: getMMAScheduledMainEventsByMonth
       summary: Get MMA scheduled main events by month
       description: Retrieves the main events scheduled for a specific MMA tournament in a given month and year.
@@ -4923,6 +5175,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/mma/unique-tournament/{tournamentId}/season/{seasonId}/team-of-the-season":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamOfTheSeason
       summary: Get team of the season
       description: Returns the team of the season for a unique tournament. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament. Cycling and motorsport are omitted.
@@ -4956,6 +5210,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/mma/unique-tournament/{uniqueTournamentId}/tournament/{tournamentId}/mma-events/all":
     get:
+      tags:
+        - Tournaments
       operationId: getAllMMAEventsForATournament
       summary: Get all MMA events for a tournament
       description: Retrieves all MMA events associated with a specific tournament and unique tournament ID.
@@ -4997,6 +5253,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/odds/providers/{countryCode}/{regionCode}/{type}":
     get:
+      tags:
+        - Odds
       operationId: listOddsProvidersForACountryRegion
       summary: List odds providers for a country region
       description: Returns odds providers for a country-region pair and a provider group.
@@ -5039,6 +5297,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/odds/providers/{countryCode}/{type}":
     get:
+      tags:
+        - Odds
       operationId: listOddsProvidersForACountry
       summary: List odds providers for a country
       description: "Returns odds providers for a country and a provider group. type is web, web-featured, or web-odds."
@@ -5074,6 +5334,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/odds/season/{seasonId}/provider/{providerId}/all":
     get:
+      tags:
+        - Odds
       operationId: getAllOddsForASeason
       summary: Get all odds for a season
       description: Returns every odds market for a season and provider. The path has no sport slug.
@@ -5107,6 +5369,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/padel/event/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getPadelEvent
       summary: Get Padel Event
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -5152,6 +5416,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/padel/player/{id}/season/{seasonId}/best-result":
     get:
+      tags:
+        - Players
       operationId: getPadelSeasonBestResult
       summary: Get padel season best result
       description: "Returns the player's best result in one season."
@@ -5185,6 +5451,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/padel/player/{id}/year-statistics/{year}":
     get:
+      tags:
+        - Players
       operationId: getPadelYearStatistics
       summary: Get padel year statistics
       description: "Returns the player's statistics for one calendar year."
@@ -5219,6 +5487,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/padel/player/{id}/{segment4}":
     get:
+      tags:
+        - Teams
       operationId: getPadelPlayer
       summary: Get Padel Player
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -5257,6 +5527,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/placeholder/{segment2}":
     get:
+      tags:
+        - Managers
       operationId: getPlaceholder
       summary: Get Placeholder
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -5293,6 +5565,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/placeholders/{segment2}":
     get:
+      tags:
+        - Placeholders
       operationId: getPlaceholders
       summary: Get Placeholders
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -5324,6 +5598,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   /api/player/trending:
     get:
+      tags:
+        - Players
       operationId: getTrendingPlayers
       summary: Get trending players
       description: Retrieves a list of football players who are currently trending.
@@ -5344,6 +5620,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/player/{id}/matches/previous/{page}":
     get:
+      tags:
+        - Matches
       operationId: getPlayerMatchHistory
       summary: Get player match history
       description: "Fetches a paginated list of completed matches a player has participated in, sorted by most recent first."
@@ -5390,6 +5668,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/player/{id}/media/videos":
     get:
+      tags:
+        - Players
       operationId: getPlayerMediaVideosgetApiPlayerIdMediaVideos
       summary: Get player media videos
       description: Retrieves video highlights and media for a player.
@@ -5418,6 +5698,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/player/{id}/penalty-history/tournament/{tournamentId}/season/{seasonId}":
     get:
+      tags:
+        - Players
       operationId: getPlayerPenaltyHistoryBySeason
       summary: Get player penalty history by season
       description: "Provides a player's historical penalty kick data within a specific tournament and season."
@@ -5466,6 +5748,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/player/{id}/statistics/match-type/{matchType}":
     get:
+      tags:
+        - Matches
       operationId: getPlayerStatisticsByMatchType
       summary: Get player statistics by match type
       description: Returns player statistics for one match-type segment.
@@ -5500,6 +5784,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/player/{id}/statistics/{segment4}":
     get:
+      tags:
+        - Players
       operationId: getPlayerStatistics
       summary: Get Player Statistics
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -5544,6 +5830,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/player/{id}/tournament/{tournamentId}/events/last/{page}":
     get:
+      tags:
+        - Matches
       operationId: getPlayerTournamentLastMatchesgetApiPlayerIdTournamentTournamentidEventsLastPage
       summary: Get player tournament last matches
       description: "Retrieves a paginated list of the player's recent matches in a tournament."
@@ -5586,6 +5874,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/player/{id}/tournament/{tournamentId}/season/{seasonId}/{segment7}":
     get:
+      tags:
+        - Players
       operationId: getPlayerTournamentSeason
       summary: Get Player Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -5645,6 +5935,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/player/{id}/{segment3}":
     get:
+      tags:
+        - Players
       operationId: getPlayer
       summary: Get Player
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -5693,6 +5985,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   /api/rankings/fifa:
     get:
+      tags:
+        - Rankings
       operationId: getFIFARankings
       summary: Get FIFA rankings
       description: Retrieves the current official FIFA national team rankings.
@@ -5713,6 +6007,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/rankings/team/{teamId}":
     get:
+      tags:
+        - Rankings
       operationId: getTeamRankings
       summary: Get team rankings
       description: Retrieves rankings for a specific team.
@@ -5741,6 +6037,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/rankings/uefa/{segment3}":
     get:
+      tags:
+        - Rankings
       operationId: getRankingsUefa
       summary: Get Rankings Uefa
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -5771,6 +6069,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/rankings/unique-tournament/{tournamentId}/{weightClass}/{gender}":
     get:
+      tags:
+        - Rankings
       operationId: getDivisionRankings
       summary: Get division rankings
       description: "Returns the ranking rows for one weight class and gender. The MMA event page sends the unique tournament id, the weight class, and the gender. Each value is one path segment and is forwarded unchanged."
@@ -5812,6 +6112,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/referee/{id}/statistics":
     get:
+      tags:
+        - Referees
       operationId: getRefereeStatistics
       summary: Get referee statistics
       description: "Returns aggregated officiating data for a referee, such as total matches, cards issued, etc."
@@ -5846,6 +6148,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/rugby/rankings/rugby-union:
     get:
+      tags:
+        - Rankings
       operationId: getRugbyUnionRankings
       summary: Get Rugby Union rankings
       description: Retrieves current World Rugby rankings for rugby union teams.
@@ -5866,6 +6170,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/rugby/team/{id}/{segment4}":
     get:
+      tags:
+        - Teams
       operationId: getRugbyTeam
       summary: Get Rugby Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -5909,6 +6215,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/rugby/tournament/{tournamentId}/season/{seasonId}/team-of-the-season":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamOfTheSeasongetApiRugbyTournamentTournamentidSeasonSeasonidTeamOfTheSeason
       summary: Get team of the season
       description: Returns the team of the season for a unique tournament. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament. Cycling and motorsport are omitted.
@@ -5942,6 +6250,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/scheduled-tournaments/{day}/{month}/{year}/page/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getFootballScheduledTournamentsByDate
       summary: Get football scheduled tournaments by date
       description: Retrieves a paginated list of tournaments that have scheduled football matches for a specific date.
@@ -5997,6 +6307,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/search/suggestions/{entityType}":
     get:
+      tags:
+        - Search
       operationId: getSearchSuggestions
       summary: Get search suggestions
       description: Returns suggestions for one entity type. The All tab uses the path segment default. The request sends sport when it is limited to one sport.
@@ -6040,6 +6352,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/search/{entityType}":
     get:
+      tags:
+        - Search
       operationId: searchByEntityType
       summary: Search by entity type
       description: "Queries /search/{entityType}. q is the search text. page is 0-based and the results request always sends it. sport limits the search to one sport."
@@ -6095,6 +6409,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/search/{segment2}":
     get:
+      tags:
+        - Search
       operationId: getSearch
       summary: Get Search
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -6143,6 +6459,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/search/{term}":
     get:
+      tags:
+        - Search
       operationId: searchFootballEntities
       summary: Search football entities
       description: Queries /search/all for this sport. The path term is sent as q. page is 0-based and defaults to 0. 
@@ -6184,6 +6502,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/sport/event-count/{timezoneOffset}":
     get:
+      tags:
+        - Matches
       operationId: countEventsForATimezoneOffset
       summary: Count events for a timezone offset
       description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. Send the viewer's offset, for example 7200."
@@ -6212,6 +6532,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/table-tennis/event/{id}/streaks/odds":
     get:
+      tags:
+        - Matches
       operationId: getTableTennisMatchStreaksWithOdds
       summary: Get table tennis match streaks with odds
       description: Returns streak details paired with bookmaker odds.
@@ -6240,6 +6562,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/table-tennis/event/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getTableTennisEvent
       summary: Get Table Tennis Event
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -6285,6 +6609,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/table-tennis/events/odds/{segment4}/{providerId}":
     get:
+      tags:
+        - Matches
       operationId: getTableTennisEventsOdds
       summary: Get Table Tennis Events Odds
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -6323,6 +6649,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/table-tennis/team/{id}/{segment4}":
     get:
+      tags:
+        - Teams
       operationId: getTableTennisTeam
       summary: Get Table Tennis Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -6370,6 +6698,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/table-tennis/team/{id}/{segment4}/seasons":
     get:
+      tags:
+        - Teams
       operationId: getTableTennisTeamSeasons
       summary: Get Table Tennis Team Seasons
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -6408,6 +6738,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/table-tennis/tournament/{tournamentId}/season/{seasonId}/power-rankings/rounds":
     get:
+      tags:
+        - Tournaments
       operationId: getTableTennisTournamentPowerRankingRounds
       summary: Get table tennis tournament power ranking rounds
       description: Returns powerRankingRounds for the season. Each entry has id and round. id is the round segment of power-rankings/round.
@@ -6443,6 +6775,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/table-tennis/tournament/{tournamentId}/season/{seasonId}/statistics/info":
     get:
+      tags:
+        - Tournaments
       operationId: getTableTennisTournamentStatisticsInfo
       summary: Get table tennis tournament statistics info
       description: Lists available statistics fields for the season.
@@ -6478,6 +6812,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/table-tennis/tournament/{tournamentId}/season/{seasonId}/team-events/{segment7}":
     get:
+      tags:
+        - Tournaments
       operationId: getTableTennisTournamentSeasonTeamEvents
       summary: Get Table Tennis Tournament Season Team Events
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -6523,6 +6859,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/table-tennis/tournament/{tournamentId}/season/{seasonId}/team-of-the-period/periods/awarded":
     get:
+      tags:
+        - Tournaments
       operationId: listAwardedTeamOfThePeriodEntries
       summary: List awarded team-of-the-period entries
       description: "Returns the periods array for awarded selections. Each period has id, type, periodName, awardName, and timestamps. Published for football, basketball, and table tennis."
@@ -6556,6 +6894,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/table-tennis/tournament/{tournamentId}/season/{seasonId}/team-of-the-week/{segment7}":
     get:
+      tags:
+        - Tournaments
       operationId: getTableTennisTournamentSeasonTeamOfTheWeek
       summary: Get Table Tennis Tournament Season Team Of The Week
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -6598,6 +6938,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/table-tennis/tournament/{tournamentId}/season/{seasonId}/{segment6}":
     get:
+      tags:
+        - Tournaments
       operationId: getTableTennisTournamentSeason
       summary: Get Table Tennis Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -6646,6 +6988,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/table-tennis/tournament/{tournamentId}/{segment4}":
     get:
+      tags:
+        - Tournaments
       operationId: getTableTennisTournament
       summary: Get Table Tennis Tournament
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -6685,6 +7029,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/team-of-the-period/{periodId}":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamOfThePeriod
       summary: Get team of the period
       description: "Returns the lineup for one period: formation and players. periodId is the id from tow/rounds or from team-of-the-period/periods."
@@ -6713,6 +7059,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/team/{id}/events/{month}/{year}":
     get:
+      tags:
+        - Teams
       operationId: listTeamEventsInAMonth
       summary: List team events in a month
       description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
@@ -6754,6 +7102,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/team/{id}/image/small":
     get:
+      tags:
+        - Teams
       operationId: getTeamSmallLogogetApiTeamIdImageSmall
       summary: Get team small logo
       description: Downloads the small logo (crest) for the specified team ID. The response is the raw image data.
@@ -6789,6 +7139,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/team/{id}/players/statistics/seasons":
     get:
+      tags:
+        - Teams
       operationId: getTeamPlayerStatisticsSeasons
       summary: Get team player statistics seasons
       description: Returns a list of seasons for which player-level statistics are available for the specified team.
@@ -6823,6 +7175,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/team/{id}/tournament/{tournamentId}/season/{seasonId}/ranks/overall":
     get:
+      tags:
+        - Teams
       operationId: getTeamOverallRanks
       summary: Get team overall ranks
       description: Retrieves overall ranking data for a team in a tournament season.
@@ -6865,6 +7219,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/team/{id}/tournament/{tournamentId}/season/{seasonId}/{segment7}":
     get:
+      tags:
+        - Teams
       operationId: getTeamTournamentSeason
       summary: Get Team Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -6922,6 +7278,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/team/{id}/unique-tournament/{tournamentId}/season/{seasonId}/player-statistics/{type}":
     get:
+      tags:
+        - Teams
       operationId: getTeamSquadPlayerStatistics
       summary: Get team squad player statistics
       description: "Returns player statistics for one team in a unique-tournament season. The last segment is the season phase the team page sends, for example regularSeason."
@@ -6973,6 +7331,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/team/{id}/unique-tournaments/all":
     get:
+      tags:
+        - Teams
       operationId: getAllTeamTournaments
       summary: Get all team tournaments
       description: Retrieves all unique tournaments a team participates in.
@@ -7001,6 +7361,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/team/{id}/{segment3}":
     get:
+      tags:
+        - Teams
       operationId: getTeam
       summary: Get Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -7049,6 +7411,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/team/{id}/{segment3}/seasons":
     get:
+      tags:
+        - Teams
       operationId: getTeamSeasons
       summary: Get Team Seasons
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -7092,6 +7456,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/team/{teamId}/tournament/{tournamentId}/season/{seasonId}/goal-distributions":
     get:
+      tags:
+        - Teams
       operationId: getTeamGoalDistributions
       summary: Get team goal distributions
       description: Provides goal distribution data (goals scored/conceded in different time intervals) for a team in a tournament season.
@@ -7140,6 +7506,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tennis/event/{id}/odds/{providerId}/{segment6}":
     get:
+      tags:
+        - Matches
       operationId: getTennisEventOdds
       summary: Get Tennis Event Odds
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -7190,6 +7558,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tennis/event/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getTennisEvent
       summary: Get Tennis Event
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -7241,6 +7611,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tennis/events/odds/{segment4}/{providerId}":
     get:
+      tags:
+        - Matches
       operationId: getTennisEventsOdds
       summary: Get Tennis Events Odds
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -7278,6 +7650,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tennis/player/{id}/rankings":
     get:
+      tags:
+        - Players
       operationId: getPlayerRankings
       summary: Get player rankings
       description: Retrieves current and historical ranking information for a specific player.
@@ -7312,6 +7686,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tennis/rankings/{segment3}":
     get:
+      tags:
+        - Rankings
       operationId: getTennisRankings
       summary: Get Tennis Rankings
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -7342,6 +7718,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tennis/rankings/{segment3}/live":
     get:
+      tags:
+        - Rankings
       operationId: getTennisRankingsLive
       summary: Get Tennis Rankings Live
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -7372,6 +7750,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tennis/team/{id}/events/near":
     get:
+      tags:
+        - Teams
       operationId: getTeamNearMatches
       summary: Get team near matches
       description: Retrieves a list of recent and upcoming matches for a specific doubles team.
@@ -7406,6 +7786,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tennis/team/{id}/events/{segment5}/{page}":
     get:
+      tags:
+        - Teams
       operationId: getTennisTeamEvents
       summary: Get Tennis Team Events
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -7462,6 +7844,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tennis/team/{id}/season/{seasonId}/best-result":
     get:
+      tags:
+        - Teams
       operationId: getTeamSeasonBestResult
       summary: Get team season best result
       description: Retrieves the best result achieved by a team in a specific season.
@@ -7503,6 +7887,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tennis/team/{id}/tournament/{tournamentId}/season/{seasonId}/ranks/overall":
     get:
+      tags:
+        - Teams
       operationId: getTeamOverallRanksgetApiTennisTeamIdTournamentTournamentidSeasonSeasonidRanksOverall
       summary: Get team overall ranks
       description: Retrieves overall ranking data for a team in a tournament season.
@@ -7545,6 +7931,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tennis/team/{id}/year-statistics/{year}":
     get:
+      tags:
+        - Teams
       operationId: getTeamYearStatistics
       summary: Get team year statistics
       description: Retrieves year-based statistics for a doubles team.
@@ -7586,6 +7974,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tennis/team/{id}/{segment4}":
     get:
+      tags:
+        - Teams
       operationId: getTennisTeam
       summary: Get Tennis Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -7631,6 +8021,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tennis/tournament/{tournamentId}/season/{seasonId}/cup-trees/old":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentDrawLegacyFormat
       summary: Get tournament draw (legacy format)
       description: "Retrieves the tournament's draw structure in a legacy format."
@@ -7672,6 +8064,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tennis/tournament/{tournamentId}/season/{seasonId}/top-teams/mainDraw":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentTopTeamsMainDraw
       summary: Get tournament top teams main draw
       description: Retrieves the top-performing teams in the main draw of a tennis tournament season (e.g. Australian Open).
@@ -7706,6 +8100,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tennis/tournament/{tournamentId}/season/{seasonId}/venue/{venueId}/events/all/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentVenueEvents
       summary: Get tournament venue events
       description: Retrieves events for a specific venue in a tournament season.
@@ -7761,6 +8157,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tennis/tournament/{tournamentId}/season/{seasonId}/{segment6}":
     get:
+      tags:
+        - Tournaments
       operationId: getTennisTournamentSeason
       summary: Get Tennis Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -7814,6 +8212,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tennis/tournament/{tournamentId}/{segment4}":
     get:
+      tags:
+        - Tournaments
       operationId: getTennisTournament
       summary: Get Tennis Tournament
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -7860,6 +8260,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tennis/venue/{id}":
     get:
+      tags:
+        - Venues
       operationId: getVenueDetails
       summary: Get venue details
       description: Retrieves detailed information for a specific venue.
@@ -7888,6 +8290,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tennis/venue/{id}/events/{sport}/{span}/{page}":
     get:
+      tags:
+        - Matches
       operationId: getVenueEvents
       summary: Get venue events
       description: Retrieves paginated events at a specific venue.
@@ -7937,6 +8341,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tennis/venue/{id}/image":
     get:
+      tags:
+        - Venues
       operationId: getVenueImage
       summary: Get venue image
       description: Retrieves the image for a specific venue.
@@ -7965,6 +8371,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tennis/{segment2}/{id}/tournaments/last":
     get:
+      tags:
+        - Players
       operationId: getTennisTournamentsLast
       summary: Get Tennis Tournaments Last
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -8008,6 +8416,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tournament/all/category/{id}":
     get:
+      tags:
+        - Categories
       operationId: getTournamentsByCategory
       summary: Get tournaments by category
       description: "Retrieves all unique tournaments within a specific category ID (e.g., a country)."
@@ -8042,6 +8452,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}":
     get:
+      tags:
+        - Tournaments
       operationId: getLeagueDetails
       summary: Get league details
       description: "Returns basic information about a tournament, including its name, sport, and current season details."
@@ -8076,6 +8488,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/events/live/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: listLiveEventsOfAUniqueTournament
       summary: List live events of a unique tournament
       description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
@@ -8109,6 +8523,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/image/dark":
     get:
+      tags:
+        - Tournaments
       operationId: getLeagueDarkLogo
       summary: Get league dark logo
       description: "Fetches the dark-theme variant of the tournament's logo. The response is the raw image data."
@@ -8144,6 +8560,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/player-transfer-history/all/{page}":
     get:
+      tags:
+        - Players
       operationId: getTournamentTransferHistorygetApiTournamentTournamentidPlayerTransferHistoryAllPage
       summary: Get tournament transfer history
       description: Retrieves paginated player transfer history for a tournament.
@@ -8179,6 +8597,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/scheduled-events/{date}":
     get:
+      tags:
+        - Matches
       operationId: getTournamentEventsOnDate
       summary: Get tournament events on date
       description: Retrieves all events for a tournament on a specific date.
@@ -8214,6 +8634,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/schedules/{day}/{month}/{year}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentEventsOnDategetApiTournamentTournamentidSchedulesDayMonthYear
       summary: Get tournament events on date
       description: "Lists events for one unique tournament on one date. The date is sent as the date query, YYYY-MM-DD."
@@ -8275,6 +8697,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/season/{seasonId}/best-players/per-game":
     get:
+      tags:
+        - Players
       operationId: getPerGamePlayerLeaders
       summary: Get per-game player leaders
       description: Provides a list of players ranked by their per-game statistical averages across an entire tournament season.
@@ -8316,6 +8740,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/season/{seasonId}/matches/round/{round}/slug/{slug}":
     get:
+      tags:
+        - Matches
       operationId: getLeagueEventsByRoundAndSlug
       summary: Get league events by round and slug
       description: "Lists matches for a specific round, further filtered by a stage slug (e.g., 'championship-round')."
@@ -8371,6 +8797,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/season/{seasonId}/matches/{segment6}/{page}":
     get:
+      tags:
+        - Matches
       operationId: getTournamentSeasonMatches
       summary: Get Tournament Season Matches
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -8433,6 +8861,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tournament/{tournamentId}/season/{seasonId}/round/{roundId}/team-of-week":
     get:
+      tags:
+        - Teams
       operationId: getTeamOfTheWeek
       summary: Get team of the week
       description: Returns the team-of-the-period lineup. roundId is the period id from tow/rounds. tournamentId and seasonId stay on the public path.
@@ -8481,6 +8911,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/season/{seasonId}/statistics/info":
     get:
+      tags:
+        - Tournaments
       operationId: getPlayerStatisticsMetadata
       summary: Get player statistics metadata
       description: Retrieves information about the available statistic fields for players in a specific tournament season.
@@ -8522,6 +8954,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/season/{seasonId}/team-of-the-period/periods/awarded":
     get:
+      tags:
+        - Tournaments
       operationId: listAwardedTeamOfThePeriodEntriesgetApiTournamentTournamentidSeasonSeasonidTeamOfThePeriodPeriodsAwarded
       summary: List awarded team-of-the-period entries
       description: "Returns the periods array for awarded selections. Each period has id, type, periodName, awardName, and timestamps. Published for football, basketball, and table tennis."
@@ -8555,6 +8989,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/season/{seasonId}/team-of-the-week/periods":
     get:
+      tags:
+        - Tournaments
       operationId: listTeamOfTheWeekPeriodsgetApiTournamentTournamentidSeasonSeasonidTeamOfTheWeekPeriods
       summary: List team-of-the-week periods
       description: "Returns the period list from team-of-the-week/periods. Published for football, basketball, and table tennis."
@@ -8588,6 +9024,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/season/{seasonId}/team/{teamId}/performance":
     get:
+      tags:
+        - Teams
       operationId: getTeamLeaguePerformanceGraph
       summary: Get team league performance graph
       description: "Returns time-series data illustrating a team's league position and performance throughout a tournament season."
@@ -8636,6 +9074,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/season/{seasonId}/top-ratings/overall":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentTopRatingsgetApiTournamentTournamentidSeasonSeasonidTopRatingsOverall
       summary: Get tournament top ratings
       description: Retrieves overall top-rated players for a tournament season.
@@ -8671,6 +9111,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tournament/{tournamentId}/season/{seasonId}/{segment5}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeason
       summary: Get Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -8758,7 +9200,7 @@ paths:
           schema:
             type: string
             enum:
-              - yes
+              - "yes"
         - name: fields
           in: query
           required: false
@@ -8796,6 +9238,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tournament/{tournamentId}/season/{seasonId}/{segment5}/round/{round}":
     get:
+      tags:
+        - Matches
       operationId: getTournamentSeasonRound
       summary: Get Tournament Season Round
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -8853,6 +9297,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tournament/{tournamentId}/season/{seasonId}/{segment5}/rounds":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasonRounds
       summary: Get Tournament Season Rounds
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -8903,6 +9349,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tournament/{tournamentId}/season/{seasonId}/{segment5}/types":
     get:
+      tags:
+        - Players
       operationId: getTournamentSeasonTypes
       summary: Get Tournament Season Types
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -8947,6 +9395,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tournament/{tournamentId}/season/{seasonId}/{segment5}/{segment6}":
     get:
+      tags:
+        - Teams
       operationId: getTournamentSeasongetApiTournamentTournamentidSeasonSeasonidSegment5Segment6
       summary: Get Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9007,6 +9457,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tournament/{tournamentId}/{segment3}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournament
       summary: Get Tournament
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9070,6 +9522,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/tournaments/finished-upcoming/{date}":
     get:
+      tags:
+        - Tournaments
       operationId: listFinishedAndUpcomingTournaments
       summary: List finished and upcoming tournaments
       description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
@@ -9098,6 +9552,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/transfer:
     get:
+      tags:
+        - Transfers
       operationId: listTransfers
       summary: List transfers
       description: Returns the transfer list. A typical call uses page=1 and sort=-transferFee.
@@ -9133,6 +9589,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/trending/events/{country}":
     get:
+      tags:
+        - Matches
       operationId: listTrendingEvents
       summary: List trending events
       description: Returns trending events for a country code.
@@ -9161,6 +9619,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/channel/{channId}/event/{id}":
     get:
+      tags:
+        - TV
       operationId: getMatchTVChannelVotes
       summary: Get match TV channel votes
       description: Fetches viewer voting data from a specific TV channel that is broadcasting the match.
@@ -9202,6 +9662,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/channel/{id}/schedule":
     get:
+      tags:
+        - TV
       operationId: getTVChannelSchedule
       summary: Get TV channel schedule
       description: Retrieves the broadcast schedule for a specific TV channel.
@@ -9230,6 +9692,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/country/all/event/{id}":
     get:
+      tags:
+        - TV
       operationId: getMatchTVCountries
       summary: Get match TV countries
       description: Lists the countries and the TV channels within them that are broadcasting a specific match.
@@ -9264,6 +9728,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/country/{countryCode}/channels":
     get:
+      tags:
+        - TV
       operationId: getCountryTVChannels
       summary: Get country TV channels
       description: Retrieves available TV channels for a specific country.
@@ -9292,6 +9758,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/venue/{id}/events/{sport}/{span}/{page}":
     get:
+      tags:
+        - Matches
       operationId: getVenueEventsgetApiVenueIdEventsSportSpanPage
       summary: Get venue events
       description: Retrieves paginated events at a specific venue.
@@ -9341,6 +9809,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/venue/{id}/{segment3}":
     get:
+      tags:
+        - Matches
       operationId: getVenue
       summary: Get Venue
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9378,6 +9848,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/volleyball/match/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getVolleyballMatch
       summary: Get Volleyball Match
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9427,6 +9899,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/volleyball/team/{id}/matches/previous/{page}":
     get:
+      tags:
+        - Teams
       operationId: getPreviousTeamMatches
       summary: Get previous team matches
       description: "Fetches a paginated list of completed matches for a team, sorted by date descending."
@@ -9474,6 +9948,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/volleyball/team/{id}/unique-tournaments":
     get:
+      tags:
+        - Teams
       operationId: getTeamTournaments
       summary: Get team tournaments
       description: Retrieves a list of all unique tournaments a team has participated in.
@@ -9508,6 +9984,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/volleyball/tournament/{tournamentId}/season/{seasonId}/venues":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasonVenues
       summary: Get tournament season venues
       description: Retrieves all venues used in a tournament season.
@@ -9543,6 +10021,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/volleyball/tournament/{tournamentId}/season/{seasonId}/{segment6}/types":
     get:
+      tags:
+        - Players
       operationId: getVolleyballTournamentSeasonTypes
       summary: Get Volleyball Tournament Season Types
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9587,6 +10067,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/volleyball/tournament/{tournamentId}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getVolleyballTournament
       summary: Get Volleyball Tournament
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9624,6 +10106,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/volleyball/unique-tournament/{tournamentId}/season/{seasonId}/{segment6}":
     get:
+      tags:
+        - Tournaments
       operationId: getVolleyballUniqueTournamentSeason
       summary: Get Volleyball Unique Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9675,6 +10159,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/volleyball/unique-tournament/{tournamentId}/seasons":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasons
       summary: Get tournament seasons
       description: Retrieves a list of all available seasons for a specific volleyball tournament.
@@ -9709,6 +10195,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/{segment1}/calendar/{yearMonth}/{timezoneOffset}/{sport}/stages":
     get:
+      tags:
+        - Calendar
       operationId: getCalendarStages
       summary: Get Calendar Stages
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9760,6 +10248,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/calendar/{day}/{month}/{year}/categories":
     get:
+      tags:
+        - Calendar
       operationId: getCalendarCategories
       summary: Get Calendar Categories
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9817,6 +10307,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/calendar/{month}/{year}":
     get:
+      tags:
+        - Calendar
       operationId: getCalendar
       summary: Get Calendar
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9867,6 +10359,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/calendar/{month}/{year}/categories":
     get:
+      tags:
+        - Calendar
       operationId: getCalendarCategoriesgetApiSportCalendarMonthYearCategories
       summary: Get Calendar Categories
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9924,6 +10418,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/categories":
     get:
+      tags:
+        - Categories
       operationId: getCategories
       summary: Get Categories
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9956,6 +10452,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/categories/{segment3}":
     get:
+      tags:
+        - Tournaments
       operationId: getCategoriesgetApiSportCategoriesSegment3
       summary: Get Categories
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -9997,6 +10495,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/category/{categoryId}/live-unique-tournaments":
     get:
+      tags:
+        - Tournaments
       operationId: getCategoryLiveUniqueTournaments
       summary: Get Category Live Unique Tournaments
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10034,6 +10534,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/category/{id}/event-count/{day}/{month}/{year}/{timezoneOffset}":
     get:
+      tags:
+        - Tournaments
       operationId: getCategoryEventCount
       summary: Get Category Event Count
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10119,6 +10621,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/category/{id}/events/{day}/{month}/{year}":
     get:
+      tags:
+        - Matches
       operationId: getCategoryEvents
       summary: Get Category Events
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10208,6 +10712,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/category/{id}/stages/all":
     get:
+      tags:
+        - Category
       operationId: getCategoryStagesAll
       summary: Get Category Stages All
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10250,6 +10756,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/event/{customId}/h2h":
     get:
+      tags:
+        - Matches
       operationId: getEventH2h
       summary: Get Event H2h
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10297,6 +10805,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/event/{id}":
     get:
+      tags:
+        - Matches
       operationId: getEvent
       summary: Get Event
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10345,6 +10855,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/event/{id}/graph":
     get:
+      tags:
+        - Matches
       operationId: getEventGraph
       summary: Get Event Graph
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10390,6 +10902,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/event/{id}/graph/sequence":
     get:
+      tags:
+        - Matches
       operationId: getEventGraphSequencegetApiSportEventIdGraphSequence
       summary: Get Event Graph Sequence
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10430,6 +10944,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/event/{id}/media/country/{country}":
     get:
+      tags:
+        - Matches
       operationId: getEventMediaCountry
       summary: Get Event Media Country
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10479,6 +10995,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/event/{id}/odds/{providerId}/featured":
     get:
+      tags:
+        - Events
       operationId: getEventOddsFeatured
       summary: Get Event Odds Featured
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10529,6 +11047,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/event/{id}/provider/{providerId}/winning-odds":
     get:
+      tags:
+        - Matches
       operationId: getEventProviderWinningOdds
       summary: Get Event Provider Winning Odds
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10579,6 +11099,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/event/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getEventgetApiSportEventIdSegment4
       summary: Get Event
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10633,6 +11155,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/events/live":
     get:
+      tags:
+        - Matches
       operationId: getEventsLive
       summary: Get Events Live
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10667,6 +11191,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/events/odds/featured-by-popularity/{providerId}":
     get:
+      tags:
+        - Odds
       operationId: getEventsOddsFeaturedByPopularity
       summary: Get Events Odds Featured By Popularity
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10706,6 +11232,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/events/odds/{day}/{month}/{year}":
     get:
+      tags:
+        - Matches
       operationId: getEventsOdds
       summary: Get Events Odds
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10763,6 +11291,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/events/{day}/{month}/{year}":
     get:
+      tags:
+        - Matches
       operationId: getEvents
       summary: Get Events
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10824,6 +11354,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/live":
     get:
+      tags:
+        - Matches
       operationId: getLive
       summary: Get Live
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10854,6 +11386,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/main-events/{date}/extended":
     get:
+      tags:
+        - Matches
       operationId: getMainEventsExtended
       summary: Get Main Events Extended
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10920,6 +11454,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/manager/{id}":
     get:
+      tags:
+        - Managers
       operationId: getManager
       summary: Get Manager
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -10965,6 +11501,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/manager/{id}/image":
     get:
+      tags:
+        - Managers
       operationId: getManagerImage
       summary: Get Manager Image
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11012,6 +11550,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/manager/{id}/matches/previous/{page}":
     get:
+      tags:
+        - Managers
       operationId: getManagerMatchesPrevious
       summary: Get Manager Matches Previous
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11070,6 +11610,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/match/{customId}/h2h":
     get:
+      tags:
+        - Matches
       operationId: getMatchH2h
       summary: Get Match H2h
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11125,6 +11667,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/match/{id}":
     get:
+      tags:
+        - Matches
       operationId: getMatchgetApiSportMatchId
       summary: Get Match
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11180,6 +11724,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/match/{id}/graph":
     get:
+      tags:
+        - Matches
       operationId: getMatchGraph
       summary: Get Match Graph
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11228,6 +11774,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/match/{id}/graph/sequence":
     get:
+      tags:
+        - Matches
       operationId: getMatchGraphSequence
       summary: Get Match Graph Sequence
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11274,6 +11822,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/match/{id}/media/country/{country}":
     get:
+      tags:
+        - Matches
       operationId: getMatchMediaCountry
       summary: Get Match Media Country
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11330,6 +11880,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/match/{id}/odds":
     get:
+      tags:
+        - Matches
       operationId: getMatchOddsgetApiSportMatchIdOdds
       summary: Get Match Odds
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11374,6 +11926,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/match/{id}/odds/{providerId}/all":
     get:
+      tags:
+        - Matches
       operationId: getMatchOddsAll
       summary: Get Match Odds All
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11421,6 +11975,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/match/{id}/player/{playerId}/statistics":
     get:
+      tags:
+        - Matches
       operationId: getMatchPlayerStatistics
       summary: Get Match Player Statistics
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11473,6 +12029,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/match/{id}/{segment4}":
     get:
+      tags:
+        - Matches
       operationId: getMatchgetApiSportMatchIdSegment4
       summary: Get Match
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11539,6 +12097,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/matches/live":
     get:
+      tags:
+        - Matches
       operationId: getMatchesLive
       summary: Get Matches Live
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11583,6 +12143,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/matches/odds/featured-by-popularity/{providerId}":
     get:
+      tags:
+        - Odds
       operationId: getMatchesOddsFeaturedByPopularity
       summary: Get Matches Odds Featured By Popularity
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11632,6 +12194,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/matches/{day}/{month}/{year}":
     get:
+      tags:
+        - Matches
       operationId: getMatchesgetApiSportMatchesDayMonthYear
       summary: Get Matches
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11703,6 +12267,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}":
     get:
+      tags:
+        - Players
       operationId: getPlayergetApiSportPlayerId
       summary: Get Player
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11754,6 +12320,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}/events/near":
     get:
+      tags:
+        - Players
       operationId: getPlayerEventsNear
       summary: Get Player Events Near
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11796,6 +12364,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}/events/{month}/{year}":
     get:
+      tags:
+        - Players
       operationId: getPlayerEvents
       summary: Get Player Events
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11846,6 +12416,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}/events/{segment5}/last/{page}":
     get:
+      tags:
+        - Players
       operationId: getPlayerEventsLast
       summary: Get Player Events Last
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11897,6 +12469,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}/events/{segment5}/{page}":
     get:
+      tags:
+        - Players
       operationId: getPlayerEventsgetApiSportPlayerIdEventsSegment5Page
       summary: Get Player Events
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11960,6 +12534,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}/grand-slam/best-results":
     get:
+      tags:
+        - Players
       operationId: getPlayerGrandSlamBestResults
       summary: Get Player Grand Slam Best Results
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -11996,6 +12572,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}/image":
     get:
+      tags:
+        - Players
       operationId: getPlayerImage
       summary: Get Player Image
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12048,6 +12626,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}/matches/near":
     get:
+      tags:
+        - Players
       operationId: getPlayerMatchesNear
       summary: Get Player Matches Near
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12096,6 +12676,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}/matches/previous/{page}":
     get:
+      tags:
+        - Players
       operationId: getPlayerMatchesPrevious
       summary: Get Player Matches Previous
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12157,6 +12739,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}/media":
     get:
+      tags:
+        - Players
       operationId: getPlayerMedia
       summary: Get Player Media
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12201,6 +12785,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}/standings/seasons":
     get:
+      tags:
+        - Players
       operationId: getPlayerStandingsSeasons
       summary: Get Player Standings Seasons
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12243,6 +12829,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}/statistics/season":
     get:
+      tags:
+        - Players
       operationId: getPlayerStatisticsSeason
       summary: Get Player Statistics Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12288,6 +12876,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/player/{id}/statistics/seasons":
     get:
+      tags:
+        - Players
       operationId: getPlayerStatisticsSeasons
       summary: Get Player Statistics Seasons
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12331,6 +12921,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/players/trending":
     get:
+      tags:
+        - Players
       operationId: getPlayersTrending
       summary: Get Players Trending
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12379,6 +12971,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/scheduled-tournaments/{day}/{month}/{year}/page/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getScheduledTournamentsPage
       summary: Get Scheduled Tournaments Page
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12463,6 +13057,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/search/{term}":
     get:
+      tags:
+        - Search
       operationId: getSearchgetApiSportSearchTerm
       summary: Get Search
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12534,6 +13130,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/stage/featured":
     get:
+      tags:
+        - Stage
       operationId: getStageFeatured
       summary: Get Stage Featured
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12564,6 +13162,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/stage/scheduled/{date}":
     get:
+      tags:
+        - Stage
       operationId: getStageScheduled
       summary: Get Stage Scheduled
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12607,6 +13207,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/stage/{id}/odds/provider/{providerId}/{segment7}":
     get:
+      tags:
+        - Odds
       operationId: getStageOddsProvider
       summary: Get Stage Odds Provider
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12666,6 +13268,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/stage/{id}/races/type/{type}":
     get:
+      tags:
+        - Stage
       operationId: getStageRacesType
       summary: Get Stage Races Type
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12708,6 +13312,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/stage/{id}/standings/{segment5}":
     get:
+      tags:
+        - Stage
       operationId: getStageStandings
       summary: Get Stage Standings
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12760,6 +13366,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/stage/{id}/{segment4}":
     get:
+      tags:
+        - Stage
       operationId: getStage
       summary: Get Stage
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12813,6 +13421,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/stage/{stageId}":
     get:
+      tags:
+        - Stage
       operationId: getStagegetApiSportStageStageid
       summary: Get Stage
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12855,6 +13465,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/stage/{stageId}/substages":
     get:
+      tags:
+        - Stage
       operationId: getStageSubstages
       summary: Get Stage Substages
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12899,6 +13511,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team-of-the-period/{periodId}":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamOfThePeriodgetApiSportTeamOfThePeriodPeriodid
       summary: Get Team Of The Period
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12935,6 +13549,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}":
     get:
+      tags:
+        - Teams
       operationId: getTeamgetApiSportTeamId
       summary: Get Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -12999,6 +13615,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/driver/history":
     get:
+      tags:
+        - Team
       operationId: getTeamDriverHistory
       summary: Get Team Driver History
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13041,6 +13659,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/events/{month}/{year}":
     get:
+      tags:
+        - Teams
       operationId: getTeamEvents
       summary: Get Team Events
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13113,6 +13733,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/image":
     get:
+      tags:
+        - Teams
       operationId: getTeamImage
       summary: Get Team Image
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13177,6 +13799,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/matches/near":
     get:
+      tags:
+        - Teams
       operationId: getTeamMatchesNear
       summary: Get Team Matches Near
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13237,6 +13861,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/matches/{segment5}/{page}":
     get:
+      tags:
+        - Teams
       operationId: getTeamMatches
       summary: Get Team Matches
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13317,6 +13943,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/odds/provider/{providerId}":
     get:
+      tags:
+        - Odds
       operationId: getTeamOddsProvider
       summary: Get Team Odds Provider
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13365,6 +13993,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/players":
     get:
+      tags:
+        - Teams
       operationId: getTeamPlayers
       summary: Get Team Players
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13408,6 +14038,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/players/statistics/seasons":
     get:
+      tags:
+        - Teams
       operationId: getTeamPlayersStatisticsSeasons
       summary: Get Team Players Statistics Seasons
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13453,6 +14085,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/stage/season/{seasonId}/races":
     get:
+      tags:
+        - Team
       operationId: getTeamStageSeasonRaces
       summary: Get Team Stage Season Races
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13503,6 +14137,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/stage/seasons":
     get:
+      tags:
+        - Team
       operationId: getTeamStageSeasons
       summary: Get Team Stage Seasons
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13546,6 +14182,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/standings/seasons":
     get:
+      tags:
+        - Teams
       operationId: getTeamStandingsSeasons
       summary: Get Team Standings Seasons
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13603,6 +14241,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/tournament/{tournamentId}/season/{seasonId}/best-players/{segment9}":
     get:
+      tags:
+        - Teams
       operationId: getTeamTournamentSeasonBestPlayers
       summary: Get Team Tournament Season Best Players
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13669,6 +14309,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/unique-tournament/{tournamentId}/season/{seasonId}/player-statistics/{type}":
     get:
+      tags:
+        - Teams
       operationId: getTeamUniqueTournamentSeasonPlayerStatistics
       summary: Get Team Unique Tournament Season Player Statistics
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13748,6 +14390,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/unique-tournaments/all":
     get:
+      tags:
+        - Teams
       operationId: getTeamUniqueTournamentsAll
       summary: Get Team Unique Tournaments All
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13786,21 +14430,14 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: No content. The route exists but no data is available for the given parameters.
-  "/api/{sport}/team/{id}/{segment4}":
+  "/api/baseball/team/{id}/{segment4}":
     get:
+      tags:
+        - Teams
       operationId: getTeamgetApiSportTeamIdSegment4
       summary: Get Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
-        - name: sport
-          in: path
-          required: true
-          description: "Allowed values: baseball, cricket."
-          schema:
-            type: string
-            enum:
-              - baseball
-              - cricket
         - name: id
           in: path
           required: true
@@ -13840,22 +14477,141 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: No content. The route exists but no data is available for the given parameters.
-  "/api/{sport}/team/{id}/{segment4}":
+  "/api/cricket/team/{id}/{segment4}":
     get:
+      tags:
+        - Teams
+      operationId: getTeamgetApiSportTeamIdSegment42
+      summary: Get Team
+      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "Unique team identifier. Example: 2817."
+          schema:
+            type: integer
+          example: 2817
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-event, media, players, tournaments."
+          schema:
+            type: string
+            enum:
+              - featured-event
+              - media
+              - players
+              - tournaments
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Team with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/badminton/team/{id}/{segment4}":
+    get:
+      tags:
+        - Teams
       operationId: getTeam2
       summary: Get Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
-        - name: sport
+        - name: id
           in: path
           required: true
-          description: "Allowed values: badminton, darts, snooker."
+          description: Team id.
+          schema:
+            type: integer
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-event, media, performance, unique-tournaments."
           schema:
             type: string
             enum:
-              - badminton
-              - darts
-              - snooker
+              - featured-event
+              - media
+              - performance
+              - unique-tournaments
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/darts/team/{id}/{segment4}":
+    get:
+      tags:
+        - Teams
+      operationId: getTeam22
+      summary: Get Team
+      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Team id.
+          schema:
+            type: integer
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-event, media, performance, unique-tournaments."
+          schema:
+            type: string
+            enum:
+              - featured-event
+              - media
+              - performance
+              - unique-tournaments
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/snooker/team/{id}/{segment4}":
+    get:
+      tags:
+        - Teams
+      operationId: getTeam23
+      summary: Get Team
+      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
         - name: id
           in: path
           required: true
@@ -13890,6 +14646,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/team/{id}/{segment4}":
     get:
+      tags:
+        - Teams
       operationId: getTeam3
       summary: Get Team
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -13943,6 +14701,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/all/category/{id}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentAllCategory
       summary: Get Tournament All Category
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14003,6 +14763,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/categories":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentCategories
       summary: Get Tournament Categories
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14053,6 +14815,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/categories/{segment4}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentCategoriesgetApiSportTournamentCategoriesSegment4
       summary: Get Tournament Categories
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14112,6 +14876,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentgetApiSportTournamentTournamentid
       summary: Get Tournament
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14173,6 +14939,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/events/live/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentEventsLive
       summary: Get Tournament Events Live
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14233,6 +15001,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/image":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentImage
       summary: Get Tournament Image
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14293,6 +15063,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/image/dark":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentImageDark
       summary: Get Tournament Image Dark
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14353,6 +15125,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/scheduled-events/{date}":
     get:
+      tags:
+        - Matches
       operationId: getTournamentScheduledEvents
       summary: Get Tournament Scheduled Events
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14398,6 +15172,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/schedules/{day}/{month}/{year}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSchedules
       summary: Get Tournament Schedules
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14483,6 +15259,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/events/round/{round}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasonEventsRound
       summary: Get Tournament Season Events Round
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14533,6 +15311,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/events/round/{round}/slug/{slug}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasonEventsRoundSlug
       summary: Get Tournament Season Events Round Slug
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14598,6 +15378,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/events/{segment7}/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasonEvents
       summary: Get Tournament Season Events
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14671,6 +15453,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/matches":
     get:
+      tags:
+        - Matches
       operationId: getTournamentSeasonMatchesgetApiSportTournamentTournamentidSeasonSeasonidMatches
       summary: Get Tournament Season Matches
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14721,6 +15505,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/matches/round/{round}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasonMatchesRound
       summary: Get Tournament Season Matches Round
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14775,6 +15561,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/matches/round/{round}/slug/{slug}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasonMatchesRoundSlug
       summary: Get Tournament Season Matches Round Slug
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14836,6 +15624,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/matches/{segment7}/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasonMatchesgetApiSportTournamentTournamentidSeasonSeasonidMatchesSegment7Page
       summary: Get Tournament Season Matches
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14917,6 +15707,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/player-statistics/types":
     get:
+      tags:
+        - Players
       operationId: getTournamentSeasonPlayerStatisticsTypes
       summary: Get Tournament Season Player Statistics Types
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -14961,6 +15753,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/standings/total":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasonStandingsTotal
       summary: Get Tournament Season Standings Total
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15011,6 +15805,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/standings/{segment7}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasonStandings
       summary: Get Tournament Season Standings
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15070,6 +15866,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/team-statistics/types":
     get:
+      tags:
+        - Teams
       operationId: getTournamentSeasonTeamStatisticsTypes
       summary: Get Tournament Season Team Statistics Types
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15114,6 +15912,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/{segment6}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasongetApiSportTournamentTournamentidSeasonSeasonidSegment6
       summary: Get Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15174,21 +15974,67 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: No content. The route exists but no data is available for the given parameters.
-  "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/{segment6}":
+  "/api/american-football/tournament/{tournamentId}/season/{seasonId}/{segment6}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeason2
       summary: Get Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
-        - name: sport
+        - name: tournamentId
           in: path
           required: true
-          description: "Allowed values: american-football, baseball."
+          description: "Unique identifier for the tournament. Example: 9464."
+          schema:
+            type: integer
+          example: 9464
+        - name: seasonId
+          in: path
+          required: true
+          description: "Unique identifier for the season. Example: 36422."
+          schema:
+            type: integer
+          example: 36422
+        - name: segment6
+          in: path
+          required: true
+          description: "Allowed values: cuptrees, team-of-the-season, venues."
           schema:
             type: string
             enum:
-              - american-football
-              - baseball
+              - cuptrees
+              - team-of-the-season
+              - venues
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Tournament or season with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/baseball/tournament/{tournamentId}/season/{seasonId}/{segment6}":
+    get:
+      tags:
+        - Tournaments
+      operationId: getTournamentSeason22
+      summary: Get Tournament Season
+      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
         - name: tournamentId
           in: path
           required: true
@@ -15236,6 +16082,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/{segment6}/{segment7}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasongetApiSportTournamentTournamentidSeasonSeasonidSegment6Segment7
       summary: Get Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15315,22 +16163,14 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: No content. The route exists but no data is available for the given parameters.
-  "/api/{sport}/tournament/{tournamentId}/{segment4}":
+  "/api/baseball/tournament/{tournamentId}/{segment4}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentgetApiSportTournamentTournamentidSegment4
       summary: Get Tournament
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
-        - name: sport
-          in: path
-          required: true
-          description: "Allowed values: baseball, cricket, esport."
-          schema:
-            type: string
-            enum:
-              - baseball
-              - cricket
-              - esport
         - name: tournamentId
           in: path
           required: true
@@ -15370,21 +16210,153 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: No content. The route exists but no data is available for the given parameters.
-  "/api/{sport}/tournament/{tournamentId}/{segment4}":
+  "/api/cricket/tournament/{tournamentId}/{segment4}":
     get:
+      tags:
+        - Tournaments
+      operationId: getTournamentgetApiSportTournamentTournamentidSegment42
+      summary: Get Tournament
+      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: tournamentId
+          in: path
+          required: true
+          description: "Unique tournament identifier. Example: 8."
+          schema:
+            type: integer
+          example: 8
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-events, media, seasons, winners."
+          schema:
+            type: string
+            enum:
+              - featured-events
+              - media
+              - seasons
+              - winners
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Tournament with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/esport/tournament/{tournamentId}/{segment4}":
+    get:
+      tags:
+        - Tournaments
+      operationId: getTournamentgetApiSportTournamentTournamentidSegment43
+      summary: Get Tournament
+      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: tournamentId
+          in: path
+          required: true
+          description: "Unique tournament identifier. Example: 8."
+          schema:
+            type: integer
+          example: 8
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-events, media, seasons, winners."
+          schema:
+            type: string
+            enum:
+              - featured-events
+              - media
+              - seasons
+              - winners
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Tournament with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/ice-hockey/tournament/{tournamentId}/{segment4}":
+    get:
+      tags:
+        - Tournaments
       operationId: getTournament2
       summary: Get Tournament
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
-        - name: sport
+        - name: tournamentId
           in: path
           required: true
-          description: "Allowed values: ice-hockey, rugby."
+          description: "Unique identifier for the tournament. Example: 234."
+          schema:
+            type: integer
+          example: 234
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: media, seasons."
           schema:
             type: string
             enum:
-              - ice-hockey
-              - rugby
+              - media
+              - seasons
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Tournament with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/rugby/tournament/{tournamentId}/{segment4}":
+    get:
+      tags:
+        - Tournaments
+      operationId: getTournament22
+      summary: Get Tournament
+      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
         - name: tournamentId
           in: path
           required: true
@@ -15424,6 +16396,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/{segment4}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournament3
       summary: Get Tournament
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15486,6 +16460,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournaments/finished-upcoming/{date}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentsFinishedUpcoming
       summary: Get Tournaments Finished Upcoming
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15546,6 +16522,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournaments/live":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentsLive
       summary: Get Tournaments Live
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15599,6 +16577,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/unique-stage/{id}/recent-stage-ids":
     get:
+      tags:
+        - Stages
       operationId: getUniqueStageRecentStageIds
       summary: Get Unique Stage Recent Stage Ids
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15636,6 +16616,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/unique-stage/{uniqueStageId}/season":
     get:
+      tags:
+        - Stage
       operationId: getUniqueStageSeason
       summary: Get Unique Stage Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15679,6 +16661,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/unique-tournament/all/category/{id}":
     get:
+      tags:
+        - Categories
       operationId: getUniqueTournamentAllCategory
       summary: Get Unique Tournament All Category
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15722,6 +16706,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/unique-tournament/{tournamentId}":
     get:
+      tags:
+        - Tournaments
       operationId: getUniqueTournament
       summary: Get Unique Tournament
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15766,6 +16752,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/unique-tournament/{tournamentId}/events/live/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getUniqueTournamentEventsLive
       summary: Get Unique Tournament Events Live
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15809,6 +16797,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/unique-tournament/{tournamentId}/image":
     get:
+      tags:
+        - Tournaments
       operationId: getUniqueTournamentImage
       summary: Get Unique Tournament Image
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15854,6 +16844,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/unique-tournament/{tournamentId}/image/dark":
     get:
+      tags:
+        - Tournaments
       operationId: getUniqueTournamentImageDark
       summary: Get Unique Tournament Image Dark
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15899,6 +16891,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/unique-tournament/{tournamentId}/season/{seasonId}/matches/round/{round}":
     get:
+      tags:
+        - Tournaments
       operationId: getUniqueTournamentSeasonMatchesRound
       summary: Get Unique Tournament Season Matches Round
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -15956,6 +16950,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/unique-tournament/{tournamentId}/season/{seasonId}/matches/round/{round}/slug/{slug}":
     get:
+      tags:
+        - Tournaments
       operationId: getUniqueTournamentSeasonMatchesRoundSlug
       summary: Get Unique Tournament Season Matches Round Slug
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -16020,6 +17016,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/unique-tournament/{tournamentId}/season/{seasonId}/matches/{segment7}/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getUniqueTournamentSeasonMatches
       summary: Get Unique Tournament Season Matches
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -16092,6 +17090,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/unique-tournament/{tournamentId}/season/{seasonId}/{segment6}/{segment7}":
     get:
+      tags:
+        - Tournaments
       operationId: getUniqueTournamentSeason
       summary: Get Unique Tournament Season
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -16161,6 +17161,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/{id}":
     get:
+      tags:
+        - Managers
       operationId: getRoute
       summary: Get route
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -16208,6 +17210,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/{id}/image":
     get:
+      tags:
+        - Managers
       operationId: getImage
       summary: Get Image
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -16254,6 +17258,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/{id}/matches/near":
     get:
+      tags:
+        - Matches
       operationId: getMatchesNear
       summary: Get Matches Near
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -16297,6 +17303,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/{id}/matches/{segment4}/{page}":
     get:
+      tags:
+        - Matches
       operationId: getMatchesgetApiSportIdMatchesSegment4Page
       summary: Get Matches
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -16362,6 +17370,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/{segment2}/{id}":
     get:
+      tags:
+        - Managers
       operationId: getRoutegetApiSportSegment2Id
       summary: Get route
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -16412,6 +17422,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/{segment2}/{id}/image":
     get:
+      tags:
+        - Managers
       operationId: getImagegetApiSportSegment2IdImage
       summary: Get Image
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
@@ -16461,21 +17473,59 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: No content. The route exists but no data is available for the given parameters.
-  "/api/{sport}/{segment2}/{id}/image":
+  "/api/cycling/{segment2}/{id}/image":
     get:
+      tags:
+        - Media
       operationId: getImage2
       summary: Get Image
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
-        - name: sport
+        - name: segment2
           in: path
           required: true
-          description: "Allowed values: cycling, motorsport."
+          description: "Allowed values: stage, unique-stage."
           schema:
             type: string
             enum:
-              - cycling
-              - motorsport
+              - stage
+              - unique-stage
+        - name: id
+          in: path
+          required: true
+          description: Stage id.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        "404":
+          description: Stage or image not found.
+          content:
+            image/png:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            image/png:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/motorsport/{segment2}/{id}/image":
+    get:
+      tags:
+        - Stage
+      operationId: getImage22
+      summary: Get Image
+      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
         - name: segment2
           in: path
           required: true
@@ -16515,6 +17565,8 @@ paths:
           description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/{segment2}/{id}/matches/previous/{page}":
     get:
+      tags:
+        - Managers
       operationId: getMatchesPrevious
       summary: Get Matches Previous
       description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
