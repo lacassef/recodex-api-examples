@@ -12,7 +12,7 @@ These files list paths, parameters, and the response status. The JSON fields ins
 
 | File | Use it when |
 |------|-------------|
-| `allsports_simplified_openapi.yaml` | You want one file for every sport and your tool has a size limit. Shared segments are enums. 359 paths. |
+| `allsports_simplified_openapi.yaml` | You want one file for every sport and your tool has a size limit. Shared segments are enums. 367 paths. |
 | `allsports_openapi.yaml` | You want every concrete path written out. 1978 paths. |
 | `{sport}_openapi.yaml` | You are building one sport. |
 
@@ -23,7 +23,7 @@ Path counts move when routes are added. The simplified file is the one to import
 | File | Paths |
 |------|------:|
 | `allsports_openapi.yaml` | 1978 |
-| `allsports_simplified_openapi.yaml` | 353 |
+| `allsports_simplified_openapi.yaml` | 367 |
 | `football_openapi.yaml` | 205 |
 | `basketball_openapi.yaml` | 172 |
 | `tennis_openapi.yaml` | 131 |

@@ -9,9 +9,30 @@ info:
 servers:
   - url: https://livescoresapi.p.rapidapi.com
     description: RapidAPI. Send this host in X-RapidAPI-Host.
+tags:
+  - name: Calendar
+  - name: Content
+  - name: Feed
+  - name: GraphQL
+  - name: Images
+  - name: Matches
+  - name: Navigation
+  - name: News
+  - name: Odds
+  - name: Participants
+  - name: Players
+  - name: Rankings
+  - name: Search
+  - name: Stats
+  - name: System
+  - name: Tables
+  - name: Tournaments
+  - name: Updates
 paths:
   /api/livescores/banners:
     get:
+      tags:
+        - Content
       operationId: getBanners
       summary: Get banners
       description: Returns banner placements.
@@ -44,6 +65,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/content/media:
     get:
+      tags:
+        - Content
       operationId: getContentMedia
       summary: Get content media
       description: Returns media assets.
@@ -76,6 +99,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/feed/{version}/{feed}":
     get:
+      tags:
+        - Feed
       operationId: getFeedData
       summary: Get feed data
       description: "Fetches feed data and normalizes the response into JSON. Response includes decoded field names in `header` and `records[].fields`. Field values are either strings or arrays when list-style values are present."
@@ -123,6 +148,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/graphql:
     get:
+      tags:
+        - GraphQL
       operationId: getPersistedQueryData
       summary: Get persisted query data
       description: "Runs a persisted query identified by `_hash`. Pass the parameters that hash requires, such as `eventId` and `projectId`."
@@ -163,6 +190,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/images/ott/*":
     get:
+      tags:
+        - Images
       operationId: getMediaImage
       summary: Get media image
       description: "Fetches a media image, such as a news cover or a photo."
@@ -196,6 +225,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/images/static/*":
     get:
+      tags:
+        - Images
       operationId: getStaticAssetImage
       summary: Get static asset image
       description: "Fetches a static image, such as a bookmaker logo."
@@ -229,6 +260,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/box-score":
     get:
+      tags:
+        - Matches
       operationId: getMatchBoxScore
       summary: Get match box score
       description: Fetches the player box-score table for a match.
@@ -276,6 +309,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/box-score/names":
     get:
+      tags:
+        - Matches
       operationId: getMatchBoxScoreNames
       summary: Get match box score names
       description: Fetches the named player box-score table for a match.
@@ -323,6 +358,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/commentary":
     get:
+      tags:
+        - Matches
       operationId: getMatchCommentary
       summary: Get match commentary
       description: Fetches live commentary for a match.
@@ -370,6 +407,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/commentary-only":
     get:
+      tags:
+        - Matches
       operationId: getMatchCommentaryOnly
       summary: Get match commentary only
       description: Fetches commentary-only updates for a match.
@@ -417,6 +456,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/detail-config":
     get:
+      tags:
+        - Matches
       operationId: getMatchDetailConfig
       summary: Get match detail config
       description: Fetches the match detail configuration feed.
@@ -464,6 +505,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/h2h":
     get:
+      tags:
+        - Matches
       operationId: getMatchHeadToHead
       summary: Get match head-to-head
       description: Fetches head-to-head data for a match.
@@ -511,6 +554,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/hashes":
     get:
+      tags:
+        - Matches
       operationId: getMatchHashFeed
       summary: Get match hash feed
       description: Fetches the hash feed for a match (used by incremental updates).
@@ -558,6 +603,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/highlights":
     get:
+      tags:
+        - Matches
       operationId: getCurrentTennisGame
       summary: Get current tennis game
       description: Fetches the current tennis game feed for a match. Video highlights stay on highlights/videos.
@@ -605,6 +652,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/highlights/videos":
     get:
+      tags:
+        - Matches
       operationId: getMatchHighlightVideos
       summary: Get match highlight videos
       description: Fetches highlight video entries for a match.
@@ -652,6 +701,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/lineups":
     get:
+      tags:
+        - Matches
       operationId: getMatchLineups
       summary: Get match lineups
       description: Fetches the lineup snapshot for a match.
@@ -699,6 +750,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/lineups/updates":
     get:
+      tags:
+        - Matches
       operationId: getMatchLineupUpdates
       summary: Get match lineup updates
       description: Fetches lineup changes for a match.
@@ -752,6 +805,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/missing-players":
     get:
+      tags:
+        - Matches
       operationId: getMissingPlayers
       summary: Get missing players
       description: Fetches the missing-player snapshot for a match.
@@ -799,6 +854,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/missing-players/updates":
     get:
+      tags:
+        - Matches
       operationId: getMissingPlayerUpdates
       summary: Get missing player updates
       description: Fetches missing-player changes for a match.
@@ -845,6 +902,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/momentum":
     get:
+      tags:
+        - Matches
       operationId: getMatchMomentum
       summary: Get match momentum
       description: Fetches the momentum graph for a match.
@@ -892,6 +951,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/momentum/stats":
     get:
+      tags:
+        - Matches
       operationId: getMatchMomentumStats
       summary: Get match momentum stats
       description: Fetches momentum statistics for a match.
@@ -938,6 +999,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/momentum/updates":
     get:
+      tags:
+        - Matches
       operationId: getMatchMomentumUpdates
       summary: Get match momentum updates
       description: Fetches momentum changes for a match.
@@ -978,6 +1041,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/news":
     get:
+      tags:
+        - Matches
       operationId: getMatchNews
       summary: Get match news
       description: Fetches news entries for a match.
@@ -1025,6 +1090,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/news-layout":
     get:
+      tags:
+        - Matches
       operationId: getMatchNewsLayout
       summary: Get match news layout
       description: Fetches match news layout data via persisted queries.
@@ -1079,6 +1146,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/odds-detail":
     get:
+      tags:
+        - Matches
       operationId: getMatchOddsDetail
       summary: Get match odds detail
       description: Fetches odds details for a match.
@@ -1126,6 +1195,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/overview":
     get:
+      tags:
+        - Matches
       operationId: getMatchTournamentTable
       summary: Get match tournament table
       description: Fetches the tournament table tab opened from a match.
@@ -1180,6 +1251,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/participants/{participantId}/detail":
     get:
+      tags:
+        - Feed
       operationId: getMatchParticipantSupplementaryDetail
       summary: Get match participant supplementary detail
       description: Fetches supplementary detail for a specific participant in a match (e.g. golf/auto-racing splits).
@@ -1234,6 +1307,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/player-statistics":
     get:
+      tags:
+        - Matches
       operationId: getMatchPlayerStatistics
       summary: Get match player statistics
       description: Fetches player statistics for a match.
@@ -1281,6 +1356,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/player-statistics/detail":
     get:
+      tags:
+        - Matches
       operationId: getMatchPlayerStatisticsDetail
       summary: Get match player statistics detail
       description: Fetches one player-statistics detail for a match.
@@ -1327,6 +1404,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/player-statistics/updates":
     get:
+      tags:
+        - Matches
       operationId: getMatchPlayerStatisticsUpdates
       summary: Get match player statistics updates
       description: Fetches player-statistics changes for a match.
@@ -1373,6 +1452,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/point-by-point":
     get:
+      tags:
+        - Matches
       operationId: getMatchPointByPoint
       summary: Get match point-by-point
       description: Fetches point-by-point data for a match.
@@ -1420,6 +1501,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/report":
     get:
+      tags:
+        - Matches
       operationId: getMatchReport
       summary: Get match report
       description: Fetches match report entries.
@@ -1467,6 +1550,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/report/html":
     get:
+      tags:
+        - Matches
       operationId: getMatchReportHTML
       summary: Get match report (HTML)
       description: Fetches the full match report HTML.
@@ -1514,6 +1599,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/stage":
     get:
+      tags:
+        - Matches
       operationId: getMatchSummaryOddsForm
       summary: Get match summary odds form
       description: Fetches the summary odds form for a match.
@@ -1561,6 +1648,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/stats":
     get:
+      tags:
+        - Matches
       operationId: getMatchStats
       summary: Get match stats
       description: Fetches stats for a match.
@@ -1608,6 +1697,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/timeline":
     get:
+      tags:
+        - Matches
       operationId: getMatchLiveTable
       summary: Get match live table
       description: Fetches the live tournament table for a match.
@@ -1655,6 +1746,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/top-scorers":
     get:
+      tags:
+        - Matches
       operationId: getMatchTopScorers
       summary: Get match top scorers
       description: Fetches top scorers table for a match.
@@ -1702,6 +1795,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/tv/long":
     get:
+      tags:
+        - Matches
       operationId: getMatchVerticalSummary
       summary: Get match vertical summary
       description: Fetches the vertical summary feed for a match.
@@ -1749,6 +1844,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/matches/{eventId}/tv/short":
     get:
+      tags:
+        - Matches
       operationId: getMatchHorizontalSummary
       summary: Get match horizontal summary
       description: Fetches the horizontal summary feed for a match.
@@ -1796,6 +1893,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/navigation/{sportId}/{countryId}":
     get:
+      tags:
+        - Navigation
       operationId: getNavigationBySportCountry
       summary: Get navigation by sport/country
       description: Fetches navigation data for a sport and country.
@@ -1843,6 +1942,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/news:
     get:
+      tags:
+        - News
       operationId: getNewsList
       summary: Get news list
       description: "Fetches the news list feed. Send `sectionId`. `categoryId` is the same section id when `sectionId` is omitted."
@@ -1902,6 +2003,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/news/articles/{articleId}":
     get:
+      tags:
+        - News
       operationId: getNewsArticle
       summary: Get news article
       description: Fetches news article content via persisted queries.
@@ -1942,6 +2045,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/news/entities/{entityTypeId}/{entityId}":
     get:
+      tags:
+        - News
       operationId: getEntityNewsList
       summary: Get entity news list
       description: "Fetches news layout entries for a team, tournament, or player via persisted queries."
@@ -2017,6 +2122,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/odds:
     get:
+      tags:
+        - Odds
       operationId: getOddsData
       summary: Get odds data
       description: "Runs an odds persisted query identified by `_hash`. Pass the parameters that hash requires, such as `eventId` and `projectId`. Omit `geoIpCode` and `geoIpSubdivisionCode` to use the default region."
@@ -2057,6 +2164,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/participants/{participantId}/events":
     get:
+      tags:
+        - Participants
       operationId: getParticipantEvents
       summary: Get participant events
       description: Fetches participant event schedules (used by motorsport/cycling).
@@ -2118,6 +2227,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/participants/{participantId}/events/{eventId}/detail":
     get:
+      tags:
+        - Participants
       operationId: getParticipantEventDetail
       summary: Get participant event detail
       description: Fetches the common feed for one participant in an event. The feed places the event id before the participant id.
@@ -2179,6 +2290,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/participants/{participantId}/last-matches":
     get:
+      tags:
+        - Participants
       operationId: getParticipantLastMatches
       summary: Get participant last matches
       description: Fetches recent matches for a participant (JSON feed).
@@ -2233,6 +2346,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/participants/{participantId}/matches":
     get:
+      tags:
+        - Participants
       operationId: getParticipantMatches
       summary: Get participant matches
       description: Fetches the match list for a participant (team or player).
@@ -2301,6 +2416,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/participants/{participantId}/news":
     get:
+      tags:
+        - Participants
       operationId: getParticipantNews
       summary: Get participant news
       description: Fetches news for a participant (team or player).
@@ -2348,6 +2465,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/participants/{participantId}/squad":
     get:
+      tags:
+        - Participants
       operationId: getParticipantSquad
       summary: Get participant squad
       description: Extracts squad tables from a participant (team) page.
@@ -2402,6 +2521,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/participants/{participantId}/transfers":
     get:
+      tags:
+        - Participants
       operationId: getParticipantTransfers
       summary: Get participant transfers
       description: Fetches transfer activity for a participant.
@@ -2463,6 +2584,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/players/{playerId}/injuries":
     get:
+      tags:
+        - Players
       operationId: getPlayerInjuries
       summary: Get player injuries
       description: Extracts injury history from a player page.
@@ -2517,6 +2640,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/players/{playerId}/match-record":
     get:
+      tags:
+        - Players
       operationId: getPlayerMatchRecord
       summary: Get player match record
       description: Extracts match record tables from a player page (tennis).
@@ -2571,6 +2696,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/players/{playerId}/profile":
     get:
+      tags:
+        - Players
       operationId: getPlayerProfile
       summary: Get player profile
       description: Fetches player profile data.
@@ -2625,6 +2752,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/players/{playerId}/tournaments-won":
     get:
+      tags:
+        - Players
       operationId: getPlayerTournamentsWon
       summary: Get player tournaments won
       description: Extracts tournaments won tables from a player page (tennis).
@@ -2679,6 +2808,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/rankings/resolve:
     get:
+      tags:
+        - Rankings
       operationId: resolveRankingId
       summary: Resolve ranking id
       description: Fetches a rankings page and extracts the rankingId.
@@ -2733,6 +2864,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/rankings/{rankingId}":
     get:
+      tags:
+        - Rankings
       operationId: getRankings
       summary: Get rankings
       description: Fetches ranking tables.
@@ -2793,6 +2926,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/rankings/{sport}/{slug}/id":
     get:
+      tags:
+        - Rankings
       operationId: resolveRankingIdBySlug
       summary: Resolve ranking id by slug
       description: Fetches a rankings page and extracts the rankingId.
@@ -2840,6 +2975,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/remote-stats:
     get:
+      tags:
+        - Stats
       operationId: getRemoteStats
       summary: Get remote stats
       description: Returns remote stats.
@@ -2872,6 +3009,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/req/{req}":
     get:
+      tags:
+        - Navigation
       operationId: getNavigationData
       summary: Get navigation data
       description: "Fetches navigation data for a req id. Requests prefixed with `m_` are returned as JSON. Other values are returned as received."
@@ -2912,6 +3051,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/search:
     get:
+      tags:
+        - Search
       operationId: searchEntities
       summary: Search entities
       description: "Searches teams, players, tournaments, and other entities."
@@ -2951,6 +3092,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/sports/{sportId}/categories":
     get:
+      tags:
+        - Navigation
       operationId: getSportCategories
       summary: Get sport categories
       description: "Fetches category sections embedded in the sport landing page. Use `path` to override the sport URL path (e.g. motorsport/auto-racing)."
@@ -2998,6 +3141,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/sports/{sportId}/categories/{categoryId}/tournaments":
     get:
+      tags:
+        - Tournaments
       operationId: getCategoryTournamentList
       summary: Get category tournament list
       description: Fetches tournament list data for a sport category feed.
@@ -3036,7 +3181,7 @@ paths:
           description: "Category flag (y/n). Example: y."
           schema:
             type: string
-          example: y
+          example: "y"
         - name: group
           in: query
           required: false
@@ -3080,6 +3225,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/sports/{sportId}/featured":
     get:
+      tags:
+        - Feed
       operationId: getSportFeaturedList
       summary: Get sport featured list
       description: Fetches featured matches for a sport.
@@ -3155,6 +3302,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/sports/{sportId}/odds":
     get:
+      tags:
+        - Odds
       operationId: getSportOddsList
       summary: Get sport odds list
       description: Fetches the odds list feed for a sport and day offset.
@@ -3216,6 +3365,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/sports/{sportId}/refresh":
     get:
+      tags:
+        - Feed
       operationId: getSportRefreshUpdates
       summary: Get sport refresh updates
       description: Fetches lightweight refresh updates for a sport.
@@ -3263,6 +3414,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/sports/{sportId}/scoreboard":
     get:
+      tags:
+        - Feed
       operationId: getSportScoreboard
       summary: Get sport scoreboard
       description: Fetches the full scoreboard feed for a sport and day offset.
@@ -3324,6 +3477,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/sports/{sportId}/season-calendar":
     get:
+      tags:
+        - Calendar
       operationId: getSeasonCalendar
       summary: Get season calendar
       description: Fetches season calendar data via persisted queries.
@@ -3371,6 +3526,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/system/status:
     get:
+      tags:
+        - System
       operationId: getSystemStatus
       summary: Get system status
       description: Fetches system status.
@@ -3418,6 +3575,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/top-search:
     get:
+      tags:
+        - Search
       operationId: topSearchSuggestions
       summary: Top search suggestions
       description: Returns the top search suggestions.
@@ -3450,6 +3609,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/tournaments/archive:
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentArchive
       summary: Get tournament archive
       description: Fetches archive seasons and winners from a tournament archive page.
@@ -3511,6 +3672,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/tournaments/resolve:
     get:
+      tags:
+        - Tournaments
       operationId: resolveTournamentMetadata
       summary: Resolve tournament metadata
       description: Extracts ids and season list from a tournament page.
@@ -3572,6 +3735,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/tournaments/{sportId}/{categoryId}/{templateId}/fixtures":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentFixtures
       summary: Get tournament fixtures
       description: Fetches fixtures for a tournament template and round.
@@ -3654,6 +3819,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/tournaments/{sportId}/{categoryId}/{templateId}/matches":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentMatches
       summary: Get tournament matches
       description: Fetches the match list for a tournament template.
@@ -3722,6 +3889,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/tournaments/{sportId}/{categoryId}/{templateId}/results":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentResults
       summary: Get tournament results
       description: Fetches results for a tournament template.
@@ -3818,6 +3987,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/tournaments/{tournamentId}/draw/{stageId}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentDraw
       summary: Get tournament draw
       description: Fetches tournament draw data for a stage.
@@ -3879,6 +4050,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/tournaments/{tournamentId}/list/{stageId}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentList
       summary: Get tournament list
       description: Fetches tournament list data for a stage.
@@ -3933,6 +4106,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/tournaments/{tournamentId}/overview/{stageId}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentOverview
       summary: Get tournament overview
       description: Fetches tournament overview data for a stage.
@@ -3994,6 +4169,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/tournaments/{tournamentId}/seasons/{stageId}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasons
       summary: Get tournament seasons
       description: Fetches tournament seasons via persisted queries.
@@ -4048,6 +4225,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/tournaments/{tournamentId}/tables/{stageId}":
     get:
+      tags:
+        - Tables
       operationId: getTournamentTable
       summary: Get tournament table
       description: Fetches table data for a tournament stage.
@@ -4102,6 +4281,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/livescores/tournaments/{tournamentId}/top-scorers/{stageId}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentTopScorers
       summary: Get tournament top scorers
       description: Fetches top scorers for a tournament stage.
@@ -4156,6 +4337,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/updates:
     get:
+      tags:
+        - Updates
       operationId: getUpdates
       summary: Get updates
       description: Fetches incremental update data for a sport.
@@ -4210,6 +4393,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/updates/counts:
     get:
+      tags:
+        - Updates
       operationId: getUpdateCounts
       summary: Get update counts
       description: Fetches match count data used by the update polling loop.
@@ -4257,6 +4442,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/livescores/updates/list:
     get:
+      tags:
+        - Updates
       operationId: getUpdatesList
       summary: Get updates list
       description: Fetches update list data for a sport.

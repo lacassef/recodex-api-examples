@@ -9,9 +9,27 @@ info:
 servers:
   - url: https://handballapi.p.rapidapi.com
     description: RapidAPI. Send this host in X-RapidAPI-Host.
+tags:
+  - name: Calendar
+  - name: Categories
+  - name: Config
+  - name: Managers
+  - name: Matches
+  - name: Media
+  - name: Odds
+  - name: Placeholders
+  - name: Players
+  - name: Rankings
+  - name: Search
+  - name: TV
+  - name: Teams
+  - name: Tournaments
+  - name: Transfers
 paths:
   "/api/calendar/season/{seasonId}/{year}/days-with-events":
     get:
+      tags:
+        - Calendar
       operationId: getCalendarDaysWithEvents
       summary: Get calendar days with events
       description: Retrieves days that have events for a specific season and year.
@@ -47,6 +65,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/category/{categoryId}/image":
     get:
+      tags:
+        - Categories
       operationId: getCategoryImage
       summary: Get category image
       description: Retrieves the image/logo for a sport category.
@@ -75,6 +95,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/category/{id}/event-count/{day}/{month}/{year}/{timezoneOffset}":
     get:
+      tags:
+        - Tournaments
       operationId: getCategoryUniqueTournamentEventCount
       summary: Get category unique tournament event count
       parameters:
@@ -120,6 +142,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/countries/all:
     get:
+      tags:
+        - Config
       operationId: getAllCountries
       summary: Get all countries
       description: Retrieves a list of all available countries.
@@ -140,6 +164,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/country/{code}/flag":
     get:
+      tags:
+        - Media
       operationId: getCountryFlagImgAPI
       summary: Get country flag (img API)
       description: Fetches the flag image by country code.
@@ -175,6 +201,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/event/newly-added:
     get:
+      tags:
+        - Matches
       operationId: listNewlyAddedEvents
       summary: List newly added events
       description: Returns events recently added.
@@ -195,6 +223,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/category/{id}/event-count/{day}/{month}/{year}/{timezoneOffset}":
     get:
+      tags:
+        - Tournaments
       operationId: getCategoryUniqueTournamentEventCountgetApiHandballCategoryIdEventCountDayMonthYearTimezoneoffset
       summary: Get category unique tournament event count
       parameters:
@@ -240,6 +270,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/category/{id}/events/{day}/{month}/{year}":
     get:
+      tags:
+        - Categories
       operationId: getHandballMatchesByCategoryAndDate
       summary: Get handball matches by category and date
       description: Retrieves all handball matches for a specific category on a given date.
@@ -301,6 +333,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/main-events/{date}/extended":
     get:
+      tags:
+        - Matches
       operationId: listExtendedMainEventsByDate
       summary: List extended main events by date
       description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
@@ -329,6 +363,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{customId}/h2h":
     get:
+      tags:
+        - Matches
       operationId: getMatchHead2Head
       summary: Get match head2 head
       parameters:
@@ -354,6 +390,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}":
     get:
+      tags:
+        - Matches
       operationId: getHandballMatchDetails
       summary: Get handball match details
       description: Retrieves detailed information about a specific handball match.
@@ -388,6 +426,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/best-players":
     get:
+      tags:
+        - Matches
       operationId: getMatchBestPlayers
       summary: Get match best players
       description: Retrieves the best performing players from the match.
@@ -422,6 +462,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/comments":
     get:
+      tags:
+        - Matches
       operationId: getEventComments
       summary: Get event comments
       description: "Returns the commentary feed. Added where the sport did not already expose comments: basketball, tennis, table tennis, volleyball, handball, ice-hockey, american-football, rugby, cricket, mma, and esport. Football stays at /api/match/{id}/commentary. Baseball stays at /api/baseball/match/{id}/comments."
@@ -449,6 +491,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/duel":
     get:
+      tags:
+        - Matches
       operationId: getHeadToHeadSummary
       summary: Get head-to-head summary
       description: "Returns teamDuel with homeWins, awayWins, and draws, and managerDuel."
@@ -483,6 +527,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/form":
     get:
+      tags:
+        - Matches
       operationId: getMatchFormAnalysis
       summary: Get match form analysis
       description: Retrieves recent form and performance trends for teams in the match.
@@ -517,6 +563,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/highlights":
     get:
+      tags:
+        - Matches
       operationId: getMatchHighlights
       summary: Get match highlights
       description: Retrieves video highlights and key moments from the match.
@@ -551,6 +599,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/incidents":
     get:
+      tags:
+        - Matches
       operationId: getMatchIncidents
       summary: Get match incidents
       description: Retrieves all incidents and events that occurred during the match.
@@ -585,6 +635,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/lineups":
     get:
+      tags:
+        - Matches
       operationId: getMatchLineups
       summary: Get match lineups
       description: Retrieves starting lineups and player positions for both teams.
@@ -619,6 +671,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/media/country/{country}":
     get:
+      tags:
+        - Matches
       operationId: getEventMediaSummary
       summary: Get event media summary
       description: "Returns the highlighted clip and the other media cards for one event in a country. Registered on the existing event prefix of football, basketball, tennis, table tennis, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, mma, and esport."
@@ -653,6 +707,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/odds":
     get:
+      tags:
+        - Matches
       operationId: getMatchBettingOdds
       summary: Get match betting odds
       description: Retrieves betting odds from various bookmakers for the handball match.
@@ -687,6 +743,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/statistics":
     get:
+      tags:
+        - Matches
       operationId: getMatchStatistics
       summary: Get match statistics
       description: Retrieves comprehensive statistical data for the handball match.
@@ -721,6 +779,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/streaks":
     get:
+      tags:
+        - Matches
       operationId: getMatchStreaks
       summary: Get match streaks
       description: Retrieves winning/scoring streaks information for the match.
@@ -755,6 +815,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/votes":
     get:
+      tags:
+        - Matches
       operationId: getMatchVotes
       summary: Get match votes
       description: Retrieves fan voting results for the match.
@@ -789,6 +851,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/match/{id}/win-probability":
     get:
+      tags:
+        - Matches
       operationId: getWinProbability
       summary: Get win probability
       description: "Returns the win, draw, and loss probability graph. Added where this path was missing: basketball, tennis, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, mma, and esport. Football and table tennis already expose it. The esport public prefix is /api/esport."
@@ -816,6 +880,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/handball/matches/live:
     get:
+      tags:
+        - Matches
       operationId: getLiveHandballMatches
       summary: Get live handball matches
       description: Retrieves all currently live handball matches.
@@ -836,6 +902,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/matches/odds/featured-by-popularity/{providerId}":
     get:
+      tags:
+        - Odds
       operationId: listFeaturedEventsByPopularity
       summary: List featured events by popularity
       description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
@@ -863,6 +931,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/matches/{day}/{month}/{year}":
     get:
+      tags:
+        - Matches
       operationId: getHandballMatchesByDate
       summary: Get handball matches by date
       description: Fetches all handball matches scheduled for a specific date.
@@ -911,6 +981,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/player/{id}":
     get:
+      tags:
+        - Players
       operationId: getHandballPlayerDetails
       summary: Get handball player details
       description: Retrieves comprehensive information about a handball player.
@@ -945,6 +1017,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/player/{id}/image":
     get:
+      tags:
+        - Players
       operationId: getPlayerImage
       summary: Get player image
       description: "Retrieves the player's profile image."
@@ -980,6 +1054,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/player/{id}/matches/near":
     get:
+      tags:
+        - Players
       operationId: getPlayerNearMatches
       summary: Get player near matches
       description: Retrieves recent and upcoming matches for the player.
@@ -1014,6 +1090,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/player/{id}/matches/previous/{page}":
     get:
+      tags:
+        - Players
       operationId: getPreviousPlayerMatches
       summary: Get previous player matches
       description: "Fetches a list of completed matches for the player, sorted by date descending."
@@ -1061,6 +1139,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/player/{id}/statistics/season":
     get:
+      tags:
+        - Players
       operationId: getPlayerStatisticsSeasons
       summary: Get player statistics seasons
       description: Retrieves available seasons for player statistics.
@@ -1095,6 +1175,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/player/{id}/unique-tournament/{tournamentId}/season/{seasonId}/statistics/overall":
     get:
+      tags:
+        - Players
       operationId: getPlayerOverallStatistics
       summary: Get player overall statistics
       description: "Retrieves player's overall statistics for a specific tournament season."
@@ -1143,6 +1225,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/handball/players/trending:
     get:
+      tags:
+        - Players
       operationId: listTrendingPlayers
       summary: List trending players
       description: Returns players currently trending in one sport. Football already exposes this at /api/player/trending.
@@ -1163,6 +1247,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/scheduled-tournaments/{day}/{month}/{year}/page/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getHandballScheduledTournamentsByDate
       summary: Get handball scheduled tournaments by date
       description: Retrieves a paginated list of tournaments that have scheduled handball matches for a specific date.
@@ -1218,6 +1304,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/search/{term}":
     get:
+      tags:
+        - Search
       operationId: searchHandballEntities
       summary: Search handball entities
       description: Queries /search/all for this sport. The path term is sent as q. page is 0-based and defaults to 0.
@@ -1259,6 +1347,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}":
     get:
+      tags:
+        - Teams
       operationId: getHandballTeamDetails
       summary: Get handball team details
       description: Retrieves comprehensive information about a handball team.
@@ -1293,6 +1383,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/events/{month}/{year}":
     get:
+      tags:
+        - Teams
       operationId: listTeamEventsInAMonth
       summary: List team events in a month
       description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
@@ -1334,6 +1426,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/image":
     get:
+      tags:
+        - Teams
       operationId: getTeamLogo
       summary: Get team logo
       description: "Retrieves the team's logo image."
@@ -1369,6 +1463,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/matches/near":
     get:
+      tags:
+        - Teams
       operationId: getTeamNearMatches
       summary: Get team near matches
       description: Retrieves recent and upcoming matches for the team.
@@ -1403,6 +1499,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/matches/next/{page}":
     get:
+      tags:
+        - Teams
       operationId: getUpcomingTeamMatches
       summary: Get upcoming team matches
       description: "Fetches a list of scheduled matches for the team, sorted by date ascending."
@@ -1450,6 +1548,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/matches/previous/{page}":
     get:
+      tags:
+        - Teams
       operationId: getPreviousTeamMatches
       summary: Get previous team matches
       description: "Fetches a list of completed matches for the team, sorted by date descending."
@@ -1497,6 +1597,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/player-statistics/seasons":
     get:
+      tags:
+        - Teams
       operationId: getTeamPlayerStatisticsSeasons
       summary: Get team player statistics seasons
       description: Retrieves available seasons for team player statistics.
@@ -1531,6 +1633,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/players":
     get:
+      tags:
+        - Teams
       operationId: getTeamPlayers
       summary: Get team players
       description: Retrieves the current roster of players for the team.
@@ -1565,6 +1669,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/standings/seasons":
     get:
+      tags:
+        - Teams
       operationId: getTeamStandingsSeasons
       summary: Get team standings seasons
       description: Retrieves available seasons for team standings data.
@@ -1599,6 +1705,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/unique-tournament/{tournamentId}/season/{seasonId}/player-statistics/{type}":
     get:
+      tags:
+        - Teams
       operationId: getTeamSquadPlayerStatistics
       summary: Get team squad player statistics
       description: "Returns player statistics for one team in a unique-tournament season. The last segment is the season phase the team page sends, for example regularSeason."
@@ -1650,6 +1758,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/unique-tournament/{tournamentId}/season/{seasonId}/top-players/overall":
     get:
+      tags:
+        - Teams
       operationId: getTeamTopPlayersOverall
       summary: Get team top players overall
       parameters:
@@ -1685,6 +1795,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/team/{id}/unique-tournaments":
     get:
+      tags:
+        - Teams
       operationId: getTeamTournaments
       summary: Get team tournaments
       description: Retrieves all tournaments the team participates in.
@@ -1719,6 +1831,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/handball/tournament/categories:
     get:
+      tags:
+        - Tournaments
       operationId: getHandballTournamentCategories
       summary: Get handball tournament categories
       description: Retrieves all available handball tournament categories (countries/regions).
@@ -1739,6 +1853,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/handball/tournament/categories/all:
     get:
+      tags:
+        - Tournaments
       operationId: listEverySportCategory
       summary: List every sport category
       description: "Returns the full category list. Football is /api/tournament/categories/all. MMA is /api/mma/categories/all. Cycling is /api/cycling/categories/all. Motorsport is /api/motorsport/categories/all. Table tennis already had this path, so it is not registered again."
@@ -1759,6 +1875,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/handball/tournament/categories/live:
     get:
+      tags:
+        - Tournaments
       operationId: listLiveSportCategories
       summary: List live sport categories
       description: "Returns categories that currently have a live event. Table tennis is included here. MMA, cycling, and motorsport use /categories/live on their own prefix."
@@ -1779,6 +1897,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/tournament/{tournamentId}/schedules/{day}/{month}/{year}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentMatchesByDate
       summary: Get tournament matches by date
       description: Retrieves all tournament matches scheduled for a specific date.
@@ -1840,6 +1960,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/tournament/{tournamentId}/season/{seasonId}/matches":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasonMatches
       summary: Get tournament season matches
       description: Retrieves all matches for a tournament season.
@@ -1881,6 +2003,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/tournaments/finished-upcoming/{date}":
     get:
+      tags:
+        - Tournaments
       operationId: listFinishedAndUpcomingTournaments
       summary: List finished and upcoming tournaments
       description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
@@ -1909,6 +2033,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/handball/tournaments/live:
     get:
+      tags:
+        - Tournaments
       operationId: listLiveTournaments
       summary: List live tournaments
       description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
@@ -1929,6 +2055,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/all/category/{id}":
     get:
+      tags:
+        - Categories
       operationId: getTournamentsByCategory
       summary: Get tournaments by category
       description: Retrieves all handball tournaments within a specific category.
@@ -1963,6 +2091,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentDetails
       summary: Get tournament details
       description: Retrieves comprehensive information about a handball tournament.
@@ -1997,6 +2127,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/events/live/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: listLiveEventsOfAUniqueTournament
       summary: List live events of a unique tournament
       description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
@@ -2030,6 +2162,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/image":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentLogo
       summary: Get tournament logo
       description: "Retrieves the tournament's logo image."
@@ -2065,6 +2199,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/image/dark":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentDarkLogo
       summary: Get tournament dark logo
       description: "Retrieves the tournament's dark theme logo image."
@@ -2100,6 +2236,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/media":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentMedia
       summary: Get tournament media
       description: Retrieves media content for the tournament.
@@ -2134,6 +2272,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/cuptrees":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentCupTrees
       summary: Get tournament cup trees
       description: Retrieves playoff/knockout bracket structure for the tournament.
@@ -2175,6 +2315,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/groups":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentGroups
       summary: Get tournament groups
       description: Retrieves group stage information for the tournament.
@@ -2216,6 +2358,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/matches/last/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentLastMatches
       summary: Get tournament last matches
       description: Retrieves recently played matches in the tournament.
@@ -2270,6 +2414,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/matches/next/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getLeagueNextMatches
       summary: Get league next matches
       parameters:
@@ -2305,6 +2451,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/matches/round/{round}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentMatchesByRound
       summary: Get tournament matches by round
       description: Retrieves matches for a specific round in the tournament.
@@ -2353,6 +2501,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/matches/round/{round}/slug/{slug}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentMatchesByRoundWithSlug
       summary: Get tournament matches by round with slug
       description: Retrieves matches for a specific round with tournament slug.
@@ -2408,6 +2558,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/player-statistics/types":
     get:
+      tags:
+        - Tournaments
       operationId: getPlayerStatisticsTypes
       summary: Get player statistics types
       description: Retrieves available player statistics categories for the tournament.
@@ -2449,6 +2601,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/rounds":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentRounds
       summary: Get tournament rounds
       description: "Returns currentRound and rounds for the season. Each round has round, and may include name, slug, and prefix."
@@ -2490,6 +2644,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/standings/away":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentAwayStandings
       summary: Get tournament away standings
       description: Retrieves standings based on away games only.
@@ -2531,6 +2687,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/standings/home":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentHomeStandings
       summary: Get tournament home standings
       description: Retrieves standings based on home games only.
@@ -2572,6 +2730,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/standings/total":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentTotalStandings
       summary: Get tournament total standings
       description: Retrieves complete standings table for all teams in the tournament.
@@ -2613,6 +2773,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/team-events/away":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamEventsAwayStatistics
       summary: Get team events away statistics
       description: "Returns tournamentTeamEvents for away matches. The first key is the tournament id, the second key is the team id, and the value is that team's events."
@@ -2654,6 +2816,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/team-events/home":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamEventsHomeStatistics
       summary: Get team events home statistics
       description: "Returns tournamentTeamEvents for home matches. The first key is the tournament id, the second key is the team id, and the value is that team's events."
@@ -2695,6 +2859,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/team-events/total":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamEventsTotalStatistics
       summary: Get team events total statistics
       description: "Returns tournamentTeamEvents. The first key is the tournament id, the second key is the team id, and the value is that team's events."
@@ -2736,6 +2902,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/team-of-the-season":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamOfTheSeason
       summary: Get team of the season
       description: Returns the team of the season for a unique tournament. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament. Cycling and motorsport are omitted.
@@ -2769,6 +2937,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/top-players-per-game/all/overall":
     get:
+      tags:
+        - Tournaments
       operationId: getTopPlayersPerGame
       summary: Get top players per game
       description: Retrieves the best performing players based on per-game averages.
@@ -2810,6 +2980,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/top-players/overall":
     get:
+      tags:
+        - Tournaments
       operationId: getTopPlayersOverall
       summary: Get top players overall
       description: Retrieves the best performing players for the entire season.
@@ -2851,6 +3023,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/season/{seasonId}/top-teams/overall":
     get:
+      tags:
+        - Tournaments
       operationId: getTopTeamsOverall
       summary: Get top teams overall
       description: Retrieves the best performing teams for the entire season.
@@ -2892,6 +3066,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/unique-tournament/{tournamentId}/seasons":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasons
       summary: Get tournament seasons
       description: Retrieves all available seasons for the tournament.
@@ -2926,6 +3102,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/img/flag/{flag}":
     get:
+      tags:
+        - Media
       operationId: getCountryFlag
       summary: Get country flag
       description: Fetches the PNG flag image asset corresponding to a provided country code. The response is the raw image data. Codes are normalized to uppercase (e.g. jp → JP).
@@ -2960,6 +3138,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/odds/providers/{countryCode}/{regionCode}/{type}":
     get:
+      tags:
+        - Odds
       operationId: listOddsProvidersForACountryRegion
       summary: List odds providers for a country region
       description: Returns odds providers for a country-region pair and a provider group.
@@ -3002,6 +3182,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/odds/providers/{countryCode}/{type}":
     get:
+      tags:
+        - Odds
       operationId: listOddsProvidersForACountry
       summary: List odds providers for a country
       description: "Returns odds providers for a country and a provider group. type is web, web-featured, or web-odds."
@@ -3037,6 +3219,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/odds/season/{seasonId}/provider/{providerId}/all":
     get:
+      tags:
+        - Odds
       operationId: getAllOddsForASeason
       summary: Get all odds for a season
       description: Returns every odds market for a season and provider. The path has no sport slug.
@@ -3070,6 +3254,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/manager.png:
     get:
+      tags:
+        - Managers
       operationId: getManagerPlaceholderImage
       summary: Get manager placeholder image
       description: Returns a static placeholder graphic for a manager. The response is an SVG image.
@@ -3091,6 +3277,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/manager.svg:
     get:
+      tags:
+        - Managers
       operationId: getManagerPlaceholderImagegetApiPlaceholderManagerSvg
       summary: Get manager placeholder image
       description: Returns a static placeholder graphic for a manager. The response is an SVG image.
@@ -3112,6 +3300,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/player.png:
     get:
+      tags:
+        - Players
       operationId: getPlayerPlaceholderImage
       summary: Get player placeholder image
       description: Returns a static placeholder graphic for a player. The response is an SVG image.
@@ -3133,6 +3323,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/player.svg:
     get:
+      tags:
+        - Players
       operationId: getPlayerPlaceholderImagegetApiPlaceholderPlayerSvg
       summary: Get player placeholder image
       description: Returns a static placeholder graphic for a player. The response is an SVG image.
@@ -3154,6 +3346,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/team.svg:
     get:
+      tags:
+        - Teams
       operationId: getTeamPlaceholderImage
       summary: Get team placeholder image
       description: Returns a static placeholder graphic for a team. The response is an SVG image.
@@ -3175,6 +3369,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/tournament.png:
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentPlaceholderImage
       summary: Get tournament placeholder image
       description: Returns a static placeholder graphic for a tournament. The response is an SVG image.
@@ -3196,6 +3392,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/tournament.svg:
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentPlaceholderImagegetApiPlaceholderTournamentSvg
       summary: Get tournament placeholder image
       description: Returns a static placeholder graphic for a tournament. The response is an SVG image.
@@ -3217,6 +3415,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholders/fighter-female.svg:
     get:
+      tags:
+        - Placeholders
       operationId: getFemaleFighterPlaceholderImage
       summary: Get female fighter placeholder image
       description: Retrieves a placeholder image for a female fighter.
@@ -3238,6 +3438,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholders/fighter-male.svg:
     get:
+      tags:
+        - Placeholders
       operationId: getMaleFighterPlaceholderImage
       summary: Get male fighter placeholder image
       description: Retrieves a placeholder image for a male fighter.
@@ -3259,6 +3461,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/rankings/team/{teamId}":
     get:
+      tags:
+        - Rankings
       operationId: getTeamRankings
       summary: Get team rankings
       description: Retrieves rankings for a specific team.
@@ -3287,6 +3491,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/rankings/unique-tournament/{tournamentId}/{weightClass}/{gender}":
     get:
+      tags:
+        - Rankings
       operationId: getDivisionRankings
       summary: Get division rankings
       description: "Returns the ranking rows for one weight class and gender. The MMA event page sends the unique tournament id, the weight class, and the gender. Each value is one path segment and is forwarded unchanged."
@@ -3328,6 +3534,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/search/all:
     get:
+      tags:
+        - Search
       operationId: searchAllEntities
       summary: Search all entities
       description: Queries /search/all. q is the search text. page is 0-based and the results request always sends it. sport limits the search to one sport.
@@ -3367,6 +3575,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/search/suggestions/{entityType}":
     get:
+      tags:
+        - Search
       operationId: getSearchSuggestions
       summary: Get search suggestions
       description: Returns suggestions for one entity type. The All tab uses the path segment default. The request sends sport when it is limited to one sport.
@@ -3410,6 +3620,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/search/unique-tournaments:
     get:
+      tags:
+        - Search
       operationId: searchUniqueTournaments
       summary: Search unique tournaments
       description: "Queries /search/unique-tournaments. q is the search text. page is 0-based, and the first page omits page. sport limits the search to one sport."
@@ -3449,6 +3661,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/search/{entityType}":
     get:
+      tags:
+        - Search
       operationId: searchByEntityType
       summary: Search by entity type
       description: "Queries /search/{entityType}. q is the search text. page is 0-based and the results request always sends it. sport limits the search to one sport."
@@ -3504,6 +3718,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/sport/event-count/{timezoneOffset}":
     get:
+      tags:
+        - Matches
       operationId: countEventsForATimezoneOffset
       summary: Count events for a timezone offset
       description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. Send the viewer's offset, for example 7200."
@@ -3532,6 +3748,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/transfer:
     get:
+      tags:
+        - Transfers
       operationId: listTransfers
       summary: List transfers
       description: Returns the transfer list. A typical call uses page=1 and sort=-transferFee.
@@ -3567,6 +3785,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/trending/events/{country}":
     get:
+      tags:
+        - Matches
       operationId: listTrendingEvents
       summary: List trending events
       description: Returns trending events for a country code.
@@ -3595,6 +3815,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/channel/{channId}/event/{id}":
     get:
+      tags:
+        - TV
       operationId: getMatchTVChannelVotes
       summary: Get match TV channel votes
       description: Fetches viewer voting data from a specific TV channel that is broadcasting the match.
@@ -3636,6 +3858,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/channel/{id}/schedule":
     get:
+      tags:
+        - TV
       operationId: getTVChannelSchedule
       summary: Get TV channel schedule
       description: Retrieves the broadcast schedule for a specific TV channel.
@@ -3664,6 +3888,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/country/all/event/{id}":
     get:
+      tags:
+        - TV
       operationId: getMatchTVCountries
       summary: Get match TV countries
       description: Lists the countries and the TV channels within them that are broadcasting a specific match.
@@ -3698,6 +3924,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/country/{countryCode}/channels":
     get:
+      tags:
+        - TV
       operationId: getCountryTVChannels
       summary: Get country TV channels
       description: Retrieves available TV channels for a specific country.

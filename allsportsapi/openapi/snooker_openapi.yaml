@@ -9,9 +9,27 @@ info:
 servers:
   - url: https://allsportsapi2.p.rapidapi.com
     description: RapidAPI. Send this host in X-RapidAPI-Host.
+tags:
+  - name: Calendar
+  - name: Categories
+  - name: Config
+  - name: Managers
+  - name: Matches
+  - name: Media
+  - name: Odds
+  - name: Placeholders
+  - name: Players
+  - name: Rankings
+  - name: Search
+  - name: TV
+  - name: Teams
+  - name: Tournaments
+  - name: Transfers
 paths:
   "/api/calendar/season/{seasonId}/{year}/days-with-events":
     get:
+      tags:
+        - Calendar
       operationId: getCalendarDaysWithEvents
       summary: Get calendar days with events
       description: Retrieves days that have events for a specific season and year.
@@ -47,6 +65,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/category/{categoryId}/image":
     get:
+      tags:
+        - Categories
       operationId: getCategoryImage
       summary: Get category image
       description: Retrieves the image/logo for a sport category.
@@ -75,6 +95,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/category/{id}/event-count/{day}/{month}/{year}/{timezoneOffset}":
     get:
+      tags:
+        - Tournaments
       operationId: getCategoryUniqueTournamentEventCount
       summary: Get category unique tournament event count
       parameters:
@@ -120,6 +142,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/countries/all:
     get:
+      tags:
+        - Config
       operationId: getAllCountries
       summary: Get all countries
       description: Retrieves a list of all available countries.
@@ -140,6 +164,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/country/{code}/flag":
     get:
+      tags:
+        - Media
       operationId: getCountryFlagImgAPI
       summary: Get country flag (img API)
       description: Fetches the flag image by country code.
@@ -175,6 +201,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/event/newly-added:
     get:
+      tags:
+        - Matches
       operationId: listNewlyAddedEvents
       summary: List newly added events
       description: Returns events recently added.
@@ -195,6 +223,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/img/flag/{flag}":
     get:
+      tags:
+        - Media
       operationId: getCountryFlag
       summary: Get country flag
       description: Fetches the PNG flag image asset corresponding to a provided country code. The response is the raw image data. Codes are normalized to uppercase (e.g. jp → JP).
@@ -229,6 +259,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/odds/providers/{countryCode}/{regionCode}/{type}":
     get:
+      tags:
+        - Odds
       operationId: listOddsProvidersForACountryRegion
       summary: List odds providers for a country region
       description: Returns odds providers for a country-region pair and a provider group.
@@ -271,6 +303,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/odds/providers/{countryCode}/{type}":
     get:
+      tags:
+        - Odds
       operationId: listOddsProvidersForACountry
       summary: List odds providers for a country
       description: "Returns odds providers for a country and a provider group. type is web, web-featured, or web-odds."
@@ -306,6 +340,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/odds/season/{seasonId}/provider/{providerId}/all":
     get:
+      tags:
+        - Odds
       operationId: getAllOddsForASeason
       summary: Get all odds for a season
       description: Returns every odds market for a season and provider. The path has no sport slug.
@@ -339,6 +375,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/manager.png:
     get:
+      tags:
+        - Managers
       operationId: getManagerPlaceholderImage
       summary: Get manager placeholder image
       description: Returns a static placeholder graphic for a manager. The response is an SVG image.
@@ -360,6 +398,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/manager.svg:
     get:
+      tags:
+        - Managers
       operationId: getManagerPlaceholderImagegetApiPlaceholderManagerSvg
       summary: Get manager placeholder image
       description: Returns a static placeholder graphic for a manager. The response is an SVG image.
@@ -381,6 +421,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/player.png:
     get:
+      tags:
+        - Players
       operationId: getPlayerPlaceholderImage
       summary: Get player placeholder image
       description: Returns a static placeholder graphic for a player. The response is an SVG image.
@@ -402,6 +444,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/player.svg:
     get:
+      tags:
+        - Players
       operationId: getPlayerPlaceholderImagegetApiPlaceholderPlayerSvg
       summary: Get player placeholder image
       description: Returns a static placeholder graphic for a player. The response is an SVG image.
@@ -423,6 +467,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/team.svg:
     get:
+      tags:
+        - Teams
       operationId: getTeamPlaceholderImage
       summary: Get team placeholder image
       description: Returns a static placeholder graphic for a team. The response is an SVG image.
@@ -444,6 +490,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/tournament.png:
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentPlaceholderImage
       summary: Get tournament placeholder image
       description: Returns a static placeholder graphic for a tournament. The response is an SVG image.
@@ -465,6 +513,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/tournament.svg:
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentPlaceholderImagegetApiPlaceholderTournamentSvg
       summary: Get tournament placeholder image
       description: Returns a static placeholder graphic for a tournament. The response is an SVG image.
@@ -486,6 +536,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholders/fighter-female.svg:
     get:
+      tags:
+        - Placeholders
       operationId: getFemaleFighterPlaceholderImage
       summary: Get female fighter placeholder image
       description: Retrieves a placeholder image for a female fighter.
@@ -507,6 +559,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholders/fighter-male.svg:
     get:
+      tags:
+        - Placeholders
       operationId: getMaleFighterPlaceholderImage
       summary: Get male fighter placeholder image
       description: Retrieves a placeholder image for a male fighter.
@@ -528,6 +582,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/rankings/team/{teamId}":
     get:
+      tags:
+        - Rankings
       operationId: getTeamRankings
       summary: Get team rankings
       description: Retrieves rankings for a specific team.
@@ -556,6 +612,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/rankings/unique-tournament/{tournamentId}/{weightClass}/{gender}":
     get:
+      tags:
+        - Rankings
       operationId: getDivisionRankings
       summary: Get division rankings
       description: "Returns the ranking rows for one weight class and gender. The MMA event page sends the unique tournament id, the weight class, and the gender. Each value is one path segment and is forwarded unchanged."
@@ -597,6 +655,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/search/all:
     get:
+      tags:
+        - Search
       operationId: searchAllEntities
       summary: Search all entities
       description: Queries /search/all. q is the search text. page is 0-based and the results request always sends it. sport limits the search to one sport.
@@ -636,6 +696,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/search/suggestions/{entityType}":
     get:
+      tags:
+        - Search
       operationId: getSearchSuggestions
       summary: Get search suggestions
       description: Returns suggestions for one entity type. The All tab uses the path segment default. The request sends sport when it is limited to one sport.
@@ -679,6 +741,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/search/unique-tournaments:
     get:
+      tags:
+        - Search
       operationId: searchUniqueTournaments
       summary: Search unique tournaments
       description: "Queries /search/unique-tournaments. q is the search text. page is 0-based, and the first page omits page. sport limits the search to one sport."
@@ -718,6 +782,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/search/{entityType}":
     get:
+      tags:
+        - Search
       operationId: searchByEntityType
       summary: Search by entity type
       description: "Queries /search/{entityType}. q is the search text. page is 0-based and the results request always sends it. sport limits the search to one sport."
@@ -773,6 +839,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/category/{id}/event-count/{day}/{month}/{year}/{timezoneOffset}":
     get:
+      tags:
+        - Tournaments
       operationId: countEventsByTournamentInACategory
       summary: Count events by tournament in a category
       description: Returns how many events each unique tournament has in this category on one local day. timezoneOffset is seconds east of UTC and is forwarded unchanged.
@@ -828,6 +896,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/category/{id}/events/{day}/{month}/{year}":
     get:
+      tags:
+        - Matches
       operationId: listCategoryEventsOnADate
       summary: List category events on a date
       description: Returns events in one category on one calendar day. Day and month are zero-padded.
@@ -876,6 +946,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{customId}/h2h":
     get:
+      tags:
+        - Matches
       operationId: getHeadToHeadEvents
       summary: Get head-to-head events
       description: "Returns previous meetings for the two sides. customId is the head-to-head key, not the numeric event id."
@@ -903,6 +975,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}":
     get:
+      tags:
+        - Matches
       operationId: getEvent
       summary: Get event
       description: "Returns one event. Team sports publish it at /match/{id}. Badminton, darts, snooker, and padel publish it at /event/{id}."
@@ -930,6 +1004,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/comments":
     get:
+      tags:
+        - Matches
       operationId: getEventComments
       summary: Get event comments
       description: Returns the commentary feed for one event.
@@ -957,6 +1033,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/duel":
     get:
+      tags:
+        - Matches
       operationId: getHeadToHeadSummary
       summary: Get head-to-head summary
       description: "Returns teamDuel with homeWins, awayWins, and draws, and managerDuel."
@@ -984,6 +1062,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/form":
     get:
+      tags:
+        - Matches
       operationId: getPregameForm
       summary: Get pregame form
       description: "Returns homeTeam and awayTeam. Each has position, value, and form. form is a list of results such as W, D, and L. label names value, for example Pts."
@@ -1011,6 +1091,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/graph":
     get:
+      tags:
+        - Matches
       operationId: getEventGraph
       summary: Get event graph
       description: "Returns the event graph."
@@ -1038,6 +1120,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/graph/sequence":
     get:
+      tags:
+        - Matches
       operationId: getEventGraphSequence
       summary: Get event graph sequence
       description: Returns the sequence of graph points for one event.
@@ -1065,6 +1149,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/highlights":
     get:
+      tags:
+        - Matches
       operationId: getEventHighlights
       summary: Get event highlights
       description: Returns highlight clips for one event.
@@ -1092,6 +1178,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/incidents":
     get:
+      tags:
+        - Matches
       operationId: getEventIncidents
       summary: Get event incidents
       description: Returns the incidents array for the event. Each entry has incidentType.
@@ -1119,6 +1207,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/media/country/{country}":
     get:
+      tags:
+        - Matches
       operationId: getEventMediaSummary
       summary: Get event media summary
       description: Returns the highlighted clip and the other media cards for this event in one country.
@@ -1153,6 +1243,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/odds":
     get:
+      tags:
+        - Odds
       operationId: getEventOdds
       summary: Get event odds
       description: Returns all odds markets for provider 1 on this event.
@@ -1180,6 +1272,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/point-by-point":
     get:
+      tags:
+        - Matches
       operationId: getPointByPoint
       summary: Get point by point
       description: "Returns the point-by-point record. Published for badminton, darts, snooker, and padel."
@@ -1207,6 +1301,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/statistics":
     get:
+      tags:
+        - Matches
       operationId: getEventStatistics
       summary: Get event statistics
       description: Returns the statistics document for one event.
@@ -1234,6 +1330,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/votes":
     get:
+      tags:
+        - Matches
       operationId: getEventVotes
       summary: Get event votes
       description: "Returns vote counts. vote has vote1, voteX, and vote2. bothTeamsToScoreVote has voteYes and voteNo. firstTeamToScoreVote has voteHome, voteAway, and voteNoGoal. whoShouldHaveWonVote has vote1 and vote2."
@@ -1261,6 +1359,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/event/{id}/win-probability":
     get:
+      tags:
+        - Matches
       operationId: getWinProbability
       summary: Get win probability
       description: "Returns the win, draw, and loss probability graph "
@@ -1288,6 +1388,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/snooker/events/live:
     get:
+      tags:
+        - Matches
       operationId: listLiveEvents
       summary: List live events
       description: "Returns events in progress for this sport. Team sports publish this at /matches/live. Badminton, darts, snooker, and padel publish it at /events/live."
@@ -1308,6 +1410,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/events/odds/featured-by-popularity/{providerId}":
     get:
+      tags:
+        - Odds
       operationId: listFeaturedEventsByPopularity
       summary: List featured events by popularity
       description: "Returns featured events for one odds provider, ordered by popularity. Team sports publish this under /matches/odds. Racket sports publish it under /events/odds."
@@ -1335,6 +1439,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/events/{day}/{month}/{year}":
     get:
+      tags:
+        - Matches
       operationId: listEventsOnADate
       summary: List events on a date
       description: "Returns the schedule for one calendar day. Day and month are zero-padded. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
@@ -1377,6 +1483,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/main-events/{date}/extended":
     get:
+      tags:
+        - Matches
       operationId: listExtendedMainEventsByDate
       summary: List extended main events by date
       description: Returns the extended main events for this sport and date. 
@@ -1405,6 +1513,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/snooker/players/trending:
     get:
+      tags:
+        - Players
       operationId: listTrendingPlayers
       summary: List trending players
       description: Returns players currently trending in this sport.
@@ -1425,6 +1535,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/scheduled-tournaments/{day}/{month}/{year}/page/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: listScheduledTournaments
       summary: List scheduled tournaments
       description: Returns tournaments that have events on that date. The list starts at page 1. The date is year-month-day.
@@ -1474,6 +1586,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/search/{term}":
     get:
+      tags:
+        - Search
       operationId: searchOneSport
       summary: Search one sport
       description: "Queries /search/all for this sport. The path term is sent as q, and the sport slug is sent as sport. page is 0-based and defaults to 0."
@@ -1507,6 +1621,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/team/{id}":
     get:
+      tags:
+        - Teams
       operationId: getTeamOrAthlete
       summary: Get team or athlete
       description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes that team at /player/{id}."
@@ -1534,6 +1650,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/team/{id}/events/{month}/{year}":
     get:
+      tags:
+        - Teams
       operationId: listTeamEventsInAMonth
       summary: List team events in a month
       description: "Returns the events on the team calendar for one month. The month is zero-padded. Padel publishes this at /player/{id}/events/{month}/{year}."
@@ -1575,6 +1693,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/team/{id}/featured-event":
     get:
+      tags:
+        - Teams
       operationId: getFeaturedEventForATeam
       summary: Get featured event for a team
       description: "Returns the featured event for this team. Padel publishes this on /player/{id}."
@@ -1602,6 +1722,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/team/{id}/image":
     get:
+      tags:
+        - Teams
       operationId: getTeamImage
       summary: Get team image
       description: "Returns the team logo from the image host. Padel uses the same image for /player/{id}/image."
@@ -1630,6 +1752,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/team/{id}/matches/near":
     get:
+      tags:
+        - Teams
       operationId: listNearbyEventsForATeam
       summary: List nearby events for a team
       description: "Returns the events around the current date for this team. Padel publishes this at /player/{id}/events/near."
@@ -1657,6 +1781,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/team/{id}/matches/next/{page}":
     get:
+      tags:
+        - Teams
       operationId: listNextEventsForATeam
       summary: List next events for a team
       description: "Returns upcoming events. Page is 0-based and the first page is 0. Padel publishes this at /player/{id}/events/next."
@@ -1690,6 +1816,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/team/{id}/matches/previous/{page}":
     get:
+      tags:
+        - Teams
       operationId: listPreviousEventsForATeam
       summary: List previous events for a team
       description: "Returns past events, newest first. Page is 0-based and the first page is 0. Team sports and badminton, darts, and snooker publish this at /team/{id}/matches/previous. Padel publishes it at /player/{id}/events/previous."
@@ -1723,6 +1851,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/team/{id}/media":
     get:
+      tags:
+        - Teams
       operationId: getTeamMedia
       summary: Get team media
       description: "Returns the media shelf for a team. Padel publishes this on /player/{id}."
@@ -1750,6 +1880,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/team/{id}/performance":
     get:
+      tags:
+        - Teams
       operationId: getTeamPerformance
       summary: Get team performance
       description: "Returns the performance summary for a team. Padel publishes this on /player/{id}."
@@ -1777,6 +1909,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/team/{id}/standings/seasons":
     get:
+      tags:
+        - Teams
       operationId: listStandingsSeasonsForATeam
       summary: List standings seasons for a team
       description: "Returns the seasons in which this team has a standings row. Padel publishes this on /player/{id}."
@@ -1804,6 +1938,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/team/{id}/unique-tournaments":
     get:
+      tags:
+        - Teams
       operationId: listUniqueTournamentsForATeam
       summary: List unique tournaments for a team
       description: "Returns the competitions linked to this team. Padel publishes this on /player/{id}."
@@ -1831,6 +1967,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/all/category/{id}":
     get:
+      tags:
+        - Tournaments
       operationId: listTournamentsInACategory
       summary: List tournaments in a category
       description: Returns the unique tournaments that belong to one category of this sport.
@@ -1858,6 +1996,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/snooker/tournament/categories:
     get:
+      tags:
+        - Tournaments
       operationId: listSportCategories
       summary: List sport categories
       description: "Returns the categories for this sport, usually countries or regions."
@@ -1878,6 +2018,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/snooker/tournament/categories/all:
     get:
+      tags:
+        - Tournaments
       operationId: listEverySportCategory
       summary: List every sport category
       description: "Returns the full category list for this sport, including categories without a live event."
@@ -1898,6 +2040,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/snooker/tournament/categories/live:
     get:
+      tags:
+        - Tournaments
       operationId: listLiveSportCategories
       summary: List live sport categories
       description: Returns categories that currently have a live event in this sport.
@@ -1918,6 +2062,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournament
       summary: Get tournament
       description: Returns one unique tournament.
@@ -1945,6 +2091,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/events/live/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: listLiveEventsOfAUniqueTournament
       summary: List live events of a unique tournament
       description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. The sport-wide live list is /matches/live or /events/live.
@@ -1978,6 +2126,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/featured-events":
     get:
+      tags:
+        - Tournaments
       operationId: getFeaturedTournamentEvents
       summary: Get featured tournament events
       description: Returns the featured events for this unique tournament.
@@ -2005,6 +2155,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/image":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentLogo
       summary: Get tournament logo
       description: Returns the tournament logo from the image host.
@@ -2033,6 +2185,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/image/dark":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentDarkLogo
       summary: Get tournament dark logo
       description: Returns the dark tournament logo from the image host.
@@ -2061,6 +2215,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/media":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentMedia
       summary: Get tournament media
       description: Returns the media shelf for a unique tournament.
@@ -2088,6 +2244,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/schedules/{day}/{month}/{year}":
     get:
+      tags:
+        - Tournaments
       operationId: listTournamentEventsOnADate
       summary: List tournament events on a date
       description: Returns events of one unique tournament on one calendar day. Pass the date in the query.
@@ -2136,6 +2294,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/cuptrees":
     get:
+      tags:
+        - Tournaments
       operationId: getStructuredCupTree
       summary: Get structured cup tree
       description: Returns the knockout bracket for a tournament season.
@@ -2169,6 +2329,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/events/last/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: listPreviousSeasonEvents
       summary: List previous season events
       description: "Returns past events in a season, newest first. Page is 0-based and the first page is 0. Team sports publish this at /matches/last. Racket sports publish it at /events/last."
@@ -2208,6 +2370,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/events/next/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: listUpcomingSeasonEvents
       summary: List upcoming season events
       description: Returns future events in a season. Page is 0-based and the first page is 0. Team sports publish this at /matches/next. Racket sports publish it at /events/next.
@@ -2247,6 +2411,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/events/round/{round}":
     get:
+      tags:
+        - Tournaments
       operationId: listEventsInARound
       summary: List events in a round
       description: Returns the events of one round. Team sports publish this at /matches/round. Racket sports publish it at /events/round.
@@ -2286,6 +2452,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/events/round/{round}/slug/{slug}":
     get:
+      tags:
+        - Tournaments
       operationId: listEventsInARoundAndSlug
       summary: List events in a round and slug
       description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended to the path."
@@ -2332,6 +2500,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/rounds":
     get:
+      tags:
+        - Tournaments
       operationId: listSeasonRounds
       summary: List season rounds
       description: "Returns currentRound and rounds for the season. Each round has round, and may include name, slug, and prefix."
@@ -2365,6 +2535,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/standings/away":
     get:
+      tags:
+        - Tournaments
       operationId: getAwayStandings
       summary: Get away standings
       description: Returns the away table for a tournament season.
@@ -2398,6 +2570,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/standings/home":
     get:
+      tags:
+        - Tournaments
       operationId: getHomeStandings
       summary: Get home standings
       description: Returns the home table for a tournament season.
@@ -2431,6 +2605,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/standings/total":
     get:
+      tags:
+        - Tournaments
       operationId: getTotalStandings
       summary: Get total standings
       description: Returns the overall table for a tournament season.
@@ -2464,6 +2640,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/team-events/away":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamEventsAway
       summary: "Get team events, away"
       description: "Returns tournamentTeamEvents for away matches. The first key is the tournament id, the second key is the team id, and the value is that team's events."
@@ -2497,6 +2675,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/team-events/home":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamEventsHome
       summary: "Get team events, home"
       description: "Returns tournamentTeamEvents for home matches. The first key is the tournament id, the second key is the team id, and the value is that team's events."
@@ -2530,6 +2710,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/team-events/total":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamEventsTotal
       summary: "Get team events, total"
       description: "Returns tournamentTeamEvents. The first key is the tournament id, the second key is the team id, and the value is that team's events."
@@ -2563,6 +2745,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/team-of-the-season":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamOfTheSeason
       summary: Get team of the season
       description: Returns the team of the season for a unique tournament.
@@ -2596,6 +2780,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/season/{seasonId}/venues":
     get:
+      tags:
+        - Tournaments
       operationId: listSeasonVenues
       summary: List season venues
       description: Returns the venues used in a tournament season.
@@ -2629,6 +2815,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournament/{tournamentId}/seasons":
     get:
+      tags:
+        - Tournaments
       operationId: listTournamentSeasons
       summary: List tournament seasons
       description: Returns the seasons of one unique tournament.
@@ -2656,6 +2844,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/tournaments/finished-upcoming/{date}":
     get:
+      tags:
+        - Tournaments
       operationId: listFinishedAndUpcomingTournaments
       summary: List finished and upcoming tournaments
       description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged.
@@ -2684,6 +2874,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/snooker/tournaments/live:
     get:
+      tags:
+        - Tournaments
       operationId: listLiveTournaments
       summary: List live tournaments
       description: Returns tournaments that currently have a live event in this sport.
@@ -2704,6 +2896,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/sport/event-count/{timezoneOffset}":
     get:
+      tags:
+        - Matches
       operationId: countEventsForATimezoneOffset
       summary: Count events for a timezone offset
       description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. Send the viewer's offset, for example 7200."
@@ -2732,6 +2926,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/transfer:
     get:
+      tags:
+        - Transfers
       operationId: listTransfers
       summary: List transfers
       description: Returns the transfer list. A typical call uses page=1 and sort=-transferFee.
@@ -2767,6 +2963,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/trending/events/{country}":
     get:
+      tags:
+        - Matches
       operationId: listTrendingEvents
       summary: List trending events
       description: Returns trending events for a country code.
@@ -2795,6 +2993,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/channel/{channId}/event/{id}":
     get:
+      tags:
+        - TV
       operationId: getMatchTVChannelVotes
       summary: Get match TV channel votes
       description: Fetches viewer voting data from a specific TV channel that is broadcasting the match.
@@ -2836,6 +3036,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/channel/{id}/schedule":
     get:
+      tags:
+        - TV
       operationId: getTVChannelSchedule
       summary: Get TV channel schedule
       description: Retrieves the broadcast schedule for a specific TV channel.
@@ -2864,6 +3066,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/country/all/event/{id}":
     get:
+      tags:
+        - TV
       operationId: getMatchTVCountries
       summary: Get match TV countries
       description: Lists the countries and the TV channels within them that are broadcasting a specific match.
@@ -2898,6 +3102,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/country/{countryCode}/channels":
     get:
+      tags:
+        - TV
       operationId: getCountryTVChannels
       summary: Get country TV channels
       description: Retrieves available TV channels for a specific country.

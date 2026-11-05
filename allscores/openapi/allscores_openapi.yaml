@@ -9,9 +9,23 @@ info:
 servers:
   - url: https://allscores.p.rapidapi.com
     description: RapidAPI. Send this host in X-RapidAPI-Host.
+tags:
+  - name: Athletes
+  - name: Betting
+  - name: Competitions
+  - name: Competitors
+  - name: Data
+  - name: Games
+  - name: Images
+  - name: News
+  - name: Search
+  - name: Stats
+  - name: Transfers
 paths:
   /api/allscores/athlete-career:
     get:
+      tags:
+        - Athletes
       operationId: getAthleteCareer
       summary: Get athlete career
       description: "Returns career tables for one athlete. stats has categories, tables, and a legend. Rows are competitions and summary is the career total. seasonKey -1 is every season."
@@ -77,6 +91,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/athlete-chart-events:
     get:
+      tags:
+        - Athletes
       operationId: getAthleteChartEvents
       summary: Get athlete chart events
       description: "Returns plotted shot and goal events for one or more athletes. chartEvents includes zones, penalty totals, and events with pitch position, plus the games those events belong to."
@@ -136,6 +152,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/athlete-details:
     get:
+      tags:
+        - Athletes
       operationId: getAthleteDetails
       summary: Get athlete details
       description: "Returns athlete profiles. Without fullDetails each athlete has age, position, club, and nationality. fullDetails=true adds jersey, contract, injury, shortBio, highlightStats, lastMatches, transfers, trophies, and careerStats. competitionId scopes the profile to one competition."
@@ -219,6 +237,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/athlete-games:
     get:
+      tags:
+        - Athletes
       operationId: getAthleteGames
       summary: Get athlete games
       description: "Returns the games an athlete played. Each entry has the game, played, hasStats, athleteStats, and relatedCompetitor, plus the competitions those games belong to."
@@ -296,6 +316,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/athlete-next-game:
     get:
+      tags:
+        - Athletes
       operationId: getAthleteNextGame
       summary: Get athlete next game
       description: "Returns each requested athlete with a nextGame when one is scheduled. nextGame has start time, status, competition, venue, and home and away competitors. fullDetails expands that game."
@@ -373,6 +395,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/athlete-trophy-stats:
     get:
+      tags:
+        - Athletes
       operationId: getAthleteTrophyStats
       summary: Get athlete trophy stats
       description: "Returns one athlete's record in one competition. stats is a table with columns, rows, and the competitor that row belongs to."
@@ -439,6 +463,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/best-odds:
     get:
+      tags:
+        - Betting
       operationId: getBestOdds
       summary: Get best odds
       description: "Returns the best available line for the requested games, or for a competition window when you send competition, sport, minGames, and maxGames. The body has lines, lineTypes, bookmakers, and the games those lines belong to."
@@ -560,6 +586,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/bets-outright-details:
     get:
+      tags:
+        - Betting
       operationId: getOutrightBetDetails
       summary: Get outright bet details
       description: "Returns one outright line: name, marketTitle, entityType, entityId, lineTypeId, lineId, bookmakerId, odds, and winningChancesText when the market has it, plus the related competitor, bookmakers, sports, countries, competitions, and competitors. An unknown lineId returns those ids as 0 and empty sports and countries. entityType 4 is the competitor."
@@ -624,6 +652,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/bets-outrights:
     get:
+      tags:
+        - Betting
       operationId: getBetsOutrights
       summary: Get bets outrights
       description: "Returns outright and futures prices for competitors, athletes, or competitions. An entity with no outright market returns an empty object and HTTP 200."
@@ -724,6 +754,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/bets-proposition:
     get:
+      tags:
+        - Betting
       operationId: getBetsProposition
       summary: Get bets proposition
       description: Returns proposition and player-prop markets for one game. Send athleteId to limit the markets to one athlete.
@@ -808,6 +840,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/bets-raffle-bookmaker:
     get:
+      tags:
+        - Betting
       operationId: getBetsRaffleBookmaker
       summary: Get bets raffle bookmaker
       description: Returns the raffle bookmaker list. bookmakers can be an empty array and the status can still be HTTP 200.
@@ -860,6 +894,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/bets-teaser:
     get:
+      tags:
+        - Betting
       operationId: getBetsTeaser
       summary: Get bets teaser
       description: "Returns the teaser card for one game, with its competition, competitors, and bookmakers. bookmakers can be empty."
@@ -925,6 +961,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/competition-brackets:
     get:
+      tags:
+        - Competitions
       operationId: getCompetitionBrackets
       summary: Get competition brackets
       description: "Returns knockout brackets. Each bracket has name, title, competitionId, stages, and knockoutTitle, plus the competitions and bookmakers referenced by the draw. Send competition, or send competitor for one side's draw."
@@ -1015,6 +1053,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/competition-details:
     get:
+      tags:
+        - Competitions
       operationId: getCompetitionDetails
       summary: Get competition details
       description: "Returns one or more competitions with name, country, sport, current season and stage, colors, popularity, and flags for standings, brackets, stats, transfers, and bets. withSeasons adds seasons. Send withBestOdds and isDashboard for the dashboard view. type is empty, stats, or standings."
@@ -1122,6 +1162,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/competition-history:
     get:
+      tags:
+        - Competitions
       operationId: getCompetitionHistory
       summary: Get competition history
       description: "Returns past winners for a competition. table has a title, rows, rowEntityType, and isChampionByKnockout, plus the competitors those rows name."
@@ -1181,6 +1223,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/competition-standings:
     get:
+      tags:
+        - Competitions
       operationId: getCompetitionStandings
       summary: Get competition standings
       description: "Returns the table for a competition season and stage. standings includes displayName, groups, columns, rows, destinations, filterTypes, and competitionRules."
@@ -1300,6 +1344,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/competition-team-of-the-week:
     get:
+      tags:
+        - Competitions
       operationId: getCompetitionTeamOfTheWeek
       summary: Get competition team of the week
       description: Returns the team-of-the-week selection for the given competitions. A competition without a published selection returns an empty object and HTTP 200.
@@ -1365,6 +1411,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/competitor-current-games:
     get:
+      tags:
+        - Competitors
       operationId: getCompetitorCurrentGames
       summary: Get competitor current games
       description: "Returns the games in progress or just played for a competitor or a competition. Each game has status, start time, lineup flags, and scores. Send includeTopBettingOpportunity=1 to add the top betting opportunity."
@@ -1516,6 +1564,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/competitor-details:
     get:
+      tags:
+        - Competitors
       operationId: getCompetitorDetails
       summary: Get competitor details
       description: "Returns one competitor with name, symbolicName, colors, mainCompetitionId, and flags such as hasSquad, hasTransfers, hasTrophies, and hasHighlights. withSeasons adds the competitions that competitor is in. Send isDashboard=true for the dashboard view."
@@ -1593,6 +1643,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/competitor-recent-form:
     get:
+      tags:
+        - Competitors
       operationId: getCompetitorRecentForm
       summary: Get competitor recent form
       description: Returns the recent results used for a competitor form strip.
@@ -1659,6 +1711,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/competitor-squads:
     get:
+      tags:
+        - Competitors
       operationId: getCompetitorSquads
       summary: Get competitor squads
       description: "Returns the roster for a competitor. squads groups athletes by position, plus the related competitions and competitors."
@@ -1718,6 +1772,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/countries:
     get:
+      tags:
+        - Data
       operationId: getCountries
       summary: Get countries
       description: "Returns the country catalog for the requested sports. Each country has id, name, nameForURL, imageVersion, sportTypes, totalGames, and liveGames, plus sports, lastUpdateId, requestedUpdateId, and ttl."
@@ -1788,6 +1844,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/custom-scores:
     get:
+      tags:
+        - Games
       operationId: getCustomScores
       summary: Get custom scores
       description: "Returns games for a chosen set of competitions and competitors over a date range. Send dates in the locale short pattern, for example 30/09/2026."
@@ -1946,6 +2004,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/featured-competitions:
     get:
+      tags:
+        - Competitions
       operationId: getFeaturedCompetitions
       summary: Get featured competitions
       description: "Returns featured competitions for a sport. Each competition has id, name, countryId, sportId, currentSeasonNum, currentStageNum, popularityRank, and flags such as hasStandings, hasBrackets, hasStats, hasTransfers, and hasBets. withSeasons adds seasons. type is empty, stats, or standings."
@@ -2034,6 +2094,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/featured-games:
     get:
+      tags:
+        - Games
       operationId: getFeaturedGames
       summary: Get featured games
       description: "Returns a short list of highlighted games, with the sports, countries, competitions, and competitors those games reference, plus summary, lastUpdateId, and ttl. context is 1 home, 2 my scores, 3 competition page, or 4 team page. Omit showOdds when you do not want odds."
@@ -2200,6 +2262,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/fixtures:
     get:
+      tags:
+        - Games
       operationId: getFixtures
       summary: Get fixtures
       description: "Returns upcoming games for competitions or competitors. The body has games, summary, competitionFilters, and paging. previousPage and nextPage are cursors for /api/allscores/paging."
@@ -2351,6 +2415,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/game-bet-line:
     get:
+      tags:
+        - Games
       operationId: getGameBetLines
       summary: Get game bet lines
       description: Returns bookmaker lines for the given games. Use best-odds for the best price on a game or a competition window.
@@ -2416,6 +2482,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/game-details:
     get:
+      tags:
+        - Games
       operationId: getGameDetails
       summary: Get game details
       description: "Returns one game: status, start time, clock, venue, officials, stage scores, events, lineups when present, top performers, and members. Select the game with gameId or with matchupId as homeId-awayId-competitionId."
@@ -2494,6 +2562,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/game-highlights:
     get:
+      tags:
+        - Games
       operationId: getGameHighlights
       summary: Get game highlights
       description: Returns video highlights for the given competitors or competitions. numberOfGames caps the list. A competitor with no clips still returns lastUpdateId and ttl.
@@ -2573,6 +2643,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/game-lineups:
     get:
+      tags:
+        - Games
       operationId: getGameLineups
       summary: Get game lineups
       description: "Returns the players on the pitch for one game. members includes status, position, formation, jersey, ranking, and per-player stats. chartEvents lists shots and other plotted events."
@@ -2644,6 +2716,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/game-predictions:
     get:
+      tags:
+        - Games
       operationId: getGamePredictions
       summary: Get game predictions
       description: Returns prediction cards for the requested competitors.
@@ -2781,6 +2855,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/game-predictions-contextual:
     get:
+      tags:
+        - Games
       operationId: getContextualGamePredictions
       summary: Get contextual game predictions
       description: "Returns contextual predictions. Each game can include promotedPredictions and playersBetsPredictions, plus sports, countries, competitions, competitors, bookmakers, lastUpdateId, requestedUpdateId, and ttl."
@@ -2991,6 +3067,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/game-stats:
     get:
+      tags:
+        - Games
       operationId: getGameStatistics
       summary: Get game statistics
       description: "Returns team statistics for the given games. statistics has name, value, valuePercentage, competitorId, isMajor, and order. onlyIsMajor keeps the headline stats. filterId selects one statisticsFilters tab."
@@ -3068,6 +3146,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/games-scores:
     get:
+      tags:
+        - Games
       operationId: getGamesScores
       summary: Get games scores
       description: "Returns the scores page for one sport and a date range: games with status, start time, and home and away scores, plus countries, competitions, competitors, summary, lastUpdateId, and ttl. Send dates in the locale short pattern, for example 30/09/2026."
@@ -3248,6 +3328,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/games-slider:
     get:
+      tags:
+        - Games
       operationId: getSliderGames
       summary: Get slider games
       description: Returns the slider list of games. The body matches games-top. Games can include lineup and news flags.
@@ -3458,6 +3540,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/games-suggestions:
     get:
+      tags:
+        - Games
       operationId: getSuggestedGames
       summary: Get suggested games
       description: "Returns suggested games. With competitions and competitors the body includes suggestedGames, plus sports, countries, competitions, competitors, lastUpdateId, requestedUpdateId, and ttl. A call that only sends sport can return an empty list."
@@ -3668,6 +3752,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/games-top:
     get:
+      tags:
+        - Games
       operationId: getTopGames
       summary: Get top games
       description: "Returns a short list of highlighted games with status, start time, and scores, plus odds when showOdds is set, and sports, countries, competitions, competitors, bookmakers, summary, lastUpdateId, requestedUpdateId, and ttl."
@@ -3878,6 +3964,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/h2h:
     get:
+      tags:
+        - Games
       operationId: getHeadToHeadMatches
       summary: Get head-to-head matches
       description: Returns previous meetings for a game. game.h2hGames lists those matches. Home and away competitors include recentGames. addMainOdds attaches the main line. Select the fixture with gameId or with matchupId as homeId-awayId-competitionId.
@@ -3962,6 +4050,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/allscores/img/flag/country/{countryId}":
     get:
+      tags:
+        - Images
       operationId: getCountryFlag
       summary: Get country flag
       description: Returns the 20x20 round country flag. This route has no image version.
@@ -3990,6 +4080,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/allscores/img/large/athlete/{athleteId}/version/{imageVersion}":
     get:
+      tags:
+        - Images
       operationId: getAthleteLargeImage
       summary: Get athlete large image
       description: Returns the 84x84 athlete photo.
@@ -4025,6 +4117,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/allscores/img/large/competitor/{competitorId}/version/{imageVersion}":
     get:
+      tags:
+        - Images
       operationId: getCompetitorLargeImage
       summary: Get competitor large image
       description: Returns the 64x64 competitor logo.
@@ -4060,6 +4154,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/allscores/img/large/country/{countryId}/competition/{competitionId}/version/{imageVersion}":
     get:
+      tags:
+        - Images
       operationId: getCompetitionLargeImage
       summary: Get competition large image
       description: Returns a 68x68 competition logo. countryId selects the fallback flag. The light routes return the list logo.
@@ -4102,6 +4198,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/allscores/img/large/light/country/{countryId}/competition/{competitionId}/version/{imageVersion}":
     get:
+      tags:
+        - Images
       operationId: getCompetitionLightLargeImage
       summary: Get competition light large image
       description: Returns the 40x40 competition logo. The fallback is the round flag of countryId.
@@ -4144,6 +4242,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/allscores/img/small/athlete/{athleteId}/version/{imageVersion}":
     get:
+      tags:
+        - Images
       operationId: getAthleteSmallImage
       summary: Get athlete small image
       description: Returns the 40x40 athlete photo used in lists.
@@ -4179,6 +4279,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/allscores/img/small/competitor/{competitorId}/version/{imageVersion}":
     get:
+      tags:
+        - Images
       operationId: getCompetitorSmallImage
       summary: Get competitor small image
       description: Returns the 34x34 competitor logo used in lists.
@@ -4214,6 +4316,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/allscores/img/small/country/{countryId}/competition/{competitionId}/version/{imageVersion}":
     get:
+      tags:
+        - Images
       operationId: getCompetitionSmallImage
       summary: Get competition small image
       description: Returns a 20x20 competition logo. countryId selects the fallback flag. The light routes return the list logo.
@@ -4256,6 +4360,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/allscores/img/small/light/country/{countryId}/competition/{competitionId}/version/{imageVersion}":
     get:
+      tags:
+        - Images
       operationId: getCompetitionLightSmallImage
       summary: Get competition light small image
       description: Returns the 24x24 competition logo used in lists. The fallback is the round flag of countryId.
@@ -4298,6 +4404,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/allscores/img/trophy/{trophyId}":
     get:
+      tags:
+        - Images
       operationId: getTrophyImage
       summary: Get trophy image
       description: Returns the 40x40 trophy image. This route has no image version.
@@ -4326,6 +4434,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/news:
     get:
+      tags:
+        - News
       operationId: getNews
       summary: Get news
       description: "Returns news cards and newsSources. Each card has id, title, publishDate, image, url, sourceId, and isMagazine. Filter by sport, games, competitions, competitors, or athletes. isPreview selects the short list."
@@ -4432,6 +4542,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/paging:
     get:
+      tags:
+        - Games
       operationId: getGamesPaging
       summary: Get games (paging)
       description: Returns the next or previous page of games. Pass the paging cursor from fixtures or results unchanged.
@@ -4477,6 +4589,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/playbyplay-comments:
     get:
+      tags:
+        - Games
       operationId: getPlayByPlayComments
       summary: Get play-by-play comments
       description: "Returns commentary. The body has Messages, UpdateURL, and TTL. lang is the numeric language id. fixtureid is the provider fixture key. sportifiergameid is the game id."
@@ -4542,6 +4656,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/point-by-point:
     get:
+      tags:
+        - Games
       operationId: getPointByPoint
       summary: Get point by point
       description: "Returns the point-by-point sequence for a game that has point-by-point, such as tennis or volleyball."
@@ -4601,6 +4717,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/related-entities:
     get:
+      tags:
+        - Competitors
       operationId: getRelatedEntities
       summary: Get related entities
       description: "Returns entities linked to the requested athletes, competitors, or competitions. Each related entity has id, name, and nameForURL."
@@ -4674,6 +4792,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/results:
     get:
+      tags:
+        - Games
       operationId: getResults
       summary: Get results
       description: "Returns finished games for competitions or competitors. The body matches fixtures, including paging cursors for /api/allscores/paging."
@@ -4825,6 +4945,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/search:
     get:
+      tags:
+        - Search
       operationId: search
       summary: Search
       description: "Searches competitions, competitors, and athletes. The body returns those three lists plus the sports and countries needed to label them. filter=all returns every result type."
@@ -4896,6 +5018,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/sports:
     get:
+      tags:
+        - Data
       operationId: getSports
       summary: Get sports
       description: "Returns the sports catalog. Each sport has id, name, nameForURL, and imageVersion. withCount includes per-sport game counts. The body includes lastUpdateId, requestedUpdateId, and ttl."
@@ -4961,6 +5085,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/stats:
     get:
+      tags:
+        - Stats
       operationId: getStats
       summary: Get stats
       description: "Returns season statistics. stats.athletesStats and stats.competitorsStats are tables. Send competition for the leader table, or competitorId for one side. withSeasons adds seasons. phaseNum selects a phase."
@@ -5039,6 +5165,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/stats-pregame:
     get:
+      tags:
+        - Games
       operationId: getPreGameStats
       summary: Get pre-game stats
       description: Returns the pre-game comparison for one game. Live and finished match stats are on game-stats.
@@ -5105,6 +5233,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/top-athletes:
     get:
+      tags:
+        - Athletes
       operationId: getTopAthletes
       summary: Get top athletes
       description: "Returns the most popular athletes, each with age, position, clubId, nationality, and imageVersion, plus the sports, countries, competitions, and competitors needed to label them."
@@ -5170,6 +5300,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/top-competitions:
     get:
+      tags:
+        - Competitions
       operationId: getTopCompetitions
       summary: Get top competitions
       description: "Returns the most popular competitions, each with id, name, countryId, sportId, popularityRank, currentSeasonNum, currentStageNum, color, and flags such as hasStandings, hasBrackets, hasStats, hasTransfers, and hasBets, plus the related sports and countries."
@@ -5241,6 +5373,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/top-competitors:
     get:
+      tags:
+        - Competitors
       operationId: getTopCompetitors
       summary: Get top competitors
       description: "Returns the most popular competitors. Each one has id, name, longName, symbolicName, countryId, sportId, imageVersion, color, mainCompetitionId, and flags such as hasSquad and hasTransfers, plus the related sports and countries. Omit promoteNational to leave national teams unpromoted."
@@ -5323,6 +5457,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/transfers:
     get:
+      tags:
+        - Transfers
       operationId: getTransfers
       summary: Get transfers
       description: "Returns player transfers. Each transfer has id, type, origin, target, time, price, athleteId, statusName, positionId, isArrival, and isDeparture, plus the related athletes and competitors. Filter by competitions or by one competitor. onlyConfirmed keeps confirmed deals."
@@ -5414,6 +5550,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/trend-details:
     get:
+      tags:
+        - Games
       operationId: getTrendDetails
       summary: Get trend details
       description: "Returns one trend. trend has id, text, betCTA, divId, lineTypeTitle, and gameId. games lists the matches behind that trend, plus bookmakers, sports, countries, competitions, and competitors."
@@ -5484,6 +5622,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/allscores/trends:
     get:
+      tags:
+        - Games
       operationId: getTrends
       summary: Get trends
       description: "Returns betting trend cards for a game or for a sport on a date. Each trend has text, outcome, percentage, confidenceTrendIds, lineTypeId, and betCTA, plus the related games, competitors, competition, and bookmakers. A date with nothing trending can return only lastUpdateId and ttl."

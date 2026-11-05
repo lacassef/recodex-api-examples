@@ -9,9 +9,28 @@ info:
 servers:
   - url: https://skalpha1.p.rapidapi.com
     description: RapidAPI. Send this host in X-RapidAPI-Host.
+tags:
+  - name: Articles
+  - name: Authors
+  - name: Calendars
+  - name: ETFs
+  - name: Feed
+  - name: Filings
+  - name: Finance
+  - name: Market
+  - name: Metrics
+  - name: News
+  - name: PressReleases
+  - name: Prices
+  - name: Screeners
+  - name: Search
+  - name: SymbolData
+  - name: Symbols
 paths:
   /api/skalpha/article-page-content-recommendations:
     get:
+      tags:
+        - Articles
       operationId: articlePageContentRecommendations
       summary: Article page content recommendations
       description: Related content for an article page.
@@ -45,6 +64,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/articles:
     get:
+      tags:
+        - Articles
       operationId: articlesList
       summary: Articles list
       description: "Latest articles with optional filters (category, fields, include, pagination)."
@@ -157,6 +178,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/articles/trending:
     get:
+      tags:
+        - Articles
       operationId: trendingArticles
       summary: Trending articles
       description: Trending articles (similar params to /articles).
@@ -263,6 +286,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/articles/{id}":
     get:
+      tags:
+        - Articles
       operationId: articleByID
       summary: Article by ID
       description: Fetch a single article by ID.
@@ -320,6 +345,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/articles/{id}/author":
     get:
+      tags:
+        - Articles
       operationId: articleAuthor
       summary: Article author
       description: Returns metadata about the author of an article.
@@ -353,6 +380,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/articles/{id}/comment-maps":
     get:
+      tags:
+        - Articles
       operationId: articleCommentMaps
       summary: Article comment maps
       description: Comment mapping for an article.
@@ -394,6 +423,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/articles/{id}/comments":
     get:
+      tags:
+        - Articles
       operationId: articleComments
       summary: Article comments
       description: Comment bodies for an article.
@@ -447,6 +478,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/authors/{slug}":
     get:
+      tags:
+        - Authors
       operationId: authorBySlug
       summary: Author by slug
       description: Public author profile by slug.
@@ -498,6 +531,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/authors/{slug}/article/ticker-counts":
     get:
+      tags:
+        - Authors
       operationId: authorArticleTickerCounts
       summary: Author article ticker counts
       description: "Aggregate ticker counts across an author's articles."
@@ -525,6 +560,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/authors/{slug}/top-covered-symbols":
     get:
+      tags:
+        - Authors
       operationId: authorTopCoveredSymbols
       summary: Author top covered symbols
       description: Top symbols covered by an author.
@@ -552,6 +589,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/breaking-news:
     get:
+      tags:
+        - News
       operationId: breakingNews
       summary: Breaking news
       description: Proxies the latest breaking headlines. No specific params required.
@@ -579,6 +618,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/charts/lua:
     get:
+      tags:
+        - Finance
       operationId: luaCharts
       summary: LUA charts
       description: Intraday and historical timeseries for a ticker_id. Accepts period or explicit from/to.
@@ -635,6 +676,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/comments/{id}/sub-comments":
     get:
+      tags:
+        - News
       operationId: commentReplies
       summary: Comment replies
       description: Replies under one comment.
@@ -682,6 +725,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/day-watch:
     get:
+      tags:
+        - Market
       operationId: dayWatch
       summary: Day watch
       description: Day watch movers.
@@ -712,6 +757,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/dividend-investing:
     get:
+      tags:
+        - Market
       operationId: dividendInvesting
       summary: Dividend investing
       description: Dividend investing overview and data.
@@ -732,6 +779,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/earnings-calendar/days:
     get:
+      tags:
+        - Calendars
       operationId: earningsCalendarDays
       summary: Earnings calendar days
       description: Earnings calendar entries within a date range.
@@ -777,6 +826,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/earnings-calendar/tickers:
     get:
+      tags:
+        - Calendars
       operationId: earningsCalendarTickers
       summary: Earnings calendar tickers
       description: Earnings calendar for a specific date.
@@ -816,6 +867,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/education-top-articles:
     get:
+      tags:
+        - Articles
       operationId: educationTopArticles
       summary: Education top articles
       description: Top articles for an education category.
@@ -865,6 +918,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/equities:
     get:
+      tags:
+        - Market
       operationId: equities
       summary: Equities
       description: Lists equities with optional category filter.
@@ -974,6 +1029,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/etf-performance-categories:
     get:
+      tags:
+        - ETFs
       operationId: etfPerformanceCategories
       summary: ETF performance categories
       description: Lists ETF performance categories.
@@ -994,6 +1051,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/etf-performance-categories/{category}":
     get:
+      tags:
+        - ETFs
       operationId: etfPerformanceByCategory
       summary: ETF performance by category
       description: Detailed performance for a given ETF category.
@@ -1021,6 +1080,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/feed:
     get:
+      tags:
+        - Feed
       operationId: feed
       summary: Feed
       description: Personalized/homepage feed blocks.
@@ -1112,6 +1173,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/filings/pdf/{id}":
     get:
+      tags:
+        - Filings
       operationId: filingsPDF
       summary: Filings PDF
       description: Fetches the raw PDF content for a filing by ID.
@@ -1139,6 +1202,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/filings/{id}":
     get:
+      tags:
+        - Filings
       operationId: filingsByID
       summary: Filings by ID
       description: Fetch an SEC filing by ID.
@@ -1190,6 +1255,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/filings/{id}/comment-maps":
     get:
+      tags:
+        - Filings
       operationId: filingsCommentMaps
       summary: Filings comment maps
       description: Comment mapping for a filing.
@@ -1231,6 +1298,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/full-news/trending:
     get:
+      tags:
+        - News
       operationId: fullNewsTrending
       summary: Full news trending
       description: Full content news trending feed.
@@ -1318,6 +1387,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/fundamental-metrics:
     get:
+      tags:
+        - Metrics
       operationId: fundamentalMetrics
       summary: Fundamental metrics
       description: High-level metrics and groupings.
@@ -1351,6 +1422,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/global-indices:
     get:
+      tags:
+        - Market
       operationId: globalIndices
       summary: Global indices
       description: Global indices list; can include related tickers.
@@ -1380,6 +1453,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/historical-prices:
     get:
+      tags:
+        - Prices
       operationId: historicalPrices
       summary: Historical prices
       description: "Price history for a slug with optional date range. slug is filter[ticker][slug]. from and to are filter[as_of_date][gte] and filter[as_of_date][lte]. slugs_list is repeated filter[ticker][slug][]. One filter_for_date is filter[for_date]; several dates are repeated filter[for_date][]."
@@ -1458,6 +1533,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/leading-news-stories:
     get:
+      tags:
+        - News
       operationId: leadingNewsStories
       summary: Leading news stories
       description: Curated leading stories for the homepage.
@@ -1478,6 +1555,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/market-open:
     get:
+      tags:
+        - Market
       operationId: marketOpen
       summary: Market open
       description: Returns the market open/close status and timing.
@@ -1505,6 +1584,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/metrics:
     get:
+      tags:
+        - Metrics
       operationId: metrics
       summary: Metrics
       description: Ticker metrics for requested fields and slugs.
@@ -1544,6 +1625,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/news:
     get:
+      tags:
+        - News
       operationId: newsList
       summary: News list
       description: Paginates through news with optional fields/include filters.
@@ -1655,6 +1738,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/news-page-content-recommendations:
     get:
+      tags:
+        - News
       operationId: newsPageContentRecommendations
       summary: News page content recommendations
       description: Related content for a news page.
@@ -1688,6 +1773,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/news/trending:
     get:
+      tags:
+        - News
       operationId: trendingNews
       summary: Trending news
       description: Trending news feed (similar params to /news).
@@ -1763,6 +1850,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/news/{id}":
     get:
+      tags:
+        - News
       operationId: newsByID
       summary: News by ID
       description: Fetch a single news item by ID.
@@ -1820,6 +1909,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/news/{id}/comment-maps":
     get:
+      tags:
+        - News
       operationId: newsCommentMaps
       summary: News comment maps
       description: Comment ids for a news item.
@@ -1867,6 +1958,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/news/{id}/comments":
     get:
+      tags:
+        - News
       operationId: newsComments
       summary: News comments
       description: Comment bodies for a news item.
@@ -1920,6 +2013,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/options/chain:
     get:
+      tags:
+        - Finance
       operationId: optionsChain
       summary: Options chain
       description: Options chain for a symbol by numeric ticker_id and expiration date.
@@ -1959,6 +2054,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/press-releases/{id}":
     get:
+      tags:
+        - PressReleases
       operationId: pressReleaseByID
       summary: Press release by ID
       description: Fetch a press release by ID.
@@ -2010,6 +2107,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/press-releases/{id}/comment-maps":
     get:
+      tags:
+        - PressReleases
       operationId: pressReleaseCommentMaps
       summary: Press release comment maps
       description: Comment mapping for a press release.
@@ -2051,6 +2150,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/quotes/realtime:
     get:
+      tags:
+        - Finance
       operationId: realTimeQuotes
       summary: Real-time quotes
       description: Real-time snapshot quotes by SA IDs or slugs. One of sa_ids or sa_slugs is required (comma-separated).
@@ -2090,6 +2191,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/screener-filters:
     get:
+      tags:
+        - Screeners
       operationId: screenerFilters
       summary: Screener filters
       description: Returns filter definitions for screeners.
@@ -2129,6 +2232,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/screeners:
     get:
+      tags:
+        - Screeners
       operationId: screeners
       summary: Screeners
       description: Lists available screeners.
@@ -2160,6 +2265,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/screeners/{id}":
     get:
+      tags:
+        - Screeners
       operationId: screenerByID
       summary: Screener by ID
       description: Screener definition by its ID.
@@ -2187,6 +2294,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/search:
     get:
+      tags:
+        - Search
       operationId: searchAutocomplete
       summary: Search autocomplete
       description: "Unified autocomplete across symbols, indices, and crypto."
@@ -2262,6 +2371,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/searches:
     get:
+      tags:
+        - Search
       operationId: searches
       summary: Searches
       description: Unified search across types.
@@ -2348,6 +2459,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/searches/{scope}":
     get:
+      tags:
+        - Search
       operationId: searchesByScope
       summary: Searches by scope
       description: "Scoped search (e.g., articles, headlines, news, symbols, people)."
@@ -2437,6 +2550,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/sector-metrics:
     get:
+      tags:
+        - Market
       operationId: sectorMetricsAggregate
       summary: Sector metrics aggregate
       description: "Analyst revision metrics for sector ids. This is not /symbols/{slug}/sector_metrics."
@@ -2470,6 +2585,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/sectors-hub:
     get:
+      tags:
+        - Market
       operationId: sectorsHub
       summary: Sectors hub
       description: Sector hub page content. sector is required.
@@ -2503,6 +2620,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/symbol-data:
     get:
+      tags:
+        - SymbolData
       operationId: symbolData
       summary: Symbol data
       description: Batch symbol data for fields and slugs.
@@ -2536,6 +2655,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/symbol-data/charting:
     get:
+      tags:
+        - SymbolData
       operationId: symbolDataCharting
       summary: Symbol data charting
       description: Symbol charting data for date range and metrics.
@@ -2587,6 +2708,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/symbol-data/estimated-earning-announces:
     get:
+      tags:
+        - SymbolData
       operationId: symbolDataEstimatedEarningAnnounces
       summary: Symbol data estimated earning announces
       description: Estimated earnings announcement date for a slug.
@@ -2614,6 +2737,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/symbol-data/estimates:
     get:
+      tags:
+        - SymbolData
       operationId: symbolDataEstimates
       summary: Symbol data estimates
       description: Estimates and revisions for requested ticker IDs.
@@ -2681,6 +2806,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/symbol-data/profile:
     get:
+      tags:
+        - SymbolData
       operationId: symbolDataProfile
       summary: Symbol data profile
       description: Company profile for one or more slugs.
@@ -2708,6 +2835,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/symbol-data/widgets:
     get:
+      tags:
+        - SymbolData
       operationId: symbolDataWidgets
       summary: Symbol data widgets
       description: Summary data used by UI widgets.
@@ -2741,6 +2870,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/symbols/rating/periods:
     get:
+      tags:
+        - Symbols
       operationId: ratingPeriodsBatch
       summary: Rating periods batch
       description: Ratings for many symbols over week periods. The slug is a query list. This is not the per-symbol rating periods route.
@@ -2787,6 +2918,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}":
     get:
+      tags:
+        - Symbols
       operationId: symbol
       summary: Symbol
       description: Ticker profile for a symbol.
@@ -2820,6 +2953,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/analysis":
     get:
+      tags:
+        - Symbols
       operationId: symbolAnalysis
       summary: Symbol analysis
       description: Analysis content for a symbol.
@@ -2889,6 +3024,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/author_ratings":
     get:
+      tags:
+        - Symbols
       operationId: authorRatings
       summary: Author ratings
       description: Author ratings distribution for a symbol.
@@ -2946,6 +3083,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/discussions":
     get:
+      tags:
+        - Symbols
       operationId: discussions
       summary: Discussions
       description: Discussion threads for a symbol.
@@ -2985,6 +3124,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/dividends":
     get:
+      tags:
+        - Symbols
       operationId: symbolDividends
       summary: Symbol dividends
       description: Dividend history for a symbol.
@@ -3034,6 +3175,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/earning_summaries":
     get:
+      tags:
+        - Symbols
       operationId: earningSummaries
       summary: Earning summaries
       description: Earnings summaries for a symbol.
@@ -3078,6 +3221,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/etf_category_metrics":
     get:
+      tags:
+        - Symbols
       operationId: etfCategoryMetrics
       summary: ETF category metrics
       description: "Category medians for an ETF symbol. filter_fields is repeated, unlike the one-value filter[fields] on /metrics."
@@ -3117,6 +3262,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/faq":
     get:
+      tags:
+        - Symbols
       operationId: faq
       summary: FAQ
       description: Frequently asked questions for a symbol.
@@ -3144,6 +3291,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/fundamentals":
     get:
+      tags:
+        - Symbols
       operationId: fundamentalsSeries
       summary: Fundamentals series
       description: "Chart series for one fundamental field. This is not fundamentals_metrics. period_type is sent as filter[period_type]."
@@ -3202,6 +3351,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/fundamentals_metrics":
     get:
+      tags:
+        - Symbols
       operationId: fundamentalsMetrics
       summary: Fundamentals metrics
       description: Fundamental metrics for a symbol.
@@ -3256,6 +3407,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/insiders_sell_buy":
     get:
+      tags:
+        - Symbols
       operationId: insiderSellAndBuy
       summary: Insider sell and buy
       description: Insider buy and sell activity for a symbol.
@@ -3283,6 +3436,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/invested_etfs":
     get:
+      tags:
+        - Symbols
       operationId: investedEtfs
       summary: Invested ETFs
       description: ETFs invested in the symbol.
@@ -3310,6 +3465,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/news":
     get:
+      tags:
+        - Symbols
       operationId: symbolNews
       summary: Symbol news
       description: News items related to a symbol.
@@ -3384,6 +3541,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/option-expirations":
     get:
+      tags:
+        - Symbols
       operationId: optionExpirationsForSymbol
       summary: Option expirations for symbol
       description: Available option expiration dates for a symbol.
@@ -3411,6 +3570,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/payout_ratios":
     get:
+      tags:
+        - Symbols
       operationId: payoutRatios
       summary: Payout ratios
       description: Dividend payout ratios for a symbol.
@@ -3438,6 +3599,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/peers/etfs/exposure":
     get:
+      tags:
+        - Symbols
       operationId: symbolPeersEtfsExposure
       summary: Symbol peers (ETFs exposure)
       description: ETFs with exposure to the symbol.
@@ -3465,6 +3628,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/peers/stocks/most_mentioned":
     get:
+      tags:
+        - Symbols
       operationId: symbolPeersStocksMostMentioned
       summary: Symbol peers (stocks most mentioned)
       description: Peer stocks most mentioned with the symbol.
@@ -3492,6 +3657,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/peers/stocks/people_follow":
     get:
+      tags:
+        - Symbols
       operationId: symbolPeersStocksPeopleFollow
       summary: Symbol peers (stocks people follow)
       description: Peer stocks people follow alongside the symbol.
@@ -3519,6 +3686,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/people_also_follow":
     get:
+      tags:
+        - Symbols
       operationId: peopleAlsoFollow
       summary: People also follow
       description: Symbols people also follow alongside the symbol.
@@ -3552,6 +3721,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/press-releases":
     get:
+      tags:
+        - Symbols
       operationId: symbolPressReleases
       summary: Symbol press releases
       description: Press releases for a symbol.
@@ -3609,6 +3780,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/random":
     get:
+      tags:
+        - Symbols
       operationId: randomSymbol
       summary: Random symbol
       description: A symbol drawn from the same set as the given slug. The public path keeps the slug in the same place as the other symbol routes.
@@ -3636,6 +3809,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/rating/histories":
     get:
+      tags:
+        - Symbols
       operationId: ratingHistories
       summary: Rating histories
       description: Historical ratings for a symbol.
@@ -3681,6 +3856,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/rating/periods":
     get:
+      tags:
+        - Symbols
       operationId: ratingPeriods
       summary: Rating periods
       description: Rating periods available for a symbol.
@@ -3714,6 +3891,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/related-analysis":
     get:
+      tags:
+        - Symbols
       operationId: relatedAnalysis
       summary: Related analysis
       description: Related analysis content for a symbol.
@@ -3777,6 +3956,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/sec-filings":
     get:
+      tags:
+        - Symbols
       operationId: symbolSECFilings
       summary: Symbol SEC filings
       description: SEC filings for a symbol.
@@ -3836,6 +4017,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/sector_metrics":
     get:
+      tags:
+        - Symbols
       operationId: sectorMetrics
       summary: Sector metrics
       description: Sector metrics for a symbol.
@@ -3869,6 +4052,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/shares":
     get:
+      tags:
+        - Symbols
       operationId: shares
       summary: Shares
       description: Share count and related data for a symbol.
@@ -3896,6 +4081,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/splits":
     get:
+      tags:
+        - Symbols
       operationId: symbolSplits
       summary: Symbol splits
       description: Split history for a symbol.
@@ -3923,6 +4110,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/suggested":
     get:
+      tags:
+        - Symbols
       operationId: suggestedSymbols
       summary: Suggested symbols
       description: Suggested similar symbols.
@@ -3967,6 +4156,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/top_discussions":
     get:
+      tags:
+        - Symbols
       operationId: topDiscussions
       summary: Top discussions
       description: Top discussion threads for a symbol.
@@ -4012,6 +4203,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/skalpha/symbols/{slug}/transcripts":
     get:
+      tags:
+        - Symbols
       operationId: symbolTranscripts
       summary: Symbol transcripts
       description: Earnings call transcripts for a symbol.
@@ -4078,6 +4271,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/ticker-metric-grades:
     get:
+      tags:
+        - Metrics
       operationId: tickerMetricGrades
       summary: Ticker metric grades
       description: Factor grades by algorithm for requested slugs.
@@ -4129,6 +4324,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/skalpha/tickers:
     get:
+      tags:
+        - Symbols
       operationId: tickers
       summary: Tickers
       description: Ticker metadata for a list of slugs.

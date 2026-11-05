@@ -9,9 +9,27 @@ info:
 servers:
   - url: https://icehockeyapi.p.rapidapi.com
     description: RapidAPI. Send this host in X-RapidAPI-Host.
+tags:
+  - name: Calendar
+  - name: Categories
+  - name: Config
+  - name: Managers
+  - name: Matches
+  - name: Media
+  - name: Odds
+  - name: Placeholders
+  - name: Players
+  - name: Rankings
+  - name: Search
+  - name: TV
+  - name: Teams
+  - name: Tournaments
+  - name: Transfers
 paths:
   "/api/calendar/season/{seasonId}/{year}/days-with-events":
     get:
+      tags:
+        - Calendar
       operationId: getCalendarDaysWithEvents
       summary: Get calendar days with events
       description: Retrieves days that have events for a specific season and year.
@@ -47,6 +65,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/category/{categoryId}/image":
     get:
+      tags:
+        - Categories
       operationId: getCategoryImage
       summary: Get category image
       description: Retrieves the image/logo for a sport category.
@@ -75,6 +95,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/category/{id}/event-count/{day}/{month}/{year}/{timezoneOffset}":
     get:
+      tags:
+        - Tournaments
       operationId: getCategoryUniqueTournamentEventCount
       summary: Get category unique tournament event count
       parameters:
@@ -120,6 +142,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/countries/all:
     get:
+      tags:
+        - Config
       operationId: getAllCountries
       summary: Get all countries
       description: Retrieves a list of all available countries.
@@ -140,6 +164,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/country/{code}/flag":
     get:
+      tags:
+        - Media
       operationId: getCountryFlagImgAPI
       summary: Get country flag (img API)
       description: Fetches the flag image by country code.
@@ -175,6 +201,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/event/newly-added:
     get:
+      tags:
+        - Matches
       operationId: listNewlyAddedEvents
       summary: List newly added events
       description: Returns events recently added.
@@ -195,6 +223,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/category/{id}/event-count/{day}/{month}/{year}/{timezoneOffset}":
     get:
+      tags:
+        - Tournaments
       operationId: getCategoryUniqueTournamentEventCountgetApiIceHockeyCategoryIdEventCountDayMonthYearTimezoneoffset
       summary: Get category unique tournament event count
       parameters:
@@ -240,6 +270,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/category/{id}/events/{day}/{month}/{year}":
     get:
+      tags:
+        - Categories
       operationId: getMatchesByCategoryAndDate
       summary: Get matches by category and date
       description: Retrieves all ice hockey matches for a specific category on a given date.
@@ -301,6 +333,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/main-events/{date}/extended":
     get:
+      tags:
+        - Matches
       operationId: listExtendedMainEventsByDate
       summary: List extended main events by date
       description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
@@ -329,6 +363,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/manager/{id}":
     get:
+      tags:
+        - Managers
       operationId: getIceHockeyManagerDetails
       summary: Get ice hockey manager details
       description: Retrieves comprehensive information about a specific ice hockey manager/coach.
@@ -363,6 +399,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/manager/{id}/image":
     get:
+      tags:
+        - Managers
       operationId: getManagerCoachImage
       summary: Get manager/coach image
       description: Retrieves the profile image for a specific manager.
@@ -398,6 +436,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/manager/{id}/matches/previous/{page}":
     get:
+      tags:
+        - Managers
       operationId: getPreviousManagerMatches
       summary: Get previous manager matches
       description: "Fetches a paginated list of completed matches for a specific manager, sorted by date descending."
@@ -445,6 +485,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{customId}/h2h":
     get:
+      tags:
+        - Matches
       operationId: getHeadToHeadHistory
       summary: Get head-to-head history
       description: Retrieves the detailed match history for head-to-head encounters between two teams.
@@ -479,6 +521,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}":
     get:
+      tags:
+        - Matches
       operationId: getIceHockeyMatchDetails
       summary: Get ice hockey match details
       description: "Retrieves detailed information for a specific ice hockey match, including teams, score, and status."
@@ -513,6 +557,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/best-players":
     get:
+      tags:
+        - Matches
       operationId: getMatchBestPlayers
       summary: Get match best players
       description: "Retrieves a list of the best performing players from a specific match, based on player ratings."
@@ -547,6 +593,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/comments":
     get:
+      tags:
+        - Matches
       operationId: getEventComments
       summary: Get event comments
       description: "Returns the commentary feed. Added where the sport did not already expose comments: basketball, tennis, table tennis, volleyball, handball, ice-hockey, american-football, rugby, cricket, mma, and esport. Football stays at /api/match/{id}/commentary. Baseball stays at /api/baseball/match/{id}/comments."
@@ -574,6 +622,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/duel":
     get:
+      tags:
+        - Matches
       operationId: getHeadToHeadSummary
       summary: Get head-to-head summary
       description: "Returns teamDuel with homeWins, awayWins, and draws, and managerDuel."
@@ -608,6 +658,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/form":
     get:
+      tags:
+        - Matches
       operationId: getMatchFormAnalysis
       summary: Get match form analysis
       description: Retrieves pre-game form and recent performance data for the teams in a specific match.
@@ -642,6 +694,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/highlights":
     get:
+      tags:
+        - Matches
       operationId: getMatchHighlights
       summary: Get match highlights
       description: "Retrieves video highlights and key moments from a specific match, if available."
@@ -676,6 +730,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/incidents":
     get:
+      tags:
+        - Matches
       operationId: getMatchIncidents
       summary: Get match incidents
       description: "Retrieves a chronological list of all significant incidents that occurred during the match (e.g., goals, penalties)."
@@ -710,6 +766,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/lineups":
     get:
+      tags:
+        - Matches
       operationId: getMatchLineups
       summary: Get match lineups
       description: Retrieves the starting lineups and substitutes for both teams in a specific match.
@@ -744,6 +802,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/managers":
     get:
+      tags:
+        - Matches
       operationId: getMatchManagersCoaches
       summary: Get match managers/coaches
       description: Retrieves information about the coaches for both teams in a specific match.
@@ -778,6 +838,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/media/country/{country}":
     get:
+      tags:
+        - Matches
       operationId: getEventMediaSummary
       summary: Get event media summary
       description: "Returns the highlighted clip and the other media cards for one event in a country. Registered on the existing event prefix of football, basketball, tennis, table tennis, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, mma, and esport."
@@ -812,6 +874,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/odds":
     get:
+      tags:
+        - Matches
       operationId: getMatchBettingOdds
       summary: Get match betting odds
       description: Retrieves available betting odds from various bookmakers for a specific match.
@@ -846,6 +910,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/player/{playerId}/statistics":
     get:
+      tags:
+        - Matches
       operationId: getPlayerMatchStatistics
       summary: Get player match statistics
       description: Retrieves detailed statistics for a specific player in a specific match.
@@ -887,6 +953,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/statistics":
     get:
+      tags:
+        - Matches
       operationId: getMatchStatistics
       summary: Get match statistics
       description: Retrieves comprehensive team and player statistics for a specific match.
@@ -921,6 +989,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/streaks":
     get:
+      tags:
+        - Matches
       operationId: getMatchStreaks
       summary: Get match streaks
       description: "Provides recent form and streak information (e.g., winning streaks) for each team in a match."
@@ -955,6 +1025,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/streaks/odds":
     get:
+      tags:
+        - Matches
       operationId: getMatchStreaksWithOdds
       summary: Get match streaks with odds
       description: "Returns recent team streaks combined with associated betting odds from bookmaker `1`."
@@ -989,6 +1061,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/votes":
     get:
+      tags:
+        - Matches
       operationId: getMatchVotes
       summary: Get match votes
       description: "Returns vote counts. vote has vote1, voteX, and vote2. bothTeamsToScoreVote has voteYes and voteNo. firstTeamToScoreVote has voteHome, voteAway, and voteNoGoal. whoShouldHaveWonVote has vote1 and vote2."
@@ -1023,6 +1097,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/match/{id}/win-probability":
     get:
+      tags:
+        - Matches
       operationId: getWinProbability
       summary: Get win probability
       description: "Returns the win, draw, and loss probability graph. Added where this path was missing: basketball, tennis, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, mma, and esport. Football and table tennis already expose it. The esport public prefix is /api/esport."
@@ -1050,6 +1126,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/ice-hockey/matches/live:
     get:
+      tags:
+        - Matches
       operationId: getLiveIceHockeyMatches
       summary: Get live ice hockey matches
       description: Retrieves all currently live ice hockey matches.
@@ -1070,6 +1148,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/matches/odds/featured-by-popularity/{providerId}":
     get:
+      tags:
+        - Odds
       operationId: listFeaturedEventsByPopularity
       summary: List featured events by popularity
       description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
@@ -1097,6 +1177,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/matches/{day}/{month}/{year}":
     get:
+      tags:
+        - Matches
       operationId: getIceHockeyMatchesByDate
       summary: Get ice hockey matches by date
       description: Fetches all ice hockey matches scheduled for a specific date.
@@ -1145,6 +1227,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/player/{id}":
     get:
+      tags:
+        - Players
       operationId: getIceHockeyPlayerDetails
       summary: Get ice hockey player details
       description: Retrieves comprehensive information about a specific ice hockey player.
@@ -1179,6 +1263,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/player/{id}/image":
     get:
+      tags:
+        - Players
       operationId: getPlayerImage
       summary: Get player image
       description: Retrieves the profile image for a specific player.
@@ -1214,6 +1300,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/player/{id}/matches/near":
     get:
+      tags:
+        - Players
       operationId: getPlayerNearMatches
       summary: Get player near matches
       description: Retrieves a list of recent and upcoming matches for a specific player.
@@ -1248,6 +1336,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/player/{id}/matches/previous/{page}":
     get:
+      tags:
+        - Players
       operationId: getPreviousPlayerMatches
       summary: Get previous player matches
       description: "Fetches a paginated list of completed matches for a specific player, sorted by date descending."
@@ -1295,6 +1385,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/player/{id}/media":
     get:
+      tags:
+        - Players
       operationId: getPlayerMedia
       summary: Get player media
       description: "Retrieves media content (e.g., videos, images) associated with a specific player."
@@ -1329,6 +1421,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/player/{id}/statistics/season":
     get:
+      tags:
+        - Players
       operationId: getPlayerStatisticsSeasons
       summary: Get player statistics seasons
       description: "Retrieves a list of seasons for which a player's statistics are available."
@@ -1363,6 +1457,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/player/{id}/tournament/{tournamentId}/season/{seasonId}/statistics/overall":
     get:
+      tags:
+        - Players
       operationId: getPlayerOverallStatistics
       summary: Get player overall statistics
       description: "Retrieves a player's combined statistics for an entire season (regular season and playoffs)."
@@ -1411,6 +1507,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/player/{id}/tournament/{tournamentId}/season/{seasonId}/statistics/playoffs":
     get:
+      tags:
+        - Players
       operationId: getPlayerPlayoffsStatistics
       summary: Get player playoffs statistics
       description: "Retrieves a player's statistics for the playoffs of a specific tournament."
@@ -1459,6 +1557,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/player/{id}/tournament/{tournamentId}/season/{seasonId}/statistics/regularSeason":
     get:
+      tags:
+        - Players
       operationId: getPlayerRegularSeasonStatistics
       summary: Get player regular season statistics
       description: "Retrieves a player's statistics for the regular season of a specific tournament."
@@ -1507,6 +1607,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/ice-hockey/players/trending:
     get:
+      tags:
+        - Players
       operationId: listTrendingPlayers
       summary: List trending players
       description: Returns players currently trending in one sport. Football already exposes this at /api/player/trending.
@@ -1527,6 +1629,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/scheduled-tournaments/{day}/{month}/{year}/page/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getIceHockeyScheduledTournamentsByDate
       summary: Get ice hockey scheduled tournaments by date
       description: Retrieves a paginated list of tournaments that have scheduled ice hockey matches for a specific date.
@@ -1582,6 +1686,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/search/{term}":
     get:
+      tags:
+        - Search
       operationId: searchIceHockeyEntities
       summary: Search ice hockey entities
       description: Queries /search/all for this sport. The path term is sent as q. page is 0-based and defaults to 0.
@@ -1623,6 +1729,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}":
     get:
+      tags:
+        - Teams
       operationId: getIceHockeyTeamDetails
       summary: Get ice hockey team details
       description: Retrieves comprehensive details for a specific ice hockey team.
@@ -1657,6 +1765,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}/events/{month}/{year}":
     get:
+      tags:
+        - Teams
       operationId: listTeamEventsInAMonth
       summary: List team events in a month
       description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
@@ -1698,6 +1808,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}/image":
     get:
+      tags:
+        - Teams
       operationId: getTeamLogo
       summary: Get team logo
       description: Retrieves the logo image for a specific team.
@@ -1733,6 +1845,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}/matches/near":
     get:
+      tags:
+        - Teams
       operationId: getTeamNearMatches
       summary: Get team near matches
       description: Retrieves a list of recent and upcoming matches for a specific team.
@@ -1767,6 +1881,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}/matches/next/{page}":
     get:
+      tags:
+        - Teams
       operationId: getUpcomingTeamMatches
       summary: Get upcoming team matches
       description: "Fetches a paginated list of scheduled ice hockey games for a specific team, sorted by date ascending."
@@ -1814,6 +1930,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}/matches/previous/{page}":
     get:
+      tags:
+        - Teams
       operationId: getPreviousTeamMatches
       summary: Get previous team matches
       description: "Fetches a paginated list of completed ice hockey games for a specific team, sorted by date descending."
@@ -1861,6 +1979,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}/media":
     get:
+      tags:
+        - Teams
       operationId: getTeamMedia
       summary: Get team media
       description: "Retrieves media content (e.g., videos, images) associated with a specific team."
@@ -1895,6 +2015,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}/players":
     get:
+      tags:
+        - Teams
       operationId: getTeamPlayers
       summary: Get team players
       description: Retrieves the current roster of players for a specific team.
@@ -1929,6 +2051,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}/players/statistics/seasons":
     get:
+      tags:
+        - Teams
       operationId: getTeamPlayerStatisticsSeasons
       summary: Get team player statistics seasons
       description: "Retrieves a list of seasons for which a team's player statistics are available."
@@ -1963,6 +2087,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}/tournament/{tournamentId}/season/{seasonId}/best-players/playoffs":
     get:
+      tags:
+        - Teams
       operationId: getTeamTopPlayersForPlayoffs
       summary: Get team top players for playoffs
       description: Retrieves the best performing players for a team in the playoffs of a specific tournament.
@@ -2011,6 +2137,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}/tournament/{tournamentId}/season/{seasonId}/best-players/regularSeason":
     get:
+      tags:
+        - Teams
       operationId: getTeamTopPlayersForRegularSeason
       summary: Get team top players for regular season
       description: Retrieves the best performing players for a team in the regular season of a specific tournament.
@@ -2059,6 +2187,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}/tournaments":
     get:
+      tags:
+        - Teams
       operationId: getTeamTournaments
       summary: Get team tournaments
       description: Retrieves a list of all unique tournaments a team has participated in.
@@ -2093,6 +2223,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/team/{id}/unique-tournament/{tournamentId}/season/{seasonId}/player-statistics/{type}":
     get:
+      tags:
+        - Teams
       operationId: getTeamSquadPlayerStatistics
       summary: Get team squad player statistics
       description: "Returns player statistics for one team in a unique-tournament season. The last segment is the season phase the team page sends, for example regularSeason."
@@ -2144,6 +2276,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/all/category/{id}":
     get:
+      tags:
+        - Categories
       operationId: getTournamentsByCategory
       summary: Get tournaments by category
       description: Retrieves all ice hockey tournaments within a specific category.
@@ -2178,6 +2312,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/ice-hockey/tournament/categories:
     get:
+      tags:
+        - Tournaments
       operationId: getIceHockeyTournamentCategories
       summary: Get ice hockey tournament categories
       description: "Retrieves all available ice hockey tournament categories, which typically correspond to countries or regions."
@@ -2198,6 +2334,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/ice-hockey/tournament/categories/all:
     get:
+      tags:
+        - Tournaments
       operationId: listEverySportCategory
       summary: List every sport category
       description: "Returns the full category list. Football is /api/tournament/categories/all. MMA is /api/mma/categories/all. Cycling is /api/cycling/categories/all. Motorsport is /api/motorsport/categories/all. Table tennis already had this path, so it is not registered again."
@@ -2218,6 +2356,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/ice-hockey/tournament/categories/live:
     get:
+      tags:
+        - Tournaments
       operationId: listLiveSportCategories
       summary: List live sport categories
       description: "Returns categories that currently have a live event. Table tennis is included here. MMA, cycling, and motorsport use /categories/live on their own prefix."
@@ -2238,6 +2378,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentDetails
       summary: Get tournament details
       description: Retrieves comprehensive details for a specific ice hockey tournament.
@@ -2272,6 +2414,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/events/live/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: listLiveEventsOfAUniqueTournament
       summary: List live events of a unique tournament
       description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
@@ -2305,6 +2449,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/image":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentLogo
       summary: Get tournament logo
       description: Retrieves the logo image for a specific tournament.
@@ -2340,6 +2486,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/image/dark":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentDarkLogo
       summary: Get tournament dark logo
       description: Retrieves the dark theme logo image for a specific tournament.
@@ -2375,6 +2523,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/media":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentMedia
       summary: Get tournament media
       description: "Retrieves media content (e.g., videos, images) for a specific tournament."
@@ -2409,6 +2559,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/schedules/{day}/{month}/{year}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentMatchesByDate
       summary: Get tournament matches by date
       description: Retrieves all matches for a specific tournament scheduled on a given date.
@@ -2470,6 +2622,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/best-players/overall":
     get:
+      tags:
+        - Tournaments
       operationId: getTopPlayersOverall
       summary: Get top players overall
       description: Retrieves the best performing players for an entire tournament season.
@@ -2511,6 +2665,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/best-players/per-game/overall":
     get:
+      tags:
+        - Tournaments
       operationId: getTopPlayersPerGameOverall
       summary: Get top players per game overall
       description: Retrieves player rankings based on per-game averages for an entire tournament season.
@@ -2552,6 +2708,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/best-players/per-game/playoffs":
     get:
+      tags:
+        - Tournaments
       operationId: getTopPlayersPerGameForPlayoffs
       summary: Get top players per game for playoffs
       description: Retrieves player rankings based on per-game averages for the playoffs.
@@ -2593,6 +2751,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/best-players/per-game/regularSeason":
     get:
+      tags:
+        - Tournaments
       operationId: getTopPlayersPerGameForRegularSeason
       summary: Get top players per game for regular season
       description: Retrieves player rankings based on per-game averages for the regular season.
@@ -2634,6 +2794,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/best-players/playoffs":
     get:
+      tags:
+        - Tournaments
       operationId: getTopPlayersForPlayoffs
       summary: Get top players for playoffs
       description: Retrieves the best performing players in the playoffs of a specific tournament.
@@ -2675,6 +2837,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/best-players/regularSeason":
     get:
+      tags:
+        - Tournaments
       operationId: getTopPlayersForRegularSeason
       summary: Get top players for regular season
       description: Retrieves the best performing players in the regular season of a specific tournament.
@@ -2716,6 +2880,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/best-players/types":
     get:
+      tags:
+        - Tournaments
       operationId: getPlayerStatisticsTypes
       summary: Get player statistics types
       description: Retrieves the available types of player statistics for a given tournament season.
@@ -2757,6 +2923,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/best-teams/playoffs":
     get:
+      tags:
+        - Tournaments
       operationId: getTopTeamsForPlayoffs
       summary: Get top teams for playoffs
       description: Retrieves the best performing teams in the playoffs of a specific tournament.
@@ -2798,6 +2966,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/best-teams/regularSeason":
     get:
+      tags:
+        - Tournaments
       operationId: getTopTeamsForRegularSeason
       summary: Get top teams for regular season
       description: Retrieves the best performing teams in the regular season of a specific tournament.
@@ -2839,6 +3009,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/cuptrees":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentCupTrees
       summary: Get tournament cup trees
       description: Retrieves the knockout bracket (cup trees) for a specific tournament season.
@@ -2880,6 +3052,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/matches/last/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentLastMatches
       summary: Get tournament last matches
       description: Retrieves a paginated list of recently played matches in a specific tournament season.
@@ -2934,6 +3108,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/matches/next/{page}":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentUpcomingMatches
       summary: Get tournament upcoming matches
       description: Retrieves a paginated list of scheduled upcoming matches in a specific tournament season.
@@ -2988,6 +3164,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/standings/away":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentAwayStandings
       summary: Get tournament away standings
       description: Retrieves the standings based on away games only for a specific tournament season.
@@ -3029,6 +3207,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/standings/home":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentHomeStandings
       summary: Get tournament home standings
       description: Retrieves the standings based on home games only for a specific tournament season.
@@ -3070,6 +3250,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/standings/total":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentTotalStandings
       summary: Get tournament total standings
       description: Retrieves the complete standings table for all teams in a specific tournament season.
@@ -3111,6 +3293,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/team-events/away":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamEventsAwayStatistics
       summary: Get team events away statistics
       description: "Returns tournamentTeamEvents for away matches. The first key is the tournament id, the second key is the team id, and the value is that team's events."
@@ -3152,6 +3336,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/team-events/home":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamEventsHomeStatistics
       summary: Get team events home statistics
       description: "Returns tournamentTeamEvents for home matches. The first key is the tournament id, the second key is the team id, and the value is that team's events."
@@ -3193,6 +3379,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/team-events/total":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamEventsTotalStatistics
       summary: Get team events total statistics
       description: "Returns tournamentTeamEvents. The first key is the tournament id, the second key is the team id, and the value is that team's events."
@@ -3234,6 +3422,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/season/{seasonId}/team-of-the-season":
     get:
+      tags:
+        - Tournaments
       operationId: getTeamOfTheSeason
       summary: Get team of the season
       description: Returns the team of the season for a unique tournament. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament. Cycling and motorsport are omitted.
@@ -3267,6 +3457,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournament/{tournamentId}/seasons":
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentSeasons
       summary: Get tournament seasons
       description: Retrieves a list of all available seasons for a specific tournament.
@@ -3301,6 +3493,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/ice-hockey/tournaments/finished-upcoming/{date}":
     get:
+      tags:
+        - Tournaments
       operationId: listFinishedAndUpcomingTournaments
       summary: List finished and upcoming tournaments
       description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
@@ -3329,6 +3523,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/ice-hockey/tournaments/live:
     get:
+      tags:
+        - Tournaments
       operationId: listLiveTournaments
       summary: List live tournaments
       description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
@@ -3349,6 +3545,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/img/flag/{flag}":
     get:
+      tags:
+        - Media
       operationId: getCountryFlag
       summary: Get country flag
       description: Fetches the PNG flag image asset corresponding to a provided country code. The response is the raw image data. Codes are normalized to uppercase (e.g. jp → JP).
@@ -3383,6 +3581,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/odds/providers/{countryCode}/{regionCode}/{type}":
     get:
+      tags:
+        - Odds
       operationId: listOddsProvidersForACountryRegion
       summary: List odds providers for a country region
       description: Returns odds providers for a country-region pair and a provider group.
@@ -3425,6 +3625,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/odds/providers/{countryCode}/{type}":
     get:
+      tags:
+        - Odds
       operationId: listOddsProvidersForACountry
       summary: List odds providers for a country
       description: "Returns odds providers for a country and a provider group. type is web, web-featured, or web-odds."
@@ -3460,6 +3662,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/odds/season/{seasonId}/provider/{providerId}/all":
     get:
+      tags:
+        - Odds
       operationId: getAllOddsForASeason
       summary: Get all odds for a season
       description: Returns every odds market for a season and provider. The path has no sport slug.
@@ -3493,6 +3697,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/manager.png:
     get:
+      tags:
+        - Managers
       operationId: getManagerPlaceholderImage
       summary: Get manager placeholder image
       description: Returns a static placeholder graphic for a manager. The response is an SVG image.
@@ -3514,6 +3720,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/manager.svg:
     get:
+      tags:
+        - Managers
       operationId: getManagerPlaceholderImagegetApiPlaceholderManagerSvg
       summary: Get manager placeholder image
       description: Returns a static placeholder graphic for a manager. The response is an SVG image.
@@ -3535,6 +3743,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/player.png:
     get:
+      tags:
+        - Players
       operationId: getPlayerPlaceholderImage
       summary: Get player placeholder image
       description: Returns a static placeholder graphic for a player. The response is an SVG image.
@@ -3556,6 +3766,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/player.svg:
     get:
+      tags:
+        - Players
       operationId: getPlayerPlaceholderImagegetApiPlaceholderPlayerSvg
       summary: Get player placeholder image
       description: Returns a static placeholder graphic for a player. The response is an SVG image.
@@ -3577,6 +3789,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/team.svg:
     get:
+      tags:
+        - Teams
       operationId: getTeamPlaceholderImage
       summary: Get team placeholder image
       description: Returns a static placeholder graphic for a team. The response is an SVG image.
@@ -3598,6 +3812,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/tournament.png:
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentPlaceholderImage
       summary: Get tournament placeholder image
       description: Returns a static placeholder graphic for a tournament. The response is an SVG image.
@@ -3619,6 +3835,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholder/tournament.svg:
     get:
+      tags:
+        - Tournaments
       operationId: getTournamentPlaceholderImagegetApiPlaceholderTournamentSvg
       summary: Get tournament placeholder image
       description: Returns a static placeholder graphic for a tournament. The response is an SVG image.
@@ -3640,6 +3858,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholders/fighter-female.svg:
     get:
+      tags:
+        - Placeholders
       operationId: getFemaleFighterPlaceholderImage
       summary: Get female fighter placeholder image
       description: Retrieves a placeholder image for a female fighter.
@@ -3661,6 +3881,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/placeholders/fighter-male.svg:
     get:
+      tags:
+        - Placeholders
       operationId: getMaleFighterPlaceholderImage
       summary: Get male fighter placeholder image
       description: Retrieves a placeholder image for a male fighter.
@@ -3682,6 +3904,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/rankings/team/{teamId}":
     get:
+      tags:
+        - Rankings
       operationId: getTeamRankings
       summary: Get team rankings
       description: Retrieves rankings for a specific team.
@@ -3710,6 +3934,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/rankings/unique-tournament/{tournamentId}/{weightClass}/{gender}":
     get:
+      tags:
+        - Rankings
       operationId: getDivisionRankings
       summary: Get division rankings
       description: "Returns the ranking rows for one weight class and gender. The MMA event page sends the unique tournament id, the weight class, and the gender. Each value is one path segment and is forwarded unchanged."
@@ -3751,6 +3977,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/search/all:
     get:
+      tags:
+        - Search
       operationId: searchAllEntities
       summary: Search all entities
       description: Queries /search/all. q is the search text. page is 0-based and the results request always sends it. sport limits the search to one sport.
@@ -3790,6 +4018,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/search/suggestions/{entityType}":
     get:
+      tags:
+        - Search
       operationId: getSearchSuggestions
       summary: Get search suggestions
       description: Returns suggestions for one entity type. The All tab uses the path segment default. The request sends sport when it is limited to one sport.
@@ -3833,6 +4063,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/search/unique-tournaments:
     get:
+      tags:
+        - Search
       operationId: searchUniqueTournaments
       summary: Search unique tournaments
       description: "Queries /search/unique-tournaments. q is the search text. page is 0-based, and the first page omits page. sport limits the search to one sport."
@@ -3872,6 +4104,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/search/{entityType}":
     get:
+      tags:
+        - Search
       operationId: searchByEntityType
       summary: Search by entity type
       description: "Queries /search/{entityType}. q is the search text. page is 0-based and the results request always sends it. sport limits the search to one sport."
@@ -3927,6 +4161,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/sport/event-count/{timezoneOffset}":
     get:
+      tags:
+        - Matches
       operationId: countEventsForATimezoneOffset
       summary: Count events for a timezone offset
       description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. Send the viewer's offset, for example 7200."
@@ -3955,6 +4191,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/transfer:
     get:
+      tags:
+        - Transfers
       operationId: listTransfers
       summary: List transfers
       description: Returns the transfer list. A typical call uses page=1 and sort=-transferFee.
@@ -3990,6 +4228,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/trending/events/{country}":
     get:
+      tags:
+        - Matches
       operationId: listTrendingEvents
       summary: List trending events
       description: Returns trending events for a country code.
@@ -4018,6 +4258,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/channel/{channId}/event/{id}":
     get:
+      tags:
+        - TV
       operationId: getMatchTVChannelVotes
       summary: Get match TV channel votes
       description: Fetches viewer voting data from a specific TV channel that is broadcasting the match.
@@ -4059,6 +4301,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/channel/{id}/schedule":
     get:
+      tags:
+        - TV
       operationId: getTVChannelSchedule
       summary: Get TV channel schedule
       description: Retrieves the broadcast schedule for a specific TV channel.
@@ -4087,6 +4331,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/country/all/event/{id}":
     get:
+      tags:
+        - TV
       operationId: getMatchTVCountries
       summary: Get match TV countries
       description: Lists the countries and the TV channels within them that are broadcasting a specific match.
@@ -4121,6 +4367,8 @@ paths:
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/tv/country/{countryCode}/channels":
     get:
+      tags:
+        - TV
       operationId: getCountryTVChannels
       summary: Get country TV channels
       description: Retrieves available TV channels for a specific country.
