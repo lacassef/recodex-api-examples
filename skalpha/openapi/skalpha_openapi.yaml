@@ -40,9 +40,10 @@ info:
     A 204 means the route exists and this symbol or query has no data. The body is empty.
 
     Start with `GET /api/skalpha/quotes/realtime` for a quote, or `GET /api/skalpha/symbols/{slug}` for a symbol page. A slug is the ticker, such as `tgt` or `BTC-USD`.
+  x-website: "https://github.com/lacassef/recodex-api-examples"
   x-version-lifecycle: active
 servers:
-  - url: https://skalpha1.p.rapidapi.com
+  - url: "https://skalpha1.p.rapidapi.com"
     description: RapidAPI. Send this host in X-RapidAPI-Host.
 tags:
   - name: Articles

@@ -32,9 +32,10 @@ info:
     Search finds teams, players, and tournaments when you do not have an id yet. A 204 means the route exists and this match or query has no data yet. The body is empty.
 
     Start with `GET /api/matches/live` for football in play. Team sports and esports use `GET /api/{sport}/matches/live` (the esports slug is `esport`). Tennis uses `GET /api/tennis/events/live`. A day's MMA card is `GET /api/mma/main-events/{date}/extended`. A day's motorsport schedule is `GET /api/motorsport/stage/scheduled/{date}`.
+  x-website: "https://github.com/lacassef/recodex-api-examples"
   x-version-lifecycle: active
 servers:
-  - url: https://allsportsapi2.p.rapidapi.com
+  - url: "https://allsportsapi2.p.rapidapi.com"
     description: RapidAPI. Send this host in X-RapidAPI-Host.
 tags:
   - name: Assets
@@ -180,7 +181,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDate
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -1122,7 +1123,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularity
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -1579,7 +1580,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -1628,7 +1629,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -1689,7 +1690,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonth
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -2434,7 +2435,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournament
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -2445,7 +2446,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -3296,7 +3297,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournaments
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -3326,7 +3327,7 @@ paths:
         - Tournaments
       operationId: listLiveTournaments
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -3405,7 +3406,7 @@ paths:
         - Matches
       operationId: listCategoryEventsOnADate
       summary: List category events on a date
-      description: Returns events in one category on one calendar day. Day and month are zero-padded.
+      description: Returns events in one category on one calendar day. Day and month are zero-padded upstream.
       parameters:
         - name: id
           in: path
@@ -3455,7 +3456,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiAussieRulesMainEventsDateExtended
       summary: List extended main events by date
-      description: Returns the extended main events for this sport and date. 
+      description: Returns the extended main events for this sport and date. The web client requests the extended segment.
       parameters:
         - name: date
           in: path
@@ -3724,7 +3725,7 @@ paths:
         - Matches
       operationId: getEventGraph
       summary: Get event graph
-      description: "Returns the event graph."
+      description: "Returns the event graph the web client loads at /api/v1/event/{id}/graph."
       parameters:
         - name: id
           in: path
@@ -4021,7 +4022,7 @@ paths:
         - Matches
       operationId: getWinProbabilitygetApiAussieRulesMatchIdWinProbability
       summary: Get win probability
-      description: "Returns the win, draw, and loss probability graph "
+      description: "Returns the win, draw, and loss probability graph the web client loads."
       parameters:
         - name: id
           in: path
@@ -4101,7 +4102,7 @@ paths:
         - Matches
       operationId: listEventsOnADate
       summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
+      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
       parameters:
         - name: day
           in: path
@@ -4261,7 +4262,7 @@ paths:
         - Tournaments
       operationId: listScheduledTournaments
       summary: List scheduled tournaments
-      description: Returns tournaments that have events on that date. The list starts at page 1. The date is year-month-day.
+      description: Returns tournaments that have events on that date. The list starts at page 1. The proxy forwards the page unchanged. The upstream date is year-month-day.
       parameters:
         - name: day
           in: path
@@ -4347,7 +4348,7 @@ paths:
         - Teams
       operationId: getTeamOrAthlete
       summary: Get team or athlete
-      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes that team at /player/{id}."
+      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes the same upstream team at /player/{id}."
       parameters:
         - name: id
           in: path
@@ -4376,7 +4377,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiAussieRulesTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Padel publishes this at /player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Padel publishes this at /player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -4899,7 +4900,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiAussieRulesTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. The sport-wide live list is /matches/live or /events/live.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. The sport-wide live list is /matches/live or /events/live.
       parameters:
         - name: tournamentId
           in: path
@@ -4910,7 +4911,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -5052,7 +5053,7 @@ paths:
         - Tournaments
       operationId: listTournamentEventsOnADate
       summary: List tournament events on a date
-      description: Returns events of one unique tournament on one calendar day. Pass the date in the query.
+      description: Returns events of one unique tournament on one calendar day. The upstream call is events-on-date with the date query.
       parameters:
         - name: tournamentId
           in: path
@@ -5260,7 +5261,7 @@ paths:
         - Tournaments
       operationId: listEventsInARoundAndSlug
       summary: List events in a round and slug
-      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended to the path."
+      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended upstream."
       parameters:
         - name: tournamentId
           in: path
@@ -5761,7 +5762,7 @@ paths:
         - Matches
       operationId: listCategoryEventsOnADategetApiBadmintonCategoryIdEventsDayMonthYear
       summary: List category events on a date
-      description: Returns events in one category on one calendar day. Day and month are zero-padded.
+      description: Returns events in one category on one calendar day. Day and month are zero-padded upstream.
       parameters:
         - name: id
           in: path
@@ -5956,7 +5957,7 @@ paths:
         - Matches
       operationId: getEventGraphgetApiBadmintonEventIdGraph
       summary: Get event graph
-      description: "Returns the event graph."
+      description: "Returns the event graph the web client loads at /api/v1/event/{id}/graph."
       parameters:
         - name: id
           in: path
@@ -6224,7 +6225,7 @@ paths:
         - Matches
       operationId: getWinProbabilitygetApiBadmintonEventIdWinProbability
       summary: Get win probability
-      description: "Returns the win, draw, and loss probability graph "
+      description: "Returns the win, draw, and loss probability graph the web client loads."
       parameters:
         - name: id
           in: path
@@ -6304,7 +6305,7 @@ paths:
         - Matches
       operationId: listEventsOnADategetApiBadmintonEventsDayMonthYear
       summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
+      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
       parameters:
         - name: day
           in: path
@@ -6348,7 +6349,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiBadmintonMainEventsDateExtended
       summary: List extended main events by date
-      description: Returns the extended main events for this sport and date. 
+      description: Returns the extended main events for this sport and date. The web client requests the extended segment.
       parameters:
         - name: date
           in: path
@@ -6400,7 +6401,7 @@ paths:
         - Tournaments
       operationId: listScheduledTournamentsgetApiBadmintonScheduledTournamentsDayMonthYearPagePage
       summary: List scheduled tournaments
-      description: Returns tournaments that have events on that date. The list starts at page 1. The date is year-month-day.
+      description: Returns tournaments that have events on that date. The list starts at page 1. The proxy forwards the page unchanged. The upstream date is year-month-day.
       parameters:
         - name: day
           in: path
@@ -6486,7 +6487,7 @@ paths:
         - Teams
       operationId: getTeamOrAthletegetApiBadmintonTeamId
       summary: Get team or athlete
-      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes that team at /player/{id}."
+      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes the same upstream team at /player/{id}."
       parameters:
         - name: id
           in: path
@@ -6515,7 +6516,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiBadmintonTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Padel publishes this at /player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Padel publishes this at /player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -6956,7 +6957,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiBadmintonTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. The sport-wide live list is /matches/live or /events/live.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. The sport-wide live list is /matches/live or /events/live.
       parameters:
         - name: tournamentId
           in: path
@@ -6967,7 +6968,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -7109,7 +7110,7 @@ paths:
         - Tournaments
       operationId: listTournamentEventsOnADategetApiBadmintonTournamentTournamentidSchedulesDayMonthYear
       summary: List tournament events on a date
-      description: Returns events of one unique tournament on one calendar day. Pass the date in the query.
+      description: Returns events of one unique tournament on one calendar day. The upstream call is events-on-date with the date query.
       parameters:
         - name: tournamentId
           in: path
@@ -7317,7 +7318,7 @@ paths:
         - Tournaments
       operationId: listEventsInARoundAndSluggetApiBadmintonTournamentTournamentidSeasonSeasonidEventsRoundRoundSlugSlug
       summary: List events in a round and slug
-      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended to the path."
+      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended upstream."
       parameters:
         - name: tournamentId
           in: path
@@ -7818,7 +7819,7 @@ paths:
         - Matches
       operationId: listCategoryEventsOnADategetApiBandyCategoryIdEventsDayMonthYear
       summary: List category events on a date
-      description: Returns events in one category on one calendar day. Day and month are zero-padded.
+      description: Returns events in one category on one calendar day. Day and month are zero-padded upstream.
       parameters:
         - name: id
           in: path
@@ -7868,7 +7869,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiBandyMainEventsDateExtended
       summary: List extended main events by date
-      description: Returns the extended main events for this sport and date. 
+      description: Returns the extended main events for this sport and date. The web client requests the extended segment.
       parameters:
         - name: date
           in: path
@@ -8137,7 +8138,7 @@ paths:
         - Matches
       operationId: getEventGraphgetApiBandyMatchIdGraph
       summary: Get event graph
-      description: "Returns the event graph."
+      description: "Returns the event graph the web client loads at /api/v1/event/{id}/graph."
       parameters:
         - name: id
           in: path
@@ -8434,7 +8435,7 @@ paths:
         - Matches
       operationId: getWinProbabilitygetApiBandyMatchIdWinProbability
       summary: Get win probability
-      description: "Returns the win, draw, and loss probability graph "
+      description: "Returns the win, draw, and loss probability graph the web client loads."
       parameters:
         - name: id
           in: path
@@ -8514,7 +8515,7 @@ paths:
         - Matches
       operationId: listEventsOnADategetApiBandyMatchesDayMonthYear
       summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
+      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
       parameters:
         - name: day
           in: path
@@ -8674,7 +8675,7 @@ paths:
         - Tournaments
       operationId: listScheduledTournamentsgetApiBandyScheduledTournamentsDayMonthYearPagePage
       summary: List scheduled tournaments
-      description: Returns tournaments that have events on that date. The list starts at page 1. The date is year-month-day.
+      description: Returns tournaments that have events on that date. The list starts at page 1. The proxy forwards the page unchanged. The upstream date is year-month-day.
       parameters:
         - name: day
           in: path
@@ -8760,7 +8761,7 @@ paths:
         - Teams
       operationId: getTeamOrAthletegetApiBandyTeamId
       summary: Get team or athlete
-      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes that team at /player/{id}."
+      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes the same upstream team at /player/{id}."
       parameters:
         - name: id
           in: path
@@ -8789,7 +8790,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiBandyTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Padel publishes this at /player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Padel publishes this at /player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -9312,7 +9313,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiBandyTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. The sport-wide live list is /matches/live or /events/live.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. The sport-wide live list is /matches/live or /events/live.
       parameters:
         - name: tournamentId
           in: path
@@ -9323,7 +9324,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -9465,7 +9466,7 @@ paths:
         - Tournaments
       operationId: listTournamentEventsOnADategetApiBandyTournamentTournamentidSchedulesDayMonthYear
       summary: List tournament events on a date
-      description: Returns events of one unique tournament on one calendar day. Pass the date in the query.
+      description: Returns events of one unique tournament on one calendar day. The upstream call is events-on-date with the date query.
       parameters:
         - name: tournamentId
           in: path
@@ -9673,7 +9674,7 @@ paths:
         - Tournaments
       operationId: listEventsInARoundAndSluggetApiBandyTournamentTournamentidSeasonSeasonidMatchesRoundRoundSlugSlug
       summary: List events in a round and slug
-      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended to the path."
+      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended upstream."
       parameters:
         - name: tournamentId
           in: path
@@ -10227,7 +10228,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiBaseballMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -10780,7 +10781,7 @@ paths:
         - Matches
       operationId: getPitchesForOnePlayerInAnEvent
       summary: Get pitches for one player in an event
-      description: Returns the pitches thrown or faced by one player in a baseball event. kind selects the pitch group.
+      description: Returns the pitches thrown or faced by one player in a baseball event. kind selects the pitch group the web client requests.
       parameters:
         - name: id
           in: path
@@ -11076,7 +11077,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularitygetApiBaseballMatchesOddsFeaturedByPopularityProviderid
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -11396,7 +11397,7 @@ paths:
         - Players
       operationId: getAPlayerSPitchesInASeason
       summary: "Get a player's pitches in a season"
-      description: "Returns a player's pitches for one tournament season. kind and phase are path segments."
+      description: "Returns a player's pitches for one tournament season. kind and phase are the segments the web client sends."
       parameters:
         - name: id
           in: path
@@ -11553,7 +11554,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -11602,7 +11603,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -11663,7 +11664,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiBaseballTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -12272,7 +12273,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiBaseballTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -12283,7 +12284,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -12998,7 +12999,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiBaseballTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -13028,7 +13029,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiBaseballTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -13319,7 +13320,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiBasketballMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -14397,7 +14398,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularitygetApiBasketballMatchesOddsFeaturedByPopularityProviderid
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -15268,7 +15269,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -15317,7 +15318,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -15407,7 +15408,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiBasketballTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -16545,7 +16546,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiBasketballTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -16556,7 +16557,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -17624,7 +17625,7 @@ paths:
         - Tournaments
       operationId: listBasketballMatchesInARoundAndSlug
       summary: List basketball matches in a round and slug
-      description: Returns the matches of one round filtered by the stage slug. The slug is appended to the path.
+      description: Returns the matches of one round filtered by the stage slug. The slug is appended upstream.
       parameters:
         - name: tournamentId
           in: path
@@ -18131,7 +18132,7 @@ paths:
         - Tournaments
       operationId: listRatedTeamOfThePeriodEntries
       summary: List rated team-of-the-period entries
-      description: "Returns the periods array for rated team-of-the-period selections. Each period has id, type, periodName, and timestamps. Basketball publishes this path. Football and table tennis use the same data on their existing tow/rounds and team-of-the-week/rounds routes."
+      description: "Returns the periods array for rated team-of-the-period selections. Each period has id, type, periodName, and timestamps. Basketball publishes this path. Football and table tennis keep the same upstream on their existing tow/rounds and team-of-the-week/rounds routes."
       parameters:
         - name: tournamentId
           in: path
@@ -18499,7 +18500,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiBasketballTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -18529,7 +18530,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiBasketballTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -18608,7 +18609,7 @@ paths:
         - Matches
       operationId: listCategoryEventsOnADategetApiBeachVolleyCategoryIdEventsDayMonthYear
       summary: List category events on a date
-      description: Returns events in one category on one calendar day. Day and month are zero-padded.
+      description: Returns events in one category on one calendar day. Day and month are zero-padded upstream.
       parameters:
         - name: id
           in: path
@@ -18658,7 +18659,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiBeachVolleyMainEventsDateExtended
       summary: List extended main events by date
-      description: Returns the extended main events for this sport and date. 
+      description: Returns the extended main events for this sport and date. The web client requests the extended segment.
       parameters:
         - name: date
           in: path
@@ -18927,7 +18928,7 @@ paths:
         - Matches
       operationId: getEventGraphgetApiBeachVolleyMatchIdGraph
       summary: Get event graph
-      description: "Returns the event graph."
+      description: "Returns the event graph the web client loads at /api/v1/event/{id}/graph."
       parameters:
         - name: id
           in: path
@@ -19224,7 +19225,7 @@ paths:
         - Matches
       operationId: getWinProbabilitygetApiBeachVolleyMatchIdWinProbability
       summary: Get win probability
-      description: "Returns the win, draw, and loss probability graph "
+      description: "Returns the win, draw, and loss probability graph the web client loads."
       parameters:
         - name: id
           in: path
@@ -19304,7 +19305,7 @@ paths:
         - Matches
       operationId: listEventsOnADategetApiBeachVolleyMatchesDayMonthYear
       summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
+      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
       parameters:
         - name: day
           in: path
@@ -19464,7 +19465,7 @@ paths:
         - Tournaments
       operationId: listScheduledTournamentsgetApiBeachVolleyScheduledTournamentsDayMonthYearPagePage
       summary: List scheduled tournaments
-      description: Returns tournaments that have events on that date. The list starts at page 1. The date is year-month-day.
+      description: Returns tournaments that have events on that date. The list starts at page 1. The proxy forwards the page unchanged. The upstream date is year-month-day.
       parameters:
         - name: day
           in: path
@@ -19550,7 +19551,7 @@ paths:
         - Teams
       operationId: getTeamOrAthletegetApiBeachVolleyTeamId
       summary: Get team or athlete
-      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes that team at /player/{id}."
+      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes the same upstream team at /player/{id}."
       parameters:
         - name: id
           in: path
@@ -19579,7 +19580,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiBeachVolleyTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Padel publishes this at /player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Padel publishes this at /player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -20102,7 +20103,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiBeachVolleyTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. The sport-wide live list is /matches/live or /events/live.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. The sport-wide live list is /matches/live or /events/live.
       parameters:
         - name: tournamentId
           in: path
@@ -20113,7 +20114,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -20255,7 +20256,7 @@ paths:
         - Tournaments
       operationId: listTournamentEventsOnADategetApiBeachVolleyTournamentTournamentidSchedulesDayMonthYear
       summary: List tournament events on a date
-      description: Returns events of one unique tournament on one calendar day. Pass the date in the query.
+      description: Returns events of one unique tournament on one calendar day. The upstream call is events-on-date with the date query.
       parameters:
         - name: tournamentId
           in: path
@@ -20463,7 +20464,7 @@ paths:
         - Tournaments
       operationId: listEventsInARoundAndSluggetApiBeachVolleyTournamentTournamentidSeasonSeasonidMatchesRoundRoundSlugSlug
       summary: List events in a round and slug
-      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended to the path."
+      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended upstream."
       parameters:
         - name: tournamentId
           in: path
@@ -21316,7 +21317,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiCricketMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -21519,7 +21520,7 @@ paths:
         - Matches
       operationId: getCricketMatchGraph
       summary: Get cricket match graph
-      description: "Returns the event graph for the runs-per-over chart."
+      description: "Retrieves the event graph. The web client requests /api/v1/event/{id}/graph for the runs-per-over chart."
       parameters:
         - name: id
           in: path
@@ -21949,7 +21950,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularitygetApiCricketMatchesOddsFeaturedByPopularityProviderid
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -22320,7 +22321,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -22369,7 +22370,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -22430,7 +22431,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiCricketTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -23075,7 +23076,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiCricketTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -23086,7 +23087,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -23766,7 +23767,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiCricketTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -23796,7 +23797,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiCricketTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -23950,7 +23951,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiCyclingMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -23998,7 +23999,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -24551,7 +24552,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiCyclingTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -24798,7 +24799,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiCyclingTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -24828,7 +24829,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiCyclingTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -25002,7 +25003,7 @@ paths:
         - Matches
       operationId: listCategoryEventsOnADategetApiDartsCategoryIdEventsDayMonthYear
       summary: List category events on a date
-      description: Returns events in one category on one calendar day. Day and month are zero-padded.
+      description: Returns events in one category on one calendar day. Day and month are zero-padded upstream.
       parameters:
         - name: id
           in: path
@@ -25197,7 +25198,7 @@ paths:
         - Matches
       operationId: getEventGraphgetApiDartsEventIdGraph
       summary: Get event graph
-      description: "Returns the event graph."
+      description: "Returns the event graph the web client loads at /api/v1/event/{id}/graph."
       parameters:
         - name: id
           in: path
@@ -25465,7 +25466,7 @@ paths:
         - Matches
       operationId: getWinProbabilitygetApiDartsEventIdWinProbability
       summary: Get win probability
-      description: "Returns the win, draw, and loss probability graph "
+      description: "Returns the win, draw, and loss probability graph the web client loads."
       parameters:
         - name: id
           in: path
@@ -25545,7 +25546,7 @@ paths:
         - Matches
       operationId: listEventsOnADategetApiDartsEventsDayMonthYear
       summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
+      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
       parameters:
         - name: day
           in: path
@@ -25589,7 +25590,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiDartsMainEventsDateExtended
       summary: List extended main events by date
-      description: Returns the extended main events for this sport and date. 
+      description: Returns the extended main events for this sport and date. The web client requests the extended segment.
       parameters:
         - name: date
           in: path
@@ -25641,7 +25642,7 @@ paths:
         - Tournaments
       operationId: listScheduledTournamentsgetApiDartsScheduledTournamentsDayMonthYearPagePage
       summary: List scheduled tournaments
-      description: Returns tournaments that have events on that date. The list starts at page 1. The date is year-month-day.
+      description: Returns tournaments that have events on that date. The list starts at page 1. The proxy forwards the page unchanged. The upstream date is year-month-day.
       parameters:
         - name: day
           in: path
@@ -25727,7 +25728,7 @@ paths:
         - Teams
       operationId: getTeamOrAthletegetApiDartsTeamId
       summary: Get team or athlete
-      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes that team at /player/{id}."
+      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes the same upstream team at /player/{id}."
       parameters:
         - name: id
           in: path
@@ -25756,7 +25757,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiDartsTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Padel publishes this at /player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Padel publishes this at /player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -26197,7 +26198,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiDartsTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. The sport-wide live list is /matches/live or /events/live.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. The sport-wide live list is /matches/live or /events/live.
       parameters:
         - name: tournamentId
           in: path
@@ -26208,7 +26209,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -26350,7 +26351,7 @@ paths:
         - Tournaments
       operationId: listTournamentEventsOnADategetApiDartsTournamentTournamentidSchedulesDayMonthYear
       summary: List tournament events on a date
-      description: Returns events of one unique tournament on one calendar day. Pass the date in the query.
+      description: Returns events of one unique tournament on one calendar day. The upstream call is events-on-date with the date query.
       parameters:
         - name: tournamentId
           in: path
@@ -26558,7 +26559,7 @@ paths:
         - Tournaments
       operationId: listEventsInARoundAndSluggetApiDartsTournamentTournamentidSeasonSeasonidEventsRoundRoundSlugSlug
       summary: List events in a round and slug
-      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended to the path."
+      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended upstream."
       parameters:
         - name: tournamentId
           in: path
@@ -27014,7 +27015,7 @@ paths:
         - name: timezoneOffset
           in: path
           required: true
-          description: "Seconds east of UTC. Send the viewer offset. Example: 7200."
+          description: "Seconds east of UTC. The web client sends the viewer offset. Example: 7200."
           schema:
             type: string
           example: "7200"
@@ -27870,7 +27871,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiEsportMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -27959,7 +27960,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularitygetApiEsportMatchesOddsFeaturedByPopularityProviderid
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -28137,7 +28138,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -28186,7 +28187,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -28247,7 +28248,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiEsportTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -28748,7 +28749,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiEsportTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -28759,7 +28760,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -29339,7 +29340,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiEsportTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -29369,7 +29370,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiEsportTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -29470,7 +29471,7 @@ paths:
         - Matches
       operationId: listCategoryEventsOnADategetApiFloorballCategoryIdEventsDayMonthYear
       summary: List category events on a date
-      description: Returns events in one category on one calendar day. Day and month are zero-padded.
+      description: Returns events in one category on one calendar day. Day and month are zero-padded upstream.
       parameters:
         - name: id
           in: path
@@ -29520,7 +29521,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiFloorballMainEventsDateExtended
       summary: List extended main events by date
-      description: Returns the extended main events for this sport and date. 
+      description: Returns the extended main events for this sport and date. The web client requests the extended segment.
       parameters:
         - name: date
           in: path
@@ -29789,7 +29790,7 @@ paths:
         - Matches
       operationId: getEventGraphgetApiFloorballMatchIdGraph
       summary: Get event graph
-      description: "Returns the event graph."
+      description: "Returns the event graph the web client loads at /api/v1/event/{id}/graph."
       parameters:
         - name: id
           in: path
@@ -30086,7 +30087,7 @@ paths:
         - Matches
       operationId: getWinProbabilitygetApiFloorballMatchIdWinProbability
       summary: Get win probability
-      description: "Returns the win, draw, and loss probability graph "
+      description: "Returns the win, draw, and loss probability graph the web client loads."
       parameters:
         - name: id
           in: path
@@ -30166,7 +30167,7 @@ paths:
         - Matches
       operationId: listEventsOnADategetApiFloorballMatchesDayMonthYear
       summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
+      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
       parameters:
         - name: day
           in: path
@@ -30326,7 +30327,7 @@ paths:
         - Tournaments
       operationId: listScheduledTournamentsgetApiFloorballScheduledTournamentsDayMonthYearPagePage
       summary: List scheduled tournaments
-      description: Returns tournaments that have events on that date. The list starts at page 1. The date is year-month-day.
+      description: Returns tournaments that have events on that date. The list starts at page 1. The proxy forwards the page unchanged. The upstream date is year-month-day.
       parameters:
         - name: day
           in: path
@@ -30412,7 +30413,7 @@ paths:
         - Teams
       operationId: getTeamOrAthletegetApiFloorballTeamId
       summary: Get team or athlete
-      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes that team at /player/{id}."
+      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes the same upstream team at /player/{id}."
       parameters:
         - name: id
           in: path
@@ -30441,7 +30442,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiFloorballTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Padel publishes this at /player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Padel publishes this at /player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -30964,7 +30965,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiFloorballTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. The sport-wide live list is /matches/live or /events/live.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. The sport-wide live list is /matches/live or /events/live.
       parameters:
         - name: tournamentId
           in: path
@@ -30975,7 +30976,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -31117,7 +31118,7 @@ paths:
         - Tournaments
       operationId: listTournamentEventsOnADategetApiFloorballTournamentTournamentidSchedulesDayMonthYear
       summary: List tournament events on a date
-      description: Returns events of one unique tournament on one calendar day. Pass the date in the query.
+      description: Returns events of one unique tournament on one calendar day. The upstream call is events-on-date with the date query.
       parameters:
         - name: tournamentId
           in: path
@@ -31325,7 +31326,7 @@ paths:
         - Tournaments
       operationId: listEventsInARoundAndSluggetApiFloorballTournamentTournamentidSeasonSeasonidMatchesRoundRoundSlugSlug
       summary: List events in a round and slug
-      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended to the path."
+      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended upstream."
       parameters:
         - name: tournamentId
           in: path
@@ -31826,7 +31827,7 @@ paths:
         - Matches
       operationId: listCategoryEventsOnADategetApiFutsalCategoryIdEventsDayMonthYear
       summary: List category events on a date
-      description: Returns events in one category on one calendar day. Day and month are zero-padded.
+      description: Returns events in one category on one calendar day. Day and month are zero-padded upstream.
       parameters:
         - name: id
           in: path
@@ -31876,7 +31877,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiFutsalMainEventsDateExtended
       summary: List extended main events by date
-      description: Returns the extended main events for this sport and date. 
+      description: Returns the extended main events for this sport and date. The web client requests the extended segment.
       parameters:
         - name: date
           in: path
@@ -32145,7 +32146,7 @@ paths:
         - Matches
       operationId: getEventGraphgetApiFutsalMatchIdGraph
       summary: Get event graph
-      description: "Returns the event graph."
+      description: "Returns the event graph the web client loads at /api/v1/event/{id}/graph."
       parameters:
         - name: id
           in: path
@@ -32442,7 +32443,7 @@ paths:
         - Matches
       operationId: getWinProbabilitygetApiFutsalMatchIdWinProbability
       summary: Get win probability
-      description: "Returns the win, draw, and loss probability graph "
+      description: "Returns the win, draw, and loss probability graph the web client loads."
       parameters:
         - name: id
           in: path
@@ -32522,7 +32523,7 @@ paths:
         - Matches
       operationId: listEventsOnADategetApiFutsalMatchesDayMonthYear
       summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
+      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
       parameters:
         - name: day
           in: path
@@ -32682,7 +32683,7 @@ paths:
         - Tournaments
       operationId: listScheduledTournamentsgetApiFutsalScheduledTournamentsDayMonthYearPagePage
       summary: List scheduled tournaments
-      description: Returns tournaments that have events on that date. The list starts at page 1. The date is year-month-day.
+      description: Returns tournaments that have events on that date. The list starts at page 1. The proxy forwards the page unchanged. The upstream date is year-month-day.
       parameters:
         - name: day
           in: path
@@ -32768,7 +32769,7 @@ paths:
         - Teams
       operationId: getTeamOrAthletegetApiFutsalTeamId
       summary: Get team or athlete
-      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes that team at /player/{id}."
+      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes the same upstream team at /player/{id}."
       parameters:
         - name: id
           in: path
@@ -32797,7 +32798,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiFutsalTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Padel publishes this at /player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Padel publishes this at /player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -33320,7 +33321,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiFutsalTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. The sport-wide live list is /matches/live or /events/live.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. The sport-wide live list is /matches/live or /events/live.
       parameters:
         - name: tournamentId
           in: path
@@ -33331,7 +33332,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -33473,7 +33474,7 @@ paths:
         - Tournaments
       operationId: listTournamentEventsOnADategetApiFutsalTournamentTournamentidSchedulesDayMonthYear
       summary: List tournament events on a date
-      description: Returns events of one unique tournament on one calendar day. Pass the date in the query.
+      description: Returns events of one unique tournament on one calendar day. The upstream call is events-on-date with the date query.
       parameters:
         - name: tournamentId
           in: path
@@ -33681,7 +33682,7 @@ paths:
         - Tournaments
       operationId: listEventsInARoundAndSluggetApiFutsalTournamentTournamentidSeasonSeasonidMatchesRoundRoundSlugSlug
       summary: List events in a round and slug
-      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended to the path."
+      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended upstream."
       parameters:
         - name: tournamentId
           in: path
@@ -34364,7 +34365,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiHandballMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -34392,21 +34393,30 @@ paths:
     get:
       tags:
         - Matches
-      operationId: getMatchHead2Head
-      summary: Get match head2 head
+      operationId: getHeadToHeadHistorygetApiHandballMatchCustomidH2h
+      summary: Get head-to-head history
+      description: Retrieves detailed head-to-head match history between the teams.
       parameters:
         - name: customId
           in: path
           required: true
+          description: "Custom match identifier. Example: tAcsmjd."
           schema:
             type: string
+          example: tAcsmjd
       responses:
         "200":
-          description: Successful response.
+          description: A detailed list of past H2H matches.
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Match not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "500":
           description: Internal server error.
           content:
@@ -34933,7 +34943,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularitygetApiHandballMatchesOddsFeaturedByPopularityProviderid
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -35304,7 +35314,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -35353,7 +35363,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -35414,7 +35424,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiHandballTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -35789,29 +35799,42 @@ paths:
         - Teams
       operationId: getTeamTopPlayersOverall
       summary: Get team top players overall
+      description: Retrieves the best performing players for the team in a specific tournament season.
       parameters:
         - name: id
           in: path
           required: true
+          description: "Team ID. Example: 6272."
           schema:
-            type: string
+            type: integer
+          example: 6272
         - name: tournamentId
           in: path
           required: true
+          description: "Tournament ID. Example: 149."
           schema:
-            type: string
+            type: integer
+          example: 149
         - name: seasonId
           in: path
           required: true
+          description: "Season ID. Example: 42967."
           schema:
-            type: string
+            type: integer
+          example: 42967
       responses:
         "200":
-          description: Successful response.
+          description: "A list of the team's top players for the season."
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: "Team, tournament or season not found."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "500":
           description: Internal server error.
           content:
@@ -36034,7 +36057,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiHandballTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -36064,7 +36087,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiHandballTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -36158,7 +36181,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiHandballUniqueTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -36169,7 +36192,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -36443,31 +36466,50 @@ paths:
     get:
       tags:
         - Tournaments
-      operationId: getLeagueNextMatches
-      summary: Get league next matches
+      operationId: getTournamentUpcomingMatchesgetApiHandballUniqueTournamentTournamentidSeasonSeasonidMatchesNextPage
+      summary: Get tournament upcoming matches
+      description: Retrieves scheduled upcoming matches in the tournament.
       parameters:
         - name: tournamentId
           in: path
           required: true
+          description: "Tournament ID. Example: 149."
           schema:
-            type: string
+            type: integer
+          example: 149
         - name: seasonId
           in: path
           required: true
+          description: "Season ID. Example: 78525."
           schema:
-            type: string
+            type: integer
+          example: 78525
         - name: page
           in: path
           required: true
+          description: "Page number for pagination (starts from 0). Example: 0."
           schema:
-            type: string
+            type: integer
+          example: 0
       responses:
         "200":
-          description: Successful response.
+          description: "A paginated list of the tournament's upcoming matches."
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/JSONResult"
+        "400":
+          description: Invalid page number.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "404":
+          description: Tournament or season not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "500":
           description: Internal server error.
           content:
@@ -37243,7 +37285,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiIceHockeyMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -38058,7 +38100,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularitygetApiIceHockeyMatchesOddsFeaturedByPopularityProviderid
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -38565,7 +38607,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -38614,7 +38656,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -38675,7 +38717,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiIceHockeyTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -39324,7 +39366,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiIceHockeyTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -39335,7 +39377,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -40403,7 +40445,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiIceHockeyTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -40433,7 +40475,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiIceHockeyTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -40491,7 +40533,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -42197,7 +42239,7 @@ paths:
         - Matches
       operationId: getMatchWinProbability
       summary: Get match win probability
-      description: "Retrieves the win, draw, and loss probability graph for the match."
+      description: "Retrieves the win, draw, and loss probability graph the web client loads for the match."
       parameters:
         - name: id
           in: path
@@ -42327,7 +42369,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularitygetApiMatchesOddsFeaturedByPopularityProviderid
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -42513,7 +42555,7 @@ paths:
         - Matches
       operationId: listCategoryEventsOnADategetApiMinifootballCategoryIdEventsDayMonthYear
       summary: List category events on a date
-      description: Returns events in one category on one calendar day. Day and month are zero-padded.
+      description: Returns events in one category on one calendar day. Day and month are zero-padded upstream.
       parameters:
         - name: id
           in: path
@@ -42563,7 +42605,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiMinifootballMainEventsDateExtended
       summary: List extended main events by date
-      description: Returns the extended main events for this sport and date. 
+      description: Returns the extended main events for this sport and date. The web client requests the extended segment.
       parameters:
         - name: date
           in: path
@@ -42832,7 +42874,7 @@ paths:
         - Matches
       operationId: getEventGraphgetApiMinifootballMatchIdGraph
       summary: Get event graph
-      description: "Returns the event graph."
+      description: "Returns the event graph the web client loads at /api/v1/event/{id}/graph."
       parameters:
         - name: id
           in: path
@@ -43129,7 +43171,7 @@ paths:
         - Matches
       operationId: getWinProbabilitygetApiMinifootballMatchIdWinProbability
       summary: Get win probability
-      description: "Returns the win, draw, and loss probability graph "
+      description: "Returns the win, draw, and loss probability graph the web client loads."
       parameters:
         - name: id
           in: path
@@ -43209,7 +43251,7 @@ paths:
         - Matches
       operationId: listEventsOnADategetApiMinifootballMatchesDayMonthYear
       summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
+      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
       parameters:
         - name: day
           in: path
@@ -43369,7 +43411,7 @@ paths:
         - Tournaments
       operationId: listScheduledTournamentsgetApiMinifootballScheduledTournamentsDayMonthYearPagePage
       summary: List scheduled tournaments
-      description: Returns tournaments that have events on that date. The list starts at page 1. The date is year-month-day.
+      description: Returns tournaments that have events on that date. The list starts at page 1. The proxy forwards the page unchanged. The upstream date is year-month-day.
       parameters:
         - name: day
           in: path
@@ -43455,7 +43497,7 @@ paths:
         - Teams
       operationId: getTeamOrAthletegetApiMinifootballTeamId
       summary: Get team or athlete
-      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes that team at /player/{id}."
+      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes the same upstream team at /player/{id}."
       parameters:
         - name: id
           in: path
@@ -43484,7 +43526,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiMinifootballTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Padel publishes this at /player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Padel publishes this at /player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -44007,7 +44049,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiMinifootballTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. The sport-wide live list is /matches/live or /events/live.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. The sport-wide live list is /matches/live or /events/live.
       parameters:
         - name: tournamentId
           in: path
@@ -44018,7 +44060,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -44160,7 +44202,7 @@ paths:
         - Tournaments
       operationId: listTournamentEventsOnADategetApiMinifootballTournamentTournamentidSchedulesDayMonthYear
       summary: List tournament events on a date
-      description: Returns events of one unique tournament on one calendar day. Pass the date in the query.
+      description: Returns events of one unique tournament on one calendar day. The upstream call is events-on-date with the date query.
       parameters:
         - name: tournamentId
           in: path
@@ -44368,7 +44410,7 @@ paths:
         - Tournaments
       operationId: listEventsInARoundAndSluggetApiMinifootballTournamentTournamentidSeasonSeasonidMatchesRoundRoundSlugSlug
       summary: List events in a round and slug
-      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended to the path."
+      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended upstream."
       parameters:
         - name: tournamentId
           in: path
@@ -44812,7 +44854,7 @@ paths:
         - Matches
       operationId: getMonthsWithEvents
       summary: Get months with events
-      description: "Returns monthsWithEvents for one unique tournament. Each entry has month and year. timezoneOffset is seconds east of UTC. Send the viewer offset, for example 7200."
+      description: "Returns monthsWithEvents for one unique tournament. Each entry has month and year. timezoneOffset is seconds east of UTC. The web client sends the viewer offset, for example 7200."
       parameters:
         - name: id
           in: path
@@ -44824,7 +44866,7 @@ paths:
         - name: timezoneOffset
           in: path
           required: true
-          description: "Seconds east of UTC. Send the viewer offset. Example: 7200."
+          description: "Seconds east of UTC. The web client sends the viewer offset. Example: 7200."
           schema:
             type: integer
           example: 7200
@@ -44861,7 +44903,7 @@ paths:
         - name: timezoneOffset
           in: path
           required: true
-          description: "Seconds east of UTC. Send the viewer offset. Example: 7200."
+          description: "Seconds east of UTC. The web client sends the viewer offset. Example: 7200."
           schema:
             type: string
           example: "7200"
@@ -45395,7 +45437,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularitygetApiMmaEventsOddsFeaturedByPopularityProviderid
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -45537,7 +45579,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -45762,7 +45804,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiMmaTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -45931,7 +45973,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiMmaTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -45961,7 +46003,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiMmaTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -46049,7 +46091,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiMmaUniqueTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -46060,7 +46102,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -46591,7 +46633,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiMotorsportMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -46639,7 +46681,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -47209,7 +47251,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiMotorsportTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -47464,7 +47506,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiMotorsportTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -47494,7 +47536,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiMotorsportTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -47663,7 +47705,7 @@ paths:
         - Odds
       operationId: listOddsProvidersForACountry
       summary: List odds providers for a country
-      description: "Returns odds providers for a country and a provider group. type is web, web-featured, or web-odds."
+      description: "Returns odds providers for a country and a provider group. The web client requests web, web-featured, and web-odds in the type segment."
       parameters:
         - name: countryCode
           in: path
@@ -47700,7 +47742,7 @@ paths:
         - Odds
       operationId: getAllOddsForASeason
       summary: Get all odds for a season
-      description: Returns every odds market for a season and provider. The path has no sport slug.
+      description: Returns every odds market for a season and provider. The web client loads this from football seasons. The path has no sport slug.
       parameters:
         - name: seasonId
           in: path
@@ -47792,7 +47834,7 @@ paths:
         - Matches
       operationId: listCategoryEventsOnADategetApiPadelCategoryIdEventsDayMonthYear
       summary: List category events on a date
-      description: Returns events in one category on one calendar day. Day and month are zero-padded.
+      description: Returns events in one category on one calendar day. Day and month are zero-padded upstream.
       parameters:
         - name: id
           in: path
@@ -47987,7 +48029,7 @@ paths:
         - Matches
       operationId: getEventGraphgetApiPadelEventIdGraph
       summary: Get event graph
-      description: "Returns the event graph."
+      description: "Returns the event graph the web client loads at /api/v1/event/{id}/graph."
       parameters:
         - name: id
           in: path
@@ -48284,7 +48326,7 @@ paths:
         - Matches
       operationId: getWinProbabilitygetApiPadelEventIdWinProbability
       summary: Get win probability
-      description: "Returns the win, draw, and loss probability graph "
+      description: "Returns the win, draw, and loss probability graph the web client loads."
       parameters:
         - name: id
           in: path
@@ -48364,7 +48406,7 @@ paths:
         - Matches
       operationId: listEventsOnADategetApiPadelEventsDayMonthYear
       summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
+      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
       parameters:
         - name: day
           in: path
@@ -48408,7 +48450,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiPadelMainEventsDateExtended
       summary: List extended main events by date
-      description: Returns the extended main events for this sport and date. 
+      description: Returns the extended main events for this sport and date. The web client requests the extended segment.
       parameters:
         - name: date
           in: path
@@ -48438,7 +48480,7 @@ paths:
         - Teams
       operationId: getTeamOrAthletegetApiPadelPlayerId
       summary: Get team or athlete
-      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes that team at /player/{id}."
+      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes the same upstream team at /player/{id}."
       parameters:
         - name: id
           in: path
@@ -48601,7 +48643,7 @@ paths:
         - Players
       operationId: listPadelSinglesResults
       summary: List padel singles results
-      description: Returns past singles events for a padel player. The player id is the same id as on the team route. Page is 0-based and the first page is 0.
+      description: Returns past singles events for a padel player. The player id is a team id upstream. Page is 0-based and the first page is 0.
       parameters:
         - name: id
           in: path
@@ -48636,7 +48678,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiPadelPlayerIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Padel publishes this at /player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Padel publishes this at /player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -48976,7 +49018,7 @@ paths:
         - Tournaments
       operationId: listScheduledTournamentsgetApiPadelScheduledTournamentsDayMonthYearPagePage
       summary: List scheduled tournaments
-      description: Returns tournaments that have events on that date. The list starts at page 1. The date is year-month-day.
+      description: Returns tournaments that have events on that date. The list starts at page 1. The proxy forwards the page unchanged. The upstream date is year-month-day.
       parameters:
         - name: day
           in: path
@@ -49186,7 +49228,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiPadelTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. The sport-wide live list is /matches/live or /events/live.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. The sport-wide live list is /matches/live or /events/live.
       parameters:
         - name: tournamentId
           in: path
@@ -49197,7 +49239,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -49339,7 +49381,7 @@ paths:
         - Tournaments
       operationId: listTournamentEventsOnADategetApiPadelTournamentTournamentidSchedulesDayMonthYear
       summary: List tournament events on a date
-      description: Returns events of one unique tournament on one calendar day. Pass the date in the query.
+      description: Returns events of one unique tournament on one calendar day. The upstream call is events-on-date with the date query.
       parameters:
         - name: tournamentId
           in: path
@@ -49547,7 +49589,7 @@ paths:
         - Tournaments
       operationId: listEventsInARoundAndSluggetApiPadelTournamentTournamentidSeasonSeasonidEventsRoundRoundSlugSlug
       summary: List events in a round and slug
-      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended to the path."
+      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended upstream."
       parameters:
         - name: tournamentId
           in: path
@@ -50643,7 +50685,7 @@ paths:
         - name: matchType
           in: path
           required: true
-          description: Match type segment in the path.
+          description: Match type segment forwarded on the upstream path.
           schema:
             type: string
       responses:
@@ -50869,7 +50911,7 @@ paths:
         - Players
       operationId: getPlayerLastRatings
       summary: Get player last ratings
-      description: "Returns the overall rating history for a player in a tournament season. This route uses /ratings/overall."
+      description: "Returns the overall rating history for a player in a tournament season. The web client has no last-ratings path, so this route uses /ratings/overall. The public path is unchanged."
       parameters:
         - name: id
           in: path
@@ -50919,7 +50961,7 @@ paths:
         - Players
       operationId: getPlayerRatings
       summary: Get player ratings
-      description: Returns the overall rating history for a player in a tournament season. The path is /ratings/overall.
+      description: Returns the overall rating history for a player in a tournament season. The web client requests /ratings/overall.
       parameters:
         - name: id
           in: path
@@ -51541,7 +51583,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiRugbyMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -52205,7 +52247,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularitygetApiRugbyMatchesOddsFeaturedByPopularityProviderid
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -52512,7 +52554,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -52561,7 +52603,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -52622,7 +52664,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiRugbyTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -53135,7 +53177,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiRugbyTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -53146,7 +53188,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -53784,7 +53826,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiRugbyTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -53814,7 +53856,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiRugbyTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -53862,7 +53904,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -54077,7 +54119,7 @@ paths:
         - Search
       operationId: searchFootballEntities
       summary: Search football entities
-      description: Queries /search/all for this sport. The path term is sent as q. page is 0-based and defaults to 0. 
+      description: Queries /search/all for this sport. The path term is sent as q. page is 0-based and defaults to 0. The upstream entity type is all.
       parameters:
         - name: term
           in: path
@@ -54095,7 +54137,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -54177,7 +54219,7 @@ paths:
         - Matches
       operationId: listCategoryEventsOnADategetApiSnookerCategoryIdEventsDayMonthYear
       summary: List category events on a date
-      description: Returns events in one category on one calendar day. Day and month are zero-padded.
+      description: Returns events in one category on one calendar day. Day and month are zero-padded upstream.
       parameters:
         - name: id
           in: path
@@ -54372,7 +54414,7 @@ paths:
         - Matches
       operationId: getEventGraphgetApiSnookerEventIdGraph
       summary: Get event graph
-      description: "Returns the event graph."
+      description: "Returns the event graph the web client loads at /api/v1/event/{id}/graph."
       parameters:
         - name: id
           in: path
@@ -54640,7 +54682,7 @@ paths:
         - Matches
       operationId: getWinProbabilitygetApiSnookerEventIdWinProbability
       summary: Get win probability
-      description: "Returns the win, draw, and loss probability graph "
+      description: "Returns the win, draw, and loss probability graph the web client loads."
       parameters:
         - name: id
           in: path
@@ -54720,7 +54762,7 @@ paths:
         - Matches
       operationId: listEventsOnADategetApiSnookerEventsDayMonthYear
       summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
+      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
       parameters:
         - name: day
           in: path
@@ -54764,7 +54806,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiSnookerMainEventsDateExtended
       summary: List extended main events by date
-      description: Returns the extended main events for this sport and date. 
+      description: Returns the extended main events for this sport and date. The web client requests the extended segment.
       parameters:
         - name: date
           in: path
@@ -54816,7 +54858,7 @@ paths:
         - Tournaments
       operationId: listScheduledTournamentsgetApiSnookerScheduledTournamentsDayMonthYearPagePage
       summary: List scheduled tournaments
-      description: Returns tournaments that have events on that date. The list starts at page 1. The date is year-month-day.
+      description: Returns tournaments that have events on that date. The list starts at page 1. The proxy forwards the page unchanged. The upstream date is year-month-day.
       parameters:
         - name: day
           in: path
@@ -54902,7 +54944,7 @@ paths:
         - Teams
       operationId: getTeamOrAthletegetApiSnookerTeamId
       summary: Get team or athlete
-      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes that team at /player/{id}."
+      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes the same upstream team at /player/{id}."
       parameters:
         - name: id
           in: path
@@ -54931,7 +54973,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiSnookerTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Padel publishes this at /player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Padel publishes this at /player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -55372,7 +55414,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiSnookerTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. The sport-wide live list is /matches/live or /events/live.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. The sport-wide live list is /matches/live or /events/live.
       parameters:
         - name: tournamentId
           in: path
@@ -55383,7 +55425,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -55525,7 +55567,7 @@ paths:
         - Tournaments
       operationId: listTournamentEventsOnADategetApiSnookerTournamentTournamentidSchedulesDayMonthYear
       summary: List tournament events on a date
-      description: Returns events of one unique tournament on one calendar day. Pass the date in the query.
+      description: Returns events of one unique tournament on one calendar day. The upstream call is events-on-date with the date query.
       parameters:
         - name: tournamentId
           in: path
@@ -55733,7 +55775,7 @@ paths:
         - Tournaments
       operationId: listEventsInARoundAndSluggetApiSnookerTournamentTournamentidSeasonSeasonidEventsRoundRoundSlugSlug
       summary: List events in a round and slug
-      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended to the path."
+      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended upstream."
       parameters:
         - name: tournamentId
           in: path
@@ -56177,7 +56219,7 @@ paths:
         - Matches
       operationId: countEventsForATimezoneOffset
       summary: Count events for a timezone offset
-      description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. Send the viewer's offset, for example 7200."
+      description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. The web client sends the viewer's offset, for example 7200."
       parameters:
         - name: timezoneOffset
           in: path
@@ -56251,7 +56293,7 @@ paths:
         - Calendar
       operationId: getTableTennisCalendarOverview
       summary: Get table tennis calendar overview
-      description: "Returns dailyUniqueTournaments for the month. Each entry has a date and uniqueTournamentIds. The route requests offset 0000. Send the viewer offset in seconds east of UTC, for example 7200."
+      description: "Returns dailyUniqueTournaments for the month. Each entry has a date and uniqueTournamentIds. The route requests offset 0000. The web client sends the viewer offset in seconds east of UTC, for example 7200."
       parameters:
         - name: month
           in: path
@@ -56941,7 +56983,7 @@ paths:
         - Matches
       operationId: getTableTennisMatchWinProbability
       summary: Get table tennis match win probability
-      description: Returns the win probability graph for the match.
+      description: Returns the win probability graph the web client loads for the match.
       parameters:
         - name: id
           in: path
@@ -56993,7 +57035,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularitygetApiTableTennisEventsOddsFeaturedByPopularityProviderid
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -57170,7 +57212,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiTableTennisMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -57226,7 +57268,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -57275,7 +57317,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -57359,7 +57401,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiTableTennisTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -57961,7 +58003,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiTableTennisTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -57972,7 +58014,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -58774,7 +58816,7 @@ paths:
         - Tournaments
       operationId: getTableTennisTournamentTeamOfTheWeekRounds
       summary: Get table tennis tournament team of the week rounds
-      description: Lists rated team-of-the-period entries. 
+      description: Lists rated team-of-the-period entries. The web client loads team-of-the-period/periods/rated. The public path is unchanged.
       parameters:
         - name: tournamentId
           in: path
@@ -58841,7 +58883,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiTableTennisTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -58871,7 +58913,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiTableTennisTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -58995,7 +59037,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -59883,7 +59925,7 @@ paths:
         - Calendar
       operationId: getTennisCalendarForMonth
       summary: Get tennis calendar for month
-      description: "Returns dailyUniqueTournaments for the month. Each entry has a date and uniqueTournamentIds. The route requests offset 0000. Send the viewer offset in seconds east of UTC, for example 7200."
+      description: "Returns dailyUniqueTournaments for the month. Each entry has a date and uniqueTournamentIds. The route requests offset 0000. The web client sends the viewer offset in seconds east of UTC, for example 7200."
       parameters:
         - name: month
           in: path
@@ -60775,7 +60817,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularitygetApiTennisEventsOddsFeaturedByPopularityProviderid
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -60934,7 +60976,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiTennisMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -61006,7 +61048,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 69208."
+          description: "Unique identifier for the player (team ID in upstream). Example: 69208."
           schema:
             type: integer
           example: 69208
@@ -61077,7 +61119,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 69208."
+          description: "Unique identifier for the player (team ID in upstream). Example: 69208."
           schema:
             type: integer
           example: 69208
@@ -61113,7 +61155,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 83397."
+          description: "Unique identifier for the player (team ID in upstream). Example: 83397."
           schema:
             type: integer
           example: 83397
@@ -61162,7 +61204,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 83397."
+          description: "Unique identifier for the player (team ID in upstream). Example: 83397."
           schema:
             type: integer
           example: 83397
@@ -61206,7 +61248,7 @@ paths:
         - Players
       operationId: listTennisSinglesResults
       summary: List tennis singles results
-      description: Returns past singles events. The player id is the same id as on the team route. Page is 0-based and the first page is 0.
+      description: Returns past singles events. The public player id is a team id upstream. Page is 0-based and the first page is 0.
       parameters:
         - name: id
           in: path
@@ -61241,7 +61283,7 @@ paths:
         - Players
       operationId: listTennisPlayerEventsInAMonth
       summary: List tennis player events in a month
-      description: "Returns the events on the player calendar for one month. The player id is the same id as on the team route. The month is zero-padded. The same calendar is also published at /api/tennis/team/{id}/events/{month}/{year}."
+      description: "Returns the events on the player calendar for one month. The public player id is a team id upstream. The month is zero-padded upstream. The year is forwarded unchanged. The same calendar is also published at /api/tennis/team/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -61318,7 +61360,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 216488."
+          description: "Unique identifier for the player (team ID in upstream). Example: 216488."
           schema:
             type: integer
           example: 216488
@@ -61355,7 +61397,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 69208."
+          description: "Unique identifier for the player (team ID in upstream). Example: 69208."
           schema:
             type: integer
           example: 69208
@@ -61391,7 +61433,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 14486."
+          description: "Unique identifier for the player (team ID in upstream). Example: 14486."
           schema:
             type: integer
           example: 14486
@@ -61427,7 +61469,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 69208."
+          description: "Unique identifier for the player (team ID in upstream). Example: 69208."
           schema:
             type: integer
           example: 69208
@@ -61594,7 +61636,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -61643,7 +61685,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -61838,7 +61880,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiTennisTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -62443,7 +62485,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiTennisTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -62454,7 +62496,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -63412,7 +63454,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiTennisTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -63442,7 +63484,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiTennisTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -63713,7 +63755,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -63724,7 +63766,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -64998,7 +65040,7 @@ paths:
         - Tournaments
       operationId: getAggregatedPlayerStatistics
       summary: Get aggregated player statistics
-      description: "Returns season player statistics for one unique tournament. page is 1-based: page 1 is the first page and sends no offset; from page 2 the offset is (page-1)*limit, so limit is required to move past the first page. A typical call sends limit 20. group, accumulation, and minApps are enums. The detailed view omits group and sends fields. order is a statistic name, with a leading minus for descending. filters joins field.operator.value conditions with commas. operator, and the values of position, type, and preferredFoot, are enums. Several values in one in condition are joined with ~."
+      description: "Returns season player statistics for one unique tournament. page is 1-based: page 1 is the first page and sends no offset; from page 2 the upstream offset is (page-1)*limit, so limit is required to move past the first page. The football page sends limit 20. group, accumulation, and minApps are enums. The detailed view omits group and sends fields. order is a statistic name, with a leading minus for descending. filters joins field.operator.value conditions with commas. operator, and the values of position, type, and preferredFoot, are enums. Several values in one in condition are joined with ~."
       parameters:
         - name: tournamentId
           in: path
@@ -65544,7 +65586,7 @@ paths:
         - Tournaments
       operationId: listTeamOfTheWeekRounds
       summary: List team of the week rounds
-      description: Lists rated team-of-the-period entries for a tournament season. 
+      description: Lists rated team-of-the-period entries for a tournament season. The web client loads team-of-the-period/periods/rated. The public path is unchanged.
       parameters:
         - name: tournamentId
           in: path
@@ -65733,7 +65775,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -65763,7 +65805,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -65785,7 +65827,7 @@ paths:
         - Transfers
       operationId: listTransfers
       summary: List transfers
-      description: Returns the transfer list. A typical call uses page=1 and sort=-transferFee.
+      description: Returns the transfer list. Query page and sort are forwarded unchanged. The web client uses page=1 and sort=-transferFee.
       parameters:
         - name: page
           in: query
@@ -66102,12 +66144,15 @@ paths:
         - Matches
       operationId: getVenueNearEvents
       summary: Get venue near events
+      description: Retrieves upcoming and recent events at a venue.
       parameters:
         - name: id
           in: path
           required: true
+          description: "Venue identifier. Example: 709."
           schema:
-            type: string
+            type: integer
+          example: 709
       responses:
         "200":
           description: Successful response.
@@ -66239,7 +66284,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiVolleyballMainEventsDateExtended
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -66800,7 +66845,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularitygetApiVolleyballMatchesOddsFeaturedByPopularityProviderid
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -66927,7 +66972,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -66976,7 +67021,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -67037,7 +67082,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiVolleyballTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -67627,7 +67672,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournamentsgetApiVolleyballTournamentsFinishedUpcomingDate
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -67657,7 +67702,7 @@ paths:
         - Tournaments
       operationId: listLiveTournamentsgetApiVolleyballTournamentsLive
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -67751,7 +67796,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiVolleyballUniqueTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -67762,7 +67807,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -68541,7 +68586,7 @@ paths:
         - Matches
       operationId: listCategoryEventsOnADategetApiWaterpoloCategoryIdEventsDayMonthYear
       summary: List category events on a date
-      description: Returns events in one category on one calendar day. Day and month are zero-padded.
+      description: Returns events in one category on one calendar day. Day and month are zero-padded upstream.
       parameters:
         - name: id
           in: path
@@ -68591,7 +68636,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDategetApiWaterpoloMainEventsDateExtended
       summary: List extended main events by date
-      description: Returns the extended main events for this sport and date. 
+      description: Returns the extended main events for this sport and date. The web client requests the extended segment.
       parameters:
         - name: date
           in: path
@@ -68860,7 +68905,7 @@ paths:
         - Matches
       operationId: getEventGraphgetApiWaterpoloMatchIdGraph
       summary: Get event graph
-      description: "Returns the event graph."
+      description: "Returns the event graph the web client loads at /api/v1/event/{id}/graph."
       parameters:
         - name: id
           in: path
@@ -69157,7 +69202,7 @@ paths:
         - Matches
       operationId: getWinProbabilitygetApiWaterpoloMatchIdWinProbability
       summary: Get win probability
-      description: "Returns the win, draw, and loss probability graph "
+      description: "Returns the win, draw, and loss probability graph the web client loads."
       parameters:
         - name: id
           in: path
@@ -69237,7 +69282,7 @@ paths:
         - Matches
       operationId: listEventsOnADategetApiWaterpoloMatchesDayMonthYear
       summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
+      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
       parameters:
         - name: day
           in: path
@@ -69397,7 +69442,7 @@ paths:
         - Tournaments
       operationId: listScheduledTournamentsgetApiWaterpoloScheduledTournamentsDayMonthYearPagePage
       summary: List scheduled tournaments
-      description: Returns tournaments that have events on that date. The list starts at page 1. The date is year-month-day.
+      description: Returns tournaments that have events on that date. The list starts at page 1. The proxy forwards the page unchanged. The upstream date is year-month-day.
       parameters:
         - name: day
           in: path
@@ -69483,7 +69528,7 @@ paths:
         - Teams
       operationId: getTeamOrAthletegetApiWaterpoloTeamId
       summary: Get team or athlete
-      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes that team at /player/{id}."
+      description: "Returns the team. Badminton, darts, and snooker publish the player on this team endpoint. Padel publishes the same upstream team at /player/{id}."
       parameters:
         - name: id
           in: path
@@ -69512,7 +69557,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonthgetApiWaterpoloTeamIdEventsMonthYear
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Padel publishes this at /player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Padel publishes this at /player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -70035,7 +70080,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournamentgetApiWaterpoloTournamentTournamentidEventsLivePage
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. The sport-wide live list is /matches/live or /events/live.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. The sport-wide live list is /matches/live or /events/live.
       parameters:
         - name: tournamentId
           in: path
@@ -70046,7 +70091,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -70188,7 +70233,7 @@ paths:
         - Tournaments
       operationId: listTournamentEventsOnADategetApiWaterpoloTournamentTournamentidSchedulesDayMonthYear
       summary: List tournament events on a date
-      description: Returns events of one unique tournament on one calendar day. Pass the date in the query.
+      description: Returns events of one unique tournament on one calendar day. The upstream call is events-on-date with the date query.
       parameters:
         - name: tournamentId
           in: path
@@ -70396,7 +70441,7 @@ paths:
         - Tournaments
       operationId: listEventsInARoundAndSluggetApiWaterpoloTournamentTournamentidSeasonSeasonidMatchesRoundRoundSlugSlug
       summary: List events in a round and slug
-      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended to the path."
+      description: "Returns the events of one round filtered by the stage slug. The sport prefix is {sport}. The last {slug} is the stage slug and is appended upstream."
       parameters:
         - name: tournamentId
           in: path

@@ -49,9 +49,10 @@ info:
     A 204 means the route exists and this match or query has no data yet, such as no lineup, no shots, or no odds. The body is empty.
 
     Start with `GET /api/matches/live` for matches in play, or the date routes for a fixture list.
+  x-website: "https://github.com/lacassef/recodex-api-examples"
   x-version-lifecycle: active
 servers:
-  - url: https://footapi7.p.rapidapi.com
+  - url: "https://footapi7.p.rapidapi.com"
     description: RapidAPI. Send this host in X-RapidAPI-Host.
 tags:
   - name: Calendar
@@ -564,7 +565,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDate
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -2270,7 +2271,7 @@ paths:
         - Matches
       operationId: getMatchWinProbability
       summary: Get match win probability
-      description: "Retrieves the win, draw, and loss probability graph for the match."
+      description: "Retrieves the win, draw, and loss probability graph the web client loads for the match."
       parameters:
         - name: id
           in: path
@@ -2400,7 +2401,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularity
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -2573,7 +2574,7 @@ paths:
         - Odds
       operationId: listOddsProvidersForACountry
       summary: List odds providers for a country
-      description: "Returns odds providers for a country and a provider group. type is web, web-featured, or web-odds."
+      description: "Returns odds providers for a country and a provider group. The web client requests web, web-featured, and web-odds in the type segment."
       parameters:
         - name: countryCode
           in: path
@@ -2610,7 +2611,7 @@ paths:
         - Odds
       operationId: getAllOddsForASeason
       summary: Get all odds for a season
-      description: Returns every odds market for a season and provider. The path has no sport slug.
+      description: Returns every odds market for a season and provider. The web client loads this from football seasons. The path has no sport slug.
       parameters:
         - name: seasonId
           in: path
@@ -3297,7 +3298,7 @@ paths:
         - name: matchType
           in: path
           required: true
-          description: Match type segment in the path.
+          description: Match type segment forwarded on the upstream path.
           schema:
             type: string
       responses:
@@ -3523,7 +3524,7 @@ paths:
         - Players
       operationId: getPlayerLastRatings
       summary: Get player last ratings
-      description: "Returns the overall rating history for a player in a tournament season. This route uses /ratings/overall."
+      description: "Returns the overall rating history for a player in a tournament season. The web client has no last-ratings path, so this route uses /ratings/overall. The public path is unchanged."
       parameters:
         - name: id
           in: path
@@ -3573,7 +3574,7 @@ paths:
         - Players
       operationId: getPlayerRatings
       summary: Get player ratings
-      description: Returns the overall rating history for a player in a tournament season. The path is /ratings/overall.
+      description: Returns the overall rating history for a player in a tournament season. The web client requests /ratings/overall.
       parameters:
         - name: id
           in: path
@@ -4111,7 +4112,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -4326,7 +4327,7 @@ paths:
         - Search
       operationId: searchFootballEntities
       summary: Search football entities
-      description: Queries /search/all for this sport. The path term is sent as q. page is 0-based and defaults to 0. 
+      description: Queries /search/all for this sport. The path term is sent as q. page is 0-based and defaults to 0. The upstream entity type is all.
       parameters:
         - name: term
           in: path
@@ -4344,7 +4345,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -4369,7 +4370,7 @@ paths:
         - Matches
       operationId: countEventsForATimezoneOffset
       summary: Count events for a timezone offset
-      description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. Send the viewer's offset, for example 7200."
+      description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. The web client sends the viewer's offset, for example 7200."
       parameters:
         - name: timezoneOffset
           in: path
@@ -4501,7 +4502,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonth
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -5477,7 +5478,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournament
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -5488,7 +5489,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -6762,7 +6763,7 @@ paths:
         - Tournaments
       operationId: getAggregatedPlayerStatistics
       summary: Get aggregated player statistics
-      description: "Returns season player statistics for one unique tournament. page is 1-based: page 1 is the first page and sends no offset; from page 2 the offset is (page-1)*limit, so limit is required to move past the first page. A typical call sends limit 20. group, accumulation, and minApps are enums. The detailed view omits group and sends fields. order is a statistic name, with a leading minus for descending. filters joins field.operator.value conditions with commas. operator, and the values of position, type, and preferredFoot, are enums. Several values in one in condition are joined with ~."
+      description: "Returns season player statistics for one unique tournament. page is 1-based: page 1 is the first page and sends no offset; from page 2 the upstream offset is (page-1)*limit, so limit is required to move past the first page. The football page sends limit 20. group, accumulation, and minApps are enums. The detailed view omits group and sends fields. order is a statistic name, with a leading minus for descending. filters joins field.operator.value conditions with commas. operator, and the values of position, type, and preferredFoot, are enums. Several values in one in condition are joined with ~."
       parameters:
         - name: tournamentId
           in: path
@@ -7308,7 +7309,7 @@ paths:
         - Tournaments
       operationId: listTeamOfTheWeekRounds
       summary: List team of the week rounds
-      description: Lists rated team-of-the-period entries for a tournament season. 
+      description: Lists rated team-of-the-period entries for a tournament season. The web client loads team-of-the-period/periods/rated. The public path is unchanged.
       parameters:
         - name: tournamentId
           in: path
@@ -7497,7 +7498,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournaments
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -7527,7 +7528,7 @@ paths:
         - Tournaments
       operationId: listLiveTournaments
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -7549,7 +7550,7 @@ paths:
         - Transfers
       operationId: listTransfers
       summary: List transfers
-      description: Returns the transfer list. A typical call uses page=1 and sort=-transferFee.
+      description: Returns the transfer list. Query page and sort are forwarded unchanged. The web client uses page=1 and sort=-transferFee.
       parameters:
         - name: page
           in: query
@@ -7866,12 +7867,15 @@ paths:
         - Matches
       operationId: getVenueNearEvents
       summary: Get venue near events
+      description: Retrieves upcoming and recent events at a venue.
       parameters:
         - name: id
           in: path
           required: true
+          description: "Venue identifier. Example: 709."
           schema:
-            type: string
+            type: integer
+          example: 709
       responses:
         "200":
           description: Successful response.

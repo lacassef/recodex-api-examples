@@ -40,9 +40,10 @@ info:
     A 204 means the route exists and this match or query has no data. The body is empty.
 
     Start with `GET /api/livescores/sports/1/scoreboard` for today's soccer scores. Omit `dayOffset` for today. Change `1` for another sport.
+  x-website: "https://github.com/lacassef/recodex-api-examples"
   x-version-lifecycle: active
 servers:
-  - url: https://livescoresapi.p.rapidapi.com
+  - url: "https://livescoresapi.p.rapidapi.com"
     description: RapidAPI. Send this host in X-RapidAPI-Host.
 tags:
   - name: Calendar
@@ -91,7 +92,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -125,7 +126,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -174,7 +175,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -216,7 +217,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -251,7 +252,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             image/avif:
               schema:
@@ -286,7 +287,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             image/png:
               schema:
@@ -335,7 +336,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -384,7 +385,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -433,7 +434,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -482,7 +483,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -531,7 +532,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -580,7 +581,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -629,7 +630,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -678,7 +679,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -727,7 +728,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -776,7 +777,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -831,7 +832,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -880,7 +881,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -928,7 +929,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -977,7 +978,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1025,7 +1026,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1067,7 +1068,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1116,7 +1117,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1172,7 +1173,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1221,7 +1222,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1277,7 +1278,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1333,7 +1334,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1382,7 +1383,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1430,7 +1431,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1478,7 +1479,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1527,7 +1528,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1576,7 +1577,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1625,7 +1626,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             text/html:
               schema:
@@ -1674,7 +1675,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1723,7 +1724,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1772,7 +1773,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1821,7 +1822,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1870,7 +1871,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1919,7 +1920,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -1968,7 +1969,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2029,7 +2030,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2071,7 +2072,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2148,7 +2149,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2190,7 +2191,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2253,7 +2254,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2316,7 +2317,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2372,7 +2373,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2442,7 +2443,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2491,7 +2492,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2547,7 +2548,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2610,7 +2611,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2666,7 +2667,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2722,7 +2723,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2778,7 +2779,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2834,7 +2835,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2890,7 +2891,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -2952,7 +2953,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3001,7 +3002,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3035,7 +3036,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3077,7 +3078,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3118,7 +3119,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3167,7 +3168,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3251,7 +3252,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3328,7 +3329,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3391,7 +3392,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3440,7 +3441,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3503,7 +3504,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3552,7 +3553,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3601,7 +3602,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3635,7 +3636,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3698,7 +3699,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3761,7 +3762,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3845,7 +3846,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -3915,7 +3916,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -4013,7 +4014,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -4076,7 +4077,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -4132,7 +4133,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -4195,7 +4196,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -4251,7 +4252,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -4307,7 +4308,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -4363,7 +4364,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -4419,7 +4420,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -4468,7 +4469,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:
@@ -4524,7 +4525,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "502":
-          description: The data could not be fetched.
+          description: Upstream error.
           content:
             application/json:
               schema:

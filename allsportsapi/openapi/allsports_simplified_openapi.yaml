@@ -32,9 +32,10 @@ info:
     Search finds teams, players, and tournaments when you do not have an id yet. A 204 means the route exists and this match or query has no data yet. The body is empty.
 
     Start with `GET /api/matches/live` for football in play. Team sports and esports use `GET /api/{sport}/matches/live` (the esports slug is `esport`). Tennis uses `GET /api/tennis/events/live`. A day's MMA card is `GET /api/mma/main-events/{date}/extended`. A day's motorsport schedule is `GET /api/motorsport/stage/scheduled/{date}`.
+  x-website: "https://github.com/lacassef/recodex-api-examples"
   x-version-lifecycle: active
 servers:
-  - url: https://allsportsapi2.p.rapidapi.com
+  - url: "https://allsportsapi2.p.rapidapi.com"
     description: RapidAPI. Send this host in X-RapidAPI-Host.
 tags:
   - name: Assets
@@ -69,7 +70,7 @@ paths:
         - Matches
       operationId: getAmericanFootballMatch
       summary: Get American Football Match
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -126,7 +127,7 @@ paths:
         - Players
       operationId: getAmericanFootballPlayerTournamentSeasonStatistics
       summary: Get American Football Player Tournament Season Statistics
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -185,7 +186,7 @@ paths:
         - Teams
       operationId: getAmericanFootballTeam
       summary: Get American Football Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -231,7 +232,7 @@ paths:
         - Tournaments
       operationId: getAmericanFootballTournamentSeasonBestPlayers
       summary: Get American Football Tournament Season Best Players
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -270,6 +271,99 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/american-football/tournament/{tournamentId}/season/{seasonId}/{segment6}":
+    get:
+      tags:
+        - Tournaments
+      operationId: getAmericanFootballTournamentSeason
+      summary: Get American Football Tournament Season
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: tournamentId
+          in: path
+          required: true
+          description: "Unique identifier for the tournament. Example: 9464."
+          schema:
+            type: integer
+          example: 9464
+        - name: seasonId
+          in: path
+          required: true
+          description: "Unique identifier for the season. Example: 36422."
+          schema:
+            type: integer
+          example: 36422
+        - name: segment6
+          in: path
+          required: true
+          description: "Allowed values: cuptrees, team-of-the-season, venues."
+          schema:
+            type: string
+            enum:
+              - cuptrees
+              - team-of-the-season
+              - venues
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Tournament or season with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/badminton/team/{id}/{segment4}":
+    get:
+      tags:
+        - Teams
+      operationId: getBadmintonTeam
+      summary: Get Badminton Team
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Team id.
+          schema:
+            type: integer
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-event, media, performance, unique-tournaments."
+          schema:
+            type: string
+            enum:
+              - featured-event
+              - media
+              - performance
+              - unique-tournaments
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
         "500":
           description: Internal server error.
           content:
@@ -327,7 +421,7 @@ paths:
         - Matches
       operationId: getPitchesForOnePlayerInAnEvent
       summary: Get pitches for one player in an event
-      description: Returns the pitches thrown or faced by one player in a baseball event. kind selects the pitch group.
+      description: Returns the pitches thrown or faced by one player in a baseball event. kind selects the pitch group the web client requests.
       parameters:
         - name: id
           in: path
@@ -368,7 +462,7 @@ paths:
         - Matches
       operationId: getBaseballMatch
       summary: Get Baseball Match
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -471,7 +565,7 @@ paths:
         - Players
       operationId: getAPlayerSPitchesInASeason
       summary: "Get a player's pitches in a season"
-      description: "Returns a player's pitches for one tournament season. kind and phase are path segments."
+      description: "Returns a player's pitches for one tournament season. kind and phase are the segments the web client sends."
       parameters:
         - name: id
           in: path
@@ -574,6 +668,153 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
+  "/api/baseball/team/{id}/{segment4}":
+    get:
+      tags:
+        - Teams
+      operationId: getBaseballTeam
+      summary: Get Baseball Team
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "Unique team identifier. Example: 2817."
+          schema:
+            type: integer
+          example: 2817
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-event, media, players, tournaments."
+          schema:
+            type: string
+            enum:
+              - featured-event
+              - media
+              - players
+              - tournaments
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Team with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/baseball/tournament/{tournamentId}/season/{seasonId}/{segment6}":
+    get:
+      tags:
+        - Tournaments
+      operationId: getBaseballTournamentSeason
+      summary: Get Baseball Tournament Season
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: tournamentId
+          in: path
+          required: true
+          description: "Unique identifier for the tournament. Example: 11205."
+          schema:
+            type: integer
+          example: 11205
+        - name: seasonId
+          in: path
+          required: true
+          description: "Unique identifier for the season. Example: 29168."
+          schema:
+            type: integer
+          example: 29168
+        - name: segment6
+          in: path
+          required: true
+          description: "Allowed values: cuptrees, team-of-the-season, venues."
+          schema:
+            type: string
+            enum:
+              - cuptrees
+              - team-of-the-season
+              - venues
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Tournament or season with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/baseball/tournament/{tournamentId}/{segment4}":
+    get:
+      tags:
+        - Tournaments
+      operationId: getBaseballTournament
+      summary: Get Baseball Tournament
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: tournamentId
+          in: path
+          required: true
+          description: "Unique tournament identifier. Example: 8."
+          schema:
+            type: integer
+          example: 8
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-events, media, seasons, winners."
+          schema:
+            type: string
+            enum:
+              - featured-events
+              - media
+              - seasons
+              - winners
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Tournament with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
   "/api/basketball/group/tournament/{tournamentId}/season/{seasonId}/matches":
     get:
       tags:
@@ -623,7 +864,7 @@ paths:
         - Tournaments
       operationId: getBasketballGroupTournamentSeasonTotal
       summary: Get Basketball Group Tournament Season Total
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -847,7 +1088,7 @@ paths:
         - Matches
       operationId: getBasketballMatch
       summary: Get Basketball Match
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -954,7 +1195,7 @@ paths:
         - Matches
       operationId: getBasketballMatchesOdds
       summary: Get Basketball Matches Odds
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: segment4
           in: path
@@ -1112,7 +1353,7 @@ paths:
         - Players
       operationId: getBasketballPlayerTournamentSeasonShotActions
       summary: Get Basketball Player Tournament Season Shot Actions
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -1171,7 +1412,7 @@ paths:
         - Players
       operationId: getBasketballPlayerTournamentSeasonStatistics
       summary: Get Basketball Player Tournament Season Statistics
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -1304,7 +1545,7 @@ paths:
         - Teams
       operationId: getBasketballTeamTournamentSeasonBestPlayers
       summary: Get Basketball Team Tournament Season Best Players
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -1363,7 +1604,7 @@ paths:
         - Teams
       operationId: getBasketballTeamTournamentSeason
       summary: Get Basketball Team Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -1431,7 +1672,7 @@ paths:
         - Teams
       operationId: getBasketballTeam
       summary: Get Basketball Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -1636,7 +1877,7 @@ paths:
         - Tournaments
       operationId: getBasketballTournamentSeasonBestPlayersPerGame
       summary: Get Basketball Tournament Season Best Players Per Game
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -1688,7 +1929,7 @@ paths:
         - Tournaments
       operationId: getBasketballTournamentSeasonBestPlayers
       summary: Get Basketball Tournament Season Best Players
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -1743,7 +1984,7 @@ paths:
         - Tournaments
       operationId: getBasketballTournamentSeasonBestTeams
       summary: Get Basketball Tournament Season Best Teams
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -1833,7 +2074,7 @@ paths:
         - Tournaments
       operationId: getBasketballTournamentSeasonShotActionsAreas
       summary: Get Basketball Tournament Season Shot Actions Areas
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -1885,7 +2126,7 @@ paths:
         - Tournaments
       operationId: getBasketballTournamentSeasonTeamOfThePeriodPeriods
       summary: Get Basketball Tournament Season Team Of The Period Periods
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -2001,7 +2242,7 @@ paths:
         - Tournaments
       operationId: getBasketballTournamentSeason
       summary: Get Basketball Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -2058,7 +2299,7 @@ paths:
         - Tournaments
       operationId: getBasketballTournament
       summary: Get Basketball Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -2419,7 +2660,7 @@ paths:
         - Matches
       operationId: getCricketMatch
       summary: Get Cricket Match
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -2517,6 +2758,53 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
+  "/api/cricket/team/{id}/{segment4}":
+    get:
+      tags:
+        - Teams
+      operationId: getCricketTeam
+      summary: Get Cricket Team
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: "Unique team identifier. Example: 2817."
+          schema:
+            type: integer
+          example: 2817
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-event, media, players, tournaments."
+          schema:
+            type: string
+            enum:
+              - featured-event
+              - media
+              - players
+              - tournaments
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/TournamentsResponse"
+        "404":
+          description: Team with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
   "/api/cricket/tournament/{tournamentId}/season/{seasonId}/team-events/total":
     get:
       tags:
@@ -2566,7 +2854,7 @@ paths:
         - Tournaments
       operationId: getCricketTournamentSeason
       summary: Get Cricket Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -2599,6 +2887,53 @@ paths:
                 "$ref": "#/components/schemas/TopPlayersResponse"
         "404":
           description: Tournament or season with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/cricket/tournament/{tournamentId}/{segment4}":
+    get:
+      tags:
+        - Tournaments
+      operationId: getCricketTournament
+      summary: Get Cricket Tournament
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: tournamentId
+          in: path
+          required: true
+          description: "Unique tournament identifier. Example: 8."
+          schema:
+            type: integer
+          example: 8
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-events, media, seasons, winners."
+          schema:
+            type: string
+            enum:
+              - featured-events
+              - media
+              - seasons
+              - winners
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/SeasonsResponse"
+        "404":
+          description: Tournament with the specified ID not found.
           content:
             application/json:
               schema:
@@ -2648,6 +2983,85 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
+  "/api/cycling/{segment2}/{id}/image":
+    get:
+      tags:
+        - Media
+      operationId: getCyclingImage
+      summary: Get Cycling Image
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: segment2
+          in: path
+          required: true
+          description: "Allowed values: stage, unique-stage."
+          schema:
+            type: string
+            enum:
+              - stage
+              - unique-stage
+        - name: id
+          in: path
+          required: true
+          description: Stage id.
+          schema:
+            type: integer
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/darts/team/{id}/{segment4}":
+    get:
+      tags:
+        - Teams
+      operationId: getDartsTeam
+      summary: Get Darts Team
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Team id.
+          schema:
+            type: integer
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-event, media, performance, unique-tournaments."
+          schema:
+            type: string
+            enum:
+              - featured-event
+              - media
+              - performance
+              - unique-tournaments
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
   "/api/esport/character/{characterId}/image":
     get:
       tags:
@@ -2728,7 +3142,7 @@ paths:
         - Events
       operationId: getEsportEvent
       summary: Get Esport Event
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -2780,7 +3194,7 @@ paths:
         - Games
       operationId: getEsportGame
       summary: Get Esport Game
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -2864,7 +3278,7 @@ paths:
         - Matches
       operationId: getEsportTeam
       summary: Get Esport Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -2909,7 +3323,7 @@ paths:
         - Tournaments
       operationId: getEsportTournamentSeason
       summary: Get Esport Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -2962,7 +3376,7 @@ paths:
         - Tournaments
       operationId: getEsportTournamentSeasonTotal
       summary: Get Esport Tournament Season Total
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -3008,6 +3422,53 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: No content. The route exists but no data is available for the given parameters.
+  "/api/esport/tournament/{tournamentId}/{segment4}":
+    get:
+      tags:
+        - Tournaments
+      operationId: getEsportTournament
+      summary: Get Esport Tournament
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: tournamentId
+          in: path
+          required: true
+          description: "Unique tournament identifier. Example: 8."
+          schema:
+            type: integer
+          example: 8
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-events, media, seasons, winners."
+          schema:
+            type: string
+            enum:
+              - featured-events
+              - media
+              - seasons
+              - winners
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Tournament not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
   /api/event/newly-added:
     get:
       tags:
@@ -3036,7 +3497,7 @@ paths:
         - Matches
       operationId: getHandballMatch
       summary: Get Handball Match
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -3141,29 +3602,42 @@ paths:
         - Teams
       operationId: getTeamTopPlayersOverall
       summary: Get team top players overall
+      description: Retrieves the best performing players for the team in a specific tournament season.
       parameters:
         - name: id
           in: path
           required: true
+          description: "Team ID. Example: 6272."
           schema:
-            type: string
+            type: integer
+          example: 6272
         - name: tournamentId
           in: path
           required: true
+          description: "Tournament ID. Example: 149."
           schema:
-            type: string
+            type: integer
+          example: 149
         - name: seasonId
           in: path
           required: true
+          description: "Season ID. Example: 42967."
           schema:
-            type: string
+            type: integer
+          example: 42967
       responses:
         "200":
-          description: Successful response.
+          description: "A list of the team's top players for the season."
           content:
             application/json:
               schema:
                 "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: "Team, tournament or season not found."
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
         "500":
           description: Internal server error.
           content:
@@ -3178,7 +3652,7 @@ paths:
         - Teams
       operationId: getHandballTeam
       summary: Get Handball Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -3223,7 +3697,7 @@ paths:
         - Teams
       operationId: getHandballTeamSeasons
       summary: Get Handball Team Seasons
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -3354,7 +3828,7 @@ paths:
         - Tournaments
       operationId: getHandballUniqueTournamentSeason
       summary: Get Handball Unique Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -3408,7 +3882,7 @@ paths:
         - Tournaments
       operationId: getHandballUniqueTournamentSeasonOverall
       summary: Get Handball Unique Tournament Season Overall
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -3460,7 +3934,7 @@ paths:
         - Tournaments
       operationId: getHandballUniqueTournament
       summary: Get Handball Unique Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -3541,7 +4015,7 @@ paths:
         - Matches
       operationId: getIceHockeyMatch
       summary: Get Ice Hockey Match
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -3597,7 +4071,7 @@ paths:
         - Players
       operationId: getIceHockeyPlayerTournamentSeasonStatistics
       summary: Get Ice Hockey Player Tournament Season Statistics
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -3657,7 +4131,7 @@ paths:
         - Teams
       operationId: getIceHockeyTeam
       summary: Get Ice Hockey Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -3702,7 +4176,7 @@ paths:
         - Tournaments
       operationId: getIceHockeyTournamentSeasonBestPlayersPerGame
       summary: Get Ice Hockey Tournament Season Best Players Per Game
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -3755,7 +4229,7 @@ paths:
         - Tournaments
       operationId: getIceHockeyTournamentSeasonBestPlayers
       summary: Get Ice Hockey Tournament Season Best Players
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -3809,7 +4283,7 @@ paths:
         - Tournaments
       operationId: getIceHockeyTournamentSeasonBestTeams
       summary: Get Ice Hockey Tournament Season Best Teams
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -3861,7 +4335,7 @@ paths:
         - Tournaments
       operationId: getIceHockeyTournamentSeason
       summary: Get Ice Hockey Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -3895,6 +4369,51 @@ paths:
                 "$ref": "#/components/schemas/JSONResult"
         "404":
           description: Tournament or season with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
+  "/api/ice-hockey/tournament/{tournamentId}/{segment4}":
+    get:
+      tags:
+        - Tournaments
+      operationId: getIceHockeyTournament
+      summary: Get Ice Hockey Tournament
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: tournamentId
+          in: path
+          required: true
+          description: "Unique identifier for the tournament. Example: 234."
+          schema:
+            type: integer
+          example: 234
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: media, seasons."
+          schema:
+            type: string
+            enum:
+              - media
+              - seasons
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Tournament with the specified ID not found.
           content:
             application/json:
               schema:
@@ -3949,7 +4468,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDate
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -4087,7 +4606,7 @@ paths:
         - Matches
       operationId: getMatchGoalkeeperJersey
       summary: Get Match Goalkeeper Jersey
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -4199,7 +4718,7 @@ paths:
         - Matches
       operationId: getMatchOdds
       summary: Get Match Odds
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -4251,7 +4770,7 @@ paths:
         - Matches
       operationId: getMatchPlayerJersey
       summary: Get Match Player Jersey
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -4299,7 +4818,7 @@ paths:
         - Matches
       operationId: getMatchPlayer
       summary: Get Match Player
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -4510,7 +5029,7 @@ paths:
         - Matches
       operationId: getMatch
       summary: Get Match
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -4594,7 +5113,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularity
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -4623,7 +5142,7 @@ paths:
         - Matches
       operationId: getMatches
       summary: Get Matches
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: segment2
           in: path
@@ -4683,7 +5202,7 @@ paths:
         - Matches
       operationId: getMonthsWithEvents
       summary: Get months with events
-      description: "Returns monthsWithEvents for one unique tournament. Each entry has month and year. timezoneOffset is seconds east of UTC. Send the viewer offset, for example 7200."
+      description: "Returns monthsWithEvents for one unique tournament. Each entry has month and year. timezoneOffset is seconds east of UTC. The web client sends the viewer offset, for example 7200."
       parameters:
         - name: id
           in: path
@@ -4695,7 +5214,7 @@ paths:
         - name: timezoneOffset
           in: path
           required: true
-          description: "Seconds east of UTC. Send the viewer offset. Example: 7200."
+          description: "Seconds east of UTC. The web client sends the viewer offset. Example: 7200."
           schema:
             type: integer
           example: 7200
@@ -4792,7 +5311,7 @@ paths:
         - Events
       operationId: getMmaEvent
       summary: Get Mma Event
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -4935,7 +5454,7 @@ paths:
         - Fighters
       operationId: getMmaTeamEvents
       summary: Get Mma Team Events
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -5029,7 +5548,7 @@ paths:
         - Tournaments
       operationId: getMmaUniqueTournamentMainEvents
       summary: Get Mma Unique Tournament Main Events
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -5278,6 +5797,52 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
+  "/api/motorsport/{segment2}/{id}/image":
+    get:
+      tags:
+        - Stage
+      operationId: getMotorsportImage
+      summary: Get Motorsport Image
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: segment2
+          in: path
+          required: true
+          description: "Allowed values: stage, unique-stage."
+          schema:
+            type: string
+            enum:
+              - stage
+              - unique-stage
+        - name: id
+          in: path
+          required: true
+          description: "Stage ID. Example: 214148."
+          schema:
+            type: integer
+          example: 214148
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            image/png:
+              schema:
+                type: string
+                format: binary
+        "404":
+          description: Stage or image not found.
+          content:
+            image/png:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            image/png:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
   "/api/odds/providers/{countryCode}/{regionCode}/{type}":
     get:
       tags:
@@ -5328,7 +5893,7 @@ paths:
         - Odds
       operationId: listOddsProvidersForACountry
       summary: List odds providers for a country
-      description: "Returns odds providers for a country and a provider group. type is web, web-featured, or web-odds."
+      description: "Returns odds providers for a country and a provider group. The web client requests web, web-featured, and web-odds in the type segment."
       parameters:
         - name: countryCode
           in: path
@@ -5365,7 +5930,7 @@ paths:
         - Odds
       operationId: getAllOddsForASeason
       summary: Get all odds for a season
-      description: Returns every odds market for a season and provider. The path has no sport slug.
+      description: Returns every odds market for a season and provider. The web client loads this from football seasons. The path has no sport slug.
       parameters:
         - name: seasonId
           in: path
@@ -5400,7 +5965,7 @@ paths:
         - Matches
       operationId: getPadelEvent
       summary: Get Padel Event
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -5518,7 +6083,7 @@ paths:
         - Teams
       operationId: getPadelPlayer
       summary: Get Padel Player
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -5558,7 +6123,7 @@ paths:
         - Managers
       operationId: getPlaceholder
       summary: Get Placeholder
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: segment2
           in: path
@@ -5596,7 +6161,7 @@ paths:
         - Placeholders
       operationId: getPlaceholders
       summary: Get Placeholders
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: segment2
           in: path
@@ -5791,7 +6356,7 @@ paths:
         - name: matchType
           in: path
           required: true
-          description: Match type segment in the path.
+          description: Match type segment forwarded on the upstream path.
           schema:
             type: string
       responses:
@@ -5815,7 +6380,7 @@ paths:
         - Players
       operationId: getPlayerStatistics
       summary: Get Player Statistics
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -5905,7 +6470,7 @@ paths:
         - Players
       operationId: getPlayerTournamentSeason
       summary: Get Player Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -5966,7 +6531,7 @@ paths:
         - Players
       operationId: getPlayer
       summary: Get Player
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -6068,7 +6633,7 @@ paths:
         - Rankings
       operationId: getRankingsUefa
       summary: Get Rankings Uefa
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: segment3
           in: path
@@ -6201,7 +6766,7 @@ paths:
         - Teams
       operationId: getRugbyTeam
       summary: Get Rugby Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -6275,6 +6840,51 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
+  "/api/rugby/tournament/{tournamentId}/{segment4}":
+    get:
+      tags:
+        - Tournaments
+      operationId: getRugbyTournament
+      summary: Get Rugby Tournament
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: tournamentId
+          in: path
+          required: true
+          description: "Unique identifier for the tournament. Example: 294."
+          schema:
+            type: integer
+          example: 294
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: media, seasons."
+          schema:
+            type: string
+            enum:
+              - media
+              - seasons
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "404":
+          description: Tournament with the specified ID not found.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
   "/api/scheduled-tournaments/{day}/{month}/{year}/page/{page}":
     get:
       tags:
@@ -6307,7 +6917,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -6440,7 +7050,7 @@ paths:
         - Search
       operationId: getSearch
       summary: Get Search
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: segment2
           in: path
@@ -6490,7 +7100,7 @@ paths:
         - Search
       operationId: searchFootballEntities
       summary: Search football entities
-      description: Queries /search/all for this sport. The path term is sent as q. page is 0-based and defaults to 0. 
+      description: Queries /search/all for this sport. The path term is sent as q. page is 0-based and defaults to 0. The upstream entity type is all.
       parameters:
         - name: term
           in: path
@@ -6508,7 +7118,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -6527,13 +7137,53 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
+  "/api/snooker/team/{id}/{segment4}":
+    get:
+      tags:
+        - Teams
+      operationId: getSnookerTeam
+      summary: Get Snooker Team
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      parameters:
+        - name: id
+          in: path
+          required: true
+          description: Team id.
+          schema:
+            type: integer
+        - name: segment4
+          in: path
+          required: true
+          description: "Allowed values: featured-event, media, performance, unique-tournaments."
+          schema:
+            type: string
+            enum:
+              - featured-event
+              - media
+              - performance
+              - unique-tournaments
+      responses:
+        "200":
+          description: Successful response.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/JSONResult"
+        "500":
+          description: Internal server error.
+          content:
+            application/json:
+              schema:
+                "$ref": "#/components/schemas/ErrorResponse"
+        "204":
+          description: No content. The route exists but no data is available for the given parameters.
   "/api/sport/event-count/{timezoneOffset}":
     get:
       tags:
         - Matches
       operationId: countEventsForATimezoneOffset
       summary: Count events for a timezone offset
-      description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. Send the viewer's offset, for example 7200."
+      description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. The web client sends the viewer's offset, for example 7200."
       parameters:
         - name: timezoneOffset
           in: path
@@ -6593,7 +7243,7 @@ paths:
         - Matches
       operationId: getTableTennisEvent
       summary: Get Table Tennis Event
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -6640,7 +7290,7 @@ paths:
         - Matches
       operationId: getTableTennisEventsOdds
       summary: Get Table Tennis Events Odds
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: segment4
           in: path
@@ -6680,7 +7330,7 @@ paths:
         - Teams
       operationId: getTableTennisTeam
       summary: Get Table Tennis Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -6729,7 +7379,7 @@ paths:
         - Teams
       operationId: getTableTennisTeamSeasons
       summary: Get Table Tennis Team Seasons
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -6843,7 +7493,7 @@ paths:
         - Tournaments
       operationId: getTableTennisTournamentSeasonTeamEvents
       summary: Get Table Tennis Tournament Season Team Events
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -6925,7 +7575,7 @@ paths:
         - Tournaments
       operationId: getTableTennisTournamentSeasonTeamOfTheWeek
       summary: Get Table Tennis Tournament Season Team Of The Week
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -6969,7 +7619,7 @@ paths:
         - Tournaments
       operationId: getTableTennisTournamentSeason
       summary: Get Table Tennis Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -7019,7 +7669,7 @@ paths:
         - Tournaments
       operationId: getTableTennisTournament
       summary: Get Table Tennis Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -7090,7 +7740,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonth
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -7250,7 +7900,7 @@ paths:
         - Teams
       operationId: getTeamTournamentSeason
       summary: Get Team Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -7392,7 +8042,7 @@ paths:
         - Teams
       operationId: getTeam
       summary: Get Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -7442,7 +8092,7 @@ paths:
         - Teams
       operationId: getTeamSeasons
       summary: Get Team Seasons
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -7537,7 +8187,7 @@ paths:
         - Matches
       operationId: getTennisEventOdds
       summary: Get Tennis Event Odds
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -7589,7 +8239,7 @@ paths:
         - Matches
       operationId: getTennisEvent
       summary: Get Tennis Event
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -7642,7 +8292,7 @@ paths:
         - Matches
       operationId: getTennisEventsOdds
       summary: Get Tennis Events Odds
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: segment4
           in: path
@@ -7686,7 +8336,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 69208."
+          description: "Unique identifier for the player (team ID in upstream). Example: 69208."
           schema:
             type: integer
           example: 69208
@@ -7717,7 +8367,7 @@ paths:
         - Rankings
       operationId: getTennisRankings
       summary: Get Tennis Rankings
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: segment3
           in: path
@@ -7749,7 +8399,7 @@ paths:
         - Rankings
       operationId: getTennisRankingsLive
       summary: Get Tennis Rankings Live
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: segment3
           in: path
@@ -7817,7 +8467,7 @@ paths:
         - Teams
       operationId: getTennisTeamEvents
       summary: Get Tennis Team Events
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -8005,7 +8655,7 @@ paths:
         - Teams
       operationId: getTennisTeam
       summary: Get Tennis Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -8188,7 +8838,7 @@ paths:
         - Tournaments
       operationId: getTennisTournamentSeason
       summary: Get Tennis Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -8243,7 +8893,7 @@ paths:
         - Tournaments
       operationId: getTennisTournament
       summary: Get Tennis Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -8402,7 +9052,7 @@ paths:
         - Players
       operationId: getTennisTournamentsLast
       summary: Get Tennis Tournaments Last
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: segment2
           in: path
@@ -8416,7 +9066,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 69208."
+          description: "Unique identifier for the player (team ID in upstream). Example: 69208."
           schema:
             type: integer
           example: 69208
@@ -8519,7 +9169,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournament
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -8530,7 +9180,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -8828,7 +9478,7 @@ paths:
         - Matches
       operationId: getTournamentSeasonMatches
       summary: Get Tournament Season Matches
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -9142,7 +9792,7 @@ paths:
         - Tournaments
       operationId: getTournamentSeason
       summary: Get Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -9269,7 +9919,7 @@ paths:
         - Matches
       operationId: getTournamentSeasonRound
       summary: Get Tournament Season Round
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -9328,7 +9978,7 @@ paths:
         - Tournaments
       operationId: getTournamentSeasonRounds
       summary: Get Tournament Season Rounds
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -9380,7 +10030,7 @@ paths:
         - Players
       operationId: getTournamentSeasonTypes
       summary: Get Tournament Season Types
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -9426,7 +10076,7 @@ paths:
         - Teams
       operationId: getTournamentSeasongetApiTournamentTournamentidSeasonSeasonidSegment5Segment6
       summary: Get Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -9488,7 +10138,7 @@ paths:
         - Tournaments
       operationId: getTournament
       summary: Get Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -9553,7 +10203,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournaments
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -9583,7 +10233,7 @@ paths:
         - Transfers
       operationId: listTransfers
       summary: List transfers
-      description: Returns the transfer list. A typical call uses page=1 and sort=-transferFee.
+      description: Returns the transfer list. Query page and sort are forwarded unchanged. The web client uses page=1 and sort=-transferFee.
       parameters:
         - name: page
           in: query
@@ -9840,7 +10490,7 @@ paths:
         - Matches
       operationId: getVenue
       summary: Get Venue
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -9879,7 +10529,7 @@ paths:
         - Matches
       operationId: getVolleyballMatch
       summary: Get Volleyball Match
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: id
           in: path
@@ -10052,7 +10702,7 @@ paths:
         - Players
       operationId: getVolleyballTournamentSeasonTypes
       summary: Get Volleyball Tournament Season Types
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -10098,7 +10748,7 @@ paths:
         - Matches
       operationId: getVolleyballTournament
       summary: Get Volleyball Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -10137,7 +10787,7 @@ paths:
         - Tournaments
       operationId: getVolleyballUniqueTournamentSeason
       summary: Get Volleyball Unique Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: tournamentId
           in: path
@@ -10226,7 +10876,7 @@ paths:
         - Calendar
       operationId: getCalendarStages
       summary: Get Calendar Stages
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: segment1
           in: path
@@ -10247,7 +10897,7 @@ paths:
         - name: timezoneOffset
           in: path
           required: true
-          description: "Seconds east of UTC. Send the viewer offset. Example: 7200."
+          description: "Seconds east of UTC. The web client sends the viewer offset. Example: 7200."
           schema:
             type: string
           example: "7200"
@@ -10279,7 +10929,7 @@ paths:
         - Calendar
       operationId: getCalendarCategories
       summary: Get Calendar Categories
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10338,7 +10988,7 @@ paths:
         - Calendar
       operationId: getCalendar
       summary: Get Calendar
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10390,7 +11040,7 @@ paths:
         - Calendar
       operationId: getCalendarCategoriesgetApiSportCalendarMonthYearCategories
       summary: Get Calendar Categories
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10449,7 +11099,7 @@ paths:
         - Categories
       operationId: getCategories
       summary: Get Categories
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10483,7 +11133,7 @@ paths:
         - Tournaments
       operationId: getCategoriesgetApiSportCategoriesSegment3
       summary: Get Categories
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10526,7 +11176,7 @@ paths:
         - Tournaments
       operationId: getCategoryLiveUniqueTournaments
       summary: Get Category Live Unique Tournaments
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10565,7 +11215,7 @@ paths:
         - Tournaments
       operationId: getCategoryEventCount
       summary: Get Category Event Count
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10652,7 +11302,7 @@ paths:
         - Matches
       operationId: getCategoryEvents
       summary: Get Category Events
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10743,7 +11393,7 @@ paths:
         - Category
       operationId: getCategoryStagesAll
       summary: Get Category Stages All
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10787,7 +11437,7 @@ paths:
         - Matches
       operationId: getEventH2h
       summary: Get Event H2h
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10836,7 +11486,7 @@ paths:
         - Matches
       operationId: getEvent
       summary: Get Event
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10886,7 +11536,7 @@ paths:
         - Matches
       operationId: getEventGraph
       summary: Get Event Graph
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10933,7 +11583,7 @@ paths:
         - Matches
       operationId: getEventGraphSequencegetApiSportEventIdGraphSequence
       summary: Get Event Graph Sequence
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -10975,7 +11625,7 @@ paths:
         - Matches
       operationId: getEventMediaCountry
       summary: Get Event Media Country
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11026,7 +11676,7 @@ paths:
         - Events
       operationId: getEventOddsFeatured
       summary: Get Event Odds Featured
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11078,7 +11728,7 @@ paths:
         - Matches
       operationId: getEventProviderWinningOdds
       summary: Get Event Provider Winning Odds
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11130,7 +11780,7 @@ paths:
         - Matches
       operationId: getEventgetApiSportEventIdSegment4
       summary: Get Event
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11186,7 +11836,7 @@ paths:
         - Matches
       operationId: getEventsLive
       summary: Get Events Live
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11222,7 +11872,7 @@ paths:
         - Odds
       operationId: getEventsOddsFeaturedByPopularity
       summary: Get Events Odds Featured By Popularity
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11263,7 +11913,7 @@ paths:
         - Matches
       operationId: getEventsOdds
       summary: Get Events Odds
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11322,7 +11972,7 @@ paths:
         - Matches
       operationId: getEvents
       summary: Get Events
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11385,7 +12035,7 @@ paths:
         - Matches
       operationId: getLive
       summary: Get Live
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11417,7 +12067,7 @@ paths:
         - Matches
       operationId: getMainEventsExtended
       summary: Get Main Events Extended
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11485,7 +12135,7 @@ paths:
         - Managers
       operationId: getManager
       summary: Get Manager
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11532,7 +12182,7 @@ paths:
         - Managers
       operationId: getManagerImage
       summary: Get Manager Image
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11581,7 +12231,7 @@ paths:
         - Managers
       operationId: getManagerMatchesPrevious
       summary: Get Manager Matches Previous
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11641,7 +12291,7 @@ paths:
         - Matches
       operationId: getMatchH2h
       summary: Get Match H2h
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11698,7 +12348,7 @@ paths:
         - Matches
       operationId: getMatchgetApiSportMatchId
       summary: Get Match
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11755,7 +12405,7 @@ paths:
         - Matches
       operationId: getMatchGraph
       summary: Get Match Graph
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11805,7 +12455,7 @@ paths:
         - Matches
       operationId: getMatchGraphSequence
       summary: Get Match Graph Sequence
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11853,7 +12503,7 @@ paths:
         - Matches
       operationId: getMatchMediaCountry
       summary: Get Match Media Country
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11911,7 +12561,7 @@ paths:
         - Matches
       operationId: getMatchOddsgetApiSportMatchIdOdds
       summary: Get Match Odds
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -11957,7 +12607,7 @@ paths:
         - Matches
       operationId: getMatchOddsAll
       summary: Get Match Odds All
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12006,7 +12656,7 @@ paths:
         - Matches
       operationId: getMatchPlayerStatistics
       summary: Get Match Player Statistics
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12060,7 +12710,7 @@ paths:
         - Matches
       operationId: getMatchgetApiSportMatchIdSegment4
       summary: Get Match
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12128,7 +12778,7 @@ paths:
         - Matches
       operationId: getMatchesLive
       summary: Get Matches Live
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12174,7 +12824,7 @@ paths:
         - Odds
       operationId: getMatchesOddsFeaturedByPopularity
       summary: Get Matches Odds Featured By Popularity
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12225,7 +12875,7 @@ paths:
         - Matches
       operationId: getMatchesgetApiSportMatchesDayMonthYear
       summary: Get Matches
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12298,7 +12948,7 @@ paths:
         - Players
       operationId: getPlayergetApiSportPlayerId
       summary: Get Player
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12351,7 +13001,7 @@ paths:
         - Players
       operationId: getPlayerEventsNear
       summary: Get Player Events Near
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12395,7 +13045,7 @@ paths:
         - Players
       operationId: getPlayerEvents
       summary: Get Player Events
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12447,7 +13097,7 @@ paths:
         - Players
       operationId: getPlayerEventsLast
       summary: Get Player Events Last
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12500,7 +13150,7 @@ paths:
         - Players
       operationId: getPlayerEventsgetApiSportPlayerIdEventsSegment5Page
       summary: Get Player Events
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12565,7 +13215,7 @@ paths:
         - Players
       operationId: getPlayerGrandSlamBestResults
       summary: Get Player Grand Slam Best Results
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12603,7 +13253,7 @@ paths:
         - Players
       operationId: getPlayerImage
       summary: Get Player Image
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12657,7 +13307,7 @@ paths:
         - Players
       operationId: getPlayerMatchesNear
       summary: Get Player Matches Near
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12707,7 +13357,7 @@ paths:
         - Players
       operationId: getPlayerMatchesPrevious
       summary: Get Player Matches Previous
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12770,7 +13420,7 @@ paths:
         - Players
       operationId: getPlayerMedia
       summary: Get Player Media
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12816,7 +13466,7 @@ paths:
         - Players
       operationId: getPlayerStandingsSeasons
       summary: Get Player Standings Seasons
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12860,7 +13510,7 @@ paths:
         - Players
       operationId: getPlayerStatisticsSeason
       summary: Get Player Statistics Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12907,7 +13557,7 @@ paths:
         - Players
       operationId: getPlayerStatisticsSeasons
       summary: Get Player Statistics Seasons
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -12952,7 +13602,7 @@ paths:
         - Players
       operationId: getPlayersTrending
       summary: Get Players Trending
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13002,7 +13652,7 @@ paths:
         - Tournaments
       operationId: getScheduledTournamentsPage
       summary: Get Scheduled Tournaments Page
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13088,7 +13738,7 @@ paths:
         - Search
       operationId: getSearchgetApiSportSearchTerm
       summary: Get Search
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13161,7 +13811,7 @@ paths:
         - Stage
       operationId: getStageFeatured
       summary: Get Stage Featured
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13193,7 +13843,7 @@ paths:
         - Stage
       operationId: getStageScheduled
       summary: Get Stage Scheduled
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13238,7 +13888,7 @@ paths:
         - Odds
       operationId: getStageOddsProvider
       summary: Get Stage Odds Provider
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13299,7 +13949,7 @@ paths:
         - Stage
       operationId: getStageRacesType
       summary: Get Stage Races Type
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13343,7 +13993,7 @@ paths:
         - Stage
       operationId: getStageStandings
       summary: Get Stage Standings
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13397,7 +14047,7 @@ paths:
         - Stage
       operationId: getStage
       summary: Get Stage
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13452,7 +14102,7 @@ paths:
         - Stage
       operationId: getStagegetApiSportStageStageid
       summary: Get Stage
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13496,7 +14146,7 @@ paths:
         - Stage
       operationId: getStageSubstages
       summary: Get Stage Substages
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13542,7 +14192,7 @@ paths:
         - Tournaments
       operationId: getTeamOfThePeriodgetApiSportTeamOfThePeriodPeriodid
       summary: Get Team Of The Period
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13580,7 +14230,7 @@ paths:
         - Teams
       operationId: getTeamgetApiSportTeamId
       summary: Get Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13646,7 +14296,7 @@ paths:
         - Team
       operationId: getTeamDriverHistory
       summary: Get Team Driver History
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13690,7 +14340,7 @@ paths:
         - Teams
       operationId: getTeamEvents
       summary: Get Team Events
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13764,7 +14414,7 @@ paths:
         - Teams
       operationId: getTeamImage
       summary: Get Team Image
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13830,7 +14480,7 @@ paths:
         - Teams
       operationId: getTeamMatchesNear
       summary: Get Team Matches Near
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13892,7 +14542,7 @@ paths:
         - Teams
       operationId: getTeamMatches
       summary: Get Team Matches
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -13974,7 +14624,7 @@ paths:
         - Odds
       operationId: getTeamOddsProvider
       summary: Get Team Odds Provider
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14024,7 +14674,7 @@ paths:
         - Teams
       operationId: getTeamPlayers
       summary: Get Team Players
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14069,7 +14719,7 @@ paths:
         - Teams
       operationId: getTeamPlayersStatisticsSeasons
       summary: Get Team Players Statistics Seasons
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14116,7 +14766,7 @@ paths:
         - Team
       operationId: getTeamStageSeasonRaces
       summary: Get Team Stage Season Races
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14168,7 +14818,7 @@ paths:
         - Team
       operationId: getTeamStageSeasons
       summary: Get Team Stage Seasons
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14213,7 +14863,7 @@ paths:
         - Teams
       operationId: getTeamStandingsSeasons
       summary: Get Team Standings Seasons
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14272,7 +14922,7 @@ paths:
         - Teams
       operationId: getTeamTournamentSeasonBestPlayers
       summary: Get Team Tournament Season Best Players
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14340,7 +14990,7 @@ paths:
         - Teams
       operationId: getTeamUniqueTournamentSeasonPlayerStatistics
       summary: Get Team Unique Tournament Season Player Statistics
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14421,7 +15071,7 @@ paths:
         - Teams
       operationId: getTeamUniqueTournamentsAll
       summary: Get Team Unique Tournaments All
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14457,227 +15107,13 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: No content. The route exists but no data is available for the given parameters.
-  "/api/baseball/team/{id}/{segment4}":
+  "/api/{sport}/team/{id}/{segment4}":
     get:
       tags:
         - Teams
       operationId: getTeamgetApiSportTeamIdSegment4
       summary: Get Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: "Unique team identifier. Example: 2817."
-          schema:
-            type: integer
-          example: 2817
-        - name: segment4
-          in: path
-          required: true
-          description: "Allowed values: featured-event, media, players, tournaments."
-          schema:
-            type: string
-            enum:
-              - featured-event
-              - media
-              - players
-              - tournaments
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "404":
-          description: Team with the specified ID not found.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/cricket/team/{id}/{segment4}":
-    get:
-      tags:
-        - Teams
-      operationId: getTeamgetApiSportTeamIdSegment42
-      summary: Get Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: "Unique team identifier. Example: 2817."
-          schema:
-            type: integer
-          example: 2817
-        - name: segment4
-          in: path
-          required: true
-          description: "Allowed values: featured-event, media, players, tournaments."
-          schema:
-            type: string
-            enum:
-              - featured-event
-              - media
-              - players
-              - tournaments
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "404":
-          description: Team with the specified ID not found.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/badminton/team/{id}/{segment4}":
-    get:
-      tags:
-        - Teams
-      operationId: getTeam2
-      summary: Get Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: Team id.
-          schema:
-            type: integer
-        - name: segment4
-          in: path
-          required: true
-          description: "Allowed values: featured-event, media, performance, unique-tournaments."
-          schema:
-            type: string
-            enum:
-              - featured-event
-              - media
-              - performance
-              - unique-tournaments
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/darts/team/{id}/{segment4}":
-    get:
-      tags:
-        - Teams
-      operationId: getTeam22
-      summary: Get Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: Team id.
-          schema:
-            type: integer
-        - name: segment4
-          in: path
-          required: true
-          description: "Allowed values: featured-event, media, performance, unique-tournaments."
-          schema:
-            type: string
-            enum:
-              - featured-event
-              - media
-              - performance
-              - unique-tournaments
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/snooker/team/{id}/{segment4}":
-    get:
-      tags:
-        - Teams
-      operationId: getTeam23
-      summary: Get Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: id
-          in: path
-          required: true
-          description: Team id.
-          schema:
-            type: integer
-        - name: segment4
-          in: path
-          required: true
-          description: "Allowed values: featured-event, media, performance, unique-tournaments."
-          schema:
-            type: string
-            enum:
-              - featured-event
-              - media
-              - performance
-              - unique-tournaments
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/{sport}/team/{id}/{segment4}":
-    get:
-      tags:
-        - Teams
-      operationId: getTeam3
-      summary: Get Team
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14732,7 +15168,7 @@ paths:
         - Tournaments
       operationId: getTournamentAllCategory
       summary: Get Tournament All Category
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14794,7 +15230,7 @@ paths:
         - Tournaments
       operationId: getTournamentCategories
       summary: Get Tournament Categories
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14846,7 +15282,7 @@ paths:
         - Tournaments
       operationId: getTournamentCategoriesgetApiSportTournamentCategoriesSegment4
       summary: Get Tournament Categories
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14907,7 +15343,7 @@ paths:
         - Tournaments
       operationId: getTournamentgetApiSportTournamentTournamentid
       summary: Get Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -14970,7 +15406,7 @@ paths:
         - Tournaments
       operationId: getTournamentEventsLive
       summary: Get Tournament Events Live
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15008,7 +15444,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -15032,7 +15468,7 @@ paths:
         - Tournaments
       operationId: getTournamentImage
       summary: Get Tournament Image
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15094,7 +15530,7 @@ paths:
         - Tournaments
       operationId: getTournamentImageDark
       summary: Get Tournament Image Dark
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15156,7 +15592,7 @@ paths:
         - Matches
       operationId: getTournamentScheduledEvents
       summary: Get Tournament Scheduled Events
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15203,7 +15639,7 @@ paths:
         - Tournaments
       operationId: getTournamentSchedules
       summary: Get Tournament Schedules
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15290,7 +15726,7 @@ paths:
         - Tournaments
       operationId: getTournamentSeasonEventsRound
       summary: Get Tournament Season Events Round
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15342,7 +15778,7 @@ paths:
         - Tournaments
       operationId: getTournamentSeasonEventsRoundSlug
       summary: Get Tournament Season Events Round Slug
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15409,7 +15845,7 @@ paths:
         - Tournaments
       operationId: getTournamentSeasonEvents
       summary: Get Tournament Season Events
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15484,7 +15920,7 @@ paths:
         - Matches
       operationId: getTournamentSeasonMatchesgetApiSportTournamentTournamentidSeasonSeasonidMatches
       summary: Get Tournament Season Matches
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15536,7 +15972,7 @@ paths:
         - Tournaments
       operationId: getTournamentSeasonMatchesRound
       summary: Get Tournament Season Matches Round
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15592,7 +16028,7 @@ paths:
         - Tournaments
       operationId: getTournamentSeasonMatchesRoundSlug
       summary: Get Tournament Season Matches Round Slug
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15655,7 +16091,7 @@ paths:
         - Tournaments
       operationId: getTournamentSeasonMatchesgetApiSportTournamentTournamentidSeasonSeasonidMatchesSegment7Page
       summary: Get Tournament Season Matches
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15738,7 +16174,7 @@ paths:
         - Players
       operationId: getTournamentSeasonPlayerStatisticsTypes
       summary: Get Tournament Season Player Statistics Types
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15784,7 +16220,7 @@ paths:
         - Tournaments
       operationId: getTournamentSeasonStandingsTotal
       summary: Get Tournament Season Standings Total
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15836,7 +16272,7 @@ paths:
         - Tournaments
       operationId: getTournamentSeasonStandings
       summary: Get Tournament Season Standings
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15897,7 +16333,7 @@ paths:
         - Teams
       operationId: getTournamentSeasonTeamStatisticsTypes
       summary: Get Tournament Season Team Statistics Types
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -15943,7 +16379,7 @@ paths:
         - Tournaments
       operationId: getTournamentSeasongetApiSportTournamentTournamentidSeasonSeasonidSegment6
       summary: Get Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16001,119 +16437,13 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: No content. The route exists but no data is available for the given parameters.
-  "/api/american-football/tournament/{tournamentId}/season/{seasonId}/{segment6}":
-    get:
-      tags:
-        - Tournaments
-      operationId: getTournamentSeason2
-      summary: Get Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: tournamentId
-          in: path
-          required: true
-          description: "Unique identifier for the tournament. Example: 9464."
-          schema:
-            type: integer
-          example: 9464
-        - name: seasonId
-          in: path
-          required: true
-          description: "Unique identifier for the season. Example: 36422."
-          schema:
-            type: integer
-          example: 36422
-        - name: segment6
-          in: path
-          required: true
-          description: "Allowed values: cuptrees, team-of-the-season, venues."
-          schema:
-            type: string
-            enum:
-              - cuptrees
-              - team-of-the-season
-              - venues
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "404":
-          description: Tournament or season with the specified ID not found.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/baseball/tournament/{tournamentId}/season/{seasonId}/{segment6}":
-    get:
-      tags:
-        - Tournaments
-      operationId: getTournamentSeason22
-      summary: Get Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: tournamentId
-          in: path
-          required: true
-          description: "Unique identifier for the tournament. Example: 9464."
-          schema:
-            type: integer
-          example: 9464
-        - name: seasonId
-          in: path
-          required: true
-          description: "Unique identifier for the season. Example: 36422."
-          schema:
-            type: integer
-          example: 36422
-        - name: segment6
-          in: path
-          required: true
-          description: "Allowed values: cuptrees, team-of-the-season, venues."
-          schema:
-            type: string
-            enum:
-              - cuptrees
-              - team-of-the-season
-              - venues
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "404":
-          description: Tournament or season with the specified ID not found.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/tournament/{tournamentId}/season/{seasonId}/{segment6}/{segment7}":
     get:
       tags:
         - Tournaments
       operationId: getTournamentSeasongetApiSportTournamentTournamentidSeasonSeasonidSegment6Segment7
       summary: Get Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16190,244 +16520,13 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: No content. The route exists but no data is available for the given parameters.
-  "/api/baseball/tournament/{tournamentId}/{segment4}":
+  "/api/{sport}/tournament/{tournamentId}/{segment4}":
     get:
       tags:
         - Tournaments
       operationId: getTournamentgetApiSportTournamentTournamentidSegment4
       summary: Get Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: tournamentId
-          in: path
-          required: true
-          description: "Unique tournament identifier. Example: 8."
-          schema:
-            type: integer
-          example: 8
-        - name: segment4
-          in: path
-          required: true
-          description: "Allowed values: featured-events, media, seasons, winners."
-          schema:
-            type: string
-            enum:
-              - featured-events
-              - media
-              - seasons
-              - winners
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "404":
-          description: Tournament with the specified ID not found.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/cricket/tournament/{tournamentId}/{segment4}":
-    get:
-      tags:
-        - Tournaments
-      operationId: getTournamentgetApiSportTournamentTournamentidSegment42
-      summary: Get Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: tournamentId
-          in: path
-          required: true
-          description: "Unique tournament identifier. Example: 8."
-          schema:
-            type: integer
-          example: 8
-        - name: segment4
-          in: path
-          required: true
-          description: "Allowed values: featured-events, media, seasons, winners."
-          schema:
-            type: string
-            enum:
-              - featured-events
-              - media
-              - seasons
-              - winners
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "404":
-          description: Tournament with the specified ID not found.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/esport/tournament/{tournamentId}/{segment4}":
-    get:
-      tags:
-        - Tournaments
-      operationId: getTournamentgetApiSportTournamentTournamentidSegment43
-      summary: Get Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: tournamentId
-          in: path
-          required: true
-          description: "Unique tournament identifier. Example: 8."
-          schema:
-            type: integer
-          example: 8
-        - name: segment4
-          in: path
-          required: true
-          description: "Allowed values: featured-events, media, seasons, winners."
-          schema:
-            type: string
-            enum:
-              - featured-events
-              - media
-              - seasons
-              - winners
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "404":
-          description: Tournament with the specified ID not found.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/ice-hockey/tournament/{tournamentId}/{segment4}":
-    get:
-      tags:
-        - Tournaments
-      operationId: getTournament2
-      summary: Get Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: tournamentId
-          in: path
-          required: true
-          description: "Unique identifier for the tournament. Example: 234."
-          schema:
-            type: integer
-          example: 234
-        - name: segment4
-          in: path
-          required: true
-          description: "Allowed values: media, seasons."
-          schema:
-            type: string
-            enum:
-              - media
-              - seasons
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "404":
-          description: Tournament with the specified ID not found.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/rugby/tournament/{tournamentId}/{segment4}":
-    get:
-      tags:
-        - Tournaments
-      operationId: getTournament22
-      summary: Get Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: tournamentId
-          in: path
-          required: true
-          description: "Unique identifier for the tournament. Example: 234."
-          schema:
-            type: integer
-          example: 234
-        - name: segment4
-          in: path
-          required: true
-          description: "Allowed values: media, seasons."
-          schema:
-            type: string
-            enum:
-              - media
-              - seasons
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "404":
-          description: Tournament with the specified ID not found.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/{sport}/tournament/{tournamentId}/{segment4}":
-    get:
-      tags:
-        - Tournaments
-      operationId: getTournament3
-      summary: Get Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16491,7 +16590,7 @@ paths:
         - Tournaments
       operationId: getTournamentsFinishedUpcoming
       summary: Get Tournaments Finished Upcoming
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16553,7 +16652,7 @@ paths:
         - Tournaments
       operationId: getTournamentsLive
       summary: Get Tournaments Live
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16608,7 +16707,7 @@ paths:
         - Stages
       operationId: getUniqueStageRecentStageIds
       summary: Get Unique Stage Recent Stage Ids
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16647,7 +16746,7 @@ paths:
         - Stage
       operationId: getUniqueStageSeason
       summary: Get Unique Stage Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16692,7 +16791,7 @@ paths:
         - Categories
       operationId: getUniqueTournamentAllCategory
       summary: Get Unique Tournament All Category
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16737,7 +16836,7 @@ paths:
         - Tournaments
       operationId: getUniqueTournament
       summary: Get Unique Tournament
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16783,7 +16882,7 @@ paths:
         - Tournaments
       operationId: getUniqueTournamentEventsLive
       summary: Get Unique Tournament Events Live
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16804,7 +16903,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -16828,7 +16927,7 @@ paths:
         - Tournaments
       operationId: getUniqueTournamentImage
       summary: Get Unique Tournament Image
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16875,7 +16974,7 @@ paths:
         - Tournaments
       operationId: getUniqueTournamentImageDark
       summary: Get Unique Tournament Image Dark
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16922,7 +17021,7 @@ paths:
         - Tournaments
       operationId: getUniqueTournamentSeasonMatchesRound
       summary: Get Unique Tournament Season Matches Round
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -16981,7 +17080,7 @@ paths:
         - Tournaments
       operationId: getUniqueTournamentSeasonMatchesRoundSlug
       summary: Get Unique Tournament Season Matches Round Slug
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -17047,7 +17146,7 @@ paths:
         - Tournaments
       operationId: getUniqueTournamentSeasonMatches
       summary: Get Unique Tournament Season Matches
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -17121,7 +17220,7 @@ paths:
         - Tournaments
       operationId: getUniqueTournamentSeason
       summary: Get Unique Tournament Season
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -17192,7 +17291,7 @@ paths:
         - Managers
       operationId: getRoute
       summary: Get route
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -17241,7 +17340,7 @@ paths:
         - Managers
       operationId: getImage
       summary: Get Image
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -17289,7 +17388,7 @@ paths:
         - Matches
       operationId: getMatchesNear
       summary: Get Matches Near
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -17334,7 +17433,7 @@ paths:
         - Matches
       operationId: getMatchesgetApiSportIdMatchesSegment4Page
       summary: Get Matches
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -17401,7 +17500,7 @@ paths:
         - Managers
       operationId: getRoutegetApiSportSegment2Id
       summary: Get route
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -17453,7 +17552,7 @@ paths:
         - Managers
       operationId: getImagegetApiSportSegment2IdImage
       summary: Get Image
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -17500,103 +17599,13 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: No content. The route exists but no data is available for the given parameters.
-  "/api/cycling/{segment2}/{id}/image":
-    get:
-      tags:
-        - Media
-      operationId: getImage2
-      summary: Get Image
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: segment2
-          in: path
-          required: true
-          description: "Allowed values: stage, unique-stage."
-          schema:
-            type: string
-            enum:
-              - stage
-              - unique-stage
-        - name: id
-          in: path
-          required: true
-          description: Stage id.
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            image/png:
-              schema:
-                type: string
-                format: binary
-        "404":
-          description: Stage or image not found.
-          content:
-            image/png:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            image/png:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/motorsport/{segment2}/{id}/image":
-    get:
-      tags:
-        - Stage
-      operationId: getImage22
-      summary: Get Image
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: segment2
-          in: path
-          required: true
-          description: "Allowed values: stage, unique-stage."
-          schema:
-            type: string
-            enum:
-              - stage
-              - unique-stage
-        - name: id
-          in: path
-          required: true
-          description: Stage id.
-          schema:
-            type: integer
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            image/png:
-              schema:
-                type: string
-                format: binary
-        "404":
-          description: Stage or image not found.
-          content:
-            image/png:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            image/png:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/{segment2}/{id}/matches/previous/{page}":
     get:
       tags:
         - Managers
       operationId: getMatchesPrevious
       summary: Get Matches Previous
-      description: Compact endpoint template. Enum values restrict this path to concrete endpoints present in the full specification.
+      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
         - name: sport
           in: path
@@ -17715,6 +17724,10 @@ components:
       additionalProperties: true
       description: Proxy payload.
     TopTeamsResponse:
+      type: object
+      additionalProperties: true
+      description: Proxy payload.
+    TournamentsResponse:
       type: object
       additionalProperties: true
       description: Proxy payload.

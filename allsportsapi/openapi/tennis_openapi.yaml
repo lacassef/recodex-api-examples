@@ -31,9 +31,10 @@ info:
     A 204 means the route exists and this match or query has no data yet, such as no points or no odds. The body is empty.
 
     Start with `GET /api/tennis/events/live` for matches in play, or the date routes for a fixture list.
+  x-website: "https://github.com/lacassef/recodex-api-examples"
   x-version-lifecycle: active
 servers:
-  - url: https://tennisapi1.p.rapidapi.com
+  - url: "https://tennisapi1.p.rapidapi.com"
     description: RapidAPI. Send this host in X-RapidAPI-Host.
 tags:
   - name: Calendar
@@ -334,7 +335,7 @@ paths:
         - Odds
       operationId: listOddsProvidersForACountry
       summary: List odds providers for a country
-      description: "Returns odds providers for a country and a provider group. type is web, web-featured, or web-odds."
+      description: "Returns odds providers for a country and a provider group. The web client requests web, web-featured, and web-odds in the type segment."
       parameters:
         - name: countryCode
           in: path
@@ -371,7 +372,7 @@ paths:
         - Odds
       operationId: getAllOddsForASeason
       summary: Get all odds for a season
-      description: Returns every odds market for a season and provider. The path has no sport slug.
+      description: Returns every odds market for a season and provider. The web client loads this from football seasons. The path has no sport slug.
       parameters:
         - name: seasonId
           in: path
@@ -870,7 +871,7 @@ paths:
         - Matches
       operationId: countEventsForATimezoneOffset
       summary: Count events for a timezone offset
-      description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. Send the viewer's offset, for example 7200."
+      description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. The web client sends the viewer's offset, for example 7200."
       parameters:
         - name: timezoneOffset
           in: path
@@ -950,7 +951,7 @@ paths:
         - Calendar
       operationId: getTennisCalendarForMonth
       summary: Get tennis calendar for month
-      description: "Returns dailyUniqueTournaments for the month. Each entry has a date and uniqueTournamentIds. The route requests offset 0000. Send the viewer offset in seconds east of UTC, for example 7200."
+      description: "Returns dailyUniqueTournaments for the month. Each entry has a date and uniqueTournamentIds. The route requests offset 0000. The web client sends the viewer offset in seconds east of UTC, for example 7200."
       parameters:
         - name: month
           in: path
@@ -1842,7 +1843,7 @@ paths:
         - Odds
       operationId: listFeaturedEventsByPopularity
       summary: List featured events by popularity
-      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. "
+      description: "Returns featured events for one odds provider, ordered by popularity. Football, basketball, volleyball, handball, ice-hockey, baseball, american-football, rugby, cricket, and esport publish this under /matches/odds. Tennis, table tennis, and mma publish it under /events/odds. The esport upstream slug is esports."
       parameters:
         - name: providerId
           in: path
@@ -2001,7 +2002,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDate
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -2073,7 +2074,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 69208."
+          description: "Unique identifier for the player (team ID in upstream). Example: 69208."
           schema:
             type: integer
           example: 69208
@@ -2144,7 +2145,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 69208."
+          description: "Unique identifier for the player (team ID in upstream). Example: 69208."
           schema:
             type: integer
           example: 69208
@@ -2180,7 +2181,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 83397."
+          description: "Unique identifier for the player (team ID in upstream). Example: 83397."
           schema:
             type: integer
           example: 83397
@@ -2229,7 +2230,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 83397."
+          description: "Unique identifier for the player (team ID in upstream). Example: 83397."
           schema:
             type: integer
           example: 83397
@@ -2273,7 +2274,7 @@ paths:
         - Players
       operationId: listTennisSinglesResults
       summary: List tennis singles results
-      description: Returns past singles events. The player id is the same id as on the team route. Page is 0-based and the first page is 0.
+      description: Returns past singles events. The public player id is a team id upstream. Page is 0-based and the first page is 0.
       parameters:
         - name: id
           in: path
@@ -2308,7 +2309,7 @@ paths:
         - Players
       operationId: listTennisPlayerEventsInAMonth
       summary: List tennis player events in a month
-      description: "Returns the events on the player calendar for one month. The player id is the same id as on the team route. The month is zero-padded. The same calendar is also published at /api/tennis/team/{id}/events/{month}/{year}."
+      description: "Returns the events on the player calendar for one month. The public player id is a team id upstream. The month is zero-padded upstream. The year is forwarded unchanged. The same calendar is also published at /api/tennis/team/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -2385,7 +2386,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 216488."
+          description: "Unique identifier for the player (team ID in upstream). Example: 216488."
           schema:
             type: integer
           example: 216488
@@ -2422,7 +2423,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 69208."
+          description: "Unique identifier for the player (team ID in upstream). Example: 69208."
           schema:
             type: integer
           example: 69208
@@ -2458,7 +2459,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 14486."
+          description: "Unique identifier for the player (team ID in upstream). Example: 14486."
           schema:
             type: integer
           example: 14486
@@ -2494,7 +2495,7 @@ paths:
         - name: id
           in: path
           required: true
-          description: "Unique identifier for the player (same id as the team route). Example: 69208."
+          description: "Unique identifier for the player (team ID in upstream). Example: 69208."
           schema:
             type: integer
           example: 69208
@@ -2661,7 +2662,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: "Page number. The list starts at page 1. Example: 1."
+          description: "Page number. The list starts at page 1. The proxy forwards the page unchanged. Example: 1."
           schema:
             type: integer
           example: 1
@@ -2710,7 +2711,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -2905,7 +2906,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonth
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -3510,7 +3511,7 @@ paths:
         - Tournaments
       operationId: listLiveEventsOfAUniqueTournament
       summary: List live events of a unique tournament
-      description: Returns events in progress for one unique tournament. Send page as given. It defaults to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
+      description: Returns events in progress for one unique tournament. page is forwarded unchanged. The web client includes the page and defaults it to 0. This is separate from the sport-wide live list. Volleyball and handball publish this under /unique-tournament. MMA publishes it under /api/mma/unique-tournament.
       parameters:
         - name: tournamentId
           in: path
@@ -3521,7 +3522,7 @@ paths:
         - name: page
           in: path
           required: true
-          description: Page number. Defaults to 0.
+          description: Page number. The web client defaults to 0.
           schema:
             type: integer
       responses:
@@ -4479,7 +4480,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournaments
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -4509,7 +4510,7 @@ paths:
         - Tournaments
       operationId: listLiveTournaments
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -4642,7 +4643,7 @@ paths:
         - Transfers
       operationId: listTransfers
       summary: List transfers
-      description: Returns the transfer list. A typical call uses page=1 and sort=-transferFee.
+      description: Returns the transfer list. Query page and sort are forwarded unchanged. The web client uses page=1 and sort=-transferFee.
       parameters:
         - name: page
           in: query

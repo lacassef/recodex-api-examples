@@ -2,12 +2,35 @@ openapi: 3.0.0
 info:
   title: Cycling API
   version: "1.0.0"
-  description: Cycling API routes and the shared AllSports routes. OpenAPI specification.
+  description: >-
+    Cycling API for stage schedules, rider and team standings, highlights,
+    extended stage details, and provider odds. Stage results and media for
+    teams and categories.
   x-category: Sports
-  x-long-description: Cycling API routes and the shared AllSports routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    The Cycling API is a race data API for stage schedules, rider and team standings, and the detail behind a stage. Build a race calendar, a results page, or a team and rider page.
+
+    A stage carries the schedule, the standings, the highlights, the extended details, and the odds board when one is published.
+
+    ### Schedule, results, and standings
+
+    - Stages scheduled on a date, and the featured stage
+    - Stage details, substages, and rankings inside a race
+    - Competitor standings and team standings
+    - Extended stage details and rider performance
+    - A team's stage seasons and that team's races in a season
+    - Video highlights when the stage has them
+    - Team images, category images, and stage images
+    - Betting odds for a stage or a team when a board is published
+    - Search for riders, teams, and races when you do not have an id yet
+
+    A 204 means the route exists and this stage or query has no data yet, such as no ranking or no odds. The body is empty.
+
+    Start with `GET /api/cycling/stage/scheduled/{date}` for a day's schedule. `{date}` is `YYYY-MM-DD`.
+  x-website: "https://github.com/lacassef/recodex-api-examples"
   x-version-lifecycle: active
 servers:
-  - url: https://allsportsapi2.p.rapidapi.com
+  - url: "https://cyclingapi.p.rapidapi.com"
     description: RapidAPI. Send this host in X-RapidAPI-Host.
 tags:
   - name: Calendar
@@ -341,7 +364,7 @@ paths:
         - Matches
       operationId: listExtendedMainEventsByDate
       summary: List extended main events by date
-      description: "Returns the extended main events for one sport and date. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. "
+      description: "Returns the extended main events for one sport and date. The web client requests the extended segment. MMA already publishes /api/mma/main-events/{date}/extended. Football is unprefixed. The esport upstream slug is esports."
       parameters:
         - name: date
           in: path
@@ -389,7 +412,7 @@ paths:
           example: 0
       responses:
         "200":
-          description: Search results.
+          description: Search results. The upstream entity type is all.
           content:
             application/json:
               schema:
@@ -942,7 +965,7 @@ paths:
         - Teams
       operationId: listTeamEventsInAMonth
       summary: List team events in a month
-      description: "Returns the events on the team calendar for one month. The month is zero-padded. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
+      description: "Returns the events on the team calendar for one month. The month is zero-padded upstream. The year is forwarded unchanged. Tennis also publishes this at /api/tennis/player/{id}/events/{month}/{year}."
       parameters:
         - name: id
           in: path
@@ -1189,7 +1212,7 @@ paths:
         - Tournaments
       operationId: listFinishedAndUpcomingTournaments
       summary: List finished and upcoming tournaments
-      description: Returns tournaments that finished or are upcoming on a date. Football is unprefixed. The esport public prefix is /api/esport.
+      description: Returns tournaments that finished or are upcoming on a date. date is forwarded unchanged. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports.
       parameters:
         - name: date
           in: path
@@ -1219,7 +1242,7 @@ paths:
         - Tournaments
       operationId: listLiveTournaments
       summary: List live tournaments
-      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
+      description: Returns tournaments that currently have a live event. Football is unprefixed. The esport public prefix is /api/esport and the upstream slug is esports. Table tennis uses /api/table-tennis/tournaments/live. MMA uses /api/mma/tournaments/live. Cycling and motorsport use their own prefixes.
       responses:
         "200":
           description: Successful response.
@@ -1438,7 +1461,7 @@ paths:
         - Odds
       operationId: listOddsProvidersForACountry
       summary: List odds providers for a country
-      description: "Returns odds providers for a country and a provider group. type is web, web-featured, or web-odds."
+      description: "Returns odds providers for a country and a provider group. The web client requests web, web-featured, and web-odds in the type segment."
       parameters:
         - name: countryCode
           in: path
@@ -1475,7 +1498,7 @@ paths:
         - Odds
       operationId: getAllOddsForASeason
       summary: Get all odds for a season
-      description: Returns every odds market for a season and provider. The path has no sport slug.
+      description: Returns every odds market for a season and provider. The web client loads this from football seasons. The path has no sport slug.
       parameters:
         - name: seasonId
           in: path
@@ -1974,7 +1997,7 @@ paths:
         - Matches
       operationId: countEventsForATimezoneOffset
       summary: Count events for a timezone offset
-      description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. Send the viewer's offset, for example 7200."
+      description: "Returns the number of events on the local day for a timezone offset in seconds east of UTC. The offset is not a sport slug. The web client sends the viewer's offset, for example 7200."
       parameters:
         - name: timezoneOffset
           in: path
@@ -2004,7 +2027,7 @@ paths:
         - Transfers
       operationId: listTransfers
       summary: List transfers
-      description: Returns the transfer list. A typical call uses page=1 and sort=-transferFee.
+      description: Returns the transfer list. Query page and sort are forwarded unchanged. The web client uses page=1 and sort=-transferFee.
       parameters:
         - name: page
           in: query

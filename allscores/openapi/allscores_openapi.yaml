@@ -41,9 +41,10 @@ info:
     A 204 means the route exists and this query has no data. Some routes return 200 with an empty object or an empty list instead. Do not parse a 204 body.
 
     Start with `GET /api/allscores/games-scores` for a day's scores, or `GET /api/allscores/sports` for the sport catalog.
+  x-website: "https://github.com/lacassef/recodex-api-examples"
   x-version-lifecycle: active
 servers:
-  - url: https://allscores.p.rapidapi.com
+  - url: "https://allscores.p.rapidapi.com"
     description: RapidAPI. Send this host in X-RapidAPI-Host.
 tags:
   - name: Athletes
