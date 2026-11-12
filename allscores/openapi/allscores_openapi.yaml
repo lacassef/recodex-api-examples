@@ -2,9 +2,45 @@ openapi: 3.0.0
 info:
   title: AllScores API
   version: "1.0.0"
-  description: AllScores API routes. OpenAPI specification.
+  description: >-
+    Live scores API for soccer, basketball, tennis, ice hockey, American
+    football, baseball, cricket, rugby, volleyball, and handball. Fixtures,
+    standings, lineups, play-by-play, athlete stats, news, and betting odds.
+    Premier League, NBA, NFL, MLB, NHL, ATP, and IPL.
   x-category: Sports
-  x-long-description: AllScores API routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    AllScores is a live scores API for fixtures, results, standings, and the detail behind each game. Build a scores board, a competition page, a team or athlete profile, or an odds view.
+
+    Sports include football (soccer), basketball, tennis, ice hockey, American football, baseball, cricket, rugby, volleyball, handball, table tennis, esports, and the Olympics.
+
+    ### Live scores, fixtures, and results
+
+    - Scores for a day, live games only, or major games only
+    - Featured games, top games, and a competition's fixtures and results
+    - Game details: status, clock, venue, officials, and stage scores
+    - Lineups, statistics, pre-game stats, and play-by-play comments
+    - Point-by-point for tennis
+    - Head-to-head (H2H) and prediction cards
+    - Video highlights when the competition or the competitor has them
+    - News cards for the games and competitions you follow
+
+    ### Standings, teams, and athletes
+
+    - Competition tables, brackets, history, and team of the week
+    - Team profile, squad, recent form, and transfers
+    - Athlete profile, career, next game, trophies, and shot charts
+    - Logos, athlete photos, and flags
+    - Search for competitions, teams, and athletes when you do not have an id yet
+
+    ### Betting odds
+
+    Best odds, game lines, proposition bets, teasers, and outright markets, when a book publishes a line for that game or competition.
+
+    Coverage includes the Premier League, the UEFA Champions League, the FA Cup, La Liga, and Serie A. Basketball includes the NBA, EuroLeague, and Liga ACB. Tennis includes the Grand Slams and the ATP Finals. Also the NHL, the NFL, MLB, the ICC Cricket World Cup, Test cricket, and the Indian Premier League, plus other leagues and cups in each sport.
+
+    A 204 means the route exists and this query has no data. Some routes return 200 with an empty object or an empty list instead. Do not parse a 204 body.
+
+    Start with `GET /api/allscores/games-scores` for a day's scores, or `GET /api/allscores/sports` for the sport catalog.
   x-version-lifecycle: active
 servers:
   - url: https://allscores.p.rapidapi.com

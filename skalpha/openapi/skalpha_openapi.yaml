@@ -2,9 +2,44 @@ openapi: 3.0.0
 info:
   title: SKAlpha API
   version: "1.0.0"
-  description: SKAlpha API routes. OpenAPI specification.
+  description: >-
+    Stock market API for real-time quotes, historical prices, charts,
+    options chains, fundamentals, earnings, dividends, SEC filings, analyst
+    ratings, news, and screeners. US stocks, ETFs, indices, and crypto symbols.
   x-category: Finance
-  x-long-description: SKAlpha API routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    SKAlpha is a stock market data API for quotes, fundamentals, filings, and market news. Build a symbol page, a watchlist, an earnings calendar, or a research feed.
+
+    ### Quotes, prices, and charts
+
+    - Real-time quotes by ticker or id
+    - Daily historical prices for one symbol or several
+    - Chart series from one day out to max history
+    - US market open and close, and the day's movers
+    - Global indices and sector pages
+    - Options expirations and the options chain for a date
+
+    ### Fundamentals, estimates, and filings
+
+    - Income statement, balance sheet, and cash flow, annual, quarterly, or trailing twelve months
+    - Earnings estimates, revisions, and the estimated earnings date
+    - Dividends, splits, share count, payout ratios, and insider buys and sells
+    - SEC filings for a symbol, and the filing PDF
+    - Earnings transcripts and slides
+    - Quant, dividend, ETF, and REIT metric grades
+
+    ### News, screeners, and search
+
+    - Market news, breaking headlines, articles, and press releases
+    - Analysis and news on one symbol
+    - Stock and ETF screener filters and saved screener definitions
+    - Earnings calendar for a day or a date range
+    - ETF groups for markets, bonds, commodities, countries, currencies, strategies, and crypto
+    - Search across stocks, ETFs, mutual funds, and crypto symbols
+
+    A 204 means the route exists and this symbol or query has no data. The body is empty.
+
+    Start with `GET /api/skalpha/quotes/realtime` for a quote, or `GET /api/skalpha/symbols/{slug}` for a symbol page. A slug is the ticker, such as `tgt` or `BTC-USD`.
   x-version-lifecycle: active
 servers:
   - url: https://skalpha1.p.rapidapi.com

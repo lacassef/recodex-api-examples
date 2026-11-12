@@ -2,9 +2,53 @@ openapi: 3.0.0
 info:
   title: Football API
   version: "1.0.0"
-  description: Football API routes and the shared AllSports routes. OpenAPI specification.
+  description: >-
+    Soccer and football livescore API for live scores, fixtures, standings,
+    league tables, lineups, player statistics, xG, shot maps, betting odds,
+    and transfers. Premier League, Champions League, World Cup, La Liga,
+    Serie A, Bundesliga, Ligue 1, Brasileirão, and hundreds of leagues and cups.
   x-category: Sports
-  x-long-description: Football API routes and the shared AllSports routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    FootApi is a football and soccer data API for live scores, fixtures, results, and the detail behind each match. Build a livescore board, a league page, a team or player profile, or a match centre.
+
+    Coverage includes the Premier League, La Liga, Copa del Rey, Serie A, Coppa Italia, Bundesliga, DFB-Pokal, Ligue 1, Brasileirão Série A, the UEFA Champions League, the UEFA Europa League, the World Cup, and the European Championship, plus hundreds of other leagues, cups, and tournaments.
+
+    ### Live scores, fixtures, and results
+
+    - Live football matches, with minute, score, status, halftime, and full time
+    - Fixtures and results by date, league, team, or country
+    - Match events: goals, assists, yellow and red cards, and substitutions
+    - Commentary, momentum, win probability, form, streaks, and head-to-head (H2H)
+    - Match weather, video highlights when the match has them, and TV channels
+
+    ### Lineups, statistics, shot maps, and xG
+
+    - Lineups, formations, and player ratings
+    - Team and player match statistics
+    - Shot maps and goalkeeper shot maps, with expected goals (xG) when the match has that coverage
+    - Player, team, and season heatmaps, plus average positions
+
+    ### Standings, leagues, and rankings
+
+    - League tables for total, home, and away
+    - Cup trees, rounds, groups, and seasons
+    - Team of the week and player of the season
+    - FIFA national team rankings, plus UEFA club and country rankings
+
+    ### Players, teams, managers, and referees
+
+    - Player profiles, attributes, season statistics, penalty history, and career totals
+    - Squads, club logos, player photos, recent matches, and upcoming fixtures
+    - Transfer history for players, clubs, and leagues
+    - Manager careers, and referee appointments and statistics
+
+    ### Betting odds and search
+
+    Pre-match and live betting odds by match, including featured markets and season odds, when a board is published for that match. Search finds teams, players, and tournaments when you do not have an id yet.
+
+    A 204 means the route exists and this match or query has no data yet, such as no lineup, no shots, or no odds. The body is empty.
+
+    Start with `GET /api/matches/live` for matches in play, or the date routes for a fixture list.
   x-version-lifecycle: active
 servers:
   - url: https://footapi7.p.rapidapi.com

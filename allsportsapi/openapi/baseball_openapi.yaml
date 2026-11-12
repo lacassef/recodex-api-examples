@@ -2,9 +2,36 @@ openapi: 3.0.0
 info:
   title: Baseball API
   version: "1.0.0"
-  description: Baseball API routes and the shared AllSports routes. OpenAPI specification.
+  description: >-
+    Baseball API for live scores, fixtures, standings, lineups, at-bats,
+    pitch data, player statistics, and betting odds. MLB and other leagues
+    and tournaments.
   x-category: Sports
-  x-long-description: Baseball API routes and the shared AllSports routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    The Baseball API is a baseball data API for live scores, fixtures, results, and the plate appearance behind each game. Build a livescore board, a box score, or a team or player page.
+
+    Coverage includes MLB and other leagues and tournaments.
+
+    ### Live scores and game detail
+
+    - Live games, with the score, inning, and match status
+    - Fixtures and results by date, league, or team
+    - At-bats for a game, and the pitches in one at-bat
+    - Pitches thrown or faced by one player in a game or a season
+    - Lineups, commentary, team statistics, and player game statistics
+    - Umpires, weather, head-to-head (H2H), form, and win probability
+    - Video highlights when the game has them
+    - Betting odds when a board is published for that game
+
+    ### Standings and rosters
+
+    - League tables for total, home, and away
+    - Season statistics, team of the season, logos, and player photos
+    - Search for teams, players, and tournaments when you do not have an id yet
+
+    A 204 means the route exists and this game or query has no data yet, such as no lineup, no pitches, or no odds. The body is empty.
+
+    Start with `GET /api/baseball/matches/live` for games in play, or the date routes for a fixture list.
   x-version-lifecycle: active
 servers:
   - url: https://baseballapi.p.rapidapi.com

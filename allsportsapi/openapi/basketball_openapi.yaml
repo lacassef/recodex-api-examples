@@ -2,9 +2,36 @@ openapi: 3.0.0
 info:
   title: Basketball API
   version: "1.0.0"
-  description: Basketball API routes and the shared AllSports routes. OpenAPI specification.
+  description: >-
+    Basketball API for live scores, fixtures, standings, quarter results,
+    shot maps, player statistics, draft data, and betting odds. NBA, NCAA,
+    EuroLeague, FIBA World Cup, EuroBasket, and more than 70 leagues.
   x-category: Sports
-  x-long-description: Basketball API routes and the shared AllSports routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    BasketAPI is a basketball data API for live scores, fixtures, results, and the detail behind each game. Build a livescore board, a league table, or a team or player page.
+
+    Coverage includes the NBA, NCAA, EuroLeague, the FIBA Basketball World Cup, EuroBasket, and more than 70 other leagues and cups.
+
+    ### Live scores, fixtures, and box detail
+
+    - Live games, with quarter scores, halftime, and the final
+    - Fixtures and results by date, league, or team
+    - Match events, lineups, statistics, best players, and head-to-head (H2H)
+    - Win probability, form, and video highlights when the game has them
+    - Betting odds, including featured markets, when a board is published for that game
+
+    ### Shot maps, standings, and player stats
+
+    - Shot maps for a player or a team in a game
+    - Shot actions for the regular season and the playoffs
+    - League tables for total, home, and away, plus cup trees
+    - Season statistics, top players, transfers, logos, and player photos
+    - Draft picks and draft-lottery probabilities when the league publishes them
+    - Search for teams, players, and tournaments when you do not have an id yet
+
+    A 204 means the route exists and this game or query has no data yet, such as no lineup, no shots, or no odds. The body is empty.
+
+    Start with `GET /api/basketball/matches/live` for games in play, or the date routes for a fixture list.
   x-version-lifecycle: active
 servers:
   - url: https://basketapi1.p.rapidapi.com

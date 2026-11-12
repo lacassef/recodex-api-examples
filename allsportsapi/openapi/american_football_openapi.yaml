@@ -2,9 +2,37 @@ openapi: 3.0.0
 info:
   title: American Football API
   version: "1.0.0"
-  description: American Football API routes and the shared AllSports routes. OpenAPI specification.
+  description: >-
+    American football API for live scores, fixtures, standings, lineups,
+    touchdowns, down and distance, player stats, and betting odds. NFL
+    regular season, playoffs, and other leagues.
   x-category: Sports
-  x-long-description: American Football API routes and the shared AllSports routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    AmericanFootballApi is an American football data API for live scores, fixtures, results, and the detail behind each game. Build a livescore board, a league table, or a team or player page.
+
+    Coverage includes the NFL regular season and the playoffs, plus other leagues.
+
+    ### Live scores and game detail
+
+    - Live games, with the score, quarter, and match status
+    - Down and distance on the live game
+    - Fixtures and results by date, league, or team
+    - Touchdowns, field goals, and other scoring plays
+    - Lineups, team statistics, and player game statistics
+    - Head-to-head (H2H), form, momentum, and win probability
+    - Video highlights when the game has them
+    - Betting odds, including the full board, when one is published for that game
+
+    ### Standings and rosters
+
+    - League tables for total, home, and away, plus cup trees
+    - Regular-season and playoff player statistics
+    - Team of the season, logos, and player photos
+    - Search for teams, players, and tournaments when you do not have an id yet
+
+    A 204 means the route exists and this game or query has no data yet, such as no lineup or no odds. The body is empty.
+
+    Start with `GET /api/american-football/matches/live` for games in play, or the date routes for a fixture list.
   x-version-lifecycle: active
 servers:
   - url: https://americanfootballapi.p.rapidapi.com

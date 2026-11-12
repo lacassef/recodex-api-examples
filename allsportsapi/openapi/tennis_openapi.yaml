@@ -2,9 +2,35 @@ openapi: 3.0.0
 info:
   title: Tennis API
   version: "1.0.0"
-  description: Tennis API routes and the shared AllSports routes. OpenAPI specification.
+  description: >-
+    Tennis API for live scores, fixtures, point-by-point, tournament draws,
+    ATP and WTA rankings, head-to-head, and betting odds. Grand Slams,
+    ATP Tour, WTA, and Challenger events.
   x-category: Sports
-  x-long-description: Tennis API routes and the shared AllSports routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    TennisApi is a tennis data API for live scores, fixtures, results, and the point-by-point record of a match. Build a livescore board, a tournament draw, or a player page.
+
+    Coverage includes the Grand Slams (Australian Open, Roland Garros, Wimbledon, and the US Open), the ATP Tour, the WTA Tour, and Challenger events.
+
+    ### Live scores and match detail
+
+    - Live matches, with set scores and match status
+    - Point-by-point scores
+    - Head-to-head (H2H) and the match power graph
+    - Video highlights when the match has them
+    - Betting odds, including featured markets, when a board is published for that match
+
+    ### Draws, rankings, and players
+
+    - Tournament draws and brackets
+    - Current and live ATP rankings
+    - Current and live WTA rankings
+    - Grand Slam best results, player rankings, and player statistics
+    - Search for players and tournaments when you do not have an id yet
+
+    A 204 means the route exists and this match or query has no data yet, such as no points or no odds. The body is empty.
+
+    Start with `GET /api/tennis/events/live` for matches in play, or the date routes for a fixture list.
   x-version-lifecycle: active
 servers:
   - url: https://tennisapi1.p.rapidapi.com

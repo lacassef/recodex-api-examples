@@ -2,9 +2,35 @@ openapi: 3.0.0
 info:
   title: Volleyball API
   version: "1.0.0"
-  description: Volleyball API routes and the shared AllSports routes. OpenAPI specification.
+  description: >-
+    Volleyball API for live scores, fixtures, standings, set scores, match
+    statistics, streaks, cup brackets, and betting odds. Leagues, cups, and
+    international tournaments.
   x-category: Sports
-  x-long-description: Volleyball API routes and the shared AllSports routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    The Volleyball API is a volleyball data API for live scores, fixtures, results, and the sets behind each match. Build a livescore board, a league table, or a team page.
+
+    Coverage includes national leagues, cups, and international tournaments.
+
+    ### Live scores and match detail
+
+    - Live matches, with set scores and match status
+    - Fixtures and results by date, league, or team
+    - Points, substitutions, and other match events
+    - Team statistics, streaks, and win probability
+    - Head-to-head (H2H)
+    - Betting odds, including the full board, when one is published for that match
+
+    ### Standings and teams
+
+    - League tables for total, home, and away
+    - Cup brackets, rounds, and team-of-the-season selections
+    - Team logos and recent results
+    - Search for teams and tournaments when you do not have an id yet
+
+    A 204 means the route exists and this match or query has no data yet, such as no statistics or no odds. The body is empty.
+
+    Start with `GET /api/volleyball/matches/live` for matches in play, or the date routes for a fixture list.
   x-version-lifecycle: active
 servers:
   - url: https://volleyballapi.p.rapidapi.com

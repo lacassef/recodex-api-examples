@@ -2,9 +2,35 @@ openapi: 3.0.0
 info:
   title: Rugby API
   version: "1.0.0"
-  description: Rugby API routes and the shared AllSports routes. OpenAPI specification.
+  description: >-
+    Rugby API for live scores, fixtures, standings, lineups, match events,
+    player stats, Rugby Union rankings, and betting odds. Leagues, cups,
+    and international matches.
   x-category: Sports
-  x-long-description: Rugby API routes and the shared AllSports routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    The Rugby API is a rugby data API for live scores, fixtures, results, and the detail behind each match. Build a livescore board, a league table, or a team or player page.
+
+    Coverage includes rugby union leagues, cups, and international matches, plus the Rugby Union rankings.
+
+    ### Live scores and match detail
+
+    - Live matches, with the score and match status
+    - Fixtures and results by date, league, or team
+    - Match events, lineups, and team statistics
+    - Head-to-head (H2H), form, and win probability
+    - Video highlights when the match has them
+    - Betting odds when a board is published for that match
+
+    ### Standings, rankings, and rosters
+
+    - League tables for total, home, and away
+    - Rugby Union rankings
+    - Team of the season, logos, and player photos
+    - Search for teams, players, and tournaments when you do not have an id yet
+
+    A 204 means the route exists and this match or query has no data yet, such as no lineup or no odds. The body is empty.
+
+    Start with `GET /api/rugby/matches/live` for matches in play, or the date routes for a fixture list.
   x-version-lifecycle: active
 servers:
   - url: https://rugbyapi2.p.rapidapi.com

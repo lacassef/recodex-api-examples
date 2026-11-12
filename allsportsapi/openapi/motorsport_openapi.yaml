@@ -2,9 +2,30 @@ openapi: 3.0.0
 info:
   title: Motorsport API
   version: "1.0.0"
-  description: Motorsport API routes and the shared AllSports routes. OpenAPI specification.
+  description: >-
+    Motorsport API for race schedules, stage results, driver standings,
+    team standings, highlights, and betting odds. Formula 1, MotoGP, WRC,
+    and other series.
   x-category: Sports
-  x-long-description: Motorsport API routes and the shared AllSports routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    The Motorsport API is a race data API for schedules, stage results, and championship standings. Build a race calendar, a results page, or a team and driver page.
+
+    Categories include Formula 1, MotoGP, and WRC, plus other series published on the API.
+
+    ### Schedule, results, and standings
+
+    - Stages scheduled on a date, and the featured stage
+    - Stage details, substages, and rankings inside a race weekend
+    - Driver performance and competitor standings
+    - Team standings, a team's driver history, and that team's races in a season
+    - Video highlights when the stage has them
+    - Stage images and team images
+    - Betting odds for a stage or a team when a board is published
+    - Search for drivers, teams, and series when you do not have an id yet
+
+    A 204 means the route exists and this stage or query has no data yet, such as no ranking or no odds. The body is empty.
+
+    Start with `GET /api/motorsport/stage/scheduled/{date}` for a day's schedule. `{date}` is `YYYY-MM-DD`.
   x-version-lifecycle: active
 servers:
   - url: https://motorsportapi.p.rapidapi.com

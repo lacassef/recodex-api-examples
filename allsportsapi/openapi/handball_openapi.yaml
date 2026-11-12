@@ -2,9 +2,34 @@ openapi: 3.0.0
 info:
   title: Handball API
   version: "1.0.0"
-  description: Handball API routes and the shared AllSports routes. OpenAPI specification.
+  description: >-
+    Handball API for live scores, fixtures, standings, lineups, player
+    statistics, cup brackets, and betting odds. Leagues, cups, and
+    international tournaments.
   x-category: Sports
-  x-long-description: Handball API routes and the shared AllSports routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    The Handball API is a handball data API for live scores, fixtures, results, and the detail behind each match. Build a livescore board, a league table, or a team or player page.
+
+    Coverage includes national leagues, cups, and international tournaments.
+
+    ### Live scores and match detail
+
+    - Live matches, with the score and match status
+    - Fixtures and results by date, league, or team
+    - Match events, lineups, and video highlights when the match has them
+    - Head-to-head (H2H)
+    - Betting odds when a board is published for that match
+
+    ### Standings, scorers, and rosters
+
+    - League tables for total, home, and away, plus cup brackets
+    - Top players and top teams for a season
+    - Player and team season statistics, logos, and player photos
+    - Search for teams, players, and tournaments when you do not have an id yet
+
+    A 204 means the route exists and this match or query has no data yet, such as no lineup or no odds. The body is empty.
+
+    Start with `GET /api/handball/matches/live` for matches in play, or the date routes for a fixture list.
   x-version-lifecycle: active
 servers:
   - url: https://handballapi.p.rapidapi.com

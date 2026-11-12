@@ -2,9 +2,36 @@ openapi: 3.0.0
 info:
   title: AllSports API
   version: "1.0.0"
-  description: Merged OpenAPI specification.
+  description: >-
+    All-sports livescore API for soccer, basketball, tennis, cricket, ice
+    hockey, American football, baseball, rugby, volleyball, handball, MMA,
+    esports, and motorsport. Live scores, fixtures, standings, player stats,
+    and betting odds. NBA, NFL, MLB, NHL, ATP, WTA, IPL, UFC, and Formula 1.
   x-category: Sports
-  x-long-description: Merged OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    AllSportsApi is one livescore API for many sports. The same paths and the same JSON shapes cover live scores, fixtures, results, standings, statistics, and betting odds. Build a multi-sport scores app, a league page, or a match centre without a different contract per sport.
+
+    Football (soccer) paths have no sport name. Every other sport puts the sport slug after `/api`.
+
+    ### Sports
+
+    - Soccer: live scores, fixtures, lineups, standings, player stats, xG, shot maps, transfers, and odds. Premier League, Champions League, World Cup, La Liga, Serie A, Bundesliga, Ligue 1, and Brasileirão
+    - Basketball: quarter scores, shot maps, standings, and odds. NBA, NCAA, EuroLeague, and more than 70 leagues
+    - Tennis: point-by-point, draws, and ATP and WTA rankings. Grand Slams, ATP, WTA, and Challenger
+    - Cricket: innings scorecards, wickets, partnerships, and fall of wicket. IPL, Cricket World Cup, Tests, and T20
+    - Ice hockey: lineups, goals, penalties, and playoff stats. NHL and other leagues
+    - American football: lineups, touchdowns, and down and distance. NFL and the playoffs
+    - Baseball: at-bats, pitches, and standings. MLB and other leagues
+    - Rugby: lineups, standings, and Rugby Union rankings
+    - Volleyball and handball: live scores, standings, and cup brackets
+    - MMA: fight cards, fighter career stats, and weight-class rankings. UFC, KSW, and other promotions
+    - Esports: series games, bans, rounds, and League of Legends-style map statistics
+    - Motorsport: stage schedules, driver and team standings. Formula 1, MotoGP, and WRC
+    - Also on this API: table tennis, badminton, darts, snooker, padel, futsal, minifootball, beach volleyball, aussie rules, bandy, floorball, water polo, and cycling
+
+    Search finds teams, players, and tournaments when you do not have an id yet. A 204 means the route exists and this match or query has no data yet. The body is empty.
+
+    Start with `GET /api/matches/live` for football in play. Team sports and esports use `GET /api/{sport}/matches/live` (the esports slug is `esport`). Tennis uses `GET /api/tennis/events/live`. A day's MMA card is `GET /api/mma/main-events/{date}/extended`. A day's motorsport schedule is `GET /api/motorsport/stage/scheduled/{date}`.
   x-version-lifecycle: active
 servers:
   - url: https://allsportsapi2.p.rapidapi.com

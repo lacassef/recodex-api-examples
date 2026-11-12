@@ -2,9 +2,33 @@ openapi: 3.0.0
 info:
   title: MMA API
   version: "1.0.0"
-  description: MMA API routes and the shared AllSports routes. OpenAPI specification.
+  description: >-
+    MMA API for fight cards, live events, fighter profiles, career statistics,
+    weight-class rankings, head-to-head, and betting odds. UFC, KSW, and
+    other promotions.
   x-category: Sports
-  x-long-description: MMA API routes and the shared AllSports routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    The MMA API is a mixed martial arts data API for fight cards, fighter records, and rankings. Build a fight card, a fighter page, or a rankings table.
+
+    Organizations include the UFC and KSW, plus other promotions published on the API.
+
+    ### Fight cards and the bout
+
+    - Main events on a date, and the fights on a card
+    - Head-to-head (H2H) between the two fighters
+    - Pre-fight form and fighter streaks
+    - Featured betting odds when a board is published for that bout
+
+    ### Fighters and rankings
+
+    - Fighter profiles, photos, and career statistics
+    - Recent and upcoming bouts for a fighter
+    - Rankings by promotion, weight class, and gender
+    - Search for fighters and organizations when you do not have an id yet
+
+    A 204 means the route exists and this event or query has no data yet, such as no odds or no ranking. The body is empty.
+
+    Start with `GET /api/mma/main-events/{date}/extended` for a day's fight card. `{date}` is `YYYY-MM-DD`.
   x-version-lifecycle: active
 servers:
   - url: https://mmaapi.p.rapidapi.com

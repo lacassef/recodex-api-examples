@@ -2,9 +2,44 @@ openapi: 3.0.0
 info:
   title: LivescoresAPI
   version: "1.0.0"
-  description: LivescoresAPI routes. OpenAPI specification.
+  description: >-
+    Livescore API for soccer, tennis, basketball, ice hockey, American
+    football, baseball, cricket, rugby, and more. Scoreboards, fixtures,
+    standings, lineups, commentary, rankings, news, and betting odds.
   x-category: Sports
-  x-long-description: LivescoresAPI routes. OpenAPI specification. Status 204 means the route exists and there is no data for those parameters.
+  x-long-description: |
+    LivescoresAPI is a multi-sport livescore API for scoreboards, fixtures, results, and the detail behind each match. Build a scores app, a competition page, or a match centre.
+
+    Soccer is `sportId` 1. The same routes cover tennis, basketball, ice hockey, American football, baseball, handball, rugby union, rugby league, volleyball, cricket, table tennis, badminton, darts, snooker, boxing, MMA, golf, field hockey, futsal, beach soccer, beach volleyball, floorball, bandy, water polo, aussie rules, netball, kabaddi, esports, motorsport, auto racing, moto racing, cycling, horse racing, and winter sports.
+
+    ### Scoreboards and fixtures
+
+    - A sport's scoreboard for today, or another day with `dayOffset`
+    - Refresh for scores that changed
+    - Featured matches and a season calendar
+    - Tournament fixtures, results, and the match list
+    - Live score, full-time score, and red cards on the match list
+
+    ### Match detail
+
+    - Lineups, lineup updates, and missing players
+    - Match statistics, box score, and player statistics
+    - Commentary, the live timeline, and point-by-point
+    - Head-to-head (H2H), momentum, and a match report
+    - Highlight videos when the match has them
+    - Betting odds for the day and the odds detail for one match
+
+    ### Tables, players, and rankings
+
+    - League tables, tournament draws, top scorers, and past seasons
+    - Squads, transfers, and a participant's recent matches
+    - Player profile, injuries, match record, and tournaments won
+    - Rankings, including tennis rankings such as the ATP
+    - News for a match, a team, or an entity, plus search
+
+    A 204 means the route exists and this match or query has no data. The body is empty.
+
+    Start with `GET /api/livescores/sports/1/scoreboard` for today's soccer scores. Omit `dayOffset` for today. Change `1` for another sport.
   x-version-lifecycle: active
 servers:
   - url: https://livescoresapi.p.rapidapi.com
