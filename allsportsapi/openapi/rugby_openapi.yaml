@@ -1483,56 +1483,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/rugby/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getAllRugbyMatchesByDate
-      summary: Get all rugby matches by date
-      description: Fetches all rugby matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 31."
-          schema:
-            type: integer
-          example: 31
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 7."
-          schema:
-            type: integer
-          example: 7
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2022."
-          schema:
-            type: integer
-          example: 2022
-      responses:
-        "200":
-          description: A list of scheduled matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/rugby/player/{id}":
     get:
       tags:

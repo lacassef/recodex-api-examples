@@ -1216,56 +1216,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/esport/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getEsportsMatchesByDate
-      summary: Get eSports matches by date
-      description: Fetches all eSports matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month (1-31). Example: 18."
-          schema:
-            type: integer
-          example: 18
-        - name: month
-          in: path
-          required: true
-          description: "Month (1-12). Example: 12."
-          schema:
-            type: integer
-          example: 12
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2022."
-          schema:
-            type: integer
-          example: 2022
-      responses:
-        "200":
-          description: Successfully retrieved matches for the specified date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date parameters.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/esport/player/{id}":
     get:
       tags:

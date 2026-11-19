@@ -6,9 +6,9 @@
  * window local midnight <= startTimestamp < local midnight + 86400. This example
  * fetches the UTC dates at offsets -1, 0 and +1, then keeps events inside that window.
  *
- * Football has no sport-wide day list: GET /api/matches/{day}/{month}/{year} is
- * discontinued. Other sports still publish GET /api/{sport}/matches/{day}/{month}/{year}
- * or GET /api/{sport}/events/{day}/{month}/{year}. This example assembles one day from
+ * The sport-wide day list is discontinued on every sport. GET /api/matches/{day}/{month}/{year},
+ * GET /api/{sport}/matches/{day}/{month}/{year}, and GET /api/{sport}/events/{day}/{month}/{year}
+ * stay on the server and are left out of the OpenAPI files. This example assembles one day from
  * a few categories. Two options (see ../DailyMatches.md):
  *
  *   1. By category:    /api/{sport}/category/{id}/events/{day}/{month}/{year}

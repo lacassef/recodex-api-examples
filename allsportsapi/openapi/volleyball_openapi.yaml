@@ -1800,56 +1800,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/volleyball/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getVolleyballMatchesByDate
-      summary: Get volleyball matches by date
-      description: Fetches all volleyball matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 20."
-          schema:
-            type: integer
-          example: 20
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2023."
-          schema:
-            type: integer
-          example: 2023
-      responses:
-        "200":
-          description: A list of scheduled volleyball matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/volleyball/players/trending:
     get:
       tags:

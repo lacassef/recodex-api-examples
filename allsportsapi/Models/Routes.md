@@ -35,9 +35,7 @@ A `200` body is the payload for that route. A `204` body is empty. The shapes th
 | `GET /api/match/{id}/votes` |  | Get match votes |
 | `GET /api/match/{id}/weather` |  | Get event weather |
 | `GET /api/match/{id}/win-probability` |  | Get match win probability |
-| `GET /api/matches/bottom/{day}/{month}/{year}` |  | Get bottom football matches by date |
 | `GET /api/matches/live` |  | Get live football matches |
-| `GET /api/matches/top/{day}/{month}/{year}` |  | Get top football matches by date |
 | `GET /api/sport/event-count/{timezoneOffset}` |  | Count events for a timezone offset |
 | `GET /api/trending/events/{country}` |  | List trending events |
 | `GET /api/venue/{id}/events/{sport}/{span}/{page}` |  | Get venue events |
@@ -62,7 +60,6 @@ A `200` body is the payload for that route. A `204` body is empty. The shapes th
 | `GET /api/{sport}/event/{id}/votes` |  | Get event votes |
 | `GET /api/{sport}/event/{id}/win-probability` |  | Get win probability |
 | `GET /api/{sport}/events/live` |  | List live events |
-| `GET /api/{sport}/events/{day}/{month}/{year}` |  | List events on a date |
 | `GET /api/{sport}/match/{customId}/h2h` |  | Get head-to-head events |
 | `GET /api/{sport}/match/{id}` |  | Get match details |
 | `GET /api/{sport}/match/{id}/at-bats` |  | List at-bats |
@@ -87,7 +84,6 @@ A `200` body is the payload for that route. A `204` body is empty. The shapes th
 | `GET /api/{sport}/match/{id}/weather` |  | Get event weather |
 | `GET /api/{sport}/match/{id}/win-probability` |  | Get win probability |
 | `GET /api/{sport}/matches/live` |  | Get live matches |
-| `GET /api/{sport}/matches/{day}/{month}/{year}` |  | Get matches by date |
 | `GET /api/{sport}/venue/{id}/events/{sport}/{span}/{page}` |  | Get venue events |
 
 ## Tournament

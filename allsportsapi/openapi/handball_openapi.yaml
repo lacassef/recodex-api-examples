@@ -964,56 +964,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/handball/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getHandballMatchesByDate
-      summary: Get handball matches by date
-      description: Fetches all handball matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month (1-31). Example: 13."
-          schema:
-            type: integer
-          example: 13
-        - name: month
-          in: path
-          required: true
-          description: "Month (1-12). Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2023."
-          schema:
-            type: integer
-          example: 2023
-      responses:
-        "200":
-          description: A list of scheduled matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/handball/player/{id}":
     get:
       tags:

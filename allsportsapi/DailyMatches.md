@@ -2,18 +2,17 @@
 
 Two calls cover a normal day. One lists the competitions that have matches. The next lists the matches in the competitions you care about.
 
-Football has no sport-wide day list. `GET /api/matches/{day}/{month}/{year}` is discontinued. Build the football day from scheduled tournaments, then the competition schedule. That walk is below.
+The sport-wide day list is discontinued on every sport. Those routes stay on the server and are left out of the OpenAPI files. Build the day from scheduled tournaments, then the competition schedule. That walk is below.
 
-Other sports still publish one list for the whole sport, when you want every match and you do not need to pick competitions first:
+Discontinued:
 
+- Football: `GET /api/matches/{day}/{month}/{year}`, `GET /api/matches/top/{day}/{month}/{year}`, and `GET /api/matches/bottom/{day}/{month}/{year}`
 - Team sports and esports: `GET /api/{sport}/matches/{day}/{month}/{year}`
-- Tennis, table tennis, badminton, darts, snooker, padel: `GET /api/{sport}/events/{day}/{month}/{year}`
+- Tennis, table tennis, badminton, darts, snooker, and padel: `GET /api/{sport}/events/{day}/{month}/{year}`
 
-`{day}` and `{month}` are not zero-padded. The body is `{ "events": [ ... ] }`. A `204` means nothing is scheduled.
+`{day}` and `{month}` on the routes that remain are not zero-padded. A competition schedule body is `{ "events": [ ... ] }`. A `204` means nothing is scheduled.
 
-That list is in UTC for the date you asked. A kickoff near midnight can fall on the previous or next local day. Filter with `event.startTimestamp`. The [timezone example](Examples/filter_schedule_by_timezone.py) does that.
-
-The competition walk below is also the one to use when the sport-wide list is larger than you need, or when you already follow a set of leagues.
+The date on those routes is UTC. A kickoff near midnight can fall on the previous or next local day. Filter with `event.startTimestamp`. The [timezone example](Examples/filter_schedule_by_timezone.py) does that.
 
 ## Quick reference
 

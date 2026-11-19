@@ -1146,56 +1146,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/american-football/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getAmericanFootballMatchesByDate
-      summary: Get American football matches by date
-      description: Fetches all American football matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 31."
-          schema:
-            type: integer
-          example: 31
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 7."
-          schema:
-            type: integer
-          example: 7
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2022."
-          schema:
-            type: integer
-          example: 2022
-      responses:
-        "200":
-          description: A list of scheduled American football matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/american-football/player/{id}":
     get:
       tags:
@@ -4096,50 +4046,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/aussie-rules/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: listEventsOnADate
-      summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/aussie-rules/player/{id}":
     get:
       tags:
@@ -6284,50 +6190,6 @@ paths:
           description: Odds provider id.
           schema:
             type: integer
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/badminton/events/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: listEventsOnADategetApiBadmintonEventsDayMonthYear
-      summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
       responses:
         "200":
           description: Successful response.
@@ -8494,50 +8356,6 @@ paths:
           description: Odds provider id.
           schema:
             type: integer
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/bandy/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: listEventsOnADategetApiBandyMatchesDayMonthYear
-      summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
       responses:
         "200":
           description: Successful response.
@@ -11092,56 +10910,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/baseball/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getBaseballMatchesByDate
-      summary: Get baseball matches by date
-      description: Fetches all baseball matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 1."
-          schema:
-            type: integer
-          example: 1
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 8."
-          schema:
-            type: integer
-          example: 8
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2022."
-          schema:
-            type: integer
-          example: 2022
-      responses:
-        "200":
-          description: A list of scheduled baseball matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
         "500":
           description: Internal server error.
           content:
@@ -14517,56 +14285,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/basketball/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getBasketballMatchesByDate
-      summary: Get basketball matches by date
-      description: Fetches all basketball matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 22."
-          schema:
-            type: integer
-          example: 22
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 07."
-          schema:
-            type: integer
-          example: 07
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2025."
-          schema:
-            type: integer
-          example: 2025
-      responses:
-        "200":
-          description: A list of scheduled basketball matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/MatchesResponse"
         "400":
           description: Invalid date format in path.
           content:
@@ -19299,50 +19017,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/beach-volley/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: listEventsOnADategetApiBeachVolleyMatchesDayMonthYear
-      summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/beach-volley/player/{id}":
     get:
       tags:
@@ -21965,56 +21639,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/cricket/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getCricketMatchesByDate
-      summary: Get cricket matches by date
-      description: Fetches all cricket matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 14."
-          schema:
-            type: integer
-          example: 14
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 8."
-          schema:
-            type: integer
-          example: 8
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2022."
-          schema:
-            type: integer
-          example: 2022
-      responses:
-        "200":
-          description: A list of scheduled cricket matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/MatchesResponse"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
         "500":
           description: Internal server error.
           content:
@@ -25540,50 +25164,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/darts/events/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: listEventsOnADategetApiDartsEventsDayMonthYear
-      summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/darts/main-events/{date}/extended":
     get:
       tags:
@@ -27983,56 +27563,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/esport/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getEsportsMatchesByDate
-      summary: Get eSports matches by date
-      description: Fetches all eSports matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month (1-31). Example: 18."
-          schema:
-            type: integer
-          example: 18
-        - name: month
-          in: path
-          required: true
-          description: "Month (1-12). Example: 12."
-          schema:
-            type: integer
-          example: 12
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2022."
-          schema:
-            type: integer
-          example: 2022
-      responses:
-        "200":
-          description: Successfully retrieved matches for the specified date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date parameters.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/esport/player/{id}":
     get:
       tags:
@@ -30146,50 +29676,6 @@ paths:
           description: Odds provider id.
           schema:
             type: integer
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/floorball/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: listEventsOnADategetApiFloorballMatchesDayMonthYear
-      summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
       responses:
         "200":
           description: Successful response.
@@ -32502,50 +31988,6 @@ paths:
           description: Odds provider id.
           schema:
             type: integer
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/futsal/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: listEventsOnADategetApiFutsalMatchesDayMonthYear
-      summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
       responses:
         "200":
           description: Successful response.
@@ -34958,56 +34400,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/handball/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getHandballMatchesByDate
-      summary: Get handball matches by date
-      description: Fetches all handball matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month (1-31). Example: 13."
-          schema:
-            type: integer
-          example: 13
-        - name: month
-          in: path
-          required: true
-          description: "Month (1-12). Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2023."
-          schema:
-            type: integer
-          example: 2023
-      responses:
-        "200":
-          description: A list of scheduled matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
         "500":
           description: Internal server error.
           content:
@@ -38115,56 +37507,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/ice-hockey/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getIceHockeyMatchesByDate
-      summary: Get ice hockey matches by date
-      description: Fetches all ice hockey matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 28."
-          schema:
-            type: integer
-          example: 28
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 11."
-          schema:
-            type: integer
-          example: 11
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2022."
-          schema:
-            type: integer
-          example: 2022
-      responses:
-        "200":
-          description: A list of scheduled ice hockey matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
         "500":
           description: Internal server error.
           content:
@@ -42269,56 +41611,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/matches/bottom/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getBottomFootballMatchesByDate
-      summary: Get bottom football matches by date
-      description: Retrieves a list of less prominent or lower-tier football matches for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 21."
-          schema:
-            type: integer
-          example: 21
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 07."
-          schema:
-            type: integer
-          example: 07
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2025."
-          schema:
-            type: integer
-          example: 2025
-      responses:
-        "200":
-          description: A JSON object containing a list of bottom-tier matches.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/matches/live:
     get:
       tags:
@@ -42424,56 +41716,6 @@ paths:
       responses:
         "200":
           description: A JSON object containing odds for matches on the specified date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/matches/top/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getTopFootballMatchesByDate
-      summary: Get top football matches by date
-      description: Retrieves a curated list of top-tier or more important football matches for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 21."
-          schema:
-            type: integer
-          example: 21
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 07."
-          schema:
-            type: integer
-          example: 07
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2025."
-          schema:
-            type: integer
-          example: 2025
-      responses:
-        "200":
-          description: A JSON object containing a list of top matches.
           content:
             application/json:
               schema:
@@ -43230,50 +42472,6 @@ paths:
           description: Odds provider id.
           schema:
             type: integer
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/minifootball/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: listEventsOnADategetApiMinifootballMatchesDayMonthYear
-      summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
       responses:
         "200":
           description: Successful response.
@@ -48400,50 +47598,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/padel/events/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: listEventsOnADategetApiPadelEventsDayMonthYear
-      summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/padel/main-events/{date}/extended":
     get:
       tags:
@@ -52270,56 +51424,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/rugby/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getAllRugbyMatchesByDate
-      summary: Get all rugby matches by date
-      description: Fetches all rugby matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 31."
-          schema:
-            type: integer
-          example: 31
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 7."
-          schema:
-            type: integer
-          example: 7
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2022."
-          schema:
-            type: integer
-          example: 2022
-      responses:
-        "200":
-          description: A list of scheduled matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/rugby/player/{id}":
     get:
       tags:
@@ -54756,50 +53860,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/snooker/events/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: listEventsOnADategetApiSnookerEventsDayMonthYear
-      summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/snooker/main-events/{date}/extended":
     get:
       tags:
@@ -57150,50 +56210,6 @@ paths:
       responses:
         "200":
           description: Matches and odds for the date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/table-tennis/events/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getTableTennisEventsByDate
-      summary: Get table tennis events by date
-      description: Returns all scheduled table tennis matches for the provided day.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 22."
-          schema:
-            type: integer
-          example: 22
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 07."
-          schema:
-            type: integer
-          example: 07
-        - name: year
-          in: path
-          required: true
-          description: "Four-digit year. Example: 2025."
-          schema:
-            type: integer
-          example: 2025
-      responses:
-        "200":
-          description: Scheduled matches for the given date.
           content:
             application/json:
               schema:
@@ -60902,56 +59918,6 @@ paths:
       responses:
         "200":
           description: A list of tennis events with associated betting odds.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/tennis/events/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getTennisEventsByDate
-      summary: Get tennis events by date
-      description: Fetches all tennis matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 22."
-          schema:
-            type: integer
-          example: 22
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 07."
-          schema:
-            type: integer
-          example: 07
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2025."
-          schema:
-            type: integer
-          example: 2025
-      responses:
-        "200":
-          description: A list of scheduled tennis matches for the given date.
           content:
             application/json:
               schema:
@@ -66868,56 +65834,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/volleyball/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getVolleyballMatchesByDate
-      summary: Get volleyball matches by date
-      description: Fetches all volleyball matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 20."
-          schema:
-            type: integer
-          example: 20
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2023."
-          schema:
-            type: integer
-          example: 2023
-      responses:
-        "200":
-          description: A list of scheduled volleyball matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/volleyball/players/trending:
     get:
       tags:
@@ -69261,50 +68177,6 @@ paths:
           description: Odds provider id.
           schema:
             type: integer
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/waterpolo/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: listEventsOnADategetApiWaterpoloMatchesDayMonthYear
-      summary: List events on a date
-      description: "Returns the schedule for one calendar day. Day and month are zero-padded upstream. Team sports publish this at /matches. Badminton, darts, snooker, and padel publish it at /events."
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
       responses:
         "200":
           description: Successful response.

@@ -280,16 +280,16 @@ The squad of one team is `GET /api/team/{id}/players`.
 
 ## How do I get all matches on a date?
 
-Football has no sport-wide day list. `GET /api/matches/{day}/{month}/{year}` is discontinued. Build that day from scheduled tournaments, then the competition schedule. The recipe is [DailyMatches.md](DailyMatches.md).
-
-Other sports still publish one list for the whole sport:
+The sport-wide day list is discontinued on every sport, including football, tennis, and the team sports. Build that day from scheduled tournaments, then the competition schedule. The recipe is [DailyMatches.md](DailyMatches.md).
 
 ```text
-GET /api/basketball/matches/7/3/2026       a team sport
-GET /api/tennis/events/7/3/2026            tennis, and the other event sports
+GET /api/basketball/scheduled-tournaments/7/3/2026/page/1
+GET /api/basketball/tournament/{uniqueTournamentId}/schedules/7/3/2026
+GET /api/tennis/scheduled-tournaments/7/3/2026/page/1
+GET /api/tennis/tournament/{uniqueTournamentId}/scheduled-events/2026-03-07
 ```
 
-Use the competition walk when you want specific leagues, or when you want to skip competitions that have no matches in the viewer's timezone. The full recipe, including MMA, motorsport, and cycling, is [DailyMatches.md](DailyMatches.md).
+The same walk covers a short list of leagues, and it skips competitions that have no matches in the viewer's timezone. MMA, motorsport, and cycling are in [DailyMatches.md](DailyMatches.md) too.
 
 The id on `schedules` and `scheduled-events` is `tournament.uniqueTournament.id` from the scheduled-tournaments row, not `tournament.id`.
 

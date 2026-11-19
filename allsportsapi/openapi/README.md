@@ -12,8 +12,8 @@ These files list paths, parameters, and the response status. The JSON fields ins
 
 | File | Use it when |
 |------|-------------|
-| `allsports_simplified_openapi.yaml` | You want one file for every sport and your tool has a size limit. Shared segments are enums. 367 paths. |
-| `allsports_openapi.yaml` | You want every concrete path written out. 1978 paths. |
+| `allsports_simplified_openapi.yaml` | You want one file for every sport and your tool has a size limit. Shared segments are enums. 365 paths. |
+| `allsports_openapi.yaml` | You want every concrete path written out. 1954 paths. |
 | `{sport}_openapi.yaml` | You are building one sport. |
 
 Path counts move when routes are added. The simplified file is the one to import into a marketplace that rejects a very large document.
@@ -22,31 +22,31 @@ Path counts move when routes are added. The simplified file is the one to import
 
 | File | Paths |
 |------|------:|
-| `allsports_openapi.yaml` | 1978 |
-| `allsports_simplified_openapi.yaml` | 367 |
-| `football_openapi.yaml` | 205 |
-| `basketball_openapi.yaml` | 172 |
-| `tennis_openapi.yaml` | 131 |
-| `american_football_openapi.yaml` | 118 |
-| `ice_hockey_openapi.yaml` | 116 |
-| `table_tennis_openapi.yaml` | 110 |
-| `baseball_openapi.yaml` | 110 |
-| `handball_openapi.yaml` | 106 |
-| `aussie_rules_openapi.yaml` | 104 |
-| `bandy_openapi.yaml` | 104 |
-| `beach_volley_openapi.yaml` | 104 |
-| `floorball_openapi.yaml` | 104 |
-| `futsal_openapi.yaml` | 104 |
-| `minifootball_openapi.yaml` | 104 |
-| `waterpolo_openapi.yaml` | 104 |
-| `cricket_openapi.yaml` | 102 |
-| `padel_openapi.yaml` | 101 |
-| `esports_openapi.yaml` | 97 |
-| `badminton_openapi.yaml` | 95 |
-| `darts_openapi.yaml` | 95 |
-| `snooker_openapi.yaml` | 95 |
-| `rugby_openapi.yaml` | 95 |
-| `volleyball_openapi.yaml` | 94 |
+| `allsports_openapi.yaml` | 1954 |
+| `allsports_simplified_openapi.yaml` | 365 |
+| `football_openapi.yaml` | 203 |
+| `basketball_openapi.yaml` | 171 |
+| `tennis_openapi.yaml` | 130 |
+| `american_football_openapi.yaml` | 117 |
+| `ice_hockey_openapi.yaml` | 115 |
+| `table_tennis_openapi.yaml` | 109 |
+| `baseball_openapi.yaml` | 109 |
+| `handball_openapi.yaml` | 105 |
+| `aussie_rules_openapi.yaml` | 103 |
+| `bandy_openapi.yaml` | 103 |
+| `beach_volley_openapi.yaml` | 103 |
+| `floorball_openapi.yaml` | 103 |
+| `futsal_openapi.yaml` | 103 |
+| `minifootball_openapi.yaml` | 103 |
+| `waterpolo_openapi.yaml` | 103 |
+| `cricket_openapi.yaml` | 101 |
+| `padel_openapi.yaml` | 100 |
+| `esports_openapi.yaml` | 96 |
+| `badminton_openapi.yaml` | 94 |
+| `darts_openapi.yaml` | 94 |
+| `snooker_openapi.yaml` | 94 |
+| `rugby_openapi.yaml` | 94 |
+| `volleyball_openapi.yaml` | 93 |
 | `mma_openapi.yaml` | 77 |
 | `cycling_openapi.yaml` | 66 |
 | `motorsport_openapi.yaml` | 65 |

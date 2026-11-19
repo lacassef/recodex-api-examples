@@ -2301,56 +2301,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/matches/bottom/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getBottomFootballMatchesByDate
-      summary: Get bottom football matches by date
-      description: Retrieves a list of less prominent or lower-tier football matches for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 21."
-          schema:
-            type: integer
-          example: 21
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 07."
-          schema:
-            type: integer
-          example: 07
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2025."
-          schema:
-            type: integer
-          example: 2025
-      responses:
-        "200":
-          description: A JSON object containing a list of bottom-tier matches.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   /api/matches/live:
     get:
       tags:
@@ -2456,56 +2406,6 @@ paths:
       responses:
         "200":
           description: A JSON object containing odds for matches on the specified date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/matches/top/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getTopFootballMatchesByDate
-      summary: Get top football matches by date
-      description: Retrieves a curated list of top-tier or more important football matches for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 21."
-          schema:
-            type: integer
-          example: 21
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 07."
-          schema:
-            type: integer
-          example: 07
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2025."
-          schema:
-            type: integer
-          example: 2025
-      responses:
-        "200":
-          description: A JSON object containing a list of top matches.
           content:
             application/json:
               schema:

@@ -1812,50 +1812,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/table-tennis/events/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getTableTennisEventsByDate
-      summary: Get table tennis events by date
-      description: Returns all scheduled table tennis matches for the provided day.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 22."
-          schema:
-            type: integer
-          example: 22
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 07."
-          schema:
-            type: integer
-          example: 07
-        - name: year
-          in: path
-          required: true
-          description: "Four-digit year. Example: 2025."
-          schema:
-            type: integer
-          example: 2025
-      responses:
-        "200":
-          description: Scheduled matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/table-tennis/main-events/{date}/extended":
     get:
       tags:

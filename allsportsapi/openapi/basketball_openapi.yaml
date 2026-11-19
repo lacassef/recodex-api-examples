@@ -1540,56 +1540,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/basketball/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getBasketballMatchesByDate
-      summary: Get basketball matches by date
-      description: Fetches all basketball matches scheduled for a specific date.
-      parameters:
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 22."
-          schema:
-            type: integer
-          example: 22
-        - name: month
-          in: path
-          required: true
-          description: "Month of the year. Example: 07."
-          schema:
-            type: integer
-          example: 07
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2025."
-          schema:
-            type: integer
-          example: 2025
-      responses:
-        "200":
-          description: A list of scheduled basketball matches for the given date.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/MatchesResponse"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/basketball/player/{id}":
     get:
       tags:

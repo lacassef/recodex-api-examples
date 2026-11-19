@@ -5136,24 +5136,14 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
-  "/api/matches/{segment2}/{day}/{month}/{year}":
+  "/api/matches/odds/{day}/{month}/{year}":
     get:
       tags:
         - Matches
-      operationId: getMatches
-      summary: Get Matches
-      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
+      operationId: getSportOddsByDate
+      summary: Get sport odds by date
+      description: Fetches pre-match betting odds for all football matches on a specific calendar date.
       parameters:
-        - name: segment2
-          in: path
-          required: true
-          description: "Allowed values: bottom, odds, top."
-          schema:
-            type: string
-            enum:
-              - bottom
-              - odds
-              - top
         - name: day
           in: path
           required: true
@@ -5177,7 +5167,7 @@ paths:
           example: 2025
       responses:
         "200":
-          description: Successful response.
+          description: A JSON object containing odds for matches on the specified date.
           content:
             application/json:
               schema:
@@ -5195,7 +5185,7 @@ paths:
               schema:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
-          description: No content. The route exists but no data is available for the given parameters.
+          description: "No content. The requested route exists but there is no data available for the given parameters (e.g. match has no TV coverage, no statistics yet, empty search results, etc.)."
   "/api/mma/calendar/unique-tournament/{id}/{timezoneOffset}/months-with-events":
     get:
       tags:
@@ -11966,69 +11956,6 @@ paths:
                 "$ref": "#/components/schemas/ErrorResponse"
         "204":
           description: No content. The route exists but no data is available for the given parameters.
-  "/api/{sport}/events/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getEvents
-      summary: Get Events
-      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: sport
-          in: path
-          required: true
-          description: "Allowed values: badminton, darts, padel, snooker, table-tennis, tennis."
-          schema:
-            type: string
-            enum:
-              - badminton
-              - darts
-              - padel
-              - snooker
-              - table-tennis
-              - tennis
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
   "/api/{sport}/live":
     get:
       tags:
@@ -12861,79 +12788,6 @@ paths:
             application/json:
               schema:
                 "$ref": "#/components/schemas/JSONResult"
-        "500":
-          description: Internal server error.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
-        "204":
-          description: No content. The route exists but no data is available for the given parameters.
-  "/api/{sport}/matches/{day}/{month}/{year}":
-    get:
-      tags:
-        - Matches
-      operationId: getMatchesgetApiSportMatchesDayMonthYear
-      summary: Get Matches
-      description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
-      parameters:
-        - name: sport
-          in: path
-          required: true
-          description: "Allowed values: american-football, aussie-rules, bandy, baseball, basketball, beach-volley, cricket, esport, floorball, futsal, handball, ice-hockey, minifootball, rugby, volleyball, waterpolo."
-          schema:
-            type: string
-            enum:
-              - american-football
-              - aussie-rules
-              - bandy
-              - baseball
-              - basketball
-              - beach-volley
-              - cricket
-              - esport
-              - floorball
-              - futsal
-              - handball
-              - ice-hockey
-              - minifootball
-              - rugby
-              - volleyball
-              - waterpolo
-        - name: day
-          in: path
-          required: true
-          description: "Day of the month. Example: 5."
-          schema:
-            type: integer
-          example: 5
-        - name: month
-          in: path
-          required: true
-          description: "Month. Example: 10."
-          schema:
-            type: integer
-          example: 10
-        - name: year
-          in: path
-          required: true
-          description: "Year. Example: 2026."
-          schema:
-            type: integer
-          example: 2026
-      responses:
-        "200":
-          description: Successful response.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/JSONResult"
-        "400":
-          description: Invalid date format in path.
-          content:
-            application/json:
-              schema:
-                "$ref": "#/components/schemas/ErrorResponse"
         "500":
           description: Internal server error.
           content:
@@ -17431,7 +17285,7 @@ paths:
     get:
       tags:
         - Matches
-      operationId: getMatchesgetApiSportIdMatchesSegment4Page
+      operationId: getMatches
       summary: Get Matches
       description: Compact endpoint template generated from allsports_openapi.yaml. Enum values restrict this path to concrete endpoints present in the full specification.
       parameters:
